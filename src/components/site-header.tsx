@@ -11,7 +11,7 @@ export async function SiteHeader() {
   const [t, user] = await Promise.all([getTranslations("nav"), getCurrentUser()]);
   const access = await hasFullAccess(user?.id);
   return (
-    <header className="border-b border-line bg-white print:hidden">
+    <header className="border-t-4 border-t-brand border-b border-b-line bg-white print:hidden">
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 py-2 sm:h-16 sm:py-0">
         <Link href={user ? "/panelis" : "/"} className="py-2 text-lg font-semibold text-accent-strong">
           {t("brand")}

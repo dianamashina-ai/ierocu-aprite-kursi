@@ -5,7 +5,7 @@ import { formatEuro } from "@/lib/format";
 /** Bloks slēgtam saturam: aicina iegādāties pilnu piekļuvi. */
 export function Paywall({ title = "Šī daļa pieejama ar pilnu piekļuvi", children }: { title?: string; children?: React.ReactNode }) {
   return (
-    <section aria-labelledby="paywall-h" className="rounded-2xl border-2 border-accent bg-accent-soft p-5 sm:p-7">
+    <section aria-labelledby="paywall-h" className="rounded-2xl border-2 border-brand bg-accent-soft p-5 sm:p-7">
       <p aria-hidden="true" className="text-2xl">🔒</p>
       <h2 id="paywall-h" className="mt-1 text-xl font-semibold text-accent-strong">{title}</h2>
       <p className="mt-2">

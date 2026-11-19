@@ -19,13 +19,13 @@ export function LessonBody({ markdown }: { markdown: string }) {
             return <p key={i}>{inline(b.text)}</p>;
           case "ul":
             return (
-              <ul key={i} className="list-disc space-y-1.5 pl-6 marker:text-accent">
+              <ul key={i} className="list-disc space-y-1.5 pl-6 marker:text-brand">
                 {b.items.map((it, j) => <li key={j}>{inline(it)}</li>)}
               </ul>
             );
           case "ol":
             return (
-              <ol key={i} className="list-decimal space-y-1.5 pl-6 marker:font-semibold marker:text-accent">
+              <ol key={i} className="list-decimal space-y-1.5 pl-6 marker:font-semibold marker:text-accent-strong">
                 {b.items.map((it, j) => <li key={j}>{inline(it)}</li>)}
               </ol>
             );
@@ -34,7 +34,7 @@ export function LessonBody({ markdown }: { markdown: string }) {
             const items = rest.filter((l) => l.startsWith("- ")).map((l) => l.slice(2));
             const text = rest.filter((l) => !l.startsWith("- "));
             return (
-              <aside key={i} className="rounded-xl border-l-4 border-accent bg-accent-soft p-4">
+              <aside key={i} className="rounded-xl border-l-4 border-brand bg-accent-soft p-4">
                 <p className="font-semibold text-accent-strong">{inline(title)}</p>
                 {text.map((t, j) => <p key={j} className="mt-1">{inline(t)}</p>)}
                 {items.length > 0 && (
