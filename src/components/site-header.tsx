@@ -21,12 +21,14 @@ export async function SiteHeader() {
               <Link href="/#moduli" className={item}>{t("modules")}</Link>
               <Link href="/kludas" className={item}>Kļūdas</Link>
               <Link href="/eksamens" className={item}>Eksāmens</Link>
+              <Link href="/skaitli" className={item}>Skaitļi</Link>
               <Link href="/meklet" className={item}>{t("search")}</Link>
               <SignOutButton className={item} />
             </>
           ) : (
             <>
               <Link href="/#moduli" className={item}>{t("modules")}</Link>
+              <Link href="/skaitli" className={item}>Skaitļi</Link>
               <Link href="/meklet" className={item}>{t("search")}</Link>
               <Link href="/pieslegties" className={`${item} text-accent-strong`}>Pieslēgties</Link>
             </>
