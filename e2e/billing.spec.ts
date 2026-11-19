@@ -29,7 +29,7 @@ test("pirkums: forma prasa piekrišanu → testa maksājums → piekļuve un rē
   await page.getByRole("link", { name: "Skatīt rēķinu" }).click();
   await expect(page.getByRole("heading", { name: /PVN rēķins Nr\. IE-\d{4}-\d{5}/ })).toBeVisible();
   await expect(page.getByText("LV40103643291")).toBeVisible();
-  await expect(page.getByText("99,17 €").first()).toBeVisible();
+  await expect(page.getByText("99,17 €").filter({ visible: true }).first()).toBeVisible();
   await expect(page.getByText("20,83 €")).toBeVisible();
 
   await page.goto("/tema/5-3/trenins");
