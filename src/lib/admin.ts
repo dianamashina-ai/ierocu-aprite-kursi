@@ -5,8 +5,8 @@ import type { CurrentUser } from "@/lib/auth/session";
 export function isAdmin(user: Pick<CurrentUser, "email"> | null | undefined) {
   if (!user?.email) return false;
   const list = (process.env.ADMIN_EMAILS ?? "")
-    .split(",")
-    .map((e) => e.trim().toLowerCase())
+    .split(/[,;\s]+/)
+    .map((e) => e.trim().replace(/^["'<]+|["'>]+$/g, "").toLowerCase())
     .filter(Boolean);
   return list.includes(user.email.toLowerCase());
 }
