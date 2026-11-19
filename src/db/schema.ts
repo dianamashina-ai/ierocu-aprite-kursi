@@ -298,3 +298,30 @@ export const orders = pgTable(
   },
   (t) => [index("orders_user_idx").on(t.userId, t.createdAt), index("orders_provider_ref_idx").on(t.providerRef)],
 );
+
+// ─── Dizaina labojumi (administratora piezīmes uz lapas elementiem) ─────────────
+
+export const noteStatus = pgEnum("note_status", ["open", "done"]);
+
+export const designNotes = pgTable(
+  "design_notes",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    path: text("path").notNull(),
+    selector: text("selector").notNull(),
+    /** īss elementa teksta fragments, lai saprastu, kas atzīmēts */
+    elementText: text("element_text"),
+    viewportWidth: integer("viewport_width").notNull(),
+    viewportHeight: integer("viewport_height").notNull(),
+    comment: text("comment").notNull(),
+    status: noteStatus("status").notNull().default("open"),
+    /** atbilde no izstrādātāja (kas izdarīts) */
+    reply: text("reply"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    resolvedAt: timestamp("resolved_at", { withTimezone: true }),
+  },
+  (t) => [index("design_notes_status_idx").on(t.status, t.createdAt), index("design_notes_path_idx").on(t.path)],
+);
