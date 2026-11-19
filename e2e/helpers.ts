@@ -29,3 +29,11 @@ export async function paidUser(page: Page, tag: string) {
   await signUp(page, uniqueEmail(tag));
   await buyAccess(page);
 }
+
+/** Iziet (telefonā poga ir izvēlnē). */
+export async function signOut(page: Page) {
+  const menu = page.getByRole("button", { name: "Atvērt izvēlni" });
+  if (await menu.isVisible()) await menu.click();
+  await page.getByRole("button", { name: "Iziet" }).filter({ visible: true }).first().click();
+  await expect(page).toHaveURL(/\/$/);
+}

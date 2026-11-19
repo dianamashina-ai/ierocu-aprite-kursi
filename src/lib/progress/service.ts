@@ -300,3 +300,18 @@ export async function getProgressFor(userId: string, ids: number[]) {
     .where(and(eq(questionProgress.userId, userId), inArray(questionProgress.questionId, ids)));
   return new Map(rows.map((r) => [r.id, r.lastCorrect]));
 }
+
+/** Apgūto jautājumu skaits pa tēmām (kursa un moduļa lapām). */
+export async function getTopicProgress(userId: string) {
+  const rows = await db
+    .select({
+      topicId: questions.topicId,
+      answered: sql<number>`count(*)::int`,
+      mastered: sql<number>`count(*) filter (where ${questionProgress.lastCorrect})::int`,
+    })
+    .from(questionProgress)
+    .innerJoin(questions, eq(questions.id, questionProgress.questionId))
+    .where(eq(questionProgress.userId, userId))
+    .groupBy(questions.topicId);
+  return new Map(rows.map((r) => [r.topicId, { answered: r.answered, mastered: r.mastered }]));
+}

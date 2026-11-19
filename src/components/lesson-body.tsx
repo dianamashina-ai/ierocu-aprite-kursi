@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { parseBlocks } from "@/lib/content/lesson-markdown";
+import { headingId, parseBlocks } from "@/lib/content/lesson-markdown";
 
 /** **treknraksts** → <strong> (bez HTML ievietošanas) */
 function inline(text: string): ReactNode[] {
@@ -10,11 +10,11 @@ function inline(text: string): ReactNode[] {
 
 export function LessonBody({ markdown }: { markdown: string }) {
   return (
-    <div className="space-y-4 leading-relaxed" lang="lv">
+    <div className="space-y-5 text-[17px] leading-[1.75]" lang="lv">
       {parseBlocks(markdown).map((b, i) => {
         switch (b.kind) {
           case "h":
-            return <h3 key={i} className="pt-2 text-lg font-semibold">{b.text}</h3>;
+            return <h2 key={i} id={headingId(b.text)} className="scroll-mt-6 pt-4 text-2xl font-semibold tracking-tight">{b.text}</h2>;
           case "p":
             return <p key={i}>{inline(b.text)}</p>;
           case "ul":

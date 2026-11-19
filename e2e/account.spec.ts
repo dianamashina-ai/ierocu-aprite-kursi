@@ -1,13 +1,12 @@
 import { expect, test } from "@playwright/test";
-import { buyAccess, signUp, uniqueEmail } from "./helpers";
+import { buyAccess, signOut, signUp, uniqueEmail } from "./helpers";
 
 test("reģistrācija → panelis → iziet → pieslēgties ar paroli", async ({ page }) => {
   const email = uniqueEmail("pw");
   await signUp(page, email);
   await expect(page.getByRole("heading", { name: /Sveiks/ })).toBeVisible();
   await expect(page.getByText("vēl nav atbildēti")).toBeVisible();
-  await page.getByRole("button", { name: "Iziet" }).click();
-  await expect(page.getByRole("link", { name: "Pieslēgties" })).toBeVisible();
+  await signOut(page);
 
   await page.goto("/panelis");
   await expect(page).toHaveURL(/\/pieslegties\?next=%2Fpanelis/);
@@ -23,7 +22,7 @@ test("reģistrācija → panelis → iziet → pieslēgties ar paroli", async ({
 test("pieslēgšanās ar saiti e-pastā", async ({ page, request }) => {
   const email = uniqueEmail("ml");
   await signUp(page, email);
-  await page.getByRole("button", { name: "Iziet" }).click();
+  await signOut(page);
   await page.goto("/pieslegties");
   await page.getByRole("tab", { name: "Saite e-pastā" }).click();
   await page.getByLabel("E-pasts").fill(email);

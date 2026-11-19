@@ -25,7 +25,7 @@
   },
   "home": {
     "heading": "Sagatavojies ieroču aprites eksāmenam mierīgi un pa tēmām",
-    "lead": "Moduļi: {modules} · tēmas: {topics} · oficiālie jautājumi ar pareizajām atbildēm: {questions}",
+    "lead": "{topics} īsas nodarbības, visi {questions} oficiālie jautājumi ar skaidrojumiem un izmēģinājuma eksāmens. 1. modulis — bez maksas.",
     "modulesHeading": "Kursa moduļi",
     "start": "Sākt ar 1. moduli"
   },

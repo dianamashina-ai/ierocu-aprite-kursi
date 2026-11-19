@@ -7,7 +7,7 @@ export async function SiteFooter() {
   const [t, version] = await Promise.all([getTranslations("footer"), getContentVersion()]);
   return (
     <footer className="print:hidden border-t border-line bg-white">
-      <div className="mx-auto max-w-5xl space-y-2 px-4 py-6 text-sm text-muted">
+      <div className="mx-auto max-w-6xl space-y-2 px-4 py-8 text-sm text-muted sm:px-6">
         <p>{t("disclaimer")}</p>
         <p>
           {SELLER.name}, reģ. Nr. {SELLER.regNo}, {SELLER.address}

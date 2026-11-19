@@ -24,6 +24,7 @@
     "@neon/env": "^2.1.7",
     "better-auth": "^1.7.26",
     "drizzle-orm": "^0.45.4",
+    "lucide-react": "^1.76.0",
     "next": "15.5.29",
     "next-intl": "^4.15.1",
     "postgres": "^4.1.1",

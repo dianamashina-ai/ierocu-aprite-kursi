@@ -151,3 +151,8 @@ export async function getContentVersion(): Promise<string> {
   const row = await db.query.appSettings.findFirst({ where: eq(appSettings.key, "content_version") });
   return typeof row?.value === "string" ? row.value : DEFAULT_CONTENT_VERSION;
 }
+
+export async function getPracticeQuestionsForModule(moduleId: string) {
+  const ids = db.select({ id: topics.id }).from(topics).where(eq(topics.moduleId, moduleId));
+  return loadPracticeQuestions(inArray(questions.topicId, ids));
+}

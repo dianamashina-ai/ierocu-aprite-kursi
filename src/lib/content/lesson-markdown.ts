@@ -23,3 +23,17 @@ export function parseBlocks(md: string): Block[] {
   }
   return blocks;
 }
+
+/** "Ko nedrīkst (36. panta 1. daļa)" → "ko-nedrikst-36-panta-1-dala" — enkuriem satura rādītājā. */
+export function headingId(text: string) {
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+export function lessonHeadings(md: string) {
+  return parseBlocks(md).flatMap((b) => (b.kind === "h" ? [{ id: headingId(b.text), text: b.text }] : []));
+}

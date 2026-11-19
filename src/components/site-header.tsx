@@ -1,42 +1,31 @@
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import { Crosshair } from "lucide-react";
 import { getCurrentUser } from "@/lib/auth/session";
-import { SignOutButton } from "./sign-out-button";
 import { hasFullAccess } from "@/lib/billing/access";
-
-const item =
-  "inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-medium text-muted hover:bg-accent-soft hover:text-accent-strong";
+import { SiteNav, type NavItem } from "./site-nav";
 
 export async function SiteHeader() {
-  const [t, user] = await Promise.all([getTranslations("nav"), getCurrentUser()]);
+  const user = await getCurrentUser();
   const access = await hasFullAccess(user?.id);
+  const items: NavItem[] = [
+    ...(user ? [{ href: "/panelis", label: "Mans progress" }] : []),
+    { href: "/", label: "Mācību kurss", match: ["/modulis", "/tema", "/jautajums", "/saime"] },
+    ...(user ? [{ href: "/kludas", label: "Kļūdas" }] : []),
+    { href: "/skaitli", label: "Skaitļi" },
+    { href: "/eksamens", label: "Eksāmens" },
+    { href: "/meklet", label: "Meklēt" },
+  ];
+
   return (
-    <header className="border-t-4 border-t-brand border-b border-b-line bg-white print:hidden">
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 py-2 sm:h-16 sm:py-0">
-        <Link href={user ? "/panelis" : "/"} className="py-2 text-lg font-semibold text-accent-strong">
-          {t("brand")}
+    <header className="relative border-b border-line bg-white/90 backdrop-blur print:hidden">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-4 sm:h-20 sm:px-6">
+        <Link href={user ? "/panelis" : "/"} className="flex items-center gap-2.5">
+          <span aria-hidden="true" className="flex size-10 items-center justify-center rounded-full bg-accent text-brand">
+            <Crosshair className="size-5" strokeWidth={2} />
+          </span>
+          <span className="text-[17px] font-bold uppercase tracking-[0.12em] text-accent">Ieroču eksāmens</span>
         </Link>
-        <nav aria-label={t("main")} className="-mx-2 flex flex-wrap gap-0.5">
-          {user ? (
-            <>
-              <Link href="/panelis" className={item}>Panelis</Link>
-              <Link href="/#moduli" className={item}>{t("modules")}</Link>
-              <Link href="/kludas" className={item}>Kļūdas</Link>
-              <Link href="/eksamens" className={item}>Eksāmens</Link>
-              <Link href="/skaitli" className={item}>Skaitļi</Link>
-              <Link href="/meklet" className={item}>{t("search")}</Link>
-              {!access && <Link href="/iegadaties" className={`${item} text-accent-strong`}>Pilna piekļuve</Link>}
-              <SignOutButton className={item} />
-            </>
-          ) : (
-            <>
-              <Link href="/#moduli" className={item}>{t("modules")}</Link>
-              <Link href="/skaitli" className={item}>Skaitļi</Link>
-              <Link href="/meklet" className={item}>{t("search")}</Link>
-              <Link href="/pieslegties" className={`${item} text-accent-strong`}>Pieslēgties</Link>
-            </>
-          )}
-        </nav>
+        <SiteNav items={items} signedIn={Boolean(user)} showBuy={Boolean(user) && !access} />
       </div>
     </header>
   );
