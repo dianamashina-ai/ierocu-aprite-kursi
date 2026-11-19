@@ -15,9 +15,12 @@
     "db:seed": "tsx scripts/seed.ts",
     "db:setup": "npm run db:migrate && npm run db:seed",
     "db:studio": "drizzle-kit studio",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "vercel-build": "drizzle-kit migrate && tsx scripts/seed.ts && next build"
   },
   "dependencies": {
+    "@neon/config": "^1.14.4",
+    "@neon/env": "^2.1.7",
     "better-auth": "^1.7.26",
     "drizzle-orm": "^0.45.4",
     "next": "15.5.29",

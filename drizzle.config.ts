@@ -5,6 +5,7 @@ export default defineConfig({
   schema: "./src/db/schema.ts",
   out: "./drizzle",
   dialect: "postgresql",
-  dbCredentials: { url: process.env.DATABASE_URL! },
+  // migrācijām — tiešais (ne pooled) savienojums, ja ir (Neon: DATABASE_URL_UNPOOLED)
+  dbCredentials: { url: (process.env.DATABASE_URL_UNPOOLED || process.env.DATABASE_URL)! },
   strict: true,
 });
