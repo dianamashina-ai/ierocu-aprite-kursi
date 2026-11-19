@@ -1,0 +1,162 @@
+[
+ {
+  "id": 1,
+  "law_reference": "Ieroču aprites likums, 1. panta 23. punkts",
+  "explanation": "Likumā termins «klasifikācija» definēts kā ieroču un munīcijas iedalījums kategorijās atbilstoši to tehniskajiem parametriem un lietojumam. Tāpēc pareizi ir abi apgalvojumi — gan par tehniskajiem parametriem, gan par lietojuma veidu. Ieroču atļauju veidi klasifikāciju nenosaka."
+ },
+ {
+  "id": 2,
+  "law_reference": "Ieroču aprites likums, 4. panta 1. daļa",
+  "explanation": "Latvijā atļauta tikai tādu šaujamieroču un to munīcijas, gāzes ieroču un signālieroču aprite, kuri ir klasificēti Valsts policijā. Noteicošais nav kategorija vai lietojuma veids, bet tas, vai ierocis ir klasificēts Valsts policijā."
+ },
+ {
+  "id": 3,
+  "law_reference": "Ieroču aprites likums, 4. panta 1. un 4. daļa",
+  "explanation": "Likums nosaka, ka šaujamieročus un munīciju klasificē Valsts policija, bet klasificēšanas kārtību nosaka Ministru kabinets. Ražotāji, importētāji, komersanti vai ekspertu laboratorijas ieročus neklasificē. TODO: konkrēto institūciju (klasificēšanas komisiju) nosaka Ministru kabineta noteikumi, kuru teksta platformā vēl nav."
+ },
+ {
+  "id": 4,
+  "law_reference": "Ieroču aprites likums, 6. pants",
+  "explanation": "Valsts policija ieročus un munīciju atbilstoši lietojumam iedala piecās grupās: pašaizsardzības, medību, sporta, kolekcijas ieroči, kā arī kultūras jomai un vēstures notikumu atveidošanai paredzēti ieroči. Visas atbilžu grupas ir šajā sarakstā."
+ },
+ {
+  "id": 5,
+  "law_reference": "Ieroču aprites likums, 6. pants",
+  "explanation": "Lietojuma veidi ir tieši pieci: pašaizsardzības, medību, sporta, kolekcijas un kultūras jomai un vēstures notikumu atveidošanai paredzēti ieroči. Atbilde, kurā minēti tikai sporta, medību un pašaizsardzības ieroči, ir nepilnīga. Iedalījums civilajos un militārajos vai pēc īpašnieka nav lietojuma klasifikācija."
+ },
+ {
+  "id": 6,
+  "law_reference": "Ieroču aprites likums, 7. panta 1. daļas 1.–3. punkts",
+  "explanation": "Pašaizsardzībai var paredzēt B kategorijas īsstobra šaujamieročus (pistoles un revolverus) ar kalibru līdz 11,43 mm, B un C kategorijas garstobra—gludstobra šaujamieročus, kuru patronas čaulas garums nepārsniedz 76,2 mm, un E kategorijas īsstobra gāzes ieročus un signālieročus. Tātad pareizi ir visi trīs varianti."
+ },
+ {
+  "id": 7,
+  "law_reference": "Ieroču aprites likums, 7. panta 1. daļas 1. punkts",
+  "explanation": "Pašaizsardzībai paredzētām pistolēm un revolveriem ir kalibra ierobežojums — ne lielāks par 11,43 mm. Tāpēc «neatkarīgi no kalibra» ir nepareizi. Garstobra—vītņstobra šaujamieroči pašaizsardzībai nav paredzēti (pašaizsardzībai — tikai garstobra—gludstobra)."
+ },
+ {
+  "id": 8,
+  "law_reference": "Ieroču aprites likums, 7. panta 1. daļas 1.–3. punkts",
+  "explanation": "No šiem variantiem tikai E kategorijas īsstobra gāzes ieroči un signālieroči atbilst likumam bez ierobežojumiem. Pistolēm un revolveriem ir kalibra robeža 11,43 mm, bet garstobra—gludstobra šaujamieročiem — patronas čaulas garums līdz 76,2 mm, tāpēc «neatkarīgi no kalibra» abos gadījumos ir nepareizi."
+ },
+ {
+  "id": 9,
+  "law_reference": "Ieroču aprites likums, 8. panta 1.–3. punkts",
+  "explanation": "Medībām var paredzēt B un C kategorijas garstobra—gludstobra un garstobra—vītņstobra šaujamieročus, kā arī D kategorijas lielas enerģijas pneimatiskos ieročus. Īsstobra šaujamieroči medību ieroču sarakstā nav, tāpēc pareiza ir kombinācija bez tiem."
+ },
+ {
+  "id": 10,
+  "law_reference": "Ieroču aprites likums, 9. panta 5. un 6. punkts",
+  "explanation": "Sportam var paredzēt B un C kategorijas garstobra—gludstobra un garstobra—vītņstobra šaujamieročus. Sporta pistolēm un revolveriem kalibra robeža ir 11,43 mm, nevis 9 mm, un sportam nav paredzēti «visu kategoriju» ieroči — tikai 9. pantā uzskaitītie."
+ },
+ {
+  "id": 11,
+  "law_reference": "Ieroču aprites likums, 9. panta 5., 6. un 7. punkts",
+  "explanation": "Sporta ieroču sarakstā ir gan D kategorijas lielas enerģijas un F kategorijas mazas enerģijas pneimatiskie ieroči, gan B kategorijas pistoles un revolveri ar kalibru līdz 11,43 mm, gan B un C kategorijas garstobra šaujamieroči. Tātad pareizi ir visi varianti."
+ },
+ {
+  "id": 12,
+  "law_reference": "Ieroču aprites likums, 9. panta 1.–3. punkts",
+  "explanation": "Sportam var paredzēt arī atsevišķus A kategorijas ieročus: automātiskos šaujamieročus, kas pārveidoti par pusautomātiskajiem, un pusautomātiskos garstobra (vairāk nekā 11 patronas) un īsstobra (vairāk nekā 21 patrona) šaujamieročus ar centrālās kapseles munīciju. Visi trīs varianti ir no likuma."
+ },
+ {
+  "id": 13,
+  "law_reference": "Ieroču aprites likums, 10. pants",
+  "explanation": "Kolekcijai paredzēti ir kolekcijai klasificēti A, B, C un D kategorijas ieroči. F kategorija sarakstā nav, un noteicošais ir klasifikācija kolekcijai, nevis ieroču skaits."
+ },
+ {
+  "id": 14,
+  "law_reference": "Ieroču aprites likums, 11. pants",
+  "explanation": "Kultūras jomai un vēstures notikumu atveidošanai paredzēti ir A kategorijas automātiskie salūtieroči (akustiskie ieroči), B un C kategorijas salūtieroči un tiem paredzētās salūtpatronas — ja tie tam klasificēti. Citiem lietojumiem klasificēti ieroči vai «visu kategoriju» šaujamieroči tajā neietilpst."
+ },
+ {
+  "id": 15,
+  "law_reference": "Ieroču aprites likums, III nodaļa (12. un 13. pants)",
+  "explanation": "Ieroču, munīcijas un to sastāvdaļu aprites aizliegumi ir noteikti Ieroču aprites likuma III nodaļā: vispārējie aizliegumi 12. pantā, aizliegumi fiziskajām un juridiskajām personām — 13. pantā. Administratīvās atbildības likums un Krimināllikums nosaka atbildību par pārkāpumiem, nevis pašus aizliegumus."
+ },
+ {
+  "id": 16,
+  "law_reference": "Ieroču aprites likums, 12. panta 2., 13. un 14. punkts",
+  "explanation": "Aizliegta ir neklasificētu ieroču un munīcijas aprite, izņemot dezaktivētus ieročus, pneimatiskos, straikbola un peintbola ieročus, lāzertaga ierīces un aukstos ieročus. Gāzes ieroči un signālieroči nav izņēmumos, tāpēc neklasificētus aizliegts apgrozīt. Dezaktivētu ieroču aprite pati par sevi nav aizliegta (aizliegta bez Valsts policijas izziņas), un neklasificēti pneimatiskie ieroči ir izņēmums."
+ },
+ {
+  "id": 17,
+  "law_reference": "Ieroču aprites likums, 12. panta 2., 13., 14. un 15. punkts",
+  "explanation": "Aizliegta ir prasībām neatbilstošu dezaktivētu šaujamieroču aprite bez Valsts policijas izziņas un dezaktivētu lielas enerģijas pneimatisko ieroču aprite bez izziņas vai apliecinājuma. Neklasificētu ieroču aizliegumam ir izņēmumi (piemēram, pneimatiskie un aukstie ieroči), tāpēc «visa veida» ir nepareizi. A kategorijas ieročiem aizliegta izmantošana (izņemot likumā noteiktos gadījumus), nevis visa aprite."
+ },
+ {
+  "id": 18,
+  "law_reference": "Ieroču aprites likums, 12. panta 4., 5. un 7. punkts",
+  "explanation": "Visas trīs darbības ir vispārējo aizliegumu sarakstā: pašizgatavotu šaujamieroču un citu ieroču aprite, pārveidošana, kas maina šaujamieroča kategoriju vai apakšgrupu (izņemot pārveidošanu par salūtieroci un dezaktivēšanu), un pārveidošana šaušanai ar gāzes ieroču, signālieroču vai traumatisko šaujamieroču munīciju."
+ },
+ {
+  "id": 19,
+  "law_reference": "Ieroču aprites likums, 12. panta 3. un 6. punkts",
+  "explanation": "Aizliegta ir ieroču pārveidošana slēptai nēsāšanai (apzāģēti vai pārurbti stobri, apzāģētas vai nomontētas laides), kā arī nemarķētu šaujamieroču, to būtisko sastāvdaļu un munīcijas, lielas enerģijas pneimatisko ieroču, gāzes ieroču un signālieroču aprite. Tātad pareizi ir visi varianti."
+ },
+ {
+  "id": 20,
+  "law_reference": "Ieroču aprites likums, 12. panta 3. un 4. punkts",
+  "explanation": "Aizliegta ir nemarķētu un pašizgatavotu šaujamieroču, lielas enerģijas pneimatisko ieroču, gāzes ieroču un signālieroču aprite. Medību un sporta patronu komplektēšana no rūpnieciski ražotām sastāvdaļām vai pašizgatavotām skrotīm, renkuļiem un lodēm likumā ir tieši minēta kā izņēmums no aizlieguma, tāpēc tā nav aizliegta."
+ },
+ {
+  "id": 21,
+  "law_reference": "Ieroču aprites likums, 3. panta 1. daļas 1. punkts; 12. panta 4. un 7. punkts",
+  "explanation": "Likums neattiecas uz antīkajiem šaujamieročiem, tāpēc to apritei Valsts policijas atļauja nav vajadzīga. Medību un sporta patronu komplektēšana no rūpnieciski ražotām sastāvdaļām ir atļauta kā izņēmums no pašizgatavotas munīcijas aizlieguma. Turpretī šaujamieroču pārveidošana šaušanai ar gāzes ieroču vai traumatisko šaujamieroču munīciju ir aizliegta."
+ },
+ {
+  "id": 22,
+  "law_reference": "Ieroču aprites likums, 13. panta 1. daļas 1., 2. un 8. punkts",
+  "explanation": "Fiziskajām personām ir aizliegts apgrozīt un pielietot salūtieročus (akustiskos ieročus), elektrošoka ierīces ar izšaujamiem vadiem un elektrodiem, kā arī nēsāt atklātā veidā ieročus, munīciju, dezaktivētus ieročus un speciālos līdzekļus. Visi trīs varianti ir šajā sarakstā."
+ },
+ {
+  "id": 23,
+  "law_reference": "Ieroču aprites likums, 13. panta 1. daļas 9. punkts un 2. daļas 2. punkts; 7. panta 1. daļas 1. punkts; 12. panta 4. punkts",
+  "explanation": "Visas darbības ir aizliegtas. Pašaizsardzībai aizliegts lietot šāviena trokšņa slāpētājus un ar tiem aprīkot pašaizsardzības šaujamieročus, traumatiskie šaujamieroči un to munīcija ir aizliegti visiem. Patronu komplektēšana atļauta tikai medību un sporta šaujamieročiem — pašaizsardzībai paredzēta tikai rūpnieciski ražota munīcija."
+ },
+ {
+  "id": 24,
+  "law_reference": "Ieroču aprites likums, 13. panta 1. daļas 4. punkts",
+  "explanation": "Aizliegts ir nēsāt aukstos ieročus, kuri īpaši paredzēti miesas bojājumu nodarīšanai. Izņēmumi: medniekiem, zvejniekiem un makšķerniekiem paredzētie aukstie ieroči medībās, zvejā un makšķerēšanā, sportistu ieroči sacensībās vai treniņos un kultūras pasākumu dalībnieku ieroči oficiālos pasākumos. Iegādāties un glabāt aukstos ieročus šis punkts neaizliedz."
+ },
+ {
+  "id": 25,
+  "law_reference": "Ieroču aprites likums, 13. panta 1. daļas 7. punkts",
+  "explanation": "Ar ieročiem, munīciju un speciālajiem līdzekļiem aizliegts apmeklēt sabiedrībai pieejamus kultūras, svētku, piemiņas, izklaides, sporta vai atpūtas pasākumus publiskā vietā un tos demonstrēt publiskā vietā. Vienīgais izņēmums — ja to atļāvis pasākuma organizators. Nēsāšanas atļauja demonstrēšanu publiskā vietā neatļauj."
+ },
+ {
+  "id": 26,
+  "law_reference": "Ieroču aprites likums, 13. panta 1. daļas 5. un 6. punkts",
+  "explanation": "Ja alkohola koncentrācija asinīs pārsniedz 0,5 promiles vai persona ir narkotisko, psihotropo, toksisko vai citu apreibinošo vielu ietekmē, aizliegts iegādāties, nēsāt, pārvadāt, izmantot un pielietot šaujamieročus, gāzes ieročus, signālieročus un pneimatiskos ieročus, kā arī iegādāties un pārvadāt šaujamieroču maināmās būtiskās sastāvdaļas. Tātad aizliegtas ir abas darbības."
+ },
+ {
+  "id": 27,
+  "law_reference": "Ieroču aprites likums, 13. panta 1. daļas 5. un 6. punkts",
+  "explanation": "Apreibinošo vielu ietekmē aizliegts iegādāties, nēsāt un pārvadāt šaujamieročus, gāzes ieročus, signālieročus un pneimatiskos ieročus, kā arī iegādāties un pārvadāt maināmās būtiskās sastāvdaļas. Alkohola gadījumā aizliegums sākas tikai tad, ja koncentrācija pārsniedz 0,5 promiles. Glabāšana šajā aizliegumu sarakstā nav minēta."
+ },
+ {
+  "id": 28,
+  "law_reference": "Ieroču aprites likums, 13. panta 1. daļas 5. un 10. punkts",
+  "explanation": "Aizliegums attiecas uz alkohola koncentrāciju, kas pārsniedz 0,5 promiles. Ja tā nepārsniedz 0,5 promiles, nēsāt, pārvadāt un izmantot ieročus nav aizliegts. Pārvadāšana virs 0,5 promilēm ir aizliegta arī tad, ja ierocis ir izlādēts, un atteikties no medicīniskās pārbaudes ir aizliegts."
+ },
+ {
+  "id": 29,
+  "law_reference": "Ieroču aprites likums, 13. panta 1. daļas 5. punkts",
+  "explanation": "Robeža ir 0,5 promiles: aizliegts, ja izelpotā gaisa vai asins pārbaudē konstatētā alkohola koncentrācija asinīs pārsniedz 0,5 promiles."
+ },
+ {
+  "id": 30,
+  "law_reference": "Ieroču aprites likums, 13. panta 1. daļas 5. punkts",
+  "explanation": "Nēsāt šaujamieroci aizliegts narkotisko, psihotropo, toksisko vai citu apreibinošo vielu ietekmē. Alkohola gadījumā aizliegums ir tikai tad, ja koncentrācija pārsniedz 0,5 promiles, nevis jebkurā gadījumā, kad lietots alkohols. Slimība, nogurums vai medikamenti šajā punktā nav minēti."
+ },
+ {
+  "id": 31,
+  "law_reference": "Ieroču aprites likums, 13. panta 1. daļas 9. punkts; 7. panta 1. daļas 1. punkts",
+  "explanation": "Pašaizsardzībai aizliegts iegādāties, glabāt, nēsāt, realizēt, izmantot un pielietot šāviena trokšņa slāpētājus (klusinātājus) un ar tiem aprīkot pašaizsardzības šaujamieročus. B kategorijas īsstobra šaujamieroči pašaizsardzībai ir atļauti."
+ },
+ {
+  "id": 32,
+  "law_reference": "Ieroču aprites likums, 13. panta 1. daļas 9. punkts un 2. daļas 2. punkts",
+  "explanation": "Aizliegts ir aprīkot pašaizsardzības šaujamieroci ar trokšņa slāpētāju un apgrozīt traumatiskos šaujamieročus un to munīciju. Nēsāt pielādētu pašaizsardzībai klasificētu E kategorijas gāzes ieroci 13. pants neaizliedz."
+ }
+]

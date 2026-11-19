@@ -90,6 +90,7 @@ async function loadPracticeQuestions(where: SQL) {
     explanationStatus: q.explanationStatus,
     lawReference: q.lawReference,
     possiblyOutdated: q.possiblyOutdated,
+    outdatedNote: q.outdatedNote,
     shuffleDisabled: q.shuffleDisabled,
     familyId: q.familyId,
     familySize: q.familyId ? (sizes.get(q.familyId) ?? 1) : 1,

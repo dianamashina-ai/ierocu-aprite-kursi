@@ -9,6 +9,7 @@ export interface PracticeQuestion {
   explanationStatus: "draft" | "reviewed";
   lawReference: string | null;
   possiblyOutdated: boolean;
+  outdatedNote: string | null;
   shuffleDisabled: boolean;
   familyId: number | null;
   familySize: number;

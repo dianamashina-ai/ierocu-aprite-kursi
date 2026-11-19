@@ -63,7 +63,7 @@ describe.skipIf(!url)("datubāzes sēklošana", () => {
       .set({ text: "ADMIN LABOTS", explanation: "skaidrojums", explanationStatus: "reviewed" })
       .where(eq(schema.questions.id, 1));
 
-    expect(await seedDatabase(db, content)).toEqual({ inserted: 0, updated: 0 });
+    expect(await seedDatabase(db, content)).toEqual({ inserted: 0, updated: 0, explained: 0 });
     let q1 = await db.query.questions.findFirst({ where: eq(schema.questions.id, 1) });
     expect(q1?.text).toBe("ADMIN LABOTS");
 
@@ -74,5 +74,24 @@ describe.skipIf(!url)("datubāzes sēklošana", () => {
     expect(q1?.explanation).toBe("skaidrojums");
     expect(q1?.explanationStatus).toBe("reviewed");
     expect(await count("question_options")).toBe(content.questions.reduce((s, q) => s + q.options.length, 0));
+  });
+});
+
+describe.skipIf(!process.env.TEST_DATABASE_URL)("skaidrojumu sēklošana", () => {
+  it("ieraksta melnrakstus, bet nepārraksta pārbaudītos (reviewed)", async () => {
+    const { readExplanations } = await import("@/lib/content/explanations");
+    const client = postgres(process.env.TEST_DATABASE_URL!, { max: 1, onnotice: () => {} });
+    const db = drizzle(client, { schema });
+    const content = loadContent();
+    const { entries } = readExplanations();
+    // Q1 iepriekšējā testā ir ar statusu "reviewed"
+    const r = await seedDatabase(db, content, { explanations: entries });
+    expect(r.explained).toBe(514);
+    const q1 = await db.query.questions.findFirst({ where: eq(schema.questions.id, 1) });
+    expect(q1?.explanation).toBe("skaidrojums");
+    const q63 = await db.query.questions.findFirst({ where: eq(schema.questions.id, 63) });
+    expect(q63?.possiblyOutdated).toBe(true);
+    expect(q63?.lawReference).toMatch(/16\. panta 2\. daļa/);
+    await client.end();
   });
 });

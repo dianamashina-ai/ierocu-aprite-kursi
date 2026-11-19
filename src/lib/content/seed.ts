@@ -3,7 +3,7 @@
  * Esošos jautājumus pārraksta tikai ar reset=true; skaidrojumi, statusi un karogi
  * (ko rediģē administrācijā) netiek aiztikti nekad.
  */
-import { sql } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import * as schema from "@/db/schema";
 import { DEFAULT_CONTENT_VERSION, DEFAULT_EXAM_CONFIG } from "@/config/exam";
@@ -13,10 +13,17 @@ import { analyzeOptions } from "@/lib/quiz/shuffle";
 export async function seedDatabase(
   db: PostgresJsDatabase<typeof schema>,
   content: Content,
-  { reset = false }: { reset?: boolean } = {},
+  {
+    reset = false,
+    explanations,
+  }: {
+    reset?: boolean;
+    /** Skaidrojumu melnraksti; tiek ierakstīti tikai jautājumiem ar statusu "draft" */
+    explanations?: Map<number, { explanation: string | null; law_reference: string | null; possibly_outdated?: boolean; outdated_note?: string | null }>;
+  } = {},
 ) {
   const { officialSections, modules, topics, questions, questionOptions, appSettings } = schema;
-  let result = { inserted: 0, updated: 0 };
+  let result = { inserted: 0, updated: 0, explained: 0 };
 
 
   await db.transaction(async (tx) => {
@@ -103,7 +110,23 @@ export async function seedDatabase(
       ])
       .onConflictDoNothing();
 
-    result = { inserted, updated };
+    let explained = 0;
+    if (explanations) {
+      for (const [id, e] of explanations) {
+        const r = await tx
+          .update(questions)
+          .set({
+            explanation: e.explanation,
+            lawReference: e.law_reference,
+            possiblyOutdated: Boolean(e.possibly_outdated),
+            outdatedNote: e.outdated_note ?? null,
+          })
+          .where(and(eq(questions.id, id), eq(questions.explanationStatus, "draft")))
+          .returning({ id: questions.id });
+        explained += r.length;
+      }
+    }
+    result = { inserted, updated, explained };
   });
 
   return result;

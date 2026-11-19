@@ -203,7 +203,10 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true, 
 
       <article className="rounded-2xl border border-line bg-white p-5 sm:p-7" aria-labelledby={`q-${q.id}`}>
         {q.possiblyOutdated && (
-          <p className="mb-4 rounded-lg bg-warn-soft px-3 py-2 text-sm text-warn">{t("outdated")}</p>
+          <div className="mb-4 rounded-lg bg-warn-soft px-3 py-2 text-sm text-warn">
+            <p className="font-semibold">{t("outdated")}</p>
+            {q.outdatedNote && <p className="mt-1">{q.outdatedNote}</p>}
+          </div>
         )}
         <h2 id={`q-${q.id}`} className="text-lg font-semibold leading-snug sm:text-xl" lang="lv">
           {q.text}
