@@ -54,10 +54,7 @@ export default async function HomePage() {
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
         {user && (
           <>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-              Mācību kurss
-            </p>
-            <div className="mt-3 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-3xl">
                 <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-5xl">
                   Mācību kurss
@@ -74,7 +71,8 @@ export default async function HomePage() {
                   </span>
                 </p>
                 <p className="mt-2 text-sm text-muted">
-                  tēmas apgūtas (≥ {READY_TOPIC_PERCENT} %)
+                  tēmas apgūtas
+                  <span className="block text-xs">tēma skaitās apgūta, ja pareizi atbildēts uz {READY_TOPIC_PERCENT} % tās jautājumu</span>
                 </p>
               </div>
             </div>
@@ -85,10 +83,10 @@ export default async function HomePage() {
           id="moduli"
           className={`${user ? "mt-14" : ""} flex scroll-mt-6 flex-col gap-4 border-y border-line py-5 sm:flex-row sm:items-center sm:justify-between`}
         >
-          <h2 className="text-sm font-semibold uppercase tracking-[0.16em]">
+          <h2 className="text-3xl font-semibold tracking-tight">
             Moduļi{" "}
-            <span className="ml-1 font-normal text-muted">
-              ({course.totals.modules})
+            <span className="ml-1 align-middle text-lg font-normal text-muted">
+              {course.totals.modules}
             </span>
           </h2>
           <form
