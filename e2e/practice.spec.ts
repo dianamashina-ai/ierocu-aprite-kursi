@@ -44,6 +44,7 @@ test("Q468 rāda 4 variantus", async ({ page }) => {
 test("tastatūra: burts izvēlas atbildi", async ({ page, isMobile }) => {
   test.skip(isMobile, "tikai datoram");
   await page.goto("/jautajums/1");
+  await page.waitForLoadState("networkidle"); // jāsagaida hidratācija, citādi taustiņš vēl netiek apstrādāts
   await page.keyboard.press("b");
   await expect(page.getByText(/^(Pareizi|Nepareizi\. Pareizā atbilde: [a-f])$/)).toBeVisible();
 });
