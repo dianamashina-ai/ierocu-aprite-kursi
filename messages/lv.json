@@ -36,6 +36,10 @@
     "practice": "Trenēties ({count})",
     "lessonHeading": "Nodarbība",
     "lessonSoon": "Īsa nodarbība par šo tēmu tiks pievienota drīzumā. Pagaidām vari trenēties ar jautājumiem.",
+    "lessonMinutes": "~{minutes} min lasīšanai",
+    "lessonSources": "Avoti",
+    "lessonDraft": "Nodarbība sagatavota pēc tiesību aktu tekstiem un vēl tiek pārbaudīta. Noteicošais vienmēr ir spēkā esošais tiesību akta teksts.",
+    "practiceAfterLesson": "Pārbaudīt sevi ({count} jautājumi)",
     "questionsHeading": "Tēmas jautājumi",
     "similarBadge": "ir līdzīgi"
   },
