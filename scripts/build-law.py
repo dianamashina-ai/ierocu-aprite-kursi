@@ -9,6 +9,7 @@ Oficiālais teksts netiek mainīts. Mūsu piezīmes ir atzīmētas ar «⏳ [pla
 """
 import importlib.util
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -181,3 +182,88 @@ kl_lines += ["## XX nodaļa — Noziedzīgi nodarījumi pret vispārējo drošī
 for n in WANT_WEAPONS:
     kl_lines += [law.to_markdown(sel_w[n]), ""]
 write("krimināllikums-izvilkums.md", "\n".join(kl_lines))
+
+# ── Ministru kabineta noteikumi ───────────────────────────────
+MK_DOCS = [
+    # (fails, id, īsais nosaukums, nākotnes redakcijas fails vai None)
+    ("mk307488.html", "307488", "mk-210-ierocu-un-municijas-aprite", ("mk307488-2027-01-01.html", "01.01.2027.")),
+    ("mk307504.html", "307504", "mk-211-ierocu-atlaujas", None),
+    ("mk341445.html", "341445", "mk-202-veselibas-parbaudes", None),
+    ("mk316509.html", "316509", "mk-494-sautuves", None),
+    ("mk313821.html", "313821", "mk-191-kvalifikacijas-parbaudijums", None),
+]
+
+
+def passport(page):
+    i = page.find("Tiesību akta pase")
+    p = re.sub(r"\s+", " ", law.clean(re.sub(r"<[^>]+>", " ", page[i : i + 3000])))
+    get = lambda k, pat=r"(\S+)": (re.search(k + r": " + pat, p) or [None, ""])[1].strip()
+    return {"nosaukums": law.clean(re.search(r"<div class='TV207'[^>]*>(.*?)</div>", page, re.S).group(1)),
+            "numurs": get("Numurs"), "pieņemts": get("Pieņemts"), "spēkā": get("Stājas spēkā"),
+            "publicēts": get("Publicēts", r"(.*?) OP")}
+
+
+def mk_point_md(item):
+    # MK noteikumu punkts: virsrakstā tikai numurs (meklēšanai), zem tā — oriģinālais teksts bez izmaiņām
+    first = item["paras"][0]["text"]
+    num = re.match(r"\*?\*?(\d+)\.(\^\d+)?", first)
+    head = f"### {num.group(1)}.{num.group(2) or ''}" if num else "###"
+    body = []
+    for p in item["paras"]:
+        if p["kind"] == "note":
+            body.append(f"> {p['text']}")
+        elif p["kind"] == "l2":
+            body.append(f"- {p['text']}")
+        elif p["kind"] == "l3":
+            body.append(f"  - {p['text']}")
+        else:
+            body.append(p["text"])
+    return head + "\n\n" + "\n\n".join(body)
+
+
+
+for fname, doc_id, slug, future in MK_DOCS:
+    page = read(fname)
+    pas = passport(page)
+    items = law.articles(page)
+    fut_changes = {}
+    if future:
+        fut_items = law.articles(read(future[0]))
+        cur_by = {i["paras"][0]["text"][:12]: i for i in items if i["kind"] == "article"}
+        for fi in fut_items:
+            if fi["kind"] != "article":
+                continue
+            k = fi["paras"][0]["text"][:12]
+            if k not in cur_by or body(cur_by[k]) != body(fi):
+                fut_changes[k] = fi
+    lines = [
+        f"# {pas['nosaukums']}",
+        "",
+        f"- **Ministru kabineta noteikumi Nr. {pas['numurs']}** · Pieņemti {pas['pieņemts']} · Stājas spēkā {pas['spēkā']} · Publicēts: {pas['publicēts']}",
+        f"- **Avots:** https://likumi.lv/ta/id/{doc_id}",
+        f"- **Redakcija:** {edition_label(page) if law.edition(page) else 'sākotnējā redakcija (grozījumu nav)'}",
+        f"- **Lejupielādēts:** {DOWNLOADED}",
+        "",
+        "> Teksts pārņemts no likumi.lv **bez izmaiņām**. Ja noteikumi ir pretrunā ar likumu (piem., pēc likuma grozījumiem, kas stājās spēkā 21.10.2026.), noteicošais ir likums.",
+        "> Rindas, kas sākas ar «⏳ [platformas piezīme]», pievienojām mēs.",
+        "",
+    ]
+    if fut_changes:
+        lines += [f"## Punkti, kas mainās no {future[1]}", "",
+                  f"Avots: https://likumi.lv/ta/id/{doc_id}/redakcijas-datums/{future[0].split('-',1)[1][:10].replace('-','/')}", ""]
+        for fi in fut_changes.values():
+            lines += [mk_point_md(fi), ""]
+        lines += ["---", ""]
+    for it in items:
+        if it["kind"] == "heading":
+            lines += [f"## {it['text']}", ""] + ([f"> {it['note']}", ""] if it.get("note") else [])
+        elif it["kind"] == "closing":
+            lines += [it["text"], ""]
+        else:
+            lines += [mk_point_md(it), ""]
+            if it["paras"][0]["text"][:12] in fut_changes:
+                lines += [f"> ⏳ [platformas piezīme] Šis punkts mainās no {future[1]} — skat. sadaļu augšā.", ""]
+    write(f"{slug}.md", "\n".join(lines))
+    md = open(os.path.join(OUT, f"{slug}.md"), encoding="utf-8").read().replace("**", "")
+    miss = [p["text"] for a in items if a["kind"] == "article" for p in a["paras"] if p["text"].replace("**", "") not in md]
+    assert not miss, f"{slug}: pazuduši paragrāfi {miss[:2]}"

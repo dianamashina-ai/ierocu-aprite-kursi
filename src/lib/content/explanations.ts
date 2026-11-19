@@ -44,10 +44,17 @@ export function lawArticleIndex(dir = LAW_DIR) {
     const body = stopAt && text.includes(stopAt) ? text.slice(0, text.indexOf(stopAt)) : text;
     return new Set([...body.matchAll(/^### (\d+)\.(\^\d+)? ?pants/gm)].map((m) => m[1] + (m[2] ? `.${m[2]}` : "")));
   };
-  return {
+  const points = (f: string) =>
+    new Set([...read(f).matchAll(/^### (\d+)\.(\^\d+)?$/gm)].map((m) => m[1] + (m[2] ? `.${m[2]}` : "")));
+  const index: Record<string, Set<string>> = {
     ial: collect(read("ieroču-aprites-likums.md"), "## Pārejas noteikumi"),
     kl: collect(read("krimināllikums-izvilkums.md")),
   };
+  for (const f of readdirSync(dir)) {
+    const m = f.match(/^mk-(\d+)-.*\.md$/);
+    if (m) index[`mk${m[1]}`] = points(f);
+  }
+  return index;
 }
 
 /**
@@ -55,15 +62,18 @@ export function lawArticleIndex(dir = LAW_DIR) {
  * → [{law:"ial", article:"14"}, {law:"kl", article:"29"}]. Diapazoniem ("28.–32. pants") ņem abus galus.
  */
 export function parseLawReference(ref: string) {
-  const out: { law: "ial" | "kl"; article: string }[] = [];
-  let law: "ial" | "kl" | null = null;
+  const out: { law: string; article: string }[] = [];
+  let law: string | null = null;
   for (const raw of ref.split(";")) {
     const seg = raw.trim();
+    const mk = seg.match(/noteikumi Nr\. (\d+)/);
     if (/Ieroču aprites likums/.test(seg)) law = "ial";
     else if (/Krimināllikums/.test(seg)) law = "kl";
-    const idx = seg.search(/pant/);
+    else if (mk) law = `mk${mk[1]}`;
+    const isMk = law?.startsWith("mk");
+    const idx = seg.search(isMk ? /punkt/ : /pant/);
     if (idx === -1 || !law) continue;
-    const before = seg.slice(0, idx).replace(/^(Ieroču aprites likums|Krimināllikums),?/, "");
+    const before = seg.slice(0, idx).replace(/^(Ieroču aprites likums|Krimināllikums|MK noteikumi Nr\. \d+),?/, "");
     for (const m of before.matchAll(/(\d+)\.(\^\d+)?/g)) out.push({ law, article: m[1] + (m[2] ? `.${m[2]}` : "") });
   }
   return out;
@@ -94,8 +104,8 @@ export function validateExplanations(content: Content) {
       const refs = parseLawReference(e.law_reference);
       if (!refs.length) problems.push(`Q${id}: atsaucē nav atpazīts neviens pants: "${e.law_reference}"`);
       for (const r of refs)
-        if (!index[r.law].has(r.article))
-          problems.push(`Q${id}: atsauce uz ${r.law === "ial" ? "IAL" : "KL"} ${r.article}. pantu, kura nav content/law tekstā`);
+        if (!index[r.law]?.has(r.article))
+          problems.push(`Q${id}: atsauce uz ${r.law} ${r.article}. pantu/punktu, kura nav content/law tekstā`);
     }
   }
   return problems;

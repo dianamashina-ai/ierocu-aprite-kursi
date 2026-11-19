@@ -21,6 +21,10 @@ describe("skaidrojumu melnraksti", () => {
       { law: "kl", article: "237" },
     ]);
     expect(parseLawReference("Ieroču aprites likums, 1. panta 2. punkts")).toEqual([{ law: "ial", article: "1" }]);
+    expect(parseLawReference("MK noteikumi Nr. 210, 15. un 21.^1 punkts")).toEqual([
+      { law: "mk210", article: "15" },
+      { law: "mk210", article: "21.^1" },
+    ]);
   });
 
   it("pantu indekss nolasa abus likumus", () => {
@@ -30,6 +34,8 @@ describe("skaidrojumu melnraksti", () => {
     expect(idx.kl.has("29")).toBe(true);
     expect(idx.kl.has("233.^1")).toBe(true);
     expect(idx.kl.has("100")).toBe(false);
+    expect(idx.mk210.has("21.^1")).toBe(true);
+    expect(idx.mk191.has("18")).toBe(true);
   });
 
   it("statistika (informatīvi)", () => {

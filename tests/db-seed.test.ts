@@ -54,7 +54,7 @@ describe.skipIf(!url)("datubāzes sēklošana", () => {
 
   it("noklusējuma iestatījumi", async () => {
     const exam = await db.query.appSettings.findFirst({ where: eq(schema.appSettings.key, "exam") });
-    expect(exam?.value).toEqual({ questionCount: 30, durationMinutes: 60, passPercent: 90 });
+    expect(exam?.value).toEqual({ questionCount: 40, durationMinutes: 40, passPercent: 90 });
   });
 
   it("atkārtota sēklošana nemaina administrācijas labojumus; --reset atjauno tekstu, bet saglabā skaidrojumu", async () => {

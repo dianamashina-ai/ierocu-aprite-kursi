@@ -60,31 +60,31 @@ describe.skipIf(!url)("progress un eksāmens (DB)", async () => {
     const id = await svc.startExam(U, t0);
     expect(await svc.startExam(U, new Date(t0.getTime() + 60_000))).toBe(id); // turpina to pašu
     const a = (await svc.getExamAttempt(U, id, t0))!;
-    expect(a.questionIds).toHaveLength(30);
-    expect(new Set(a.questionIds).size).toBe(30);
-    // 27 pareizi, 1 nepareizi, 2 neatbildēti → 90 % → nokārtots
+    expect(a.questionIds).toHaveLength(40);
+    expect(new Set(a.questionIds).size).toBe(40);
+    // 36 pareizi, 1 nepareizi, 3 neatbildēti → 4 kļūdas = 90 % → nokārtots (MK Nr. 191, 19. p.)
     for (const [i, qid] of a.questionIds.entries()) {
-      if (i < 27) await svc.saveExamAnswer(U, id, qid, byId.get(qid)!.correctKey, t0);
-      else if (i === 27) await svc.saveExamAnswer(U, id, qid, wrongKey(qid), t0);
+      if (i < 36) await svc.saveExamAnswer(U, id, qid, byId.get(qid)!.correctKey, t0);
+      else if (i === 36) await svc.saveExamAnswer(U, id, qid, wrongKey(qid), t0);
     }
     await expect(svc.saveExamAnswer(U, id, 999, "a", t0)).rejects.toThrow();
     const done = await svc.finishExam(U, id, new Date(t0.getTime() + 10 * 60_000));
-    expect(done.correctCount).toBe(27);
+    expect(done.correctCount).toBe(36);
     expect(done.passed).toBe(true);
-    expect((await svc.finishExam(U, id)).correctCount).toBe(27); // idempotenti
-    await expect(svc.saveExamAnswer(U, id, a.questionIds[29], "a", t0)).rejects.toThrow(/pabeigts/);
+    expect((await svc.finishExam(U, id)).correctCount).toBe(36); // idempotenti
+    await expect(svc.saveExamAnswer(U, id, a.questionIds[39], "a", t0)).rejects.toThrow(/pabeigts/);
     const hist = await svc.getExamHistory(U);
     expect(hist[0].id).toBe(id);
   });
 
   it("nokavēts eksāmens tiek pabeigts automātiski pēc laika", async () => {
     const id = await svc.startExam(U, t0);
-    const late = new Date(t0.getTime() + 62 * 60_000);
+    const late = new Date(t0.getTime() + 42 * 60_000);
     const a = await svc.getExamAttempt(U, id, late);
     expect(a?.status).toBe("finished");
     expect(a?.correctCount).toBe(0);
     expect(a?.passed).toBe(false);
-    expect(a?.finishedAt?.getTime()).toBe(t0.getTime() + 60 * 60_000);
+    expect(a?.finishedAt?.getTime()).toBe(t0.getTime() + 40 * 60_000);
   });
 
   it("cits lietotājs neredz svešu eksāmenu", async () => {

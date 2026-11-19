@@ -84,7 +84,7 @@ npm run dev                  # http://localhost:3000
 - Kļūda → atkārtot pēc 1 dienas; pareizi termiņā → pēc 3, tad pēc 7 dienām; tad apgūts. Kļūda jebkurā brīdī sāk no jauna.
 - Izmēģinājuma eksāmens: jautājumi proporcionāli oficiālajām sadaļām I–X (lielāko atlikumu metode),
   atbildes saglabājas uzreiz, laiku kontrolē serveris; eksāmena laikā klientam netiek sūtītas pareizās atbildes.
-  Iestatījumi: `app_settings.exam` (noklusējums `src/config/exam.ts`: 30 jaut., 60 min, 90 %).
+  Iestatījumi: `app_settings.exam` (noklusējums `src/config/exam.ts`: 40 jaut., 40 min, ne vairāk par 4 kļūdām — kā MK noteikumos Nr. 191).
 - «Gatavs eksāmenam»: pēdējie 3 izmēģinājuma eksāmeni nokārtoti un visas tēmas ≥ 80 % (pēdējā atbilde pareiza).
 
 ## Struktūra
@@ -96,7 +96,7 @@ messages/lv.json      saskarnes teksti
 e2e/                  Playwright testi
 scripts/seed.ts       sēklošanas CLI
 src/app/[locale]/     lapas
-src/config/exam.ts    eksāmena noklusējumi (30 jaut., 60 min, 90 %), bezmaksas modulis
+src/config/exam.ts    eksāmena noklusējumi (40 jaut., 40 min, 90 %), bezmaksas modulis
 src/db/               Drizzle shēma un klients
 src/lib/content/      satura ielāde, validācija, sēklošana, vaicājumi
 src/lib/quiz/         variantu jaukšana, salīdzināšana (tīri moduļi)
