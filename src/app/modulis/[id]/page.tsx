@@ -34,7 +34,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
       <Breadcrumbs items={[{ href: "/", label: "Mācību kurss" }, { label: m.titleLv }]} />
 
       <header className="mt-6 flex items-start gap-5 sm:gap-8">
-        <span className="hidden font-display text-7xl font-bold leading-none tabular-nums text-accent-strong sm:block lg:text-8xl">{pad(m.order)}</span>
+        <span className="hidden text-7xl font-extrabold leading-none tabular-nums text-accent-strong sm:block lg:text-8xl">{pad(m.order)}</span>
         <div className="flex-1">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
             {pad(m.order)} · Modulis
@@ -64,7 +64,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
               return (
                 <li key={tp.id}>
                   <Link href={`/tema/${topicSlug(tp.id)}`} className="group flex items-center gap-4 py-5 hover:bg-white/60 sm:gap-5 sm:px-2">
-                    <span className="flex size-11 shrink-0 items-center justify-center rounded-full border border-line bg-white font-display text-sm font-bold tabular-nums">
+                    <span className="flex size-11 shrink-0 items-center justify-center rounded-full border border-line bg-white text-sm font-extrabold tabular-nums">
                       {pad(i + 1)}
                     </span>
                     <span className="min-w-0 flex-1">

@@ -37,7 +37,7 @@ export default async function HomePage() {
         <div className="shrink-0 border-line lg:border-l lg:pl-10">
           {user ? (
             <>
-              <p className="font-display font-bold tabular-nums leading-none text-accent">
+              <p className="font-extrabold tabular-nums leading-none text-accent">
                 <span className="text-6xl">{topicsDone}</span>
                 <span className="text-3xl text-accent-strong">/{course.totals.topics}</span>
               </p>
@@ -45,7 +45,7 @@ export default async function HomePage() {
             </>
           ) : (
             <>
-              <p className="font-display text-6xl font-bold tabular-nums leading-none text-accent">{course.totals.questions}</p>
+              <p className="text-6xl font-extrabold tabular-nums leading-none text-accent">{course.totals.questions}</p>
               <p className="mt-2 text-sm text-muted">oficiālie jautājumi ar skaidrojumiem</p>
             </>
           )}
@@ -53,7 +53,7 @@ export default async function HomePage() {
       </div>
 
       <div id="moduli" className="mt-14 flex scroll-mt-6 flex-col gap-4 border-y border-line py-5 sm:flex-row sm:items-center sm:justify-between">
-        <h2 className="font-sans text-sm font-semibold uppercase tracking-[0.16em]">
+        <h2 className="text-sm font-semibold uppercase tracking-[0.16em]">
           Moduļi <span className="ml-1 font-normal text-muted">({course.totals.modules})</span>
         </h2>
         <form action="/meklet" role="search" className="relative w-full sm:w-80">
@@ -79,7 +79,7 @@ export default async function HomePage() {
             <li key={m.id} className="group relative flex flex-col rounded-2xl border border-line bg-white p-6 transition-shadow hover:shadow-[0_8px_30px_-12px_rgba(39,23,38,0.25)]">
               <div className="flex items-start justify-between">
                 <ModuleIcon moduleId={m.id} />
-                <span className="font-display text-2xl font-bold tabular-nums text-accent-strong">{pad(m.order)}</span>
+                <span className="text-2xl font-extrabold tabular-nums text-accent-strong">{pad(m.order)}</span>
               </div>
               <h3 className="mt-6 text-xl font-semibold leading-snug tracking-tight">
                 <Link href={`/modulis/${m.id}`} className="after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none">

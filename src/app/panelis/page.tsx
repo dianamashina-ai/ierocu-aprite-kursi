@@ -15,7 +15,7 @@ export const metadata = { title: "Panelis" };
 function Stat({ value, label, href }: { value: React.ReactNode; label: string; href?: string }) {
   const body = (
     <>
-      <span className="block font-display text-2xl font-bold tabular-nums">{value}</span>
+      <span className="block text-2xl font-extrabold tabular-nums">{value}</span>
       <span className="text-sm text-muted">{label}</span>
     </>
   );
