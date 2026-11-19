@@ -1,26 +1,23 @@
 @import "tailwindcss";
 
 /*
- * Palete: aubergine #271726 (teksts, galvenās pogas), orhideja #BC82C9 (akcenti, līnijas),
- * olīvu #69762E (pareizi), korāļu #DB6161 (kļūda), pelēkā #D8D1CF (līnijas, fons).
- * Gaišās krāsas tekstam nav pietiekami kontrastējošas, tāpēc tekstam — tumšāki to toņi.
- * Kontrasts (WCAG AA) uz balta: ink 17:1, accent-strong 6.5:1, ok 6.3:1, err 5.9:1, muted 7.6:1.
+ * Melnbalta gamma ar LPSC zīmola krāsu #6C3441.
+ * Kontrasts (WCAG AA): ink #222 uz #F8F8F8 ≈ 15:1, accent uz balta ≈ 9.6:1, muted ≈ 6.4:1,
+ * ok ≈ 6.4:1, err ≈ 5.9:1 (statusa krāsas paliek, lai pareizi/nepareizi būtu atšķirams).
  */
 @theme {
-  --color-surface: #f5f2f1;
-  --color-ink: #271726;
-  --color-muted: #5f4f5d;
-  --color-line: #d8d1cf;
-  --color-accent: #271726;
-  --color-accent-strong: #7d4a8a;
-  --color-accent-soft: #f2e7f5;
-  --color-brand: #bc82c9;
-  --color-ok: #5a6527;
-  --color-ok-soft: #eef0e1;
-  --color-err: #b23b3b;
-  --color-err-soft: #fbe8e7;
-  --color-coral: #db6161;
-  --color-olive: #69762e;
+  --color-surface: #f8f8f8;
+  --color-ink: #222222;
+  --color-muted: #5c5c5c;
+  --color-line: #e3e3e3;
+  --color-accent: #6c3441;
+  --color-accent-strong: #522630;
+  --color-accent-soft: #efefef;
+  --color-brand: #6c3441;
+  --color-ok: #1d6b3a;
+  --color-ok-soft: #e6f2ea;
+  --color-err: #c0261a;
+  --color-err-soft: #fde8e5;
   --color-warn: #7a4f00;
   --color-warn-soft: #fbf0d9;
   --font-sans: "Figtree Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -52,7 +49,7 @@ body {
     @apply bg-accent text-white hover:bg-accent-strong;
   }
   .btn-secondary {
-    @apply border-2 border-accent text-accent hover:bg-accent-soft;
+    @apply border-2 border-ink text-ink hover:bg-accent-soft;
   }
   .btn-ghost {
     @apply text-accent-strong underline-offset-4 hover:underline;
