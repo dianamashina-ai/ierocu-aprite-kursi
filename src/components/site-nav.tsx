@@ -30,7 +30,7 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
 
   return (
     <>
-      <nav aria-label="Galvenā navigācija" className="hidden flex-1 justify-center lg:flex">
+      <nav aria-label="Galvenā navigācija" className="hidden flex-1 justify-end lg:flex">
         <ul className="flex items-center gap-1">
           {items.map((it) => {
             const active = isActive(path, it);
