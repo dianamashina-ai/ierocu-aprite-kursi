@@ -6,7 +6,8 @@
 - **Izdevējs:** Saeima · Pieņemts 17.06.1998. · Stājas spēkā 01.04.1999.
 
 > Tikai panti, kas vajadzīgi kvalifikācijas pārbaudījuma tēmām. Teksts pārņemts no likumi.lv **bez izmaiņām**.
-> Iekļauts: III nodaļa (28.–34. pants) un XX nodaļas panti par nelikumīgu darbību ar šaujamieročiem un munīciju.
+> Iekļauts: III nodaļa (28.–34. pants); 121., 122., 128., 129. pants (nepieciešamās aizstāvēšanās un aizturēšanas
+> nosacījumu pārkāpšana); XX nodaļas panti par nelikumīgu darbību ar šaujamieročiem un munīciju.
 
 ## III nodaļa — Apstākļi, kas izslēdz kriminālatbildību
 
@@ -59,6 +60,50 @@ Galējā nepieciešamība ir darbība, ko persona izdara, lai novērstu kaitēju
 (1) Noziedzīgas pavēles vai noziedzīga rīkojuma izpildīšana personai, kas to izpildījusi, ir attaisnojama tikai tādos gadījumos, ja šī persona nav apzinājusies pavēles vai rīkojuma noziedzīgo raksturu un tas nav bijis acīmredzams. Kriminālatbildība šādos gadījumos tomēr iestājas tad, kad izdarīti noziegumi pret cilvēci un mieru, kara noziegumi un genocīds.
 
 (2) Persona, kas nav izpildījusi noziedzīgu pavēli vai rīkojumu, nav saucama pie kriminālatbildības.
+
+## XII nodaļa — Nonāvēšana (izvilkums)
+
+### 121.pants. Slepkavība, pārkāpjot nepieciešamās aizstāvēšanās robežas
+
+Par slepkavību, kas izdarīta, pārkāpjot nepieciešamās aizstāvēšanās robežas, —
+
+soda ar brīvības atņemšanu uz laiku līdz diviem gadiem vai ar īslaicīgu brīvības atņemšanu, vai ar probācijas uzraudzību, vai ar sabiedrisko darbu.
+
+> (Ar grozījumiem, kas izdarīti ar 13.12.2012. un 17.12.2020. likumu, kas stājas spēkā 01.01.2022.)
+
+### 122.pants. Slepkavība, pārkāpjot personas aizturēšanas nosacījumus
+
+(1) Par slepkavību, kas izdarīta, pārkāpjot personas aizturēšanas nosacījumus, —
+
+soda ar brīvības atņemšanu uz laiku līdz diviem gadiem vai ar īslaicīgu brīvības atņemšanu, vai ar probācijas uzraudzību, vai ar sabiedrisko darbu.
+
+(2) Par tādām pašām darbībām, ja tās izdarījusi valsts amatpersona, —
+
+soda ar brīvības atņemšanu uz laiku līdz trim gadiem vai ar īslaicīgu brīvības atņemšanu, vai ar probācijas uzraudzību, vai ar sabiedrisko darbu.
+
+> (Ar grozījumiem, kas izdarīti ar 13.12.2012. un 17.12.2020. likumu, kas stājas spēkā 01.01.2022.)
+
+## XIII nodaļa — Noziedzīgi nodarījumi pret personas veselību (izvilkums)
+
+### 128.pants. Tīša miesas bojājuma nodarīšana, pārkāpjot nepieciešamās aizstāvēšanās robežas
+
+Par tīša smaga vai vidēja smaguma miesas bojājuma nodarīšanu, pārkāpjot nepieciešamās aizstāvēšanās robežas, ja šis bojājums nav nodarīts, aizsargājoties pret dzīvības apdraudējumu vai pret izvarošanu, —
+
+soda ar īslaicīgu brīvības atņemšanu vai ar probācijas uzraudzību, vai ar sabiedrisko darbu, vai ar naudas sodu.
+
+> (Ar grozījumiem, kas izdarīti ar 13.12.2012. un 17.12.2020. likumu, kas stājas spēkā 01.01.2022.)
+
+### 129.pants. Tīša miesas bojājuma nodarīšana, pārkāpjot personas aizturēšanas nosacījumus
+
+(1) Par tīša smaga vai vidēja smaguma miesas bojājuma nodarīšanu, pārkāpjot personas aizturēšanas nosacījumus, —
+
+soda ar īslaicīgu brīvības atņemšanu vai ar probācijas uzraudzību, vai ar sabiedrisko darbu, vai ar naudas sodu.
+
+(2) Par tādām pašām darbībām, ja tās izdarījusi valsts amatpersona, —
+
+soda ar brīvības atņemšanu uz laiku līdz vienam gadam vai ar īslaicīgu brīvības atņemšanu, vai ar probācijas uzraudzību, vai ar sabiedrisko darbu, vai ar naudas sodu.
+
+> (Ar grozījumiem, kas izdarīti ar 12.02.2004., 13.12.2012. un 17.12.2020. likumu, kas stājas spēkā 01.01.2022.)
 
 ## XX nodaļa — Noziedzīgi nodarījumi pret vispārējo drošību un sabiedrisko kārtību (izvilkums)
 

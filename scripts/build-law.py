@@ -133,8 +133,10 @@ kl_page = read("kl.html")
 kl = law.articles(kl_page)
 WANT_III = {"28", "29", "30", "31", "32", "33", "34"}
 WANT_WEAPONS = ["233", "233_1", "234", "235", "236", "237"]
+# Nepieciešamās aizstāvēšanās / aizturēšanas robežu pārkāpšana
+WANT_LIMITS = {"XII nodaļa": ["121", "122"], "XIII nodaļa": ["128", "129"]}
 chapter = ""
-sel_iii, sel_w = [], {}
+sel_iii, sel_w, sel_lim = [], {}, {}
 for item in kl:
     if item["kind"] == "heading":
         chapter = item["text"]
@@ -145,7 +147,11 @@ for item in kl:
         sel_iii.append(item)
     if chapter.startswith("XX nodaļa") and item["num"] in WANT_WEAPONS:
         sel_w[item["num"]] = item
+    for ch, nums in WANT_LIMITS.items():
+        if chapter.startswith(ch) and item["num"] in nums:
+            sel_lim[item["num"]] = (chapter, item)
 assert len(sel_iii) == 7 and len(sel_w) == len(WANT_WEAPONS), (len(sel_iii), list(sel_w))
+assert sorted(sel_lim) == ["121", "122", "128", "129"], list(sel_lim)
 
 kl_lines = [
     "# Krimināllikums — izvilkums",
@@ -156,12 +162,20 @@ kl_lines = [
     "- **Izdevējs:** Saeima · Pieņemts 17.06.1998. · Stājas spēkā 01.04.1999.",
     "",
     "> Tikai panti, kas vajadzīgi kvalifikācijas pārbaudījuma tēmām. Teksts pārņemts no likumi.lv **bez izmaiņām**.",
-    "> Iekļauts: III nodaļa (28.–34. pants) un XX nodaļas panti par nelikumīgu darbību ar šaujamieročiem un munīciju.",
+    "> Iekļauts: III nodaļa (28.–34. pants); 121., 122., 128., 129. pants (nepieciešamās aizstāvēšanās un aizturēšanas",
+    "> nosacījumu pārkāpšana); XX nodaļas panti par nelikumīgu darbību ar šaujamieročiem un munīciju.",
     "",
     "## III nodaļa — Apstākļi, kas izslēdz kriminālatbildību",
     "",
 ]
 for a in sel_iii:
+    kl_lines += [law.to_markdown(a), ""]
+last_ch = None
+for n in ["121", "122", "128", "129"]:
+    ch, a = sel_lim[n]
+    if ch != last_ch:
+        kl_lines += [f"## {ch} (izvilkums)", ""]
+        last_ch = ch
     kl_lines += [law.to_markdown(a), ""]
 kl_lines += ["## XX nodaļa — Noziedzīgi nodarījumi pret vispārējo drošību un sabiedrisko kārtību (izvilkums)", ""]
 for n in WANT_WEAPONS:
