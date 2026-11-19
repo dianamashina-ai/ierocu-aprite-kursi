@@ -4,6 +4,9 @@ import { getTranslations } from "next-intl/server";
 import { getFamily } from "@/lib/content/queries";
 import { buildFamilyComparison, type DiffToken } from "@/lib/quiz/diff";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { getCurrentUser } from "@/lib/auth/session";
+import { canAccessModule, moduleOfTopic } from "@/lib/billing/access";
+import { Paywall } from "@/components/billing/paywall";
 
 export const dynamic = "force-dynamic";
 
@@ -37,6 +40,14 @@ export default async function FamilyPage({
   const familyId = /^\d{1,3}$/.test(id) ? Number(id) : null;
   const qs = familyId ? await getFamily(familyId) : [];
   if (qs.length < 2) notFound();
+  const user = await getCurrentUser();
+  if (!(await canAccessModule(user?.id, moduleOfTopic(qs[0].topicId)))) {
+    return (
+      <div className="mx-auto max-w-2xl px-4 py-8 sm:py-12">
+        <Paywall title="Līdzīgo jautājumu salīdzinājums pieejams ar pilnu piekļuvi" />
+      </div>
+    );
+  }
   const from = no && /^\d+$/.test(no) ? Number(no) : null;
   const t = await getTranslations("compare");
 

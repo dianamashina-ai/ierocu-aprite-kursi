@@ -2,14 +2,16 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { getCurrentUser } from "@/lib/auth/session";
 import { SignOutButton } from "./sign-out-button";
+import { hasFullAccess } from "@/lib/billing/access";
 
 const item =
   "inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-medium text-muted hover:bg-accent-soft hover:text-accent-strong";
 
 export async function SiteHeader() {
   const [t, user] = await Promise.all([getTranslations("nav"), getCurrentUser()]);
+  const access = await hasFullAccess(user?.id);
   return (
-    <header className="border-b border-line bg-white">
+    <header className="border-b border-line bg-white print:hidden">
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 py-2 sm:h-16 sm:py-0">
         <Link href={user ? "/panelis" : "/"} className="py-2 text-lg font-semibold text-accent-strong">
           {t("brand")}
@@ -23,6 +25,7 @@ export async function SiteHeader() {
               <Link href="/eksamens" className={item}>Eksāmens</Link>
               <Link href="/skaitli" className={item}>Skaitļi</Link>
               <Link href="/meklet" className={item}>{t("search")}</Link>
+              {!access && <Link href="/iegadaties" className={`${item} text-accent-strong`}>Pilna piekļuve</Link>}
               <SignOutButton className={item} />
             </>
           ) : (

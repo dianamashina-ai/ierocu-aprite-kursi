@@ -17,7 +17,14 @@ export default defineConfig({
   ],
   webServer: {
     command: "npx next start -p 3100",
-    env: { BETTER_AUTH_URL: "http://localhost:3100", DEV_OUTBOX: "1", AUTH_RATE_LIMIT: "off" },
+    env: {
+      BETTER_AUTH_URL: "http://localhost:3100",
+      NEXT_PUBLIC_SITE_URL: "http://localhost:3100",
+      DEV_OUTBOX: "1",
+      AUTH_RATE_LIMIT: "off",
+      PAYMENT_PROVIDER: "dev",
+      ALLOW_TEST_PAYMENTS: "1",
+    },
     url: "http://localhost:3100",
     reuseExistingServer: false,
     timeout: 60_000,

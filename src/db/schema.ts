@@ -15,6 +15,7 @@ import {
   integer,
   jsonb,
   pgEnum,
+  pgSequence,
   pgTable,
   primaryKey,
   text,
@@ -251,4 +252,49 @@ export const examAttempts = pgTable(
     passed: boolean("passed"),
   },
   (t) => [index("exam_user_idx").on(t.userId, t.startedAt)],
+);
+
+// ─── 5. posms: maksājumi ───────────────────────────────────────────────
+
+export const orderStatus = pgEnum("order_status", ["pending", "paid", "failed", "canceled", "refunded"]);
+export const paymentProvider = pgEnum("payment_provider", ["stripe", "montonio", "dev"]);
+
+export interface OrderBuyer {
+  name: string;
+  email: string;
+  company?: string;
+  regNo?: string;
+  vatNo?: string;
+  address?: string;
+}
+
+/** Rēķinu numuru secība (piešķir tikai apmaksātiem pasūtījumiem — numerācija bez robiem). */
+export const invoiceSeq = pgSequence("invoice_seq", { startWith: 1 });
+
+export const orders = pgTable(
+  "orders",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "restrict" }),
+    status: orderStatus("status").notNull().default("pending"),
+    provider: paymentProvider("provider").notNull(),
+    /** Stripe Checkout Session id / Montonio order uuid */
+    providerRef: text("provider_ref"),
+    product: text("product").notNull(),
+    amountCents: integer("amount_cents").notNull(),
+    netCents: integer("net_cents").notNull(),
+    vatCents: integer("vat_cents").notNull(),
+    vatRate: integer("vat_rate").notNull(),
+    currency: text("currency").notNull().default("EUR"),
+    buyer: jsonb("buyer").$type<OrderBuyer>().notNull(),
+    /** Piekrišana tūlītējai piekļuvei digitālajam saturam un atteikuma tiesību zaudēšanai */
+    waiverAcceptedAt: timestamp("waiver_accepted_at", { withTimezone: true }).notNull(),
+    invoiceNumber: text("invoice_number").unique(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    paidAt: timestamp("paid_at", { withTimezone: true }),
+    refundedAt: timestamp("refunded_at", { withTimezone: true }),
+  },
+  (t) => [index("orders_user_idx").on(t.userId, t.createdAt), index("orders_provider_ref_idx").on(t.providerRef)],
 );

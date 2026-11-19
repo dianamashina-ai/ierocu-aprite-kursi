@@ -5,6 +5,9 @@ import { getTopic, topicIdFromSlug, topicSlug } from "@/lib/content/queries";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LessonBody } from "@/components/lesson-body";
 import { readLesson } from "@/lib/content/lessons";
+import { getCurrentUser } from "@/lib/auth/session";
+import { canAccessModule } from "@/lib/billing/access";
+import { Paywall } from "@/components/billing/paywall";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +22,9 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
   const { topic, questions, prev, next } = data;
   const [t, tc] = await Promise.all([getTranslations("topic"), getTranslations("common")]);
   const lesson = readLesson(topic.id);
+  const allowed = await canAccessModule((await getCurrentUser())?.id, topic.module.id);
+  // bez piekļuves — nodarbības sākums (pirmās divas rindkopas) un aicinājums iegādāties
+  const lessonBody = lesson && !allowed ? lesson.body.split(/\n\s*\n/).slice(0, 2).join("\n\n") : lesson?.body;
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:py-12">
@@ -48,17 +54,24 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
         {lesson ? (
           <>
             <div className="mt-4">
-              <LessonBody markdown={lesson.body} />
+              <LessonBody markdown={lessonBody ?? ""} />
             </div>
+            {!allowed && (
+              <div className="mt-6">
+                <Paywall title="Visa nodarbība pieejama ar pilnu piekļuvi" />
+              </div>
+            )}
             <p className="mt-6 border-t border-line pt-4 text-sm text-muted">
               <span className="font-medium text-ink">{t("lessonSources")}:</span> {lesson.sources}
             </p>
             <p className="mt-1 text-xs text-muted">{t("lessonDraft")}</p>
-            <div className="mt-5">
-              <Link href={`/tema/${topicSlug(topic.id)}/trenins`} className="btn-primary">
-                {t("practiceAfterLesson", { count: questions.length })}
-              </Link>
-            </div>
+            {allowed && (
+              <div className="mt-5">
+                <Link href={`/tema/${topicSlug(topic.id)}/trenins`} className="btn-primary">
+                  {t("practiceAfterLesson", { count: questions.length })}
+                </Link>
+              </div>
+            )}
           </>
         ) : (
           <p className="mt-2 text-muted">{t("lessonSoon")}</p>

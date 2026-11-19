@@ -1,15 +1,5 @@
-import { expect, test, type Page } from "@playwright/test";
-
-const uniqueEmail = (tag: string) => `e2e-${tag}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}@example.com`;
-
-async function signUp(page: Page, email: string) {
-  await page.goto("/registreties");
-  await page.getByLabel("E-pasts").fill(email);
-  await page.getByLabel(/Parole/).fill("drosa-parole-123");
-  await page.getByRole("checkbox").check();
-  await page.getByRole("button", { name: "Izveidot kontu" }).click();
-  await expect(page).toHaveURL(/\/panelis$/);
-}
+import { expect, test } from "@playwright/test";
+import { buyAccess, signUp, uniqueEmail } from "./helpers";
 
 test("reģistrācija → panelis → iziet → pieslēgties ar paroli", async ({ page }) => {
   const email = uniqueEmail("pw");
@@ -48,6 +38,7 @@ test("pieslēgšanās ar saiti e-pastā", async ({ page, request }) => {
 
 test("atbildes saglabājas; kļūda nonāk kļūdu sarakstā; panelis rāda progresu", async ({ page }) => {
   await signUp(page, uniqueEmail("progress"));
+  await buyAccess(page);
   await page.goto("/jautajums/1");
   // izvēlamies nepareizu: atrodam pareizo pēc atbildes un, ja trāpījām, mēģinām citu jautājumu
   await page.locator("fieldset button", { hasNotText: "variants" }).first().click();
@@ -63,6 +54,7 @@ test("atbildes saglabājas; kļūda nonāk kļūdu sarakstā; panelis rāda prog
 test("izmēģinājuma eksāmens: sākt, atbildēt, turpināt pēc pārlādes, pabeigt, rezultāts", async ({ page }) => {
   test.setTimeout(90_000);
   await signUp(page, uniqueEmail("exam"));
+  await buyAccess(page);
   await page.goto("/eksamens");
   await page.getByRole("button", { name: "Sākt eksāmenu" }).click();
   await expect(page).toHaveURL(/\/eksamens\/[0-9a-f-]+$/);

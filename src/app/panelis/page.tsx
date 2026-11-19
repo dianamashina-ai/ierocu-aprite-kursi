@@ -3,8 +3,11 @@ import { requireUser } from "@/lib/auth/session";
 import { getDashboard } from "@/lib/progress/service";
 import { topicSlug } from "@/lib/content/queries";
 import { ProgressBar } from "@/components/progress-bar";
-import { formatDateTime, plural } from "@/lib/format";
+import { formatDate, formatDateTime, formatEuro, plural } from "@/lib/format";
 import { READY_TOPIC_PERCENT } from "@/lib/progress/readiness";
+import { hasFullAccess } from "@/lib/billing/access";
+import { getOrdersForUser } from "@/lib/billing/service";
+import { Paywall } from "@/components/billing/paywall";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Panelis" };
@@ -25,13 +28,19 @@ function Stat({ value, label, href }: { value: React.ReactNode; label: string; h
 
 export default async function DashboardPage() {
   const user = await requireUser("/panelis");
-  const d = await getDashboard(user.id);
+  const [d, access, orders] = await Promise.all([getDashboard(user.id), hasFullAccess(user.id), getOrdersForUser(user.id)]);
+  const invoices = orders.filter((o) => o.invoiceNumber);
   const masteredPct = Math.round((d.masteredQuestions / d.totalQuestions) * 100);
   const started = d.answeredQuestions > 0;
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:py-12">
       <h1 className="text-3xl font-semibold">Sveiks{user.name ? `, ${user.name}` : ""}!</h1>
+      {!access && (
+        <div className="mt-6">
+          <Paywall title="Tev pieejams 1. modulis">Atver pārējos 8 moduļus, visas nodarbības, skaidrojumus un izmēģinājuma eksāmenu.</Paywall>
+        </div>
+      )}
 
       <section
         aria-labelledby="ready-h"
@@ -144,6 +153,23 @@ export default async function DashboardPage() {
           </ol>
         )}
       </section>
+      {invoices.length > 0 && (
+        <section className="mt-12" aria-labelledby="inv-h">
+          <h2 id="inv-h" className="text-xl font-semibold">Rēķini</h2>
+          <ul className="mt-3 divide-y divide-line rounded-xl border border-line bg-white">
+            {invoices.map((o) => (
+              <li key={o.id}>
+                <Link href={`/rekins/${o.id}`} className="flex items-center justify-between gap-3 px-4 py-3 hover:bg-accent-soft">
+                  <span className="font-medium">{o.invoiceNumber}</span>
+                  <span className="text-sm text-muted">{formatDate(o.paidAt!)}</span>
+                  <span className="tabular-nums">{formatEuro(o.amountCents)}</span>
+                  {o.status === "refunded" && <span className="text-xs font-semibold text-err">atmaksāts</span>}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </div>
   );
 }

@@ -1,6 +1,13 @@
 import { expect, test } from "@playwright/test";
+import { paidUser } from "./helpers";
+
+test("viesim — tikai 1. moduļa kartītes", async ({ page }) => {
+  await page.goto("/skaitli");
+  await expect(page.getByRole("heading", { name: /^Bez maksas — \d+ no \d+ kartītēm$/ })).toBeVisible();
+});
 
 test("skaitļu kartītes: apgriež, atzīmē, filtrē un rāda sarakstu", async ({ page }) => {
+  await paidUser(page, "num");
   await page.goto("/skaitli");
   await page.waitForLoadState("networkidle");
   await expect(page.getByRole("heading", { level: 1, name: "Skaitļi, kas jāatceras" })).toBeVisible();

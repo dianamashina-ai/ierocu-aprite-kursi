@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { paidUser } from "./helpers";
 
 test("ceļš: sākums → modulis → tēma → treniņš", async ({ page }) => {
   await page.goto("/");
@@ -12,6 +13,7 @@ test("ceļš: sākums → modulis → tēma → treniņš", async ({ page }) => 
 });
 
 test("treniņš: atbilde → atgriezeniskā saite → nākamais → rezultāts", async ({ page }) => {
+  await paidUser(page, "p91");
   await page.goto("/tema/2-2/trenins"); // 8 jautājumi
   for (let i = 0; i < 8; i++) {
     const options = page.locator("fieldset button");
@@ -28,6 +30,7 @@ test("treniņš: atbilde → atgriezeniskā saite → nākamais → rezultāts",
 });
 
 test("pareizās atbildes izcelšana sakrīt ar datiem (Q243 — labots jautājums)", async ({ page }) => {
+  await paidUser(page, "p622");
   await page.goto("/jautajums/243");
   const correct = page.locator("fieldset button", { hasText: "visas atbildes ir pareizas" });
   await correct.click();
@@ -37,11 +40,13 @@ test("pareizās atbildes izcelšana sakrīt ar datiem (Q243 — labots jautājum
 });
 
 test("Q468 rāda 4 variantus", async ({ page }) => {
+  await paidUser(page, "p104");
   await page.goto("/jautajums/468");
   await expect(page.locator("fieldset button")).toHaveCount(4);
 });
 
 test("tastatūra: burts izvēlas atbildi", async ({ page, isMobile }) => {
+  await paidUser(page, "p201");
   test.skip(isMobile, "tikai datoram");
   await page.goto("/jautajums/1");
   await page.waitForLoadState("networkidle"); // jāsagaida hidratācija, citādi taustiņš vēl netiek apstrādāts
@@ -50,6 +55,7 @@ test("tastatūra: burts izvēlas atbildi", async ({ page, isMobile }) => {
 });
 
 test("salīdzināt līdzīgos: no jautājuma uz saimi", async ({ page }) => {
+  await paidUser(page, "p595");
   await page.goto("/jautajums/58");
   await page.locator("fieldset button").first().click();
   await page.getByRole("link", { name: /Salīdzināt līdzīgos \(4\)/ }).click();

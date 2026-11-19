@@ -5,6 +5,7 @@ import { getDueReviewIds, getUpcomingReviews, getWrongIds } from "@/lib/progress
 import { getPracticeQuestionsByIds } from "@/lib/content/queries";
 import { Practice } from "@/components/practice/practice";
 import { formatDay, plural } from "@/lib/format";
+import { hasFullAccess, isFreeModule, moduleOfTopic } from "@/lib/billing/access";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Kļūdu labošana" };
@@ -14,7 +15,8 @@ export default async function ReviewPage({ searchParams }: { searchParams: Promi
   const all = (await searchParams).visas === "1";
   const [due, wrong, upcoming] = await Promise.all([getDueReviewIds(user.id), getWrongIds(user.id), getUpcomingReviews(user.id)]);
   const ids = all ? wrong : due;
-  const qs = await getPracticeQuestionsByIds(ids);
+  const access = await hasFullAccess(user.id);
+  const qs = (await getPracticeQuestionsByIds(ids)).filter((q) => access || isFreeModule(moduleOfTopic(q.topicId)));
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-8 sm:py-10">

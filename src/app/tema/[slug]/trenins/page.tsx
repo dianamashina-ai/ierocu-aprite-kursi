@@ -5,6 +5,8 @@ import { getPracticeQuestionsForTopic, getTopicMeta, topicIdFromSlug, topicSlug 
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Practice } from "@/components/practice/practice";
 import { getCurrentUser } from "@/lib/auth/session";
+import { canAccessModule } from "@/lib/billing/access";
+import { Paywall } from "@/components/billing/paywall";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +24,8 @@ export default async function PracticePage({ params }: { params: Promise<{ slug:
   ]);
   if (!meta || !questions.length) notFound();
   const topicHref = `/tema/${topicSlug(topicId)}`;
+  const user = await getCurrentUser();
+  const allowed = await canAccessModule(user?.id, meta.moduleId);
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-6 sm:py-10">
@@ -34,7 +38,11 @@ export default async function PracticePage({ params }: { params: Promise<{ slug:
       />
       <div className="mt-5">
         {/* sēkla katram apmeklējumam jauna → cita jautājumu un variantu secība */}
-        <Practice signedIn={Boolean(await getCurrentUser())} questions={questions} seed={randomUUID()} topicHref={topicHref} />
+        {allowed ? (
+          <Practice signedIn={Boolean(user)} questions={questions} seed={randomUUID()} topicHref={topicHref} />
+        ) : (
+          <Paywall />
+        )}
       </div>
     </div>
   );

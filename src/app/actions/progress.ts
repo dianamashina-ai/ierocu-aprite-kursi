@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { getCurrentUser } from "@/lib/auth/session";
+import { canAccessQuestion, hasFullAccess } from "@/lib/billing/access";
 import { finishExam, ProgressError, recordAnswer, saveExamAnswer, startExam } from "@/lib/progress/service";
 
 type Result = { ok: true } | { ok: false; error: string };
@@ -21,12 +22,14 @@ const safe = async (fn: () => Promise<unknown>): Promise<Result> => {
 export async function recordAnswerAction(questionId: number, key: string, mode: "practice" | "review"): Promise<Result> {
   const user = await getCurrentUser();
   if (!user) return { ok: false, error: "Nav pieslēgts" };
+  if (!(await canAccessQuestion(user.id, questionId))) return { ok: false, error: "Šis jautājums pieejams ar pilnu piekļuvi" };
   return safe(() => recordAnswer(user.id, questionId, key, mode));
 }
 
 export async function startExamAction() {
   const user = await getCurrentUser();
   if (!user) redirect("/pieslegties?next=/eksamens");
+  if (!(await hasFullAccess(user.id))) redirect("/iegadaties");
   const id = await startExam(user.id);
   redirect(`/eksamens/${id}`);
 }

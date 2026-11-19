@@ -15,6 +15,13 @@
       "when": 1795096774925,
       "tag": "0001_accounts_progress",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795109632539,
+      "tag": "0002_payments",
+      "breakpoints": true
     }
   ]
 }

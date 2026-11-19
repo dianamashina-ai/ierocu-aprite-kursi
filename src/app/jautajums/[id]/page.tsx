@@ -6,6 +6,8 @@ import { getPracticeQuestion, getTopicMeta, topicSlug } from "@/lib/content/quer
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Practice } from "@/components/practice/practice";
 import { getCurrentUser } from "@/lib/auth/session";
+import { canAccessModule, moduleOfTopic } from "@/lib/billing/access";
+import { Paywall } from "@/components/billing/paywall";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +24,8 @@ export default async function QuestionPage({ params }: { params: Promise<{ id: s
   if (!q) notFound();
   const [meta, tc, tp] = await Promise.all([getTopicMeta(q.topicId), getTranslations("common"), getTranslations("practice")]);
   const topicHref = `/tema/${topicSlug(q.topicId)}`;
+  const user = await getCurrentUser();
+  const allowed = await canAccessModule(user?.id, moduleOfTopic(q.topicId));
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-6 sm:py-10">
@@ -36,7 +40,14 @@ export default async function QuestionPage({ params }: { params: Promise<{ id: s
         {tc("question", { id: q.id })} · {tc("pdfPage", { page: q.sourcePage })}
       </p>
       <div className="mt-3">
-        <Practice signedIn={Boolean(await getCurrentUser())} questions={[q]} seed={randomUUID()} topicHref={topicHref} shuffleQuestions={false} />
+        {allowed ? (
+          <Practice signedIn={Boolean(user)} questions={[q]} seed={randomUUID()} topicHref={topicHref} shuffleQuestions={false} />
+        ) : (
+          <div className="space-y-5">
+            <p className="rounded-2xl border border-line bg-white p-5 text-lg font-semibold leading-snug" lang="lv">{q.text}</p>
+            <Paywall title="Atbilde un skaidrojums pieejami ar pilnu piekļuvi" />
+          </div>
+        )}
       </div>
       <p className="mt-6 text-sm text-muted">{tp("officialText")}</p>
       {q.id > 1 || q.id < 515 ? (

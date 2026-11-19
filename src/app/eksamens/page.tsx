@@ -3,6 +3,8 @@ import { getCurrentUser } from "@/lib/auth/session";
 import { getExamConfig, getExamHistory } from "@/lib/progress/service";
 import { startExamAction } from "@/app/actions/progress";
 import { formatDateTime } from "@/lib/format";
+import { hasFullAccess } from "@/lib/billing/access";
+import { Paywall } from "@/components/billing/paywall";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Izmēģinājuma eksāmens" };
@@ -10,6 +12,7 @@ export const metadata = { title: "Izmēģinājuma eksāmens" };
 export default async function ExamStartPage() {
   const [user, cfg] = await Promise.all([getCurrentUser(), getExamConfig()]);
   const history = user ? await getExamHistory(user.id) : [];
+  const access = await hasFullAccess(user?.id);
   const maxWrong = cfg.questionCount - Math.ceil((cfg.questionCount * cfg.passPercent) / 100);
 
   return (
@@ -30,7 +33,9 @@ export default async function ExamStartPage() {
       </ul>
 
       <div className="mt-8">
-        {user ? (
+        {!access ? (
+          <Paywall title="Izmēģinājuma eksāmens pieejams ar pilnu piekļuvi" />
+        ) : user ? (
           <form action={startExamAction}>
             <button type="submit" className="btn-primary">Sākt eksāmenu</button>
           </form>
