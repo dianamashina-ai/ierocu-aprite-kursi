@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "title": "Ieroču aprites eksāmena sagatavošana",
+    "description": "Sagatavojies Valsts policijas kvalifikācijas pārbaudījumam par ieroču aprites kārtību: tēmas, visi 515 jautājumi, kļūdu labošana un izmēģinājuma eksāmens."
+  },
+  "nav": {
+    "brand": "Ieroču eksāmens",
+    "language": "Valoda"
+  },
+  "home": {
+    "heading": "Sagatavojies ieroču aprites eksāmenam mierīgi un pa tēmām",
+    "lead": "Moduļi: {modules} · tēmas: {topics} · oficiālie jautājumi ar pareizajām atbildēm: {questions}",
+    "modulesHeading": "Kursa moduļi",
+    "questionsCount": "{count, plural, zero {# jautājumu} one {# jautājums} other {# jautājumi}}",
+    "topicsCount": "{count, plural, zero {# tēmu} one {# tēma} other {# tēmas}}",
+    "free": "Bez maksas"
+  },
+  "footer": {
+    "disclaimer": "Šī ir mācību platforma eksāmena sagatavošanai. Tā nav oficiālais eksāmens un nav saistīta ar Valsts policiju.",
+    "contentVersion": "Satura versija: {version}"
+  }
+}

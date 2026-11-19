@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+/*
+ * Mierīgs mācību stils: gaišs fons, viena akcenta krāsa (tumši zaļgani zila).
+ * Kontrasts pārbaudīts pret AA: accent uz balta 7.0:1, muted uz balta 7.4:1.
+ */
+@theme {
+  --color-surface: #f7f8f6;
+  --color-ink: #1c2321;
+  --color-muted: #4a5552;
+  --color-line: #dfe3e0;
+  --color-accent: #1f5e57;
+  --color-accent-strong: #174842;
+  --color-accent-soft: #e4efec;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "Labojumi, kas tiek piemēroti questions.json ielādes laikā. Avots (questions.json) netiek mainīts. Katrs labojums pārbaudīts vizuāli pret oficiālo PDF (sarkanā krāsā iezīmētā atbilde).",
+  "questions": {
+    "87": {
+      "reason": "PDF 18. lpp. variantiem iespiesti burti a, b, c, a (oriģināla drukas kļūda). Pareizā atbilde (sarkana) ir 2. variants.",
+      "printed_labels": ["a", "b", "c", "a"],
+      "correct_position": 2
+    },
+    "243": {
+      "reason": "PDF 52. lpp. variantiem iespiesti burti a, b, c, a. Pareizā atbilde (sarkana) ir 4. variants 'visas atbildes ir pareizas', nevis 1. variants, kā varētu nolasīt no questions.json (correct = 'a').",
+      "printed_labels": ["a", "b", "c", "a"],
+      "correct_position": 4
+    },
+    "313": {
+      "reason": "PDF 66. lpp. variantiem iespiesti burti a, b, c, a. Pareizā atbilde (sarkana) ir 1. variants.",
+      "printed_labels": ["a", "b", "c", "a"],
+      "correct_position": 1
+    },
+    "468": {
+      "reason": "PDF 102. lpp. variantiem iespiesti burti e, f, g, h (oriģināla drukas kļūda). questions.json automātiskā nolasīšana apvienoja f, g un h vienā variantā. Pareizā atbilde (sarkana) ir 4. variants 'visas atbildes ir pareizas'.",
+      "printed_labels": ["e", "f", "g", "h"],
+      "options": [
+        "ieroču uzbūve ir atkarīga no ieroča veida, konstrukcijas un sistēmas (šaujamierocis vai pneimatiskais ierocis, garstobra vai īstobra, viena šāviena, atkārtotas darbības, pusautomātiskais vai automātiskais u.c.)",
+        "atsevišķas ieroča daļas tiek pieskaitītas pie galvenajām jeb pamatdaļām. Tās var būt kā atsevišķas daļas vai sastāvēt no vairākām sastāvdaļām, kā arī tās var saturēt atsevišķus mehānismus",
+        "ieroča mehānismiem parasti ir izveidotas kopīgas daļas, kas izpilda vairākas funkcijas, piemēram, aizslēgs un stobra kārba vai aizslēga rāmis",
+        "visas atbildes ir pareizas"
+      ],
+      "correct_position": 4
+    }
+  }
+}
