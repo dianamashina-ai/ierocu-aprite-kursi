@@ -8,6 +8,7 @@ import type { PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import * as schema from "@/db/schema";
 import { DEFAULT_CONTENT_VERSION, DEFAULT_EXAM_CONFIG } from "@/config/exam";
 import type { Content } from "./source";
+import { analyzeOptions } from "@/lib/quiz/shuffle";
 
 export async function seedDatabase(
   db: PostgresJsDatabase<typeof schema>,
@@ -31,7 +32,7 @@ export async function seedDatabase(
         .values(m)
         .onConflictDoUpdate({
           target: modules.id,
-          set: { order: m.order, titleLv: m.titleLv, titleRu: m.titleRu },
+          set: { order: m.order, titleLv: m.titleLv },
         });
     }
     for (const t of content.topics) {
@@ -40,12 +41,11 @@ export async function seedDatabase(
         moduleId: t.moduleId,
         order: t.order,
         titleLv: t.titleLv,
-        titleRu: t.titleRu,
         lawHint: t.lawHint,
       };
       await tx.insert(topics).values(row).onConflictDoUpdate({
         target: topics.id,
-        set: { moduleId: row.moduleId, order: row.order, titleLv: row.titleLv, titleRu: row.titleRu },
+        set: { moduleId: row.moduleId, order: row.order, titleLv: row.titleLv },
       });
     }
 
@@ -61,6 +61,11 @@ export async function seedDatabase(
         sourcePage: q.sourcePage,
         familyId: q.familyId,
         correctionNote: q.correctionNote,
+        // Aprēķināts no variantu tekstiem; ja nevar droši parsēt — nejaucam un atzīmējam administrācijai
+        ...(() => {
+          const a = analyzeOptions(q.options);
+          return { shuffleDisabled: !a.shuffleable, shuffleNote: a.reason };
+        })(),
       };
       const opts = q.options.map((o) => ({
         questionId: q.id,

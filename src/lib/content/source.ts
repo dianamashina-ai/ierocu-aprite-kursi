@@ -27,7 +27,7 @@ const QuestionSchema = z.object({
 const TopicSchema = z.object({
   id: z.string(),
   title_lv: z.string(),
-  title_ru: z.string(),
+  title_ru: z.string().optional(), // avotā ir, platformā netiek izmantots
   question_ids: z.array(z.number().int()),
   count: z.number().int(),
   law_hint: z.string().nullable().optional(),
@@ -36,7 +36,7 @@ const TopicSchema = z.object({
 const ModuleSchema = z.object({
   id: z.string(),
   title_lv: z.string(),
-  title_ru: z.string(),
+  title_ru: z.string().optional(), // avotā ir, platformā netiek izmantots
   order: z.number().int(),
   topics: z.array(TopicSchema),
 });
@@ -96,7 +96,6 @@ export interface ContentTopic {
   moduleId: string;
   order: number;
   titleLv: string;
-  titleRu: string;
   lawHint: string | null;
   questionIds: number[];
 }
@@ -105,7 +104,6 @@ export interface ContentModule {
   id: string;
   order: number;
   titleLv: string;
-  titleRu: string;
 }
 
 export interface Content {
@@ -202,7 +200,7 @@ export function buildContent(source: SourceData, corrections: Corrections): Cont
     meta: source.meta,
     officialSections: source.official_sections.map((s, i) => ({ id: s.id, order: i + 1, title: s.title })),
     modules: source.modules
-      .map((m) => ({ id: m.id, order: m.order, titleLv: m.title_lv, titleRu: m.title_ru }))
+      .map((m) => ({ id: m.id, order: m.order, titleLv: m.title_lv }))
       .sort((a, b) => a.order - b.order),
     topics: source.modules.flatMap((m) =>
       m.topics.map((t, i) => ({
@@ -210,7 +208,6 @@ export function buildContent(source: SourceData, corrections: Corrections): Cont
         moduleId: m.id,
         order: i + 1,
         titleLv: t.title_lv,
-        titleRu: t.title_ru,
         lawHint: t.law_hint ?? null,
         questionIds: t.question_ids,
       })),

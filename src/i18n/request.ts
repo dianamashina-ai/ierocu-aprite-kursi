@@ -1,12 +1,13 @@
 import { getRequestConfig } from "next-intl/server";
-import { hasLocale } from "next-intl";
-import { routing } from "./routing";
 
-export default getRequestConfig(async ({ requestLocale }) => {
-  const requested = await requestLocale;
-  const locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;
-  return {
-    locale,
-    messages: (await import(`../../messages/${locale}.json`)).default,
-  };
-});
+/**
+ * Platforma ir tikai latviešu valodā. next-intl izmantojam teksta katalogam
+ * (messages/lv.json) un pareizām daudzskaitļa formām, bez valodu maršrutēšanas.
+ */
+export const LOCALE = "lv";
+
+export default getRequestConfig(async () => ({
+  locale: LOCALE,
+  messages: (await import("../../messages/lv.json")).default,
+  timeZone: "Europe/Riga",
+}));

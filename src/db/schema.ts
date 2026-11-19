@@ -34,7 +34,6 @@ export const modules = pgTable("modules", {
   id: text("id").primaryKey(), // "M1".."M9"
   order: integer("order").notNull(),
   titleLv: text("title_lv").notNull(),
-  titleRu: text("title_ru").notNull(),
 });
 
 export const topics = pgTable(
@@ -46,8 +45,7 @@ export const topics = pgTable(
       .references(() => modules.id),
     order: integer("order").notNull(),
     titleLv: text("title_lv").notNull(),
-    titleRu: text("title_ru").notNull(),
-    lawHint: text("law_hint"),
+      lawHint: text("law_hint"),
     possiblyOutdated: boolean("possibly_outdated").notNull().default(false),
     outdatedNote: text("outdated_note"),
   },
@@ -69,8 +67,7 @@ export const questions = pgTable(
     sourcePage: integer("source_page").notNull(),
     familyId: integer("family_id"), // mazākais jautājuma id saimē; null = nav saimes
     // Saturs, ko aizpilda 4. posmā / administrācijā
-    explanationLv: text("explanation_lv"),
-    explanationRu: text("explanation_ru"),
+    explanation: text("explanation"),
     explanationStatus: explanationStatus("explanation_status").notNull().default("draft"),
     lawReference: text("law_reference"),
     possiblyOutdated: boolean("possibly_outdated").notNull().default(false),

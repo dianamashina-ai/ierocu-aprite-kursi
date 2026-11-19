@@ -60,7 +60,7 @@ describe.skipIf(!url)("datubāzes sēklošana", () => {
   it("atkārtota sēklošana nemaina administrācijas labojumus; --reset atjauno tekstu, bet saglabā skaidrojumu", async () => {
     await db
       .update(schema.questions)
-      .set({ text: "ADMIN LABOTS", explanationLv: "skaidrojums", explanationStatus: "reviewed" })
+      .set({ text: "ADMIN LABOTS", explanation: "skaidrojums", explanationStatus: "reviewed" })
       .where(eq(schema.questions.id, 1));
 
     expect(await seedDatabase(db, content)).toEqual({ inserted: 0, updated: 0 });
@@ -71,7 +71,7 @@ describe.skipIf(!url)("datubāzes sēklošana", () => {
     expect(r.updated).toBe(515);
     q1 = await db.query.questions.findFirst({ where: eq(schema.questions.id, 1) });
     expect(q1?.text).toBe(content.questions.find((q) => q.id === 1)!.text);
-    expect(q1?.explanationLv).toBe("skaidrojums");
+    expect(q1?.explanation).toBe("skaidrojums");
     expect(q1?.explanationStatus).toBe("reviewed");
     expect(await count("question_options")).toBe(content.questions.reduce((s, q) => s + q.options.length, 0));
   });

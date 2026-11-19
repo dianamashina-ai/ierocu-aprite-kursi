@@ -1,17 +1,24 @@
 @import "tailwindcss";
 
 /*
- * Mierīgs mācību stils: gaišs fons, viena akcenta krāsa (tumši zaļgani zila).
- * Kontrasts pārbaudīts pret AA: accent uz balta 7.0:1, muted uz balta 7.4:1.
+ * LPSC krāsu gamma: akcents #6C3441 (bordo), silti, viegli rozīgi neitrālie toņi.
+ * Kontrasts (AA): accent uz balta ≈ 9.6:1, muted uz surface ≈ 7.3:1, err uz balta ≈ 6.0:1.
+ * Kļūdas sarkanais apzināti spilgtāks par bordo akcentu, lai nesajauktos.
  */
 @theme {
-  --color-surface: #f7f8f6;
-  --color-ink: #1c2321;
-  --color-muted: #4a5552;
-  --color-line: #dfe3e0;
-  --color-accent: #1f5e57;
-  --color-accent-strong: #174842;
-  --color-accent-soft: #e4efec;
+  --color-surface: #f8f2f1;
+  --color-ink: #2a1c1f;
+  --color-muted: #5b4a4e;
+  --color-line: #e7d9d9;
+  --color-accent: #6c3441;
+  --color-accent-strong: #522630;
+  --color-accent-soft: #f2e4e5;
+  --color-ok: #1d6b3a;
+  --color-ok-soft: #e3f2e8;
+  --color-err: #c0261a;
+  --color-err-soft: #fde8e5;
+  --color-warn: #7a4f00;
+  --color-warn-soft: #fbf0d9;
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -27,4 +34,22 @@ body {
 :focus-visible {
   outline: 3px solid var(--color-accent);
   outline-offset: 2px;
+}
+
+/* Pogas: lielas nospiešanas zonas (min. 44 px) */
+@layer components {
+  .btn-primary,
+  .btn-secondary,
+  .btn-ghost {
+    @apply inline-flex min-h-12 items-center justify-center rounded-xl px-5 text-base font-semibold transition-colors motion-reduce:transition-none;
+  }
+  .btn-primary {
+    @apply bg-accent text-white hover:bg-accent-strong;
+  }
+  .btn-secondary {
+    @apply border-2 border-accent text-accent-strong hover:bg-accent-soft;
+  }
+  .btn-ghost {
+    @apply text-accent-strong underline-offset-4 hover:underline;
+  }
 }

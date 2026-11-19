@@ -1,5 +1,5 @@
 {
-  "id": "d10dea25-4337-41a0-88c3-6f5bc68ad6d9",
+  "id": "d86defbb-64b6-4f4f-993e-d8a706307f29",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -54,12 +54,6 @@
         },
         "title_lv": {
           "name": "title_lv",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "title_ru": {
-          "name": "title_ru",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -224,14 +218,8 @@
           "primaryKey": false,
           "notNull": false
         },
-        "explanation_lv": {
-          "name": "explanation_lv",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "explanation_ru": {
-          "name": "explanation_ru",
+        "explanation": {
+          "name": "explanation",
           "type": "text",
           "primaryKey": false,
           "notNull": false
@@ -400,12 +388,6 @@
         },
         "title_lv": {
           "name": "title_lv",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "title_ru": {
-          "name": "title_ru",
           "type": "text",
           "primaryKey": false,
           "notNull": true

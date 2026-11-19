@@ -8,8 +8,7 @@ CREATE TABLE "app_settings" (
 CREATE TABLE "modules" (
 	"id" text PRIMARY KEY NOT NULL,
 	"order" integer NOT NULL,
-	"title_lv" text NOT NULL,
-	"title_ru" text NOT NULL
+	"title_lv" text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "official_sections" (
@@ -37,8 +36,7 @@ CREATE TABLE "questions" (
 	"correct_key" text NOT NULL,
 	"source_page" integer NOT NULL,
 	"family_id" integer,
-	"explanation_lv" text,
-	"explanation_ru" text,
+	"explanation" text,
 	"explanation_status" "explanation_status" DEFAULT 'draft' NOT NULL,
 	"law_reference" text,
 	"possibly_outdated" boolean DEFAULT false NOT NULL,
@@ -55,7 +53,6 @@ CREATE TABLE "topics" (
 	"module_id" text NOT NULL,
 	"order" integer NOT NULL,
 	"title_lv" text NOT NULL,
-	"title_ru" text NOT NULL,
 	"law_hint" text,
 	"possibly_outdated" boolean DEFAULT false NOT NULL,
 	"outdated_note" text
