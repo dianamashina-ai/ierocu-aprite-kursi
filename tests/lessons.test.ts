@@ -20,6 +20,10 @@ describe("nodarbības", () => {
     expect(l).toEqual({ topicId: "4.2", title: "X: Y", minutes: 3, sources: "Ieroču aprites likums, 14. pants", body: "Teksts" });
   });
 
+  it("numurēts saraksts", () => {
+    expect(parseBlocks("1. a\n2. b")).toEqual([{ kind: "ol", items: ["a", "b"] }]);
+  });
+
   it("markdown bloki", () => {
     expect(parseBlocks("## A\nteksts\nturpinās\n\n- x\n- y\n\n> Atceries\n> - z")).toEqual([
       { kind: "h", text: "A" },

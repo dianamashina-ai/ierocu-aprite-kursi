@@ -9,6 +9,7 @@
  *   ---
  * Teksts — vienkāršs markdown: "## virsraksts", rindkopas, "- saraksts", "> Atceries" bloks, **treknraksts**.
  * Atsauces tekstā iekavās; bez akta nosaukuma — attiecas uz pirmo galvenē minēto aktu.
+ * Tehniskajās tēmās avots var būt "Kvalifikācijas pārbaudījuma jautājumi Nr. …" (data/questions.json oficiālās atbildes).
  * Visi juridiskie fakti — tikai no content/law (atsauces pārbauda validateLessons).
  */
 import { existsSync, readdirSync, readFileSync } from "node:fs";
@@ -69,7 +70,8 @@ export function validateLessons(topicIds: string[], dir = LESSON_DIR) {
     const words = l.body.split(/\s+/).length;
     if (words < 120 || words > 1100) p(`${words} vārdi (jābūt 120–1100)`);
     const refs = parseLawReference(l.sources);
-    if (!refs.length) p("galvenē nav atpazītu avotu");
+    // tehniskajām tēmām (ieroča uzbūve, drošība) avots var būt oficiālie pārbaudījuma jautājumi
+    if (!refs.length && !/pārbaudījuma jautājumi Nr\./.test(l.sources)) p("galvenē nav atpazītu avotu");
     for (const r of refs) if (!index[r.law]?.has(r.article)) p(`avots ${r.law} ${r.article} nav content/law tekstā`);
     // atsauce bez akta nosaukuma, piem. "(13. pants)", attiecas uz pirmo galvenē minēto aktu
     const defaultAct = l.sources.split(",")[0];

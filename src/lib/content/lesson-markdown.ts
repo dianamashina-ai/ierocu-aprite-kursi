@@ -3,6 +3,7 @@ export type Block =
   | { kind: "h"; text: string }
   | { kind: "p"; text: string }
   | { kind: "ul"; items: string[] }
+  | { kind: "ol"; items: string[] }
   | { kind: "note"; lines: string[] };
 
 export function parseBlocks(md: string): Block[] {
@@ -17,6 +18,7 @@ export function parseBlocks(md: string): Block[] {
     }
     if (lines.every((l) => l.startsWith(">"))) blocks.push({ kind: "note", lines: lines.map((l) => l.replace(/^>\s?/, "")) });
     else if (lines.every((l) => l.startsWith("- "))) blocks.push({ kind: "ul", items: lines.map((l) => l.slice(2)) });
+    else if (lines.every((l) => /^\d+\. /.test(l))) blocks.push({ kind: "ol", items: lines.map((l) => l.replace(/^\d+\. /, "")) });
     else blocks.push({ kind: "p", text: lines.join(" ") });
   }
   return blocks;

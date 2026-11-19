@@ -23,6 +23,12 @@ export function LessonBody({ markdown }: { markdown: string }) {
                 {b.items.map((it, j) => <li key={j}>{inline(it)}</li>)}
               </ul>
             );
+          case "ol":
+            return (
+              <ol key={i} className="list-decimal space-y-1.5 pl-6 marker:font-semibold marker:text-accent">
+                {b.items.map((it, j) => <li key={j}>{inline(it)}</li>)}
+              </ol>
+            );
           case "note": {
             const [title, ...rest] = b.lines;
             const items = rest.filter((l) => l.startsWith("- ")).map((l) => l.slice(2));
