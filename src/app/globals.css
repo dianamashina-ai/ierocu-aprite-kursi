@@ -19,7 +19,7 @@
   --color-err-soft: #fde8e5;
   --color-warn: #7a4f00;
   --color-warn-soft: #fbf0d9;
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Figtree Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 html {

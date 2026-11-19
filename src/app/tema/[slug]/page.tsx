@@ -11,6 +11,17 @@ import { Paywall } from "@/components/billing/paywall";
 
 export const dynamic = "force-dynamic";
 
+/** Nodarbības sākums viesim: pirmā rindkopa (bez virsraksta beigās). */
+function lessonTeaser(body: string) {
+  const chunks = body.split(/\n\s*\n/);
+  const out: string[] = [];
+  for (const c of chunks) {
+    if (c.startsWith("## ")) break;
+    out.push(c);
+  }
+  return (out.length ? out : chunks.slice(0, 1)).join("\n\n");
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const data = await getTopic(topicIdFromSlug((await params).slug));
   return { title: data ? `${data.topic.id} ${data.topic.titleLv}` : undefined };
@@ -24,7 +35,7 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
   const lesson = readLesson(topic.id);
   const allowed = await canAccessModule((await getCurrentUser())?.id, topic.module.id);
   // bez piekļuves — nodarbības sākums (pirmās divas rindkopas) un aicinājums iegādāties
-  const lessonBody = lesson && !allowed ? lesson.body.split(/\n\s*\n/).slice(0, 2).join("\n\n") : lesson?.body;
+  const lessonBody = lesson && !allowed ? lessonTeaser(lesson.body) : lesson?.body;
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:py-12">
