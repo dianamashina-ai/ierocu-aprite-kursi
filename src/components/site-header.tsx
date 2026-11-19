@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Crosshair } from "lucide-react";
 import { getCurrentUser } from "@/lib/auth/session";
 import { hasFullAccess } from "@/lib/billing/access";
 import { SiteNav, type NavItem } from "./site-nav";
@@ -19,11 +18,9 @@ export async function SiteHeader() {
   return (
     <header className="relative border-b border-line bg-white/90 backdrop-blur print:hidden">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-4 sm:h-20 sm:px-6">
-        <Link href={user ? "/panelis" : "/"} className="flex items-center gap-2.5">
-          <span aria-hidden="true" className="flex size-10 items-center justify-center rounded-full bg-accent text-brand">
-            <Crosshair className="size-5" strokeWidth={2} />
-          </span>
-          <span className="text-[17px] font-bold uppercase tracking-[0.12em] text-accent">Ieroču eksāmens</span>
+        <Link href={user ? "/panelis" : "/"} className="flex flex-col leading-none" aria-label="Ieroču atļauja — sadarbībā ar LPSC, uz sākumu">
+          <span className="text-[19px] font-extrabold uppercase tracking-[0.01em] text-ink sm:text-[22px]">Ieroču atļauja</span>
+          <span className="mt-1.5 text-[11px] font-normal uppercase tracking-[0.04em] text-ink sm:text-[13px]">Sadarbībā ar LPSC</span>
         </Link>
         <SiteNav items={items} signedIn={Boolean(user)} showBuy={Boolean(user) && !access} />
       </div>

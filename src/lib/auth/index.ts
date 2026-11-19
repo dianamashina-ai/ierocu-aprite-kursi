@@ -9,7 +9,7 @@ import { sendEmail } from "@/lib/email/send";
 const googleEnabled = Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
 
 export const auth = betterAuth({
-  appName: "Ieroču eksāmens",
+  appName: "Ieroču atļauja",
   // Servera puses adrese (nolasa palaišanas brīdī, ne būvējot)
   baseURL:
     process.env.BETTER_AUTH_URL ??
