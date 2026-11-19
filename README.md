@@ -8,7 +8,7 @@ Mācību platforma sagatavošanai Valsts policijas kvalifikācijas pārbaudījum
 ## Tehnoloģijas
 
 Next.js 15 (App Router) · TypeScript · Tailwind CSS 4 · next-intl (tikai latviešu, teksti `messages/lv.json`) ·
-PostgreSQL (lokāli vai Supabase) + Drizzle ORM · Vitest · Playwright
+PostgreSQL (lokāli vai Supabase) + Drizzle ORM · better-auth (konti) · Vitest · Playwright
 
 ## Lokālā palaišana
 
@@ -20,6 +20,7 @@ cp .env.example .env         # skriptiem (seed, migrācijas, testi)
 cp .env.example .env.local   # Next.js
 # izveido datubāzes, piem.:
 #   createuser -P app && createdb -O app ierocu && createdb -O app ierocu_test
+# .env: iestati BETTER_AUTH_SECRET (openssl rand -base64 32)
 npm run db:setup             # migrācijas + sēklošana no data/questions.json
 npm run dev                  # http://localhost:3000
 ```
@@ -68,6 +69,23 @@ npm run dev                  # http://localhost:3000
 | `/jautajums/243` | viens jautājums |
 | `/saime/54?no=58` | «Salīdzināt līdzīgos» — saimes id = mazākais jautājuma numurs |
 | `/meklet?q=…` | meklēšana pēc numura vai teksta |
+| `/registreties`, `/pieslegties` | konts: e-pasts + parole vai saite e-pastā; Google, ja iestatīts |
+| `/panelis` | progress pa moduļiem un tēmām, vājās tēmas, sērija, gatavība eksāmenam |
+| `/kludas` | kļūdu atkārtošana pēc 1, 3, 7 dienām; `?visas=1` — visas kļūdas |
+| `/eksamens`, `/eksamens/<id>` | izmēģinājuma eksāmens ar taimeri un rezultātu analīzi |
+
+## Konti un progress
+
+- **better-auth** glabā lietotājus tajā pašā Postgres (`user`, `session`, `account`, `verification`).
+  Supabase Auth netika izmantots: lokālā Supabase nav palaižama šajā vidē, un atsevišķs auth serviss
+  nav vajadzīgs. Supabase var izmantot kā Postgres hostingu.
+- E-pasti: ar `RESEND_API_KEY` — caur Resend; bez tā — konsolē un `/api/dev/outbox` (tikai izstrādē).
+- `answers` — katra atbilde (pēc oriģinālā burta); `question_progress` — kopsavilkums + atkārtošanas grafiks.
+- Kļūda → atkārtot pēc 1 dienas; pareizi termiņā → pēc 3, tad pēc 7 dienām; tad apgūts. Kļūda jebkurā brīdī sāk no jauna.
+- Izmēģinājuma eksāmens: jautājumi proporcionāli oficiālajām sadaļām I–X (lielāko atlikumu metode),
+  atbildes saglabājas uzreiz, laiku kontrolē serveris; eksāmena laikā klientam netiek sūtītas pareizās atbildes.
+  Iestatījumi: `app_settings.exam` (noklusējums `src/config/exam.ts`: 30 jaut., 60 min, 90 %).
+- «Gatavs eksāmenam»: pēdējie 3 izmēģinājuma eksāmeni nokārtoti un visas tēmas ≥ 80 % (pēdējā atbilde pareiza).
 
 ## Struktūra
 
@@ -89,7 +107,7 @@ tests/                Vitest
 
 1. ✅ Karkass, datubāze, sēklošana, integritātes testi
 2. ✅ Treniņš bez konta, variantu jaukšana, «Salīdzināt līdzīgos», meklēšana
-3. Konti, progress, kļūdu labošana, izmēģinājuma eksāmens
+3. ✅ Konti, progress, kļūdu labošana, izmēģinājuma eksāmens
 4. Skaidrojumi un nodarbības (pēc likuma teksta `content/law/`)
 5. Maksājumi (Stripe, vēlāk Montonio)
 6. Administrācija, juridiskās lapas, SEO

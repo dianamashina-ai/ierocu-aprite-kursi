@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { getPracticeQuestionsForTopic, getTopicMeta, topicIdFromSlug, topicSlug } from "@/lib/content/queries";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Practice } from "@/components/practice/practice";
+import { getCurrentUser } from "@/lib/auth/session";
 
 export const dynamic = "force-dynamic";
 
@@ -33,7 +34,7 @@ export default async function PracticePage({ params }: { params: Promise<{ slug:
       />
       <div className="mt-5">
         {/* sēkla katram apmeklējumam jauna → cita jautājumu un variantu secība */}
-        <Practice questions={questions} seed={randomUUID()} topicHref={topicHref} />
+        <Practice signedIn={Boolean(await getCurrentUser())} questions={questions} seed={randomUUID()} topicHref={topicHref} />
       </div>
     </div>
   );

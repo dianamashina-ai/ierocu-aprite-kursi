@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { seededRandom, shuffleOptions } from "@/lib/quiz/shuffle";
+import { recordAnswerAction } from "@/app/actions/progress";
 import type { PracticeQuestion } from "@/lib/quiz/types";
 
 interface Props {
@@ -13,6 +14,9 @@ interface Props {
   topicHref?: string;
   /** Vai jaukt jautājumu secību (vienam jautājumam — nē) */
   shuffleQuestions?: boolean;
+  /** Pieslēgts lietotājs → atbildes tiek saglabātas */
+  signedIn?: boolean;
+  mode?: "practice" | "review";
 }
 
 type Phase = "question" | "summary";
@@ -28,7 +32,7 @@ function shuffledIndexes(n: number, seed: string, enabled: boolean) {
   return idx;
 }
 
-export function Practice({ questions, seed, topicHref, shuffleQuestions = true }: Props) {
+export function Practice({ questions, seed, topicHref, shuffleQuestions = true, signedIn = false, mode = "practice" }: Props) {
   const t = useTranslations("practice");
   const [round, setRound] = useState(0);
   const [pool, setPool] = useState<number[]>(() => shuffledIndexes(questions.length, seed, shuffleQuestions));
@@ -36,6 +40,7 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true }
   const [selected, setSelected] = useState<string | null>(null); // oriģinālais burts
   const [results, setResults] = useState<Record<number, boolean>>({});
   const [phase, setPhase] = useState<Phase>("question");
+  const [saveError, setSaveError] = useState<string | null>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
 
   const q = questions[pool[pos]];
@@ -53,8 +58,14 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true }
       if (answered || !q) return;
       setSelected(originalKey);
       setResults((r) => ({ ...r, [q.id]: originalKey === q.correctKey }));
+      if (signedIn) {
+        recordAnswerAction(q.id, originalKey, mode).then(
+          (r) => setSaveError(r.ok ? null : r.error),
+          () => setSaveError("Neizdevās saglabāt atbildi. Pārbaudi interneta savienojumu."),
+        );
+      }
     },
-    [answered, q],
+    [answered, q, signedIn, mode],
   );
 
   const next = useCallback(() => {
@@ -120,6 +131,11 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true }
         <div className="mt-4 h-3 overflow-hidden rounded-full bg-accent-soft" aria-hidden="true">
           <div className="h-full bg-accent" style={{ width: `${(correct / ids.length) * 100}%` }} />
         </div>
+        {!signedIn && (
+          <p className="mt-4 rounded-xl bg-accent-soft p-4 text-sm">
+            <Link href="/registreties" className="font-semibold text-accent-strong underline underline-offset-4">Izveido kontu</Link>, lai progress un kļūdas tiktu saglabāti un atkārtoti pēc 1, 3 un 7 dienām.
+          </p>
+        )}
         {wrongIdx.length === 0 ? (
           <p className="mt-4 text-ok">{t("allCorrect")}</p>
         ) : (
@@ -242,6 +258,9 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true }
         <div aria-live="polite">
           {answered && (
             <div className="mt-6 space-y-4 border-t border-line pt-5">
+              {saveError && (
+                <p role="alert" className="rounded-lg bg-err-soft px-3 py-2 text-sm text-err">{saveError}</p>
+              )}
               <p className={`text-lg font-semibold ${isCorrect ? "text-ok" : "text-err"}`}>
                 {isCorrect ? t("correct") : `${t("wrong")}. ${t("correctAnswerIs", { key: correctDisplay })}`}
               </p>

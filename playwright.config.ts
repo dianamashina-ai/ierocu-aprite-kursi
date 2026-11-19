@@ -9,6 +9,7 @@ export default defineConfig({
   fullyParallel: true,
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? "github" : "list",
+  expect: { timeout: 10_000 },
   use: { baseURL: "http://localhost:3100", trace: "off" },
   projects: [
     { name: "mobile", use: { ...devices["iPhone 13"], browserName: "chromium" } },
@@ -16,8 +17,9 @@ export default defineConfig({
   ],
   webServer: {
     command: "npx next start -p 3100",
+    env: { BETTER_AUTH_URL: "http://localhost:3100", DEV_OUTBOX: "1", AUTH_RATE_LIMIT: "off" },
     url: "http://localhost:3100",
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
     timeout: 60_000,
   },
 });

@@ -2,20 +2,26 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { getCourseOverview, topicSlug } from "@/lib/content/queries";
 import { FREE_MODULE_IDS } from "@/config/exam";
+import { getCurrentUser } from "@/lib/auth/session";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [t, tc, course] = await Promise.all([getTranslations("home"), getTranslations("common"), getCourseOverview()]);
+  const [t, tc, course, user] = await Promise.all([getTranslations("home"), getTranslations("common"), getCourseOverview(), getCurrentUser()]);
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:py-16">
       <h1 className="max-w-3xl text-3xl font-semibold leading-tight text-balance sm:text-4xl">{t("heading")}</h1>
       <p className="mt-4 max-w-2xl text-lg text-muted">{t("lead", course.totals)}</p>
-      <div className="mt-6">
-        <Link href="/modulis/M1" className="btn-primary">
-          {t("start")}
-        </Link>
+      <div className="mt-6 flex flex-wrap gap-3">
+        {user ? (
+          <Link href="/panelis" className="btn-primary">Uz paneli</Link>
+        ) : (
+          <>
+            <Link href="/modulis/M1" className="btn-primary">{t("start")}</Link>
+            <Link href="/registreties" className="btn-secondary">Izveidot kontu</Link>
+          </>
+        )}
       </div>
 
       <h2 id="moduli" className="mt-14 scroll-mt-6 text-xl font-semibold">

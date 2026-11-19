@@ -106,6 +106,11 @@ export async function getPracticeQuestion(id: number) {
   return q ?? null;
 }
 
+export async function getPracticeQuestionsByIds(ids: number[]) {
+  if (!ids.length) return [];
+  return loadPracticeQuestions(inArray(questions.id, ids));
+}
+
 export async function getFamily(familyId: number) {
   return loadPracticeQuestions(eq(questions.familyId, familyId));
 }

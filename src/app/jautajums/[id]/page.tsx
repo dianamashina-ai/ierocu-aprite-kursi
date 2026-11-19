@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server";
 import { getPracticeQuestion, getTopicMeta, topicSlug } from "@/lib/content/queries";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Practice } from "@/components/practice/practice";
+import { getCurrentUser } from "@/lib/auth/session";
 
 export const dynamic = "force-dynamic";
 
@@ -35,7 +36,7 @@ export default async function QuestionPage({ params }: { params: Promise<{ id: s
         {tc("question", { id: q.id })} · {tc("pdfPage", { page: q.sourcePage })}
       </p>
       <div className="mt-3">
-        <Practice questions={[q]} seed={randomUUID()} topicHref={topicHref} shuffleQuestions={false} />
+        <Practice signedIn={Boolean(await getCurrentUser())} questions={[q]} seed={randomUUID()} topicHref={topicHref} shuffleQuestions={false} />
       </div>
       <p className="mt-6 text-sm text-muted">{tp("officialText")}</p>
       {q.id > 1 || q.id < 515 ? (
