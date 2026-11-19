@@ -16,38 +16,34 @@
  },
  {
   "id": 116,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī procedūra nav noteikta Ieroču aprites likumā (35. panta 8. daļa to deleģē Ministru kabinetam). Vajadzīgs Ministru kabineta noteikumu teksts par ieroču aprites kārtību un ieroču atļaujām."
+  "law_reference": "MK noteikumi Nr. 211, 2. punkts",
+  "explanation": "Iesniegumu ieroča iegādei fiziskā persona iesniedz Valsts policijas reģionālajā pārvaldē atbilstoši deklarētajai dzīvesvietai, deklarācijā norādītajai papildu adresei vai nekustamā īpašuma atrašanās vietai, kur paredzēts glabāt ieroci, — pēc noteikumu 1. pielikuma parauga. Noteikumi neierobežo iesniegšanu tikai klātienē vai tikai ar drošu elektronisko parakstu."
  },
  {
   "id": 117,
   "law_reference": null,
   "explanation": null,
-  "todo": "Šī procedūra nav noteikta Ieroču aprites likumā (35. panta 8. daļa to deleģē Ministru kabinetam). Vajadzīgs Ministru kabineta noteikumu teksts par ieroču aprites kārtību un ieroču atļaujām."
+  "todo": "Iesnieguma iesniegšanas veidi (klātienē, e-pastā ar drošu elektronisko parakstu, portālā) nav noteikti ne Ieroču aprites likumā, ne MK noteikumos Nr. 211 (2. punkts nosaka tikai iestādi). Vajadzīgs avots — piem., Valsts policijas vai Latvija.gov.lv pakalpojuma apraksts."
  },
  {
   "id": 118,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī procedūra nav noteikta Ieroču aprites likumā (35. panta 8. daļa to deleģē Ministru kabinetam). Vajadzīgs Ministru kabineta noteikumu teksts par ieroču aprites kārtību un ieroču atļaujām."
+  "law_reference": "MK noteikumi Nr. 211, 3.2. un 3.3. apakšpunkts",
+  "explanation": "Sporta šaujamieroča iegādei pievieno sporta federācijas izziņu, ka persona reģistrēta tās kolektīvā biedra sporta organizācijā, un sporta federācijas vai organizācijas izziņu par ieroča atbilstību šaušanas sporta disciplīnai (ar federācijas nosaukumu) un apliecinājumu, ka persona regulāri nodarbojas ar šo disciplīnu. Ar vienu izziņu nepietiek."
  },
  {
   "id": 119,
-  "law_reference": "Ieroču aprites likums, 14. panta 11. daļa",
-  "explanation": "A kategorijas sporta šaujamieročus var iegādāties persona no 21 gada, kura vismaz 12 mēnešus ir reģistrētas ar šaušanas sportu saistītas sporta organizācijas biedrs un kurai ir vismaz otrā sporta klase ar šaušanu saistītā sporta veidā. Tātad jāpierāda abi nosacījumi. TODO: konkrēto apliecinošo dokumentu (izziņas) veidu nosaka Ministru kabineta noteikumi."
+  "law_reference": "Ieroču aprites likums, 14. panta 11. daļa; MK noteikumi Nr. 211, 3.2. apakšpunkts",
+  "explanation": "A kategorijas sporta šaujamierocim pievieno sporta federācijas izziņu, kas apliecina, ka persona vismaz 12 mēnešus reģistrēta sporta organizācijā un tai ir vismaz otrā sporta klase ar šaušanu saistītā sporta veidā. Tātad vajag abus apliecinājumus, un tie jāizsniedz sporta federācijai."
  },
  {
   "id": 120,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī procedūra nav noteikta Ieroču aprites likumā (35. panta 8. daļa to deleģē Ministru kabinetam). Vajadzīgs Ministru kabineta noteikumu teksts par ieroču aprites kārtību un ieroču atļaujām."
+  "law_reference": "MK noteikumi Nr. 211, 3.1. apakšpunkts",
+  "explanation": "Pievieno apliecības kopiju par pirmās palīdzības pamatzināšanu kursa beigšanu vismaz 12 stundu apjomā ar trīs stundas ilgu zināšanu pārbaudi (vai medicīniskās izglītības dokumentu, vai diplomu ar atbilstošu kursu). «Jebkurš» kurss vai autovadītāja apliecība neder."
  },
  {
   "id": 121,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī procedūra nav noteikta Ieroču aprites likumā (35. panta 8. daļa to deleģē Ministru kabinetam). Vajadzīgs Ministru kabineta noteikumu teksts par ieroču aprites kārtību un ieroču atļaujām."
+  "law_reference": "MK noteikumi Nr. 211, 3.1. apakšpunkts",
+  "explanation": "Der jebkurš no trim dokumentiem: apliecība par pirmās palīdzības kursu (vismaz 12 stundas ar 3 stundu pārbaudi), medicīniskās izglītības dokuments vai izglītības iestādes diploms un sekmju izraksts, kas apliecina atbilstoša kursa apguvi."
  },
  {
   "id": 122,
@@ -86,15 +82,13 @@
  },
  {
   "id": 129,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī procedūra nav noteikta Ieroču aprites likumā (35. panta 8. daļa to deleģē Ministru kabinetam). Vajadzīgs Ministru kabineta noteikumu teksts par ieroču aprites kārtību un ieroču atļaujām. Likumā (17. panta 1. daļa) ir tikai noteikts, ka maināmās būtiskās sastāvdaļas iegādājas ar iegādāšanās atļauju; noteikums par remontam vajadzīgajām sastāvdaļām ir MK noteikumos."
+  "law_reference": "MK noteikumi Nr. 210, 5. punkts; Ieroču aprites likums, 17. panta 1. daļas 1. punkts",
+  "explanation": "Ar glabāšanas vai nēsāšanas atļauju drīkst iegādāties tikai tādas sastāvdaļas (izņemot būtiskās), kas vajadzīgas reģistrētā ieroča remontam un ražotas tieši šim ierocim. Maināmās būtiskās sastāvdaļas iegādājas ar iegādāšanās atļauju — tādas, kādas tajā norādītas. Glabāšanas atļauja to nedod."
  },
  {
   "id": 130,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī procedūra nav noteikta Ieroču aprites likumā (35. panta 8. daļa to deleģē Ministru kabinetam). Vajadzīgs Ministru kabineta noteikumu teksts par ieroču aprites kārtību un ieroču atļaujām."
+  "law_reference": "MK noteikumi Nr. 210, 5. punkts",
+  "explanation": "Bez būtiskajām sastāvdaļām ieroča īpašnieks drīkst iegādāties tikai tādas sastāvdaļas, kas nepieciešamas reģistrētā ieroča remontam un ir ražotas attiecīgajam ierocim — neatkarīgi no lietojuma veida."
  },
  {
   "id": 131,
@@ -103,31 +97,28 @@
  },
  {
   "id": 132,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī procedūra nav noteikta Ieroču aprites likumā (35. panta 8. daļa to deleģē Ministru kabinetam). Vajadzīgs Ministru kabineta noteikumu teksts par ieroču aprites kārtību un ieroču atļaujām."
+  "law_reference": "MK noteikumi Nr. 210, 6. punkts",
+  "explanation": "Ieroču veikalā, pērkot šaujamieroci, maināmās būtiskās sastāvdaļas vai lielas enerģijas pneimatisko ieroci, uzrāda personu apliecinošu dokumentu un Valsts policijas izsniegto iegādāšanās atļauju. Glabāšanas vai nēsāšanas atļauja ieroča pirkšanai neder."
  },
  {
   "id": 133,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī procedūra nav noteikta Ieroču aprites likumā (35. panta 8. daļa to deleģē Ministru kabinetam). Vajadzīgs Ministru kabineta noteikumu teksts par ieroču aprites kārtību un ieroču atļaujām."
+  "law_reference": "MK noteikumi Nr. 210, 7.1. apakšpunkts",
+  "explanation": "Pērkot munīciju Latvijas ieroču veikalā, Latvijā reģistrēta šaujamieroča īpašnieks uzrāda iegādāšanās atļauju, glabāšanas atļauju vai nēsāšanas atļauju (ar personu apliecinošu dokumentu). Der jebkura no šīm atļaujām."
  },
  {
   "id": 134,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī procedūra nav noteikta Ieroču aprites likumā (35. panta 8. daļa to deleģē Ministru kabinetam). Vajadzīgs Ministru kabineta noteikumu teksts par ieroču aprites kārtību un ieroču atļaujām."
+  "law_reference": "MK noteikumi Nr. 210, 9. un 49. punkts",
+  "explanation": "Īpašnieka maiņu Valsts policijas struktūrvienība veic abu personu (pārdevēja un pircēja) klātbūtnē. Ne portālā, ne pie komersanta to izdarīt nevar."
  },
  {
   "id": 135,
-  "law_reference": "Ieroču aprites likums, 38. panta 1. daļa",
-  "explanation": "Fiziskā persona drīkst realizēt savu rūpnieciski ražoto munīciju tikai citām fiziskajām personām, kurām ir attiecīgo šaujamieroču glabāšanas vai nēsāšanas atļauja. Tāpēc pircējs uzrāda savu atļauju, un abām pusēm jābūt atbilstošām atļaujām. TODO: precīzu uzrādīšanas kārtību nosaka Ministru kabineta noteikumi."
+  "law_reference": "Ieroču aprites likums, 38. panta 1. daļa; MK noteikumi Nr. 210, 10. punkts",
+  "explanation": "Pērkot munīciju no citas fiziskās personas, pieprasa, lai tā uzrāda munīcijai atbilstošu glabāšanas vai nēsāšanas atļauju, un uzrāda arī savu atļauju. Informēt Valsts policiju vajag tikai tad, ja otra persona atļauju neuzrāda vai ir aizdomas par pašizgatavotu munīciju."
  },
  {
   "id": 136,
-  "law_reference": "Ieroču aprites likums, 27. panta 3. un 4. daļa",
-  "explanation": "Personas ar glabāšanas, nēsāšanas vai kolekcijas atļauju iziet kārtējo veselības pārbaudi ik pēc viena līdz pieciem gadiem atkarībā no veselības stāvokļa, kā arī pirmstermiņa pārbaudi, ja uz to nosūta ārstniecības persona vai Valsts policija. TODO: konkrētos termiņus («pirms termiņa beigām», «ne vēlāk kā 5 gadus») nosaka MK noteikumi par veselības pārbaudēm."
+  "law_reference": "Ieroču aprites likums, 27. panta 3. un 4. daļa; MK noteikumi Nr. 211, 207.1.–207.3. apakšpunkts",
+  "explanation": "Atļaujas turētājam jāiziet kārtējā veselības pārbaude pirms tās termiņa beigām; ja termiņš nav norādīts — ne vēlāk kā piecus gadus pēc iepriekšējās; pēc nosūtījuma uz pirmstermiņa pārbaudi — mēneša laikā. Visi varianti ir pareizi."
  },
  {
   "id": 137,
@@ -136,35 +127,30 @@
  },
  {
   "id": 138,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi (piem., par ieroču glabāšanas, nēsāšanas un pārvadāšanas kārtību vai par veselības pārbaudēm). Vajadzīgs noteikumu teksts. Likums (27. panta 4. daļa) nosaka tikai, ka uz pirmstermiņa pārbaudi var nosūtīt ārstniecības persona vai Valsts policija; mēneša termiņš ir MK noteikumos par veselības pārbaudēm."
+  "law_reference": "MK noteikumi Nr. 211, 207.3. apakšpunkts",
+  "explanation": "Pirmstermiņa veselības pārbaude jāiziet mēneša laikā pēc nosūtījuma saņemšanas — neatkarīgi no tā, vai nosūtījusi ārstniecības persona vai Valsts policijas amatpersona. Trīs mēneši nav pareizi."
  },
  {
   "id": 139,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi (piem., par ieroču glabāšanas, nēsāšanas un pārvadāšanas kārtību vai par veselības pārbaudēm). Vajadzīgs noteikumu teksts. Likums (27. panta 3. daļa) nosaka kārtējo pārbaudi ik pēc 1–5 gadiem; pienākums to veikt pirms termiņa beigām ir MK noteikumos."
+  "law_reference": "MK noteikumi Nr. 211, 207.1. apakšpunkts",
+  "explanation": "Kārtējā veselības pārbaude jāveic pirms tās termiņa beigām, nevis pēc tam. «Reizi piecos gados» attiecas tikai uz gadījumu, kad termiņš nav norādīts (207.2.)."
  },
  {
   "id": 140,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi (piem., par ieroču glabāšanas, nēsāšanas un pārvadāšanas kārtību vai par veselības pārbaudēm). Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 211, 207.4. apakšpunkts",
+  "explanation": "Ja paredzēts mainīt ieroča glabāšanas adresi, iesniegumu atkārtotas atļaujas saņemšanai iesniedz pirms adreses maiņas. Pārvest ieročus uz jauno adresi pirms jaunas atļaujas nedrīkst, un piecu darbdienu termiņš attiecas uz dublikātu, nevis adreses maiņu."
  },
  {
   "id": 141,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi (piem., par ieroču glabāšanas, nēsāšanas un pārvadāšanas kārtību vai par veselības pārbaudēm). Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 211, 207.4. apakšpunkts",
+  "explanation": "Atkārtota atļauja jāprasa, ja mainījušies atļaujā norādītie personas dati vai (pirms tam) paredzēts mainīt glabāšanas adresi, bet dublikāts — piecu darbdienu laikā pēc atļaujas nozaudēšanas, zādzības, iznīcināšanas vai bojājuma. Visi varianti ir pareizi."
  },
  {
   "id": 142,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi (piem., par ieroču glabāšanas, nēsāšanas un pārvadāšanas kārtību vai par veselības pārbaudēm). Vajadzīgs noteikumu teksts. Papildus: no 01.12.2026. pašaizsardzības glabāšanas un nēsāšanas atļaujas izsniegs uz nenoteiktu laiku (16. panta 2. daļas jaunā redakcija), tāpēc derīguma termiņa pagarināšana vairs nebūs vajadzīga.",
+  "law_reference": "MK noteikumi Nr. 211, 49. punkts",
+  "explanation": "Pašaizsardzības ieroča glabāšanas vai nēsāšanas atļaujas derīguma termiņa pagarināšanai iesniegumu iesniedz vismaz mēnesi pirms atļaujas termiņa beigām tajā Valsts policijas struktūrvienībā, kurā ierocis reģistrēts. Uzmanību: no 01.12.2026. šīs atļaujas izsniegs uz nenoteiktu laiku (likuma 16. panta 2. daļas jaunā redakcija), bet MK noteikumi vēl nav grozīti.",
   "possibly_outdated": true,
-  "outdated_note": "No 01.12.2026. glabāšanas un nēsāšanas atļaujas izsniegs uz nenoteiktu laiku (16. panta 2. daļas jaunā redakcija). Pēc šī datuma par pareizu kļūs apgalvojums, ka pašaizsardzības atļauja nav jāpagarina."
+  "outdated_note": "No 01.12.2026. glabāšanas un nēsāšanas atļaujas izsniegs uz nenoteiktu laiku (likuma 16. panta 2. daļas jaunā redakcija). MK noteikumu Nr. 211 49. punkts vēl nav grozīts, bet pēc šī datuma derīguma termiņa pagarināšana vairs nebūs vajadzīga."
  },
  {
   "id": 143,
@@ -183,9 +169,8 @@
  },
  {
   "id": 146,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi (piem., par ieroču glabāšanas, nēsāšanas un pārvadāšanas kārtību vai par veselības pārbaudēm). Vajadzīgs noteikumu teksts. Likumā noteikts tikai, ka ieroci glabā atļaujā norādītajā adresē (35. panta 2. daļa); iesnieguma iesniegšana pirms adreses maiņas ir MK noteikumos."
+  "law_reference": "MK noteikumi Nr. 211, 207.4. apakšpunkts; 210. punkts",
+  "explanation": "Ja paredzēts mainīt glabāšanas adresi, iesniegumu atkārtotas atļaujas saņemšanai iesniedz pirms adreses maiņas tajā Valsts policijas struktūrvienībā, kas izsniegusi atļauju. Pārvest ieročus vai deklarēt jaunu dzīvesvietu pirms tam nepietiek."
  },
  {
   "id": 147,
@@ -214,68 +199,64 @@
  },
  {
   "id": 161,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi (piem., par ieroču glabāšanas, nēsāšanas un pārvadāšanas kārtību vai par veselības pārbaudēm). Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 21. punkts",
+  "explanation": "Seifa vai metāla skapja (kastes) sienu biezums ir vismaz 2,5 mm (cita materiāla rūpnieciski ražotam seifam jābūt ekvivalentam pēc izturības), un tas ir aizslēdzams tā, ka atslēgt var tikai ieroča īpašnieks (atslēgas pieejamas tikai viņam). Visi varianti ir pareizi."
  },
  {
   "id": 162,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi (piem., par ieroču glabāšanas, nēsāšanas un pārvadāšanas kārtību vai par veselības pārbaudēm). Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 21. punkts",
+  "explanation": "Arī maināmās būtiskās sastāvdaļas glabā slēgtā metāla seifā vai metāla skapī (kastē), kura sienu biezums ir vismaz 2,5 mm. Oriģinālais iepakojums neder, un atsevišķs seifs tikai sastāvdaļām nav prasīts."
  },
  {
   "id": 163,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi (piem., par ieroču glabāšanas, nēsāšanas un pārvadāšanas kārtību vai par veselības pārbaudēm). Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 28. punkts",
+  "explanation": "Vairāki ieroču īpašnieki kopējā dzīvesvietā drīkst glabāt ieročus vienā seifā tikai ar Valsts policijas atļauju un ja viņiem reģistrēti viena lietojuma ieroči. Kopīga adrese vai vieta seifā vien nav pietiekama."
  },
  {
   "id": 164,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi (piem., par ieroču glabāšanas, nēsāšanas un pārvadāšanas kārtību vai par veselības pārbaudēm). Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 21. punkts",
+  "explanation": "Metāla seifa vai skapja (kastes) sienu biezums ir vismaz 2,5 mm."
  },
  {
   "id": 165,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi (piem., par ieroču glabāšanas, nēsāšanas un pārvadāšanas kārtību vai par veselības pārbaudēm). Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 21. punkts",
+  "explanation": "Seifu vai metāla skapi (kasti) stiprina, savienojot ar grīdu vai sienu, ja tā izmērs ir mazāks par 1500 × 400 × 300 mm. Lielākus stiprināt nav obligāti, un stiprinājums pie mēbeles neder."
  },
  {
   "id": 166,
-  "law_reference": "Ieroču aprites likums, 35. panta 2. daļa",
-  "explanation": "Likums prasa nodrošināt tādus glabāšanas apstākļus, kas nepieļauj nejaušu ieroča, tā maināmo būtisko sastāvdaļu un munīcijas nokļūšanu nepiederošu personu rokās. Nepiederoša ir jebkura persona, kas nav ieroča īpašnieks, tostarp ģimenes locekļi, policijas darbinieki un citi ieroču īpašnieki. TODO: precizējums var būt arī MK noteikumos."
+  "law_reference": "Ieroču aprites likums, 35. panta 2. daļa; MK noteikumi Nr. 210, 21. punkts",
+  "explanation": "Glabāšanas apstākļiem jānepieļauj, ka ierocis nonāk nepiederošu personu rokās, un seifu atslēgt var tikai ieroča īpašnieks — atslēgas vai kods ir zināmi tikai viņam. Tāpēc nepiederoši ir arī ģimenes locekļi, policijas darbinieki un citi ieroču īpašnieki."
  },
  {
   "id": 167,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi (piem., par ieroču glabāšanas, nēsāšanas un pārvadāšanas kārtību vai par veselības pārbaudēm). Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 22. punkts (MK 27.10.2026. noteikumu Nr. 641 redakcijā)",
+  "explanation": "Spēkā esošā redakcija: visus šaujamieročus un lielas enerģijas pneimatiskos ieročus glabā izlādētus — gan medību un sporta, gan pašaizsardzības. Pielādētu magazīnu glabā kā munīciju. Agrākā redakcija atļāva pašaizsardzības ieroci glabāt ar pievienotu pielādētu magazīnu, uz ko balstās PDF atbilde.",
+  "possibly_outdated": true,
+  "outdated_note": "MK 27.10.2026. noteikumi Nr. 641 mainīja MK noteikumu Nr. 210 22. punktu: tagad visus šaujamieročus (arī pašaizsardzības) glabā izlādētus, pielādētu magazīnu glabā kā munīciju, un visu šaujamieroču munīciju glabā atsevišķi no ieroča (atsevišķā slēdzamā nodalījumā vai atsevišķā seifā). PDF atbilde atbilst iepriekšējai redakcijai."
  },
  {
   "id": 168,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi (piem., par ieroču glabāšanas, nēsāšanas un pārvadāšanas kārtību vai par veselības pārbaudēm). Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 22. punkts (MK 27.10.2026. noteikumu Nr. 641 redakcijā)",
+  "explanation": "Spēkā esošā redakcija: jebkura lietojuma veida šaujamieroci glabā izlādētu — magazīnā (cilindrā), kas pievienots ierocim, un patrontelpā nav munīcijas. Agrāk šī prasība bija tikai medību un sporta ieročiem, uz ko balstās PDF atbilde.",
+  "possibly_outdated": true,
+  "outdated_note": "MK 27.10.2026. noteikumi Nr. 641 mainīja MK noteikumu Nr. 210 22. punktu: tagad visus šaujamieročus (arī pašaizsardzības) glabā izlādētus, pielādētu magazīnu glabā kā munīciju, un visu šaujamieroču munīciju glabā atsevišķi no ieroča (atsevišķā slēdzamā nodalījumā vai atsevišķā seifā). PDF atbilde atbilst iepriekšējai redakcijai."
  },
  {
   "id": 169,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi (piem., par ieroču glabāšanas, nēsāšanas un pārvadāšanas kārtību vai par veselības pārbaudēm). Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 22. punkts",
+  "explanation": "Sporta šaujamieroci glabā izlādētu: ne pievienotajā magazīnā (cilindrā), ne patrontelpā nav munīcijas. Pielādētu magazīnu glabā kā munīciju — atsevišķi."
  },
  {
   "id": 170,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi (piem., par ieroču glabāšanas, nēsāšanas un pārvadāšanas kārtību vai par veselības pārbaudēm). Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 22. punkts (MK 27.10.2026. noteikumu Nr. 641 redakcijā)",
+  "explanation": "Spēkā esošā redakcija: arī pašaizsardzības šaujamieroci glabā tikai izlādētu, bet pielādētu magazīnu glabā kā munīciju atsevišķi. Iespēja glabāt ar pievienotu pielādētu magazīnu bija agrākajā redakcijā, uz ko balstās PDF atbilde.",
+  "possibly_outdated": true,
+  "outdated_note": "MK 27.10.2026. noteikumi Nr. 641 mainīja MK noteikumu Nr. 210 22. punktu: tagad visus šaujamieročus (arī pašaizsardzības) glabā izlādētus, pielādētu magazīnu glabā kā munīciju, un visu šaujamieroču munīciju glabā atsevišķi no ieroča (atsevišķā slēdzamā nodalījumā vai atsevišķā seifā). PDF atbilde atbilst iepriekšējai redakcijai."
  },
  {
   "id": 176,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi (piem., par ieroču glabāšanas, nēsāšanas un pārvadāšanas kārtību vai par veselības pārbaudēm). Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 22. punkts",
+  "explanation": "Šaujamierocis ir izlādēts, ja munīcija nav ne pievienotajā magazīnā (cilindrā), ne patrontelpā. Ar ieslēgtu drošinātāju vai pielādētu pievienotu magazīnu ierocis nav izlādēts. Pielādētu atvienotu magazīnu glabā kā munīciju."
  },
  {
   "id": 152,
@@ -284,85 +265,77 @@
  },
  {
   "id": 153,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi par ieroču glabāšanas un pārvadāšanas kārtību. Vajadzīgs noteikumu teksts. Likums (35. panta 4. daļa) nosaka tikai vispārīgo nosacījumu par īslaicīgu glabāšanu; konkrētas vietas (telpa ar seifu, transportlīdzeklis) ir MK noteikumos."
+  "law_reference": "MK noteikumi Nr. 210, 24. un 25. punkts",
+  "explanation": "Medībās vai sacensībās medību un sporta ieročus īslaicīgi drīkst glabāt gan īpaši tam paredzētā telpā slēgtā seifā vai metāla skapī, gan transportlīdzeklī, ja iesaiņojums nav redzams no ārpuses, durvis un bagāžnieks aizslēgti un ieslēgta signalizācija. Abi varianti ir pareizi."
  },
  {
   "id": 154,
-  "law_reference": "Ieroču aprites likums, 35. panta 4. daļa",
-  "explanation": "Tiesības īslaicīgi glabāt ieroci ārpus atļaujā norādītās vietas ir tikai personām, kurām šaujamieroči vai lielas enerģijas pneimatiskie ieroči reģistrēti medībām vai sportam. Pašaizsardzības un kolekcijas ieročiem šādu tiesību nav. TODO: konkrētos nosacījumus transportlīdzeklim (piem., pārtraukums līdz 2 stundām) nosaka MK noteikumi."
+  "law_reference": "Ieroču aprites likums, 35. panta 4. daļa; MK noteikumi Nr. 210, 25. punkts",
+  "explanation": "Glabāt ieroci transportlīdzeklī medību, sacensību vai treniņu laikā (arī pārtraukumā līdz divām stundām) drīkst tikai personas, kurām ieroči reģistrēti medībām vai sportam. Pašaizsardzības un kolekcijas ieročiem šādu tiesību nav."
  },
  {
   "id": 155,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi par ieroču glabāšanas un pārvadāšanas kārtību. Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 25. punkts",
+  "explanation": "Transportlīdzeklī medību vai sporta ieroci drīkst glabāt medību, sacensību vai treniņu laikā, to īslaicīgā pārtraukumā (līdz divām stundām) un īslaicīgas apstāšanās laikā (līdz divām stundām), braucot uz šiem pasākumiem vai no tiem. Visi varianti ir pareizi."
  },
  {
   "id": 156,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi par ieroču glabāšanas un pārvadāšanas kārtību. Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 25. punkts",
+  "explanation": "Noteikumi attiecas uz visiem trim pasākumiem — medībām, sacensībām un treniņšaušanu — un to īslaicīgu pārtraukumu līdz divām stundām. «Tikai» viens no pasākumiem ir nepareizi."
  },
  {
   "id": 157,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi par ieroču glabāšanas un pārvadāšanas kārtību. Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 25. punkts",
+  "explanation": "Īslaicīgas apstāšanās laikā (līdz divām stundām) ieroci transportlīdzeklī drīkst atstāt tikai tad, ja to pārvadā uz medībām, sacensībām vai treniņiem vai no tiem. Braucot uz glabāšanas adresi, Valsts policiju vai veikalu, šis izņēmums nav paredzēts."
  },
  {
   "id": 158,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi par ieroču glabāšanas un pārvadāšanas kārtību. Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 25. punkts",
+  "explanation": "Pārtraukums, kurā ieroci var atstāt transportlīdzeklī, nedrīkst būt ilgāks par divām stundām. Laiks nav neierobežots, un glabāšana ir atļauta ne tikai pašu pasākumu laikā."
  },
  {
   "id": 159,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi par ieroču glabāšanas un pārvadāšanas kārtību. Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 25. punkts",
+  "explanation": "Apstājoties ceļā uz medībām, sacensībām vai treniņiem vai no tiem, ieroci transportlīdzeklī drīkst atstāt tikai līdz divām stundām. Laiks nav neierobežots un neattiecas uz braucieniem uz Valsts policiju."
  },
  {
   "id": 160,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi par ieroču glabāšanas un pārvadāšanas kārtību. Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 25. punkts",
+  "explanation": "Ieroci un munīciju novieto pēc iespējas drošākā vietā tā, lai iesaiņojums nebūtu redzams no ārpuses, aizslēdz durvis un bagāžas nodalījumu un ieslēdz trauksmes signalizāciju, nodrošinot, ka ierocis nenonāk nepiederošu personu rokās. Jāizpilda visi nosacījumi."
  },
  {
   "id": 171,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi par ieroču glabāšanas un pārvadāšanas kārtību. Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 22. punkts (MK 27.10.2026. noteikumu Nr. 641 redakcijā)",
+  "explanation": "Spēkā esošā redakcija: jebkura šaujamieroča munīciju glabā atsevišķi no ieroča — seifa atsevišķā slēdzamā nodalījumā vai atsevišķā seifā. Agrāk tas bija prasīts tikai medību un sporta garstobra–vītņstobra šaujamieroču munīcijai, uz ko balstās PDF atbilde.",
+  "possibly_outdated": true,
+  "outdated_note": "MK 27.10.2026. noteikumi Nr. 641 mainīja MK noteikumu Nr. 210 22. punktu: tagad visus šaujamieročus (arī pašaizsardzības) glabā izlādētus, pielādētu magazīnu glabā kā munīciju, un visu šaujamieroču munīciju glabā atsevišķi no ieroča (atsevišķā slēdzamā nodalījumā vai atsevišķā seifā). PDF atbilde atbilst iepriekšējai redakcijai."
  },
  {
   "id": 172,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi par ieroču glabāšanas un pārvadāšanas kārtību. Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 22. punkts (MK 27.10.2026. noteikumu Nr. 641 redakcijā)",
+  "explanation": "Spēkā esošā redakcija: visu šaujamieroču (medību, sporta un pašaizsardzības) munīciju glabā atsevišķi no ieroča. Ierobežojums «tikai medību un sporta vītņstobra» bija agrākajā redakcijā, uz ko balstās PDF atbilde.",
+  "possibly_outdated": true,
+  "outdated_note": "MK 27.10.2026. noteikumi Nr. 641 mainīja MK noteikumu Nr. 210 22. punktu: tagad visus šaujamieročus (arī pašaizsardzības) glabā izlādētus, pielādētu magazīnu glabā kā munīciju, un visu šaujamieroču munīciju glabā atsevišķi no ieroča (atsevišķā slēdzamā nodalījumā vai atsevišķā seifā). PDF atbilde atbilst iepriekšējai redakcijai."
  },
  {
   "id": 173,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi par ieroču glabāšanas un pārvadāšanas kārtību. Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 22. punkts",
+  "explanation": "Munīciju drīkst glabāt ieroču seifā no ieroča atsevišķā slēdzamā nodalījumā (vai atsevišķā seifā). Atsevišķs seifs nav vienīgā iespēja, kopā ar ieroci glabāt nedrīkst, un oriģinālais iepakojums neder."
  },
  {
   "id": 174,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi par ieroču glabāšanas un pārvadāšanas kārtību. Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 22. punkts",
+  "explanation": "Munīciju glabā atsevišķā seifā vai metāla skapī (kastē) vai ieroču seifa atsevišķā slēdzamā nodalījumā. Kopā ar ieroci vai oriģinālajā iepakojumā glabāt nedrīkst."
  },
  {
   "id": 175,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Šī prasība nav noteikta Ieroču aprites likumā — to nosaka Ministru kabineta noteikumi par ieroču glabāšanas un pārvadāšanas kārtību. Vajadzīgs noteikumu teksts."
+  "law_reference": "MK noteikumi Nr. 210, 22. punkts",
+  "explanation": "Der abi veidi: ieroču seifa atsevišķs slēdzams nodalījums vai atsevišķs seifs vai metāla skapis (kaste). Kopā ar ieroci munīciju glabāt nedrīkst."
  },
  {
   "id": 177,
-  "law_reference": "Ieroču aprites likums, 17. panta 1. daļas 2. punkts; 20. panta 1. daļas 3. punkts; 35. panta 2. daļa",
-  "explanation": "Glabāšanas kārtība attiecas uz visiem, kuriem ir tiesības glabāt ieroci: iegādāšanās atļauja dod tiesības glabāt ieroci līdz reģistrācijai Valsts policijā, bet realizēšanas atļauja — līdz realizācijai. Glabāšanas prasības ir jāievēro arī šajos gadījumos un līdz ieroča izvešanai no Latvijas. TODO: izvešanas gadījuma detaļas ir MK noteikumos."
+  "law_reference": "MK noteikumi Nr. 210, 23. punkts; Ieroču aprites likums, 17. panta 1. daļas 2. punkts; 20. panta 1. daļas 3. punkts",
+  "explanation": "Glabāšanas prasības attiecas arī uz iegādāšanās atļaujas turētāju līdz ieroča reģistrācijai, uz realizēšanas atļaujas turētāju līdz realizācijai vai īpašnieka maiņai un uz personu ar pārvadāšanas vai pārsūtīšanas atļauju līdz ieroča izvešanai no Latvijas. Visi varianti ir pareizi."
  },
  {
   "id": 178,

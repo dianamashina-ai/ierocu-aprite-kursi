@@ -312,9 +312,8 @@
  },
  {
   "id": 94,
-  "law_reference": null,
-  "explanation": null,
-  "todo": "Ieroču aprites likumā nav noteikts, kad Eiropas šaujamieroču apliecība jāiesniedz Valsts policijā ierakstu izdarīšanai. Tas, visticamāk, ir Ministru kabineta noteikumos par ieroču atļaujām — vajadzīgs to teksts."
+  "law_reference": "MK noteikumi Nr. 211, 208. punkts; 98. punkts",
+  "explanation": "Eiropas šaujamieroču apliecību iesniedz Valsts policijā ierakstu izdarīšanai, ja mainījušies apliecībā norādītie personas dati, ja apliecībā norādītais šaujamierocis ir realizēts vai ja mainījušās ziņas par ieroča glabāšanas atļauju. Pirms ceļojuma ar apliecībā jau ierakstītu ieroci tā nav jāiesniedz."
  },
  {
   "id": 95,
