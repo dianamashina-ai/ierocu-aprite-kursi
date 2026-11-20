@@ -16,7 +16,7 @@ interface Stats {
 export function Hero({ stats, sample }: { stats: Stats; sample: PracticeQuestion | null }) {
   return (
     <>
-      <section className="border-b border-line bg-white">
+      <section className="bg-white">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:py-20">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">Sagatavošanās eksāmenam</p>
@@ -45,23 +45,25 @@ export function Hero({ stats, sample }: { stats: Stats; sample: PracticeQuestion
         </div>
       </section>
 
-      <section aria-label="Kurss skaitļos" className="bg-ink text-white">
-        <dl className="mx-auto grid max-w-6xl grid-cols-2 px-4 sm:px-6 lg:grid-cols-4">
+      <section aria-label="Kurss skaitļos" className="border-b border-line bg-white">
+        <div className="mx-auto max-w-6xl px-4 pb-14 sm:px-6 lg:pb-20">
+        <dl className="grid grid-cols-2 rounded-2xl bg-accent text-white lg:grid-cols-4">
           {[
             [String(stats.modules), "moduļi no ieroča uzbūves līdz atbildībai"],
             [String(stats.topics), "īsas nodarbības pēc likuma teksta"],
             [String(stats.questions), "oficiālie jautājumi ar skaidrojumiem"],
             [`${stats.examMinutes} min`, `eksāmena simulācija — ${stats.examQuestions} jautājumi`],
           ].map(([value, label], i) => (
-            <div key={label} className={`py-8 lg:py-10 ${["pr-4", "border-l pl-5 sm:pl-8", "border-t pr-4 lg:border-l lg:border-t-0 lg:pl-8", "border-l border-t pl-5 sm:pl-8 lg:border-t-0"][i]} border-white/15`}>
+            <div key={label} className={`py-8 lg:py-10 px-5 sm:px-8 ${["", "border-l", "border-t lg:border-l lg:border-t-0", "border-l border-t lg:border-t-0"][i]} border-white/20`}>
               <dt className="sr-only">{label}</dt>
               <dd>
-                <span className="block text-5xl font-extrabold tabular-nums tracking-tight sm:text-6xl">{value}</span>
-                <span className="mt-2 block text-sm text-white/75">{label}</span>
+                <span className="block whitespace-nowrap text-4xl font-extrabold tabular-nums tracking-tight sm:text-6xl">{value}</span>
+                <span className="mt-2 block text-sm text-white/80">{label}</span>
               </dd>
             </div>
           ))}
         </dl>
+        </div>
       </section>
     </>
   );
