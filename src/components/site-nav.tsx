@@ -30,7 +30,7 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
 
   return (
     <>
-      <nav aria-label="Galvenā navigācija" className="hidden flex-1 justify-end lg:flex">
+      <nav aria-label="Galvenā navigācija" className="hidden flex-1 justify-end xl:flex">
         <ul className="flex items-center gap-1">
           {items.map((it) => {
             const active = isActive(path, it);
@@ -39,7 +39,7 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
                 <Link
                   href={it.href}
                   aria-current={active ? "page" : undefined}
-                  className={`inline-flex min-h-11 items-center rounded-lg px-3.5 text-[15px] transition-colors hover:bg-accent-soft ${
+                  className={`inline-flex min-h-11 items-center whitespace-nowrap rounded-lg px-3 text-[15px] transition-colors hover:bg-accent-soft ${
                     active ? "font-semibold text-ink" : "font-normal text-muted hover:text-ink"
                   }`}
                 >
@@ -51,10 +51,10 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
         </ul>
       </nav>
 
-      <div className="hidden items-center gap-2 lg:flex">
+      <div className="hidden items-center gap-2 xl:flex">
         {showBuy && <Link href="/iegadaties" className="btn-primary min-h-11 px-4 text-sm">Pilna piekļuve</Link>}
         {account}
-        {signedIn && <SignOutButton className="inline-flex min-h-11 items-center px-2 text-sm text-muted hover:text-accent-strong" />}
+        {signedIn && <SignOutButton className="inline-flex min-h-11 items-center whitespace-nowrap px-2 text-sm text-muted hover:text-ink" />}
       </div>
 
       <button
@@ -62,14 +62,14 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-controls="mobile-nav"
-        className="inline-flex size-11 items-center justify-center rounded-xl border border-line lg:hidden"
+        className="inline-flex size-11 items-center justify-center rounded-xl border border-line xl:hidden"
       >
         {open ? <X className="size-5" aria-hidden="true" /> : <Menu className="size-5" aria-hidden="true" />}
         <span className="sr-only">{open ? "Aizvērt izvēlni" : "Atvērt izvēlni"}</span>
       </button>
 
       {open && (
-        <div id="mobile-nav" className="absolute inset-x-0 top-full z-20 border-b border-line bg-white shadow-lg lg:hidden">
+        <div id="mobile-nav" className="absolute inset-x-0 top-full z-20 border-b border-line bg-white shadow-lg xl:hidden">
           <nav aria-label="Galvenā navigācija" className="mx-auto max-w-6xl px-4 py-3">
             <ul className="divide-y divide-line">
               {items.map((it) => (

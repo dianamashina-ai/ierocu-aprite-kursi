@@ -5,10 +5,9 @@ import { getModule, topicSlug } from "@/lib/content/queries";
 import { readLesson } from "@/lib/content/lessons";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { getCurrentUser } from "@/lib/auth/session";
-import { canAccessModule, isFreeModule } from "@/lib/billing/access";
+import { canAccessModule } from "@/lib/billing/access";
 import { getTopicProgress } from "@/lib/progress/service";
 import { Paywall } from "@/components/billing/paywall";
-import { ModuleIcon } from "@/components/module-icon";
 import { MODULE_META } from "@/config/module-meta";
 
 export const dynamic = "force-dynamic";
@@ -30,21 +29,14 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
   const minutes = [...lessons.values()].reduce((s, l) => s + (l?.minutes ?? 0), 0);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+    <div className="page-white mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
       <Breadcrumbs items={[{ href: "/", label: "Mācību kurss" }, { label: m.titleLv }]} />
 
       <header className="mt-6 flex items-start gap-5 sm:gap-8">
         <span className="hidden text-7xl font-bold leading-none tabular-nums text-accent-strong sm:block lg:text-8xl">{pad(m.order)}</span>
         <div className="flex-1">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-            {pad(m.order)} · Modulis
-            {isFreeModule(m.id) && <span className="ml-2 rounded-full bg-ok-soft px-2 py-0.5 normal-case tracking-normal text-ok">Bez maksas</span>}
-          </p>
-          <h1 className="mt-2 text-4xl font-semibold leading-tight tracking-tight text-balance sm:text-5xl">{m.titleLv}</h1>
+          <h1 className="text-4xl font-semibold leading-tight tracking-tight text-balance sm:text-5xl">{m.titleLv}</h1>
           <p className="mt-4 max-w-2xl text-lg text-muted">{MODULE_META[m.id]?.description}</p>
-        </div>
-        <div className="hidden md:block">
-          <ModuleIcon moduleId={m.id} size="lg" />
         </div>
       </header>
 
