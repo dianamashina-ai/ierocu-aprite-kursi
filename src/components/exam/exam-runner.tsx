@@ -87,33 +87,35 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
 
   return (
     <div>
-      <div className="sticky top-0 z-10 border-b border-line bg-white/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-0.5">
-            <span className="text-base font-semibold">
-              Jautājums {pos + 1} no {questions.length}
-            </span>
-            <span className="text-sm text-muted">
-              Atbildēti {answeredCount} no {questions.length}
+      <div className="sticky top-0 z-10 bg-white/95 backdrop-blur">
+        <div className="mx-auto max-w-6xl px-4 pt-4 sm:px-6 sm:pt-6">
+          <div className="flex items-center justify-between gap-4 pb-3">
+            <div className="flex flex-wrap items-baseline gap-x-4 gap-y-0.5">
+              <span className="text-base font-semibold">
+                Jautājums {pos + 1} no {questions.length}
+              </span>
+              <span className="text-sm text-muted">
+                Atbildēti {answeredCount} no {questions.length}
+              </span>
+            </div>
+            <span
+              className={`rounded-lg px-3 py-1.5 text-lg font-bold tabular-nums ${lowTime ? "bg-err-soft text-err" : "bg-accent-soft text-ink"}`}
+              role="timer"
+              aria-label="Atlikušais laiks"
+            >
+              {fmt(left)}
             </span>
           </div>
-          <span
-            className={`rounded-lg px-3 py-1.5 text-lg font-bold tabular-nums ${lowTime ? "bg-err-soft text-err" : "bg-accent-soft text-ink"}`}
-            role="timer"
-            aria-label="Atlikušais laiks"
+          <div
+            className="h-1 overflow-hidden rounded-full bg-line"
+            role="progressbar"
+            aria-label="Eksāmena progress"
+            aria-valuemin={1}
+            aria-valuemax={questions.length}
+            aria-valuenow={pos + 1}
           >
-            {fmt(left)}
-          </span>
-        </div>
-        <div
-          className="h-1 bg-line"
-          role="progressbar"
-          aria-label="Eksāmena progress"
-          aria-valuemin={1}
-          aria-valuemax={questions.length}
-          aria-valuenow={pos + 1}
-        >
-          <div className="h-full bg-accent transition-[width] duration-300 motion-reduce:transition-none" style={{ width: `${progress}%` }} />
+            <div className="h-full bg-accent transition-[width] duration-300 motion-reduce:transition-none" style={{ width: `${progress}%` }} />
+          </div>
         </div>
       </div>
 

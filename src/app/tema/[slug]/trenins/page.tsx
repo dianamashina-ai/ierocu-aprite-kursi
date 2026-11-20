@@ -28,7 +28,7 @@ export default async function PracticePage({ params }: { params: Promise<{ slug:
   const allowed = await canAccessModule(user?.id, meta.moduleId);
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-6 sm:py-10">
+    <div className="page-white mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
       <Breadcrumbs
         items={[
           { href: `/modulis/${meta.moduleId}`, label: tc("module", { order: meta.moduleOrder }) },

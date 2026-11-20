@@ -28,7 +28,7 @@ export default async function QuestionPage({ params }: { params: Promise<{ id: s
   const allowed = await canAccessModule(user?.id, moduleOfTopic(q.topicId));
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-6 sm:py-10">
+    <div className="page-white mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
       <Breadcrumbs
         items={[
           ...(meta ? [{ href: `/modulis/${meta.moduleId}`, label: tc("module", { order: meta.moduleOrder }) }] : []),

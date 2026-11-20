@@ -44,7 +44,7 @@
     "similarBadge": "ir līdzīgi"
   },
   "practice": {
-    "progress": "{current} no {total}",
+    "progress": "Jautājums {current} no {total}",
     "progressLabel": "Treniņa progress",
     "correct": "Pareizi",
     "wrong": "Nepareizi",

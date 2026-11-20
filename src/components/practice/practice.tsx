@@ -123,7 +123,7 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true, 
     const correct = ids.filter((id) => results[id]).length;
     const wrongIdx = pool.filter((i) => !results[questions[i].id]);
     return (
-      <section aria-labelledby="summary-h" className="rounded-2xl border border-line bg-white p-6 sm:p-8">
+      <section aria-labelledby="summary-h" className="max-w-2xl rounded-2xl border border-line bg-white p-6 sm:p-8">
         <h2 id="summary-h" className="text-2xl font-semibold">
           {t("summaryHeading")}
         </h2>
@@ -178,15 +178,15 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true, 
   if (!q) return null;
 
   return (
-    <div className="space-y-5">
+    <div>
       {pool.length > 1 && (
-        <div>
-          <div className="flex items-center justify-between text-sm text-muted">
-            <span>{t("progress", { current: pos + 1, total: pool.length })}</span>
-            <span className="tabular-nums">Nr. {q.id}</span>
+        <div className="mb-8">
+          <div className="flex items-baseline justify-between gap-3">
+            <span className="text-base font-semibold">{t("progress", { current: pos + 1, total: pool.length })}</span>
+            <span className="text-sm tabular-nums text-muted">Nr. {q.id}</span>
           </div>
           <div
-            className="mt-2 h-2 overflow-hidden rounded-full bg-accent-soft"
+            className="mt-3 h-1 overflow-hidden rounded-full bg-line"
             role="progressbar"
             aria-label={t("progressLabel")}
             aria-valuemin={0}
@@ -201,117 +201,122 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true, 
         </div>
       )}
 
-      <article className="rounded-2xl border border-line bg-white p-5 sm:p-7" aria-labelledby={`q-${q.id}`}>
-        {q.possiblyOutdated && (
-          <div className="mb-4 rounded-lg bg-warn-soft px-3 py-2 text-sm text-warn">
-            <p className="font-semibold">{t("outdated")}</p>
-            {q.outdatedNote && <p className="mt-1">{q.outdatedNote}</p>}
-          </div>
-        )}
-        <h2 id={`q-${q.id}`} className="text-lg font-semibold leading-snug sm:text-xl" lang="lv">
-          {q.text}
-        </h2>
-
-        <fieldset className="mt-5">
-          <legend className="sr-only">{t("chooseAnswer")}</legend>
-          <ul className="space-y-3">
-            {shown.map((o) => {
-              const isSel = selected === o.originalKey;
-              const isRight = o.originalKey === q.correctKey;
-              let tone = "border-line bg-white hover:border-accent hover:bg-accent-soft";
-              if (answered) {
-                if (isRight) tone = "border-ok bg-ok-soft";
-                else if (isSel) tone = "border-err bg-err-soft";
-                else tone = "border-line bg-white opacity-70";
-              }
-              return (
-                <li key={o.originalKey}>
-                  <button
-                    type="button"
-                    onClick={() => choose(o.originalKey)}
-                    disabled={answered}
-                    aria-pressed={isSel}
-                    className={`flex min-h-14 w-full items-start gap-3 rounded-xl border-2 px-4 py-3 text-left transition-colors disabled:cursor-default motion-reduce:transition-none ${tone}`}
-                  >
-                    <span
-                      aria-hidden="true"
-                      className={`mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full text-sm font-semibold ${
-                        answered && isRight
-                          ? "bg-ok text-white"
-                          : answered && isSel
-                            ? "bg-err text-white"
-                            : "bg-accent-soft text-accent-strong"
-                      }`}
-                    >
-                      {o.displayKey}
-                    </span>
-                    <span className="flex-1" lang="lv">
-                      <span className="sr-only">{o.displayKey}. </span>
-                      {o.text}
-                      {answered && isRight && <span className="sr-only"> — {t("correct")}</span>}
-                      {answered && isSel && !isRight && <span className="sr-only"> — {t("wrong")}</span>}
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </fieldset>
-
-        <div aria-live="polite">
-          {answered && (
-            <div className="mt-6 space-y-4 border-t border-line pt-5">
-              {saveError && (
-                <p role="alert" className="rounded-lg bg-err-soft px-3 py-2 text-sm text-err">{saveError}</p>
-              )}
-              <p className={`text-lg font-semibold ${isCorrect ? "text-ok" : "text-err"}`}>
-                {isCorrect ? t("correct") : `${t("wrong")}. ${t("correctAnswerIs", { key: correctDisplay })}`}
-              </p>
-
-              <div className="rounded-xl bg-surface p-4">
-                <h3 className="flex flex-wrap items-center gap-2 font-semibold">
-                  {t("explanation")}
-                  {q.explanation && q.explanationStatus === "draft" && (
-                    <span className="rounded-full bg-warn-soft px-2 py-0.5 text-xs font-semibold text-warn">
-                      {t("explanationDraft")}
-                    </span>
-                  )}
-                </h3>
-                <p className="mt-1 text-muted">{q.explanation ?? t("explanationMissing")}</p>
-                {q.lawReference && (
-                  <p className="mt-2 text-sm">
-                    <span className="font-semibold">{t("lawReference")}:</span> {q.lawReference}
-                  </p>
-                )}
-              </div>
-
-              <div className="flex flex-wrap gap-3">
-                {pool.length === 1 ? (
-                  <button ref={nextRef} type="button" onClick={() => startRound([pool[0]])} className="btn-primary">
-                    {t("tryAgain")}
-                  </button>
-                ) : (
-                  <button ref={nextRef} type="button" onClick={next} className="btn-primary">
-                    {isLast ? t("finish") : t("next")}
-                  </button>
-                )}
-                {q.familyId && q.familySize > 1 && (
-                  <Link href={`/saime/${q.familyId}?no=${q.id}`} className="btn-secondary">
-                    {t("compareSimilar", { count: q.familySize })}
-                  </Link>
-                )}
-                {topicHref && (
-                  <Link href={topicHref} className="btn-ghost">
-                    {t("lesson")}
-                  </Link>
-                )}
-              </div>
+      <article className="grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14" aria-labelledby={`q-${q.id}`}>
+        <div className="lg:sticky lg:top-8 lg:self-start">
+          {q.possiblyOutdated && (
+            <div className="mb-5 rounded-lg bg-warn-soft px-3 py-2 text-sm text-warn">
+              <p className="font-semibold">{t("outdated")}</p>
+              {q.outdatedNote && <p className="mt-1">{q.outdatedNote}</p>}
             </div>
           )}
+          {pool.length === 1 && <p className="text-sm tabular-nums text-muted">Nr. {q.id}</p>}
+          <h2 id={`q-${q.id}`} className="text-2xl font-semibold leading-snug tracking-tight sm:text-3xl" lang="lv">
+            {q.text}
+          </h2>
+        </div>
+
+        <div>
+          <fieldset>
+            <legend className="sr-only">{t("chooseAnswer")}</legend>
+            <ul className="space-y-3">
+              {shown.map((o) => {
+                const isSel = selected === o.originalKey;
+                const isRight = o.originalKey === q.correctKey;
+                let tone = "border-line bg-white hover:border-ink";
+                if (answered) {
+                  if (isRight) tone = "border-ok bg-ok-soft";
+                  else if (isSel) tone = "border-err bg-err-soft";
+                  else tone = "border-line bg-white opacity-70";
+                }
+                return (
+                  <li key={o.originalKey}>
+                    <button
+                      type="button"
+                      onClick={() => choose(o.originalKey)}
+                      disabled={answered}
+                      aria-pressed={isSel}
+                      className={`flex min-h-14 w-full items-start gap-3 rounded-xl border-2 px-4 py-3.5 text-left transition-colors disabled:cursor-default motion-reduce:transition-none ${tone}`}
+                    >
+                      <span
+                        aria-hidden="true"
+                        className={`mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full text-sm font-semibold ${
+                          answered && isRight
+                            ? "bg-ok text-white"
+                            : answered && isSel
+                              ? "bg-err text-white"
+                              : "bg-accent-soft text-ink"
+                        }`}
+                      >
+                        {o.displayKey}
+                      </span>
+                      <span className="flex-1 text-[16px] leading-relaxed" lang="lv">
+                        <span className="sr-only">{o.displayKey}. </span>
+                        {o.text}
+                        {answered && isRight && <span className="sr-only"> — {t("correct")}</span>}
+                        {answered && isSel && !isRight && <span className="sr-only"> — {t("wrong")}</span>}
+                      </span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </fieldset>
+
+          <div aria-live="polite">
+            {answered && (
+              <div className="mt-6 space-y-4">
+                {saveError && (
+                  <p role="alert" className="rounded-lg bg-err-soft px-3 py-2 text-sm text-err">{saveError}</p>
+                )}
+                <p className={`text-lg font-semibold ${isCorrect ? "text-ok" : "text-err"}`}>
+                  {isCorrect ? t("correct") : `${t("wrong")}. ${t("correctAnswerIs", { key: correctDisplay })}`}
+                </p>
+
+                <div className="rounded-xl bg-surface p-4">
+                  <h3 className="flex flex-wrap items-center gap-2 font-semibold">
+                    {t("explanation")}
+                    {q.explanation && q.explanationStatus === "draft" && (
+                      <span className="rounded-full bg-warn-soft px-2 py-0.5 text-xs font-semibold text-warn">
+                        {t("explanationDraft")}
+                      </span>
+                    )}
+                  </h3>
+                  <p className="mt-1 text-muted">{q.explanation ?? t("explanationMissing")}</p>
+                  {q.lawReference && (
+                    <p className="mt-2 text-sm">
+                      <span className="font-semibold">{t("lawReference")}:</span> {q.lawReference}
+                    </p>
+                  )}
+                </div>
+
+                <div className="flex flex-wrap gap-3">
+                  {pool.length === 1 ? (
+                    <button ref={nextRef} type="button" onClick={() => startRound([pool[0]])} className="btn-primary">
+                      {t("tryAgain")}
+                    </button>
+                  ) : (
+                    <button ref={nextRef} type="button" onClick={next} className="btn-primary">
+                      {isLast ? t("finish") : t("next")}
+                    </button>
+                  )}
+                  {q.familyId && q.familySize > 1 && (
+                    <Link href={`/saime/${q.familyId}?no=${q.id}`} className="btn-secondary">
+                      {t("compareSimilar", { count: q.familySize })}
+                    </Link>
+                  )}
+                  {topicHref && (
+                    <Link href={topicHref} className="btn-ghost">
+                      {t("lesson")}
+                    </Link>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <p className="mt-6 hidden text-sm text-muted sm:block">{t("keyboardHint")}</p>
         </div>
       </article>
-
-      <p className="hidden text-sm text-muted sm:block">{t("keyboardHint")}</p>
     </div>
   );
 }

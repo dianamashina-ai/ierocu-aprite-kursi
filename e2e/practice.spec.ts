@@ -12,7 +12,7 @@ test("ceļš: sākums → modulis → tēma → treniņš", async ({ page }) => 
   await page.getByRole("link", { name: /Pamatjēdzieni un darbības princips/ }).click();
   await expect(page).toHaveURL(/\/tema\/1-1$/);
   await page.getByRole("link", { name: /Trenēties \(15\)/ }).click();
-  await expect(page.getByText("1 no 15")).toBeVisible();
+  await expect(page.getByText("Jautājums 1 no 15")).toBeVisible();
 });
 
 test("treniņš: atbilde → atgriezeniskā saite → nākamais → rezultāts", async ({ page }) => {

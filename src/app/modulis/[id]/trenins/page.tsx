@@ -23,7 +23,7 @@ export default async function ModulePracticePage({ params }: { params: Promise<{
   const questions = allowed ? await getPracticeQuestionsForModule(id) : [];
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-6 sm:py-10">
+    <div className="page-white mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
       <Breadcrumbs items={[{ href: "/", label: "Mācību kurss" }, { href: `/modulis/${id}`, label: data.module.titleLv }, { label: "Treniņš" }]} />
       <div className="mt-5">
         {allowed ? (
