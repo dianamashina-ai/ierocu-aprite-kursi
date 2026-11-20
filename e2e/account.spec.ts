@@ -4,7 +4,7 @@ import { buyAccess, signOut, signUp, uniqueEmail } from "./helpers";
 test("reģistrācija → mācību kurss ar progresu → iziet → pieslēgties ar paroli", async ({ page }) => {
   const email = uniqueEmail("pw");
   await signUp(page, email);
-  await expect(page.getByRole("heading", { name: "Mācību kurss", level: 1 })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /^Sveiki/, level: 1 })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Ceļš līdz gatavībai" })).toBeVisible();
   await expect(page.getByText("vēl nav atbildēti")).toBeVisible();
   await signOut(page);

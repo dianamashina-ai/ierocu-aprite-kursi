@@ -179,7 +179,7 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true, 
   if (!q) return null;
 
   return (
-    <div>
+    <div className="has-sticky-footer pb-24 lg:pb-0">
       {pool.length > 1 && (
         <div className="mb-8">
           <div className="flex items-baseline justify-between gap-3">
@@ -294,23 +294,29 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true, 
                   )}
                 </div>
 
-                <div className="flex flex-wrap gap-3">
-                  {pool.length === 1 ? (
-                    <button ref={nextRef} type="button" onClick={() => startRound([pool[0]])} className="btn-primary">
-                      {t("tryAgain")}
-                    </button>
-                  ) : (
-                    <button ref={nextRef} type="button" onClick={next} className="btn-primary">
-                      {isLast ? t("finish") : t("next")}
-                    </button>
-                  )}
-                  {q.familyId && q.familySize > 1 && (
+                {q.familyId && q.familySize > 1 && (
+                  <div>
                     <Link href={`/saime/${q.familyId}?no=${q.id}`} className="btn-secondary">
                       {t("compareSimilar", { count: q.familySize })}
                     </Link>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
+            )}
+          </div>
+
+          {/* telefonā — vienmēr ekrāna apakšā (aktīva pēc atbildes); datorā — zem skaidrojuma, kad atbildēts */}
+          <div
+            className={`fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur lg:static lg:mt-4 lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none ${answered ? "" : "lg:hidden"}`}
+          >
+            {pool.length === 1 ? (
+              <button ref={nextRef} type="button" disabled={!answered} onClick={() => startRound([pool[0]])} className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-40 lg:w-auto">
+                {t("tryAgain")}
+              </button>
+            ) : (
+              <button ref={nextRef} type="button" disabled={!answered} onClick={next} className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-40 lg:w-auto">
+                {isLast ? t("finish") : t("next")}
+              </button>
             )}
           </div>
 

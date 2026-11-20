@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowUpRight, Lock, Search } from "lucide-react";
-import { getTranslations } from "next-intl/server";
 import { getCourseOverview } from "@/lib/content/queries";
 import { getCurrentUser } from "@/lib/auth/session";
 import { hasFullAccess, isFreeModule } from "@/lib/billing/access";
@@ -20,9 +19,16 @@ export const dynamic = "force-dynamic";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
+/** Vārds sveicienam: tikai ja lietotājs to norādījis (pēc noklusējuma vārds = e-pasta sākums). */
+function greetingName(u: { name: string; email: string } | null) {
+  if (!u) return null;
+  const name = u.name.trim();
+  if (!name || name.toLowerCase() === u.email.split("@")[0].toLowerCase()) return null;
+  return name.split(/\s+/)[0];
+}
+
 export default async function HomePage() {
-  const [t, course, user] = await Promise.all([
-    getTranslations("home"),
+  const [course, user] = await Promise.all([
     getCourseOverview(),
     getCurrentUser(),
   ]);
@@ -69,10 +75,12 @@ export default async function HomePage() {
           <>
             <div className="max-w-3xl">
               <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-5xl">
-                Mācību kurss
+                {greetingName(user) ? `Sveiki, ${greetingName(user)}!` : "Sveiki!"}
               </h1>
               <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
-                {t("lead", course.totals)}
+                {dashboard && dashboard.answeredQuestions > 0
+                  ? "Turpini tur, kur palikāt — vai pārbaudi sevi izmēģinājuma eksāmenā."
+                  : `Sāc ar pirmo nodarbību — ${course.totals.topics} īsās nodarbībās un ${course.totals.questions} oficiālajos jautājumos ir viss eksāmenam vajadzīgais.`}
               </p>
             </div>
             {dashboard && <ProgressSummary d={dashboard} totalTopics={course.totals.topics} />}
@@ -83,10 +91,7 @@ export default async function HomePage() {
           className={`mt-14 flex scroll-mt-6 flex-col gap-4 border-y border-line py-5 sm:flex-row sm:items-center sm:justify-between`}
         >
           <h2 className="text-3xl font-semibold tracking-tight">
-            Moduļi{" "}
-            <span className="ml-1 align-middle text-lg font-normal text-muted">
-              {course.totals.modules}
-            </span>
+            Moduļi
           </h2>
           <form
             action="/meklet"
