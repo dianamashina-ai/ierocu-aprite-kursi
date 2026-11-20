@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="lv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>E-pasta paraksts</title>
+<style>
+  body { margin: 0; padding: 40px 16px; background: #f8f8f8; font-family: Arial, Helvetica, sans-serif; color: #222; }
+  .wrap { max-width: 640px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0 0 8px; }
+  p.hint { color: #5c5c5c; font-size: 14px; margin: 0 0 24px; }
+  .card { background: #fff; border: 1px solid #e3e3e3; border-radius: 12px; padding: 24px; }
+  button { margin-top: 20px; font: 600 15px Arial, Helvetica, sans-serif; color: #fff; background: #6c3441; border: 0; border-radius: 10px; padding: 12px 20px; cursor: pointer; }
+  button:hover { background: #522630; }
+  #status { margin-left: 12px; font-size: 14px; color: #1d6b3a; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>E-pasta paraksts</h1>
+  <p class="hint">Nospied “Kopēt parakstu” un ielīmē Gmail iestatījumos: Iestatījumi → Visi iestatījumi → Paraksts.</p>
+
+  <div class="card">
+    <div id="signature">
+      <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;color:#222222;">
+        <tr>
+          <td style="padding:0 0 12px 0;">
+            <a href="https://ierocuatlauja.lv" style="text-decoration:none;"><img src="https://ierocuatlauja.lv/e-pasts/logo-paraksts.png" width="235" height="40" alt="Ieroču atļauja — sadarbībā ar LPSC" style="display:block;border:0;width:235px;height:40px;"></a>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-top:2px solid #6c3441;padding:10px 0 0 0;font-size:13px;line-height:20px;">
+            <span style="font-weight:bold;color:#222222;">Sagatavošanās ieroču atļaujas kvalifikācijas pārbaudījumam</span><br>
+            <span style="color:#5c5c5c;">SIA „Latvijas Praktiskās Šaušanas Centrs”</span><br>
+            <a href="https://ierocuatlauja.lv" style="color:#6c3441;text-decoration:none;font-weight:bold;">ierocuatlauja.lv</a>
+            <span style="color:#5c5c5c;">&nbsp;·&nbsp;</span>
+            <a href="mailto:info@ierocuatlauja.lv" style="color:#6c3441;text-decoration:none;">info@ierocuatlauja.lv</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <button type="button" id="copy">Kopēt parakstu</button><span id="status" role="status"></span>
+</div>
+<script>
+  document.getElementById("copy").addEventListener("click", async () => {
+    const el = document.getElementById("signature");
+    const status = document.getElementById("status");
+    try {
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          "text/html": new Blob([el.innerHTML], { type: "text/html" }),
+          "text/plain": new Blob([el.innerText], { type: "text/plain" }),
+        }),
+      ]);
+      status.textContent = "Nokopēts!";
+    } catch (e) {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      document.execCommand("copy");
+      status.textContent = "Nokopēts (vai iezīmēts — nospied Cmd+C).";
+    }
+  });
+</script>
+</body>
+</html>
