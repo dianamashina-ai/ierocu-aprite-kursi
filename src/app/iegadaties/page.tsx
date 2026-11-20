@@ -6,7 +6,6 @@ import { COURSE_PRODUCT, splitVat } from "@/config/pricing";
 import { formatEuro } from "@/lib/format";
 import { CheckoutForm } from "@/components/billing/checkout-form";
 import { getCourseOverview } from "@/lib/content/queries";
-import { readNumbers } from "@/lib/content/numbers";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Pilna piekļuve kursam", description: "Visi moduļi, nodarbības, 515 jautājumi ar skaidrojumiem un izmēģinājuma eksāmens." };
@@ -29,7 +28,6 @@ export default async function BuyPage() {
     `Visi ${course.totals.questions} oficiālie jautājumi ar skaidrojumiem un atsaucēm uz likumu`,
     "Neierobežoti izmēģinājuma eksāmeni (40 jautājumi, 40 minūtes)",
     "Kļūdu atkārtošana pēc 1, 3 un 7 dienām",
-    `${readNumbers().length} kartītes ar skaitļiem, kas jāatceras`,
   ];
 
   return (

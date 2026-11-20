@@ -10,7 +10,6 @@ export async function SiteHeader() {
     ...(user ? [{ href: "/panelis", label: "Mans progress" }] : []),
     { href: "/", label: "Mācību kurss", match: ["/modulis", "/tema", "/jautajums", "/saime"] },
     ...(user ? [{ href: "/kludas", label: "Kļūdas" }] : []),
-    { href: "/skaitli", label: "Skaitļi" },
     { href: "/eksamens", label: "Eksāmens" },
     { href: "/meklet", label: "Meklēt" },
   ];
