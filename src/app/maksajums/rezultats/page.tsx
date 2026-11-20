@@ -38,7 +38,7 @@ export default async function PaymentResultPage({ searchParams }: { searchParams
             Maksājums {formatEuro(order.amountCents)} saņemts. Rēķins {order.invoiceNumber} nosūtīts uz {order.buyer.email}.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/panelis" className="btn-primary">Sākt mācīties</Link>
+            <Link href="/" className="btn-primary">Sākt mācīties</Link>
             <Link href={`/rekins/${order.id}`} className="btn-secondary">Skatīt rēķinu</Link>
           </div>
         </section>

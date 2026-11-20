@@ -51,7 +51,7 @@ export default async function ReviewPage({ searchParams }: { searchParams: Promi
           </div>
           <div className="flex flex-wrap gap-3">
             {!all && wrong.length > 0 && <Link href="/kludas?visas=1" className="btn-primary">Trenēt visas kļūdas ({wrong.length})</Link>}
-            <Link href="/panelis" className="btn-secondary">Uz paneli</Link>
+            <Link href="/" className="btn-secondary">Uz mācību kursu</Link>
           </div>
         </div>
       )}

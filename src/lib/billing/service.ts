@@ -111,7 +111,7 @@ async function sendReceipt(order: typeof schema.orders.$inferSelect) {
       `Sveiki, ${order.buyer.name}!\n\n` +
       `Maksājums ${formatEuro(order.amountCents)} saņemts — tagad tev ir pieejami visi kursa moduļi, nodarbības un izmēģinājuma eksāmens.\n\n` +
       `Rēķins ${order.invoiceNumber}: ${link}\n` +
-      `Sākt mācīties: ${siteUrl()}/panelis\n`,
+      `Sākt mācīties: ${siteUrl()}/\n`,
   });
 }
 

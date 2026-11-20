@@ -5,7 +5,6 @@ import { getCourseOverview } from "@/lib/content/queries";
 import { getCurrentUser } from "@/lib/auth/session";
 import { hasFullAccess, isFreeModule } from "@/lib/billing/access";
 import { getTopicProgress } from "@/lib/progress/service";
-import { READY_TOPIC_PERCENT } from "@/lib/progress/readiness";
 import { MODULE_META } from "@/config/module-meta";
 import { ModuleIcon } from "@/components/module-icon";
 import { Hero } from "@/components/home/hero";
@@ -14,7 +13,8 @@ import { WhoCanOwn } from "@/components/home/who-can-own";
 import { Faq } from "@/components/home/faq";
 import { readLesson } from "@/lib/content/lessons";
 import { getPracticeQuestion } from "@/lib/content/queries";
-import { getExamConfig } from "@/lib/progress/service";
+import { getDashboard, getExamConfig } from "@/lib/progress/service";
+import { ProgressSummary } from "@/components/home/progress-summary";
 
 export const dynamic = "force-dynamic";
 
@@ -26,22 +26,13 @@ export default async function HomePage() {
     getCourseOverview(),
     getCurrentUser(),
   ]);
-  const [access, progress, sample, examCfg] = await Promise.all([
+  const [access, progress, sample, examCfg, dashboard] = await Promise.all([
     hasFullAccess(user?.id),
     user ? getTopicProgress(user.id) : Promise.resolve(null),
     user ? Promise.resolve(null) : getPracticeQuestion(435), // paraugs sākumlapai: lielas enerģijas pneimatiskais ierocis
     getExamConfig(),
+    user ? getDashboard(user.id) : Promise.resolve(null),
   ]);
-
-  const topicPercent = (topicId: string, total: number) =>
-    progress && total
-      ? Math.round(((progress.get(topicId)?.mastered ?? 0) / total) * 100)
-      : 0;
-  const topicsDone = course.modules
-    .flatMap((m) => m.topics)
-    .filter(
-      (tp) => topicPercent(tp.id, tp.questionCount) >= READY_TOPIC_PERCENT,
-    ).length;
 
   return (
     <>
@@ -76,28 +67,15 @@ export default async function HomePage() {
       {user && (
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
           <>
-            <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-              <div className="max-w-3xl">
-                <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-5xl">
-                  Mācību kurss
-                </h1>
-                <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
-                  {t("lead", course.totals)}
-                </p>
-              </div>
-              <div className="shrink-0 border-line lg:border-l lg:pl-10">
-                <p className="font-bold tabular-nums leading-none text-accent">
-                  <span className="text-6xl">{topicsDone}</span>
-                  <span className="text-3xl text-accent-strong">
-                    /{course.totals.topics}
-                  </span>
-                </p>
-                <p className="mt-2 text-sm text-muted">
-                  tēmas apgūtas
-                  <span className="block text-xs">tēma skaitās apgūta, ja pareizi atbildēts uz {READY_TOPIC_PERCENT} % tās jautājumu</span>
-                </p>
-              </div>
+            <div className="max-w-3xl">
+              <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-5xl">
+                Mācību kurss
+              </h1>
+              <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
+                {t("lead", course.totals)}
+              </p>
             </div>
+            {dashboard && <ProgressSummary d={dashboard} totalTopics={course.totals.topics} />}
           </>
 
         <div

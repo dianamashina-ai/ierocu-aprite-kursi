@@ -8,7 +8,7 @@ import { authClient } from "@/lib/auth/client";
 const input =
   "mt-1 block min-h-12 w-full rounded-xl border-2 border-line bg-white px-4 text-base focus:border-accent focus:outline-none";
 
-function Field({ label, ...props }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
+export function Field({ label, ...props }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <label className="block">
       <span className="text-sm font-semibold">{label}</span>
@@ -17,7 +17,7 @@ function Field({ label, ...props }: { label: string } & React.InputHTMLAttribute
   );
 }
 
-function ErrorText({ children }: { children: React.ReactNode }) {
+export function ErrorText({ children }: { children: React.ReactNode }) {
   return (
     <p role="alert" className="rounded-lg bg-err-soft px-3 py-2 text-sm text-err">
       {children}
@@ -26,7 +26,7 @@ function ErrorText({ children }: { children: React.ReactNode }) {
 }
 
 /** better-auth kļūdu kodi → latviski */
-function lvError(code?: string, message?: string, status?: number) {
+export function lvError(code?: string, message?: string, status?: number) {
   if (status === 429) return "Pārāk daudz mēģinājumu. Pagaidi minūti un mēģini vēlreiz.";
   switch (code) {
     case "INVALID_EMAIL_OR_PASSWORD":
@@ -38,6 +38,12 @@ function lvError(code?: string, message?: string, status?: number) {
       return "Parolei jābūt vismaz 8 rakstzīmes garai.";
     case "INVALID_EMAIL":
       return "Pārbaudi e-pasta adresi.";
+    case "INVALID_PASSWORD":
+      return "Pašreizējā parole nav pareiza.";
+    case "CREDENTIAL_ACCOUNT_NOT_FOUND":
+      return "Tavam kontam vēl nav paroles. Iestati to ar “Aizmirsi paroli?” pieslēgšanās lapā.";
+    case "PASSWORD_TOO_LONG":
+      return "Parole ir pārāk gara.";
     case "INVALID_TOKEN":
       return "Saite ir novecojusi vai jau izmantota. Pieprasi jaunu.";
     default:

@@ -7,7 +7,6 @@ export async function SiteHeader() {
   const user = await getCurrentUser();
   const access = await hasFullAccess(user?.id);
   const items: NavItem[] = [
-    ...(user ? [{ href: "/panelis", label: "Mans progress" }] : []),
     { href: "/", label: "Mācību kurss", match: ["/modulis", "/tema", "/jautajums", "/saime"] },
     ...(user ? [{ href: "/kludas", label: "Kļūdas" }] : []),
     { href: "/eksamens", label: "Eksāmens" },
@@ -17,7 +16,7 @@ export async function SiteHeader() {
   return (
     <header className="relative border-b border-line bg-white print:hidden">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-4 sm:h-20 sm:px-6">
-        <Link href={user ? "/panelis" : "/"} className="flex shrink-0 items-center" aria-label="Ieroču atļauja — sadarbībā ar LPSC, uz sākumu">
+        <Link href="/" className="flex shrink-0 items-center" aria-label="Ieroču atļauja — sadarbībā ar LPSC, uz sākumu">
           {/* eslint-disable-next-line @next/next/no-img-element -- vektora logotips, optimizācija nav vajadzīga */}
           <img src="/logo-lpsc-2026.svg" alt="Ieroču atļauja — sadarbībā ar LPSC" width={235} height={40} className="h-9 w-auto sm:h-11" />
         </Link>

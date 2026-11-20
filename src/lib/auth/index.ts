@@ -33,6 +33,18 @@ export const auth = betterAuth({
       });
     },
   },
+  // E-pasta maiņa: jaunā adrese stājas spēkā tikai pēc saites atvēršanas jaunajā pastkastē.
+  user: { changeEmail: { enabled: true } },
+  emailVerification: {
+    sendOnSignUp: false,
+    sendVerificationEmail: async ({ user, url }) => {
+      await sendEmail({
+        to: user.email,
+        subject: "Apstiprini e-pasta adresi",
+        text: `Lai apstiprinātu šo e-pasta adresi savam kontam, atver saiti:\n${url}\n\nJa e-pastu nemainīji, šo vēstuli vari ignorēt.`,
+      });
+    },
+  },
   socialProviders: googleEnabled
     ? { google: { clientId: process.env.GOOGLE_CLIENT_ID!, clientSecret: process.env.GOOGLE_CLIENT_SECRET! } }
     : {},

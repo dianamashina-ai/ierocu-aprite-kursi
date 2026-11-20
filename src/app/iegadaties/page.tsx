@@ -57,7 +57,7 @@ export default async function BuyPage() {
             {access ? (
               <div className="space-y-4">
                 <p className="rounded-lg bg-ok-soft px-3 py-2 text-ok">Tev jau ir pilna piekļuve kursam.</p>
-                <Link href="/panelis" className="btn-primary">Uz paneli</Link>
+                <Link href="/" className="btn-primary">Sākt mācīties</Link>
               </div>
             ) : !provider ? (
               <p className="text-muted">Tiešsaistes maksājumi tiks atvērti drīzumā.</p>

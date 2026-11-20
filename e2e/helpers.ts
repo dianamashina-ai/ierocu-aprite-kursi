@@ -8,7 +8,7 @@ export async function signUp(page: Page, email: string) {
   await page.getByLabel(/Parole/).fill("drosa-parole-123");
   await page.getByRole("checkbox").check();
   await page.getByRole("button", { name: "Izveidot kontu" }).click();
-  await expect(page).toHaveURL(/\/panelis$/);
+  await expect(page).toHaveURL(/^https?:\/\/[^/]+\/$/);
 }
 
 /** Iegādājas pilnu piekļuvi ar testa maksājumu (PAYMENT_PROVIDER=dev). */
@@ -34,6 +34,10 @@ export async function paidUser(page: Page, tag: string) {
 export async function signOut(page: Page) {
   const menu = page.getByRole("button", { name: "Atvērt izvēlni" });
   if (await menu.isVisible()) await menu.click();
-  await page.getByRole("button", { name: "Iziet" }).filter({ visible: true }).first().click();
+  // sākumlapā jau varam būt — gaidām, līdz sesija tiešām beigusies
+  await Promise.all([
+    page.waitForResponse((r) => r.url().includes("/api/auth/sign-out") && r.ok()),
+    page.getByRole("button", { name: "Iziet" }).filter({ visible: true }).first().click(),
+  ]);
   await expect(page).toHaveURL(/\/$/);
 }

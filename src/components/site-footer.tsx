@@ -18,7 +18,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
     links: [
       { href: "/pieslegties", label: "Pieslēgties" },
       { href: "/registreties", label: "Izveidot kontu" },
-      { href: "/panelis", label: "Mans progress" },
+      { href: "/konts", label: "Mans konts" },
       { href: "/kludas", label: "Kļūdu labošana" },
       { href: "/parole/aizmirsta", label: "Aizmirsi paroli?" },
     ],
