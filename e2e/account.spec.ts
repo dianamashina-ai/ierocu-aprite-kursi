@@ -75,6 +75,15 @@ test("izmēģinājuma eksāmens: sākt, atbildēt, turpināt pēc pārlādes, pa
   // eksāmena laikā nav skaidrojumu un pareizo atbilžu
   await expect(page.getByText("Skaidrojums")).toHaveCount(0);
 
+  // izejot no eksāmena — sākumlapā “Turpināt eksāmenu” ar atlikušo laiku
+  const examUrl = page.url();
+  await page.goto("/eksamens");
+  await expect(page.getByText("Atbildēti 3 no 40")).toBeVisible();
+  await expect(page.getByRole("timer")).toHaveText(/^(40:00|39:\d\d)$/);
+  await page.getByRole("link", { name: "Turpināt eksāmenu" }).click();
+  await expect(page).toHaveURL(examUrl);
+  await expect(page.getByText("Jautājums 4 no 40")).toBeVisible();
+
   await page.getByRole("button", { name: "Pabeigt eksāmenu" }).last().click();
   await expect(page.getByText(/Neatbildēti 37 jautājumi/)).toBeVisible();
   await page.getByRole("button", { name: "Jā, pabeigt" }).click();

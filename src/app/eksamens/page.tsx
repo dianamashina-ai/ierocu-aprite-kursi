@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth/session";
-import { getExamConfig, getExamHistory } from "@/lib/progress/service";
+import { getExamConfig, getExamHistory, getOpenExam } from "@/lib/progress/service";
+import { Countdown } from "@/components/exam/countdown";
 import { startExamAction } from "@/app/actions/progress";
 import { formatDateTime } from "@/lib/format";
 import { hasFullAccess } from "@/lib/billing/access";
@@ -11,7 +12,7 @@ export const metadata = { title: "Izmēģinājuma eksāmens" };
 
 export default async function ExamStartPage() {
   const [user, cfg] = await Promise.all([getCurrentUser(), getExamConfig()]);
-  const history = user ? await getExamHistory(user.id) : [];
+  const [history, open] = user ? await Promise.all([getExamHistory(user.id), getOpenExam(user.id)]) : [[], null];
   const access = await hasFullAccess(user?.id);
   const maxWrong = cfg.questionCount - Math.ceil((cfg.questionCount * cfg.passPercent) / 100);
 
@@ -35,6 +36,22 @@ export default async function ExamStartPage() {
       <div className="mt-8">
         {!access ? (
           <Paywall title="Izmēģinājuma eksāmens pieejams ar pilnu piekļuvi" />
+        ) : open ? (
+          <div className="rounded-2xl border-2 border-accent bg-white p-5">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <p className="font-semibold">Tev ir nepabeigts eksāmens</p>
+                <p className="mt-1 text-sm text-muted">
+                  Atbildēti {open.answered} no {open.total} jautājumiem. Laiks turpina iet arī tad, ja eksāmens nav atvērts.
+                </p>
+              </div>
+              <div className="text-right">
+                <p className="text-xs text-muted">Atlikušais laiks</p>
+                <Countdown deadline={open.deadline.toISOString()} className="text-2xl font-bold tabular-nums" />
+              </div>
+            </div>
+            <Link href={`/eksamens/${open.id}`} className="btn-primary mt-4">Turpināt eksāmenu</Link>
+          </div>
         ) : user ? (
           <form action={startExamAction}>
             <button type="submit" className="btn-primary">Sākt eksāmenu</button>

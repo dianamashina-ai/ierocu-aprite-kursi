@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, TriangleAlert, X } from "lucide-react";
+import { TriangleAlert, X } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
@@ -334,19 +334,10 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
                   </button>
                 </div>
               )}
-              {/* telefons: josla ekrāna apakšā — pa kreisi rezultāts, pa labi bultiņa */}
-              <div className="fixed inset-x-0 bottom-0 z-20 flex items-center justify-between gap-3 border-t border-line bg-white/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur lg:hidden">
-                <span aria-hidden="true" className={`font-semibold ${!answered ? "text-muted" : isCorrect ? "text-ok" : "text-err"}`}>
-                  {!answered ? t("chooseAnswer") : isCorrect ? t("correct") : t("wrong")}
-                </span>
-                <button
-                  type="button"
-                  aria-label={isLast ? t("finish") : t("next")}
-                  disabled={!answered}
-                  onClick={next}
-                  className="btn-primary size-12 px-0 disabled:cursor-not-allowed disabled:opacity-40"
-                >
-                  <ArrowRight aria-hidden="true" className="size-5" />
+              {/* telefons: poga ekrāna apakšā (aktīva pēc atbildes) */}
+              <div className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur lg:hidden">
+                <button type="button" disabled={!answered} onClick={next} className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-40">
+                  {isLast ? t("finish") : t("next")}
                 </button>
               </div>
             </>

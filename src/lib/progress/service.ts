@@ -120,6 +120,20 @@ export function examDeadline(a: { startedAt: Date; durationMinutes: number }) {
   return new Date(a.startedAt.getTime() + a.durationMinutes * 60_000);
 }
 
+/** Nepabeigts eksāmens, kuram vēl nav beidzies laiks (lai sākumlapā rādītu “Turpināt”). */
+export async function getOpenExam(userId: string, now = new Date()) {
+  const [a] = await db
+    .select()
+    .from(examAttempts)
+    .where(and(eq(examAttempts.userId, userId), eq(examAttempts.status, "in_progress")))
+    .orderBy(desc(examAttempts.startedAt))
+    .limit(1);
+  if (!a) return null;
+  const deadline = examDeadline(a);
+  if (deadline.getTime() <= now.getTime()) return null;
+  return { id: a.id, deadline, answered: Object.keys(a.selected).length, total: a.questionIds.length };
+}
+
 export async function startExam(userId: string, now = new Date()) {
   const open = await db
     .select()

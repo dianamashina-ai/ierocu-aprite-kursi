@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, X } from "lucide-react";
+import { X } from "lucide-react";
 
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -175,15 +175,15 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
               </p>
             )}
 
-            {/* dators: pogas zem atbildēm */}
-            <div className="mt-8 hidden flex-wrap items-center justify-between gap-3 lg:flex">
-              <button type="button" className="btn-secondary" disabled={pos === 0} onClick={() => setPos((p) => p - 1)}>
+            {/* telefonā — piestiprināts ekrāna apakšā, datorā — zem atbildēm */}
+            <div className="fixed inset-x-0 bottom-0 z-20 flex items-center justify-between gap-3 border-t border-line bg-white/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur lg:static lg:mt-8 lg:flex-wrap lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
+              <button type="button" className="btn-secondary flex-1 disabled:cursor-not-allowed disabled:opacity-40 lg:flex-none" disabled={pos === 0} onClick={() => setPos((p) => p - 1)}>
                 ← Iepriekšējais
               </button>
               {pos < questions.length - 1 ? (
                 <button
                   type="button"
-                  className="btn-primary disabled:cursor-not-allowed disabled:opacity-40"
+                  className="btn-primary flex-1 disabled:cursor-not-allowed disabled:opacity-40 lg:flex-none"
                   disabled={!selected[q.id]}
                   title={selected[q.id] ? undefined : "Vispirms izvēlies atbildi"}
                   onClick={() => setPos((p) => p + 1)}
@@ -193,7 +193,7 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
               ) : (
                 <button
                   type="button"
-                  className="btn-primary disabled:cursor-not-allowed disabled:opacity-40"
+                  className="btn-primary flex-1 disabled:cursor-not-allowed disabled:opacity-40 lg:flex-none"
                   disabled={!selected[q.id]}
                   onClick={() => setConfirming(true)}
                 >
@@ -202,36 +202,7 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
               )}
             </div>
 
-            {/* telefons: josla ekrāna apakšā — pa kreisi “Pabeigt”, pa labi bultiņas */}
-            <div className="fixed inset-x-0 bottom-0 z-20 flex items-center justify-between gap-3 border-t border-line bg-white/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur lg:hidden">
-              <button type="button" className="btn-ghost -ml-2 px-2" onClick={() => setConfirming(true)}>
-                Pabeigt eksāmenu
-              </button>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  aria-label="Iepriekšējais"
-                  disabled={pos === 0}
-                  onClick={() => setPos((p) => p - 1)}
-                  className="btn-secondary size-12 px-0 disabled:opacity-40"
-                >
-                  <ArrowLeft aria-hidden="true" className="size-5" />
-                </button>
-                {pos < questions.length - 1 && (
-                  <button
-                    type="button"
-                    aria-label="Nākamais"
-                    disabled={!selected[q.id]}
-                    onClick={() => setPos((p) => p + 1)}
-                    className="btn-primary size-12 px-0 disabled:cursor-not-allowed disabled:opacity-40"
-                  >
-                    <ArrowRight aria-hidden="true" className="size-5" />
-                  </button>
-                )}
-              </div>
-            </div>
-
-            <div className="mt-8 border-t border-line pt-6 max-lg:hidden max-lg:has-[[role=dialog]]:block">
+            <div className="mt-8 border-t border-line pt-6">
               {!confirming ? (
                 <button type="button" className="btn-ghost px-0" onClick={() => setConfirming(true)}>
                   Pabeigt eksāmenu
