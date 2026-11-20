@@ -9,6 +9,8 @@ import { READY_TOPIC_PERCENT } from "@/lib/progress/readiness";
 import { MODULE_META } from "@/config/module-meta";
 import { ModuleIcon } from "@/components/module-icon";
 import { Hero } from "@/components/home/hero";
+import { CourseOutline } from "@/components/home/course-outline";
+import { readLesson } from "@/lib/content/lessons";
 import { getPracticeQuestion } from "@/lib/content/queries";
 import { getExamConfig } from "@/lib/progress/service";
 
@@ -42,17 +44,26 @@ export default async function HomePage() {
   return (
     <>
       {!user && (
-        <Hero
-          sample={sample}
-          stats={{
-            ...course.totals,
-            examMinutes: examCfg.durationMinutes,
-            examQuestions: examCfg.questionCount,
-          }}
-        />
+        <>
+          <Hero
+            sample={sample}
+            stats={{
+              ...course.totals,
+              examMinutes: examCfg.durationMinutes,
+              examQuestions: examCfg.questionCount,
+            }}
+          />
+          <CourseOutline
+            totals={course.totals}
+            modules={course.modules.map((m) => ({
+              ...m,
+              topics: m.topics.map((t) => ({ id: t.id, titleLv: t.titleLv, questionCount: t.questionCount, minutes: readLesson(t.id)?.minutes ?? null })),
+            }))}
+          />
+        </>
       )}
+      {user && (
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
-        {user && (
           <>
             <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-3xl">
@@ -77,11 +88,10 @@ export default async function HomePage() {
               </div>
             </div>
           </>
-        )}
 
         <div
           id="moduli"
-          className={`${user ? "mt-14" : ""} flex scroll-mt-6 flex-col gap-4 border-y border-line py-5 sm:flex-row sm:items-center sm:justify-between`}
+          className={`mt-14 flex scroll-mt-6 flex-col gap-4 border-y border-line py-5 sm:flex-row sm:items-center sm:justify-between`}
         >
           <h2 className="text-3xl font-semibold tracking-tight">
             Moduļi{" "}
@@ -187,6 +197,7 @@ export default async function HomePage() {
           })}
         </ol>
       </div>
+      )}
     </>
   );
 }
