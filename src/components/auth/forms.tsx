@@ -76,10 +76,11 @@ function GoogleButton({ next }: { next: string }) {
   );
 }
 
-export function SignInForm({ next, google }: { next: string; google: boolean }) {
+export function SignInForm({ next, google, initialEmail }: { next: string; google: boolean; initialEmail?: string }) {
   const router = useRouter();
-  const [tab, setTab] = useState<"password" | "link">("password");
-  const [email, setEmail] = useState("");
+  // no uzaicinājuma vēstules (?epasts=…) — uzreiz pieslēgšanās ar saiti e-pastā
+  const [tab, setTab] = useState<"password" | "link">(initialEmail ? "link" : "password");
+  const [email, setEmail] = useState(initialEmail ?? "");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [sent, setSent] = useState(false);

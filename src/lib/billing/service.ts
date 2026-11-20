@@ -13,6 +13,7 @@ import type { PaymentEvent, PaymentProvider, ProviderName } from "./types";
 import { stripeProvider } from "./providers/stripe";
 import { montonioProvider } from "./providers/montonio";
 import { devProvider } from "./providers/dev";
+import { manualProvider } from "./providers/manual";
 
 export class BillingError extends Error {}
 
@@ -25,7 +26,7 @@ const siteUrl = () =>
     "http://localhost:3000"
   ).replace(/\/$/, "");
 
-const providers: Record<ProviderName, PaymentProvider> = { stripe: stripeProvider, montonio: montonioProvider, dev: devProvider };
+const providers: Record<ProviderName, PaymentProvider> = { stripe: stripeProvider, montonio: montonioProvider, dev: devProvider, manual: manualProvider };
 
 export async function createOrder(userId: string, buyer: OrderBuyer, opts: { provider?: ProviderName; now?: Date } = {}) {
   const provider = opts.provider ?? activeProviderName();
@@ -139,7 +140,7 @@ export async function refundOrder(orderId: string, opts: { now?: Date } = {}) {
   if (order.status !== "paid") throw new BillingError("Atmaksāt var tikai apmaksātu pasūtījumu");
   await providers[order.provider].refund({ orderId: order.id, providerRef: order.providerRef, amountCents: order.amountCents });
   const result = await applyPaymentEvent({ orderId: order.id, status: "refunded" }, order.provider, opts);
-  if (result.changed && result.order) {
+  if (result.changed && result.order && result.order.provider !== "manual") {
     await sendEmail({
       to: result.order.buyer.email,
       subject: `Atmaksa veikta — rēķins ${result.order.invoiceNumber}`,
@@ -150,4 +151,71 @@ export async function refundOrder(orderId: string, opts: { now?: Date } = {}) {
     }).catch((e) => console.error("Atmaksas e-pasts:", e));
   }
   return result;
+}
+
+export type ManualMethod = "cash" | "free";
+export const MANUAL_METHOD_LABEL: Record<ManualMethod, string> = { cash: "Skaidra nauda", free: "Bez maksas" };
+
+/**
+ * Administrators piešķir pilnu piekļuvi (samaksāts skaidrā naudā vai bez maksas). Rēķins netiek izrakstīts.
+ * Ja konta nav — tas tiek izveidots (bez paroles), un uz e-pastu nosūtīts uzaicinājums pieslēgties.
+ */
+export async function grantManualAccess(
+  input: { email: string; name?: string | null; method: ManualMethod; note?: string | null },
+  opts: { now?: Date } = {},
+) {
+  const now = opts.now ?? new Date();
+  const email = input.email.trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new BillingError("Pārbaudi e-pasta adresi");
+  let account = await db.query.user.findFirst({ where: eq(schema.user.email, email) });
+  let created = false;
+  if (!account) {
+    [account] = await db
+      .insert(schema.user)
+      .values({ id: randomUUID(), email, name: input.name?.trim() || email.split("@")[0], createdAt: now, updatedAt: now })
+      .returning();
+    created = true;
+  }
+  const paid = await db.query.orders.findFirst({
+    columns: { id: true },
+    where: and(eq(schema.orders.userId, account.id), eq(schema.orders.status, "paid")),
+  });
+  if (paid) throw new BillingError("Šim lietotājam jau ir pilna piekļuve");
+
+  const amount = input.method === "cash" ? COURSE_PRODUCT.amountCents : 0;
+  const { netCents, vatCents } = splitVat(amount, COURSE_PRODUCT.vatRate);
+  const note = [MANUAL_METHOD_LABEL[input.method], input.note?.trim()].filter(Boolean).join(": ");
+  const [order] = await db
+    .insert(schema.orders)
+    .values({
+      id: randomUUID(),
+      userId: account.id,
+      provider: "manual",
+      status: "paid",
+      product: COURSE_PRODUCT.name,
+      amountCents: amount,
+      netCents,
+      vatCents,
+      vatRate: COURSE_PRODUCT.vatRate,
+      currency: COURSE_PRODUCT.currency,
+      buyer: { name: input.name?.trim() || account.name, email },
+      waiverAcceptedAt: now,
+      createdAt: now,
+      paidAt: now,
+      note,
+    })
+    .returning();
+
+  const login = `${siteUrl()}/pieslegties?epasts=${encodeURIComponent(email)}`;
+  await sendEmail({
+    to: email,
+    subject: "Tev atvērta pilna piekļuve kursam “Ieroču atļauja”",
+    text:
+      `Sveiki!\n\nTev ir atvērta pilna piekļuve mācību kursam sagatavošanās ieroču atļaujas kvalifikācijas pārbaudījumam: ` +
+      `visi moduļi, nodarbības, skaidrojumi un izmēģinājuma eksāmens.\n\n` +
+      (created
+        ? `Konts jau ir izveidots ar šo e-pasta adresi. Lai pieslēgtos, atver saiti un izvēlies «Saite e-pastā» — atsūtīsim pieslēgšanās saiti:\n${login}\n\nParoli vari iestatīt vēlāk ar «Aizmirsi paroli?».\n`
+        : `Pieslēdzies ar savu kontu:\n${login}\n`),
+  }).catch((e) => console.error("Piekļuves e-pasts:", e));
+  return { order, created };
 }

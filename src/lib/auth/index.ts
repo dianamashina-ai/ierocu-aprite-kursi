@@ -5,6 +5,7 @@ import { nextCookies } from "better-auth/next-js";
 import { magicLink } from "better-auth/plugins/magic-link";
 import { db, schema } from "@/db";
 import { sendEmail } from "@/lib/email/send";
+import { afterSessionCreated } from "./devices";
 
 const googleEnabled = Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
 
@@ -54,6 +55,16 @@ export const auth = betterAuth({
   session: {
     expiresIn: 60 * 60 * 24 * 60, // 60 dienas
     updateAge: 60 * 60 * 24,
+  },
+  // Vienlaikus ne vairāk kā MAX_DEVICES ierīces; pieslēgšanās vēsture koplietošanas pazīmēm
+  databaseHooks: {
+    session: {
+      create: {
+        after: async (s) => {
+          await afterSessionCreated(s);
+        },
+      },
+    },
   },
   plugins: [
     magicLink({

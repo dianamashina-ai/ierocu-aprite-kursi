@@ -29,6 +29,13 @@
       "when": 1795117025862,
       "tag": "0003_design_notes",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1795209780088,
+      "tag": "0004_manual_access_logins",
+      "breakpoints": true
     }
   ]
 }

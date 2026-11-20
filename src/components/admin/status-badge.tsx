@@ -6,8 +6,13 @@ const ORDER: Record<string, { label: string; cls: string }> = {
   canceled: { label: "Atcelts", cls: "bg-surface text-muted" },
 };
 
-export function OrderStatusBadge({ status }: { status: string }) {
-  const s = ORDER[status] ?? { label: status, cls: "bg-surface text-muted" };
+export function OrderStatusBadge({ status, provider }: { status: string; provider?: string }) {
+  const s =
+    provider === "manual" && status === "paid"
+      ? { label: "Piešķirts", cls: "bg-ok-soft text-ok" }
+      : provider === "manual" && status === "refunded"
+        ? { label: "Atsaukts", cls: "bg-surface text-muted" }
+        : (ORDER[status] ?? { label: status, cls: "bg-surface text-muted" });
   return <span className={`inline-flex shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold ${s.cls}`}>{s.label}</span>;
 }
 

@@ -4,7 +4,8 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { getCurrentUser } from "@/lib/auth/session";
 import { isAdmin } from "@/lib/admin";
-import { BillingError, refundOrder } from "@/lib/billing/service";
+import { BillingError, grantManualAccess, refundOrder } from "@/lib/billing/service";
+import { signOutEverywhere } from "@/lib/auth/devices";
 import { saveExplanation } from "@/lib/backoffice/service";
 
 async function requireAdmin() {
@@ -20,7 +21,9 @@ export async function refundOrderAction(orderId: string): Promise<ActionResult> 
   try {
     const r = await refundOrder(z.string().min(1).parse(orderId));
     revalidatePath("/admin", "layout");
-    return { ok: true, message: r.changed ? "Atmaksāts. Piekļuve slēgta, pircējam nosūtīts e-pasts." : "Pasūtījums jau bija atmaksāts." };
+    const manual = r.order?.provider === "manual";
+    if (!r.changed) return { ok: true, message: "Jau bija slēgts." };
+    return { ok: true, message: manual ? "Piekļuve atsaukta." : "Atmaksāts. Piekļuve slēgta, pircējam nosūtīts e-pasts." };
   } catch (e) {
     const msg = e instanceof BillingError ? e.message : e instanceof Error ? e.message : "Neizdevās";
     return { ok: false, message: `Atmaksa neizdevās: ${msg}` };
@@ -43,4 +46,37 @@ export async function saveExplanationAction(input: z.input<typeof ExplanationFor
   revalidatePath("/admin", "layout");
   revalidatePath(`/jautajums/${data.id}`);
   return { ok: true, message: data.status === "reviewed" ? "Saglabāts un atzīmēts kā pārbaudīts." : "Saglabāts kā melnraksts." };
+}
+
+const GrantForm = z.object({
+  email: z.string().trim().min(3).max(200),
+  name: z.string().trim().max(100).optional(),
+  method: z.enum(["cash", "free"]),
+  note: z.string().trim().max(300).optional(),
+});
+
+export async function grantAccessAction(input: z.input<typeof GrantForm>): Promise<ActionResult & { userId?: string }> {
+  await requireAdmin();
+  const parsed = GrantForm.safeParse(input);
+  if (!parsed.success) return { ok: false, message: "Pārbaudi laukus" };
+  try {
+    const { order, created } = await grantManualAccess(parsed.data);
+    revalidatePath("/admin", "layout");
+    return {
+      ok: true,
+      userId: order.userId,
+      message: created
+        ? "Konts izveidots un piekļuve atvērta. Uzaicinājums nosūtīts uz e-pastu."
+        : "Piekļuve atvērta. Lietotājam nosūtīts e-pasts.",
+    };
+  } catch (e) {
+    return { ok: false, message: e instanceof BillingError ? e.message : "Neizdevās" };
+  }
+}
+
+export async function signOutEverywhereAction(userId: string): Promise<ActionResult> {
+  await requireAdmin();
+  await signOutEverywhere(z.string().min(1).parse(userId));
+  revalidatePath("/admin", "layout");
+  return { ok: true, message: "Lietotājs izrakstīts no visām ierīcēm." };
 }

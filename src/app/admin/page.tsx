@@ -32,14 +32,14 @@ export default async function AdminHome() {
         </p>
       )}
       <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <Stat value={formatEuro(s.revenueCents)} label="ieņēmumi (apmaksātie, ar PVN)" href="/admin/pasutijumi?status=paid" />
-        <Stat value={s.paid} label="apmaksāti pasūtījumi" href="/admin/pasutijumi?status=paid" />
+        <Stat value={formatEuro(s.revenueCents)} label="ieņēmumi tiešsaistē (ar PVN)" href="/admin/pasutijumi?status=paid" />
+        <Stat value={s.paid} label="apmaksāti tiešsaistē" href="/admin/pasutijumi?status=paid" />
         <Stat value={s.users} label={`lietotāji (+${s.newUsers} šonedēļ)`} href="/admin/lietotaji" />
         <Stat value={`${s.reviewed} / ${s.reviewed + s.draft}`} label="skaidrojumi pārbaudīti" href="/admin/skaidrojumi?status=draft" />
       </div>
-      {(s.refunded > 0 || s.pending > 0) && (
+      {(s.refunded > 0 || s.pending > 0 || s.manual > 0) && (
         <p className="mt-3 text-sm text-muted">
-          Atmaksāti: {s.refunded} · Gaida apmaksu: {s.pending}
+          Atmaksāti: {s.refunded} · Gaida apmaksu: {s.pending} · Piešķirti manuāli: {s.manual}
         </p>
       )}
 
@@ -56,7 +56,7 @@ export default async function AdminHome() {
               <span className="w-36 tabular-nums text-muted">{formatDateTime(o.createdAt)}</span>
               <span className="min-w-0 flex-1 truncate">{o.buyer.name} · {email}</span>
               <span className="tabular-nums">{formatEuro(o.amountCents)}</span>
-              <OrderStatusBadge status={o.status} />
+              <OrderStatusBadge status={o.status} provider={o.provider} />
             </li>
           ))}
         </ul>

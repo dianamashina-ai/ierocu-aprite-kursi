@@ -40,8 +40,8 @@ export default function PrivacyPage() {
           mēs tos nesaņemam un neglabājam.
         </li>
         <li>
-          <strong>Tehniskie dati:</strong> pieslēgšanās sesijas laikā — IP adrese un pārlūkprogrammas veids, lai aizsargātu
-          kontu pret nesankcionētu piekļuvi.
+          <strong>Tehniskie dati:</strong> pieslēgšanās brīdī — IP adrese un pārlūkprogrammas veids. Tos izmantojam, lai aizsargātu
+          kontu pret nesankcionētu piekļuvi un konstatētu konta nodošanu citām personām.
         </li>
         <li>
           <strong>Sarakste:</strong> ja rakstāt mums uz e-pastu, apstrādājam jūsu vēstuli un atbildi uz to.
@@ -58,7 +58,8 @@ export default function PrivacyPage() {
           <strong>Juridisks pienākums</strong> — rēķinu un grāmatvedības dokumentu glabāšana.
         </li>
         <li>
-          <strong>Leģitīmās intereses</strong> — vietnes un kontu drošība, kļūdu novēršana un atbildes uz jūsu jautājumiem.
+          <strong>Leģitīmās intereses</strong> — vietnes un kontu drošība (arī konta koplietošanas novēršana), kļūdu novēršana un
+          atbildes uz jūsu jautājumiem.
         </li>
       </List>
       <p>Mēs nepārdodam datus, neizmantojam tos reklāmai un nesūtām jaunumu vēstules bez jūsu piekrišanas.</p>
@@ -93,7 +94,7 @@ export default function PrivacyPage() {
       <List>
         <li>Konta un mācību datus — kamēr jums ir konts. Pēc konta dzēšanas tie tiek izdzēsti.</li>
         <li>Rēķinus un pirkuma datus — Grāmatvedības likumā noteikto termiņu, arī pēc konta dzēšanas.</li>
-        <li>Sesijas tehniskos datus — kamēr sesija ir aktīva (ne ilgāk par 60 dienām).</li>
+        <li>Pieslēgšanās vēsturi (laiks, IP adrese, pārlūks) — 90 dienas.</li>
         <li>E-pasta saraksti — kamēr tā vajadzīga jūsu jautājuma atrisināšanai.</li>
       </List>
 

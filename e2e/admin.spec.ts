@@ -48,3 +48,39 @@ test("administrācija: skaidrojumu saraksts un redaktors", async ({ page }) => {
   await page.getByRole("button", { name: "Saglabāt kā melnrakstu" }).click();
   await expect(page.getByRole("status")).toHaveText("Saglabāts kā melnraksts.");
 });
+
+test("administrācija: manuāla piekļuve jaunam lietotājam un uzaicinājums", async ({ browser, request }) => {
+  test.setTimeout(90_000);
+  const email = uniqueEmail("skaidra");
+  const adminCtx = await browser.newContext();
+  const admin = await adminCtx.newPage();
+  await signInAdmin(admin);
+  await admin.goto("/admin/lietotaji");
+  await admin.getByRole("button", { name: "Piešķirt piekļuvi" }).click();
+  await admin.getByLabel("E-pasts").fill(email);
+  await admin.getByLabel(/Vārds, uzvārds/).fill("Skaidras Naudas Klients");
+  await admin.getByLabel("Samaksāts skaidrā naudā").check();
+  await admin.getByRole("button", { name: "Piešķirt piekļuvi" }).click();
+  await expect(admin.getByRole("status")).toContainText("Konts izveidots");
+  await admin.getByRole("link", { name: "Atvērt lietotāju" }).click();
+  await expect(admin.getByRole("heading", { name: email })).toBeVisible();
+  await expect(admin.getByText("Piešķirts")).toBeVisible();
+  await adminCtx.close();
+
+  // uzaicinājums: saite uz pieslēgšanos ar aizpildītu e-pastu
+  const outbox = await (await request.get("/api/dev/outbox")).json();
+  const mail = outbox.find((m: { to: string; subject: string }) => m.to === email && /pilna piekļuve/.test(m.subject));
+  const link = mail.text.match(/https?:\/\/\S+pieslegties\S*/)[0];
+  const ctx = await browser.newContext();
+  const page = await ctx.newPage();
+  await page.goto(link);
+  await expect(page.getByLabel("E-pasts")).toHaveValue(email);
+  await page.getByRole("button", { name: "Sūtīt saiti" }).click();
+  await expect(page.getByRole("status")).toContainText("Saite nosūtīta");
+  const outbox2 = await (await request.get("/api/dev/outbox")).json();
+  const magic = outbox2.find((m: { to: string; subject: string }) => m.to === email && /Pieslēgšanās saite/.test(m.subject));
+  await page.goto(magic.text.match(/https?:\/\/\S+/)[0]);
+  await page.goto("/konts");
+  await expect(page.locator("#saturs").getByText("Pilna piekļuve", { exact: true })).toBeVisible();
+  await ctx.close();
+});

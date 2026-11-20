@@ -12,7 +12,7 @@ const TABS: { status?: OrderStatus; label: string }[] = [
   { status: "refunded", label: "Atmaksāti" },
   { status: "pending", label: "Gaida apmaksu" },
 ];
-const PROVIDER: Record<string, string> = { stripe: "Stripe", montonio: "Montonio", dev: "Tests" };
+const PROVIDER: Record<string, string> = { stripe: "Stripe", montonio: "Montonio", dev: "Tests", manual: "Manuāli" };
 
 export default async function OrdersPage({ searchParams }: { searchParams: Promise<{ status?: string; q?: string }> }) {
   const sp = await searchParams;
@@ -65,19 +65,19 @@ export default async function OrdersPage({ searchParams }: { searchParams: Promi
               <span className="tabular-nums text-muted">{formatDateTime(o.createdAt)}</span>
               <span className="min-w-0">
                 <span className="block truncate font-semibold">{o.buyer.name}</span>
-                <span className="block truncate text-muted">{email}</span>
+                <Link href={`/admin/lietotaji/${o.userId}`} className="block truncate text-muted underline-offset-2 hover:text-ink hover:underline">{email}</Link>
                 <span className="block text-xs text-muted">
                   {o.invoiceNumber ? (
                     <Link href={`/rekins/${o.id}`} className="underline underline-offset-2 hover:text-ink">{o.invoiceNumber}</Link>
                   ) : (
                     "bez rēķina"
                   )}{" "}
-                  · {PROVIDER[o.provider] ?? o.provider}
+                  · {o.provider === "manual" ? (o.note ?? "Manuāli") : (PROVIDER[o.provider] ?? o.provider)}
                 </span>
               </span>
               <span className="tabular-nums">{formatEuro(o.amountCents)}</span>
-              <span><OrderStatusBadge status={o.status} /></span>
-              <span>{o.status === "paid" && <RefundButton orderId={o.id} label={formatEuro(o.amountCents)} />}</span>
+              <span><OrderStatusBadge status={o.status} provider={o.provider} /></span>
+              <span>{o.status === "paid" && <RefundButton orderId={o.id} label={formatEuro(o.amountCents)} revoke={o.provider === "manual"} />}</span>
             </li>
           ))}
         </ul>

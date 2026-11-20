@@ -11,7 +11,9 @@ export interface Email {
   html?: string;
 }
 
-const outbox: (Email & { sentAt: string })[] = [];
+// globalThis: Next.js servera darbības un maršruti var ielādēt moduli atsevišķi — pastkastītei jābūt kopīgai
+const g = globalThis as unknown as { __devOutbox?: (Email & { sentAt: string })[] };
+const outbox = (g.__devOutbox ??= []);
 export const devOutbox = () => outbox;
 
 export async function sendEmail(email: Email) {

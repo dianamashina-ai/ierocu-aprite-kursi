@@ -20,6 +20,7 @@ import {
   primaryKey,
   text,
   timestamp,
+  uuid,
 } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 
@@ -257,7 +258,8 @@ export const examAttempts = pgTable(
 // ─── 5. posms: maksājumi ───────────────────────────────────────────────
 
 export const orderStatus = pgEnum("order_status", ["pending", "paid", "failed", "canceled", "refunded"]);
-export const paymentProvider = pgEnum("payment_provider", ["stripe", "montonio", "dev"]);
+/** manual = piekļuvi piešķīris administrators (skaidra nauda vai bez maksas), bez rēķina */
+export const paymentProvider = pgEnum("payment_provider", ["stripe", "montonio", "dev", "manual"]);
 
 export interface OrderBuyer {
   name: string;
@@ -292,6 +294,8 @@ export const orders = pgTable(
     /** Piekrišana tūlītējai piekļuvei digitālajam saturam un atteikuma tiesību zaudēšanai */
     waiverAcceptedAt: timestamp("waiver_accepted_at", { withTimezone: true }).notNull(),
     invoiceNumber: text("invoice_number").unique(),
+    /** Administratora piezīme (manuālai piekļuvei: veids, čeka Nr. u. tml.) */
+    note: text("note"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     paidAt: timestamp("paid_at", { withTimezone: true }),
     refundedAt: timestamp("refunded_at", { withTimezone: true }),
@@ -324,4 +328,20 @@ export const designNotes = pgTable(
     resolvedAt: timestamp("resolved_at", { withTimezone: true }),
   },
   (t) => [index("design_notes_status_idx").on(t.status, t.createdAt), index("design_notes_path_idx").on(t.path)],
+);
+
+// ─── Pieslēgšanās vēsture (konta koplietošanas pazīmēm; glabā 90 dienas) ───────
+
+export const loginEvents = pgTable(
+  "login_events",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    ipAddress: text("ip_address"),
+    userAgent: text("user_agent"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("login_events_user_time_idx").on(t.userId, t.createdAt)],
 );

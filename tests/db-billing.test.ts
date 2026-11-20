@@ -106,4 +106,46 @@ describe.skipIf(!url)("maksājumi (DB)", async () => {
     expect((await admin.listQuestionsForReview({ status: "reviewed" })).map((q) => q.id)).toContain(422);
     expect(await admin.saveExplanation(99999, { explanation: null, lawReference: null, outdatedNote: null, status: "draft" })).toBeNull();
   });
+
+  it("manuāla piekļuve: jauns konts tiek izveidots, bez rēķina; atkārtoti — atsaka; atsaukšana slēdz", async () => {
+    const r = await billing.grantManualAccess({ email: " Skolens@Example.com ", name: "Skolēns", method: "cash", note: "čeks 15" }, { now: t0 });
+    expect(r.created).toBe(true);
+    expect(r.order).toMatchObject({ provider: "manual", status: "paid", invoiceNumber: null, amountCents: 12000, note: "Skaidra nauda: čeks 15" });
+    expect(r.order.buyer.email).toBe("skolens@example.com");
+    expect(await access.hasFullAccess(r.order.userId)).toBe(true);
+    await expect(billing.grantManualAccess({ email: "skolens@example.com", method: "free" })).rejects.toThrow(/jau ir pilna piekļuve/);
+
+    const free = await billing.grantManualAccess({ email: "janis@example.com", method: "free" }, { now: t0 });
+    expect(free.created).toBe(false);
+    expect(free.order).toMatchObject({ userId: "u1", amountCents: 0, note: "Bez maksas" });
+
+    const revoked = await billing.refundOrder(r.order.id);
+    expect(revoked.order).toMatchObject({ status: "refunded" });
+    expect(await access.hasFullAccess(r.order.userId)).toBe(false);
+    await expect(billing.grantManualAccess({ email: "nav-epasts", method: "free" })).rejects.toThrow(/e-pasta/);
+
+    const admin = await import("@/lib/backoffice/service");
+    const s = await admin.getStats(t0);
+    expect(s.manual).toBe(1); // tikai Jānis (Skolēnam atsaukts); tiešsaistes ieņēmumos manuālie neskaitās
+    expect(s.revenueCents).toBe(0);
+  });
+
+  it("ierīču ierobežojums: paliek 3 jaunākās sesijas; vēsture skaita ierīces", async () => {
+    const devices = await import("@/lib/auth/devices");
+    const future = new Date(Date.now() + 86400_000);
+    for (let i = 0; i < 4; i++) {
+      const created = new Date(Date.now() - (4 - i) * 60_000);
+      await db.insert(schema.session).values({ id: `s${i}`, token: `t${i}`, userId: "u2", expiresAt: future, createdAt: created, updatedAt: created });
+      await devices.afterSessionCreated({ userId: "u2", ipAddress: `10.0.${i}.5`, userAgent: `UA-${i}` });
+    }
+    const left = await devices.activeSessions("u2");
+    expect(left.map((x) => x.id).sort()).toEqual(["s1", "s2", "s3"]);
+    // tā pati ierīce no cita IP tajā pašā /24 tīklā — neskaitās kā jauna
+    await devices.afterSessionCreated({ userId: "u2", ipAddress: "10.0.3.99", userAgent: "UA-3" });
+    expect((await devices.deviceCounts(["u2"])).get("u2")).toBe(4);
+    const detail = await (await import("@/lib/backoffice/service")).getUserDetail("u2");
+    expect(detail).toMatchObject({ devices30d: 4, possiblyShared: false });
+    await devices.signOutEverywhere("u2");
+    expect(await devices.activeSessions("u2")).toHaveLength(0);
+  });
 });

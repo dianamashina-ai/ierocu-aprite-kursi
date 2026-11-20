@@ -1,6 +1,7 @@
 import "server-only";
-import { and, asc, count, desc, eq, gte, ilike, inArray, or, sql, sum } from "drizzle-orm";
+import { and, asc, count, desc, eq, gte, ilike, inArray, ne, or, sql, sum } from "drizzle-orm";
 import { db, schema } from "@/db";
+import { activeSessions, deviceCounts, recentLogins, SHARING_DEVICE_THRESHOLD } from "@/lib/auth/devices";
 
 const { orders, user, questions, questionOptions, topics, answers } = schema;
 
@@ -10,12 +11,13 @@ export type ExplanationStatus = (typeof schema.explanationStatus.enumValues)[num
 /** Pārskata skaitļi administratora sākumlapai. */
 export async function getStats(now = new Date()) {
   const weekAgo = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
-  const [[users], [newUsers], byStatus, [revenue], byExplanation] = await Promise.all([
+  const [[users], [newUsers], byStatus, [revenue], byExplanation, [manual]] = await Promise.all([
     db.select({ n: count() }).from(user),
     db.select({ n: count() }).from(user).where(gte(user.createdAt, weekAgo)),
-    db.select({ status: orders.status, n: count() }).from(orders).groupBy(orders.status),
-    db.select({ cents: sum(orders.amountCents) }).from(orders).where(eq(orders.status, "paid")),
+    db.select({ status: orders.status, n: count() }).from(orders).where(ne(orders.provider, "manual")).groupBy(orders.status),
+    db.select({ cents: sum(orders.amountCents) }).from(orders).where(and(eq(orders.status, "paid"), ne(orders.provider, "manual"))),
     db.select({ status: questions.explanationStatus, n: count() }).from(questions).groupBy(questions.explanationStatus),
+    db.select({ n: count() }).from(orders).where(and(eq(orders.status, "paid"), eq(orders.provider, "manual"))),
   ]);
   const st = Object.fromEntries(byStatus.map((r) => [r.status, Number(r.n)])) as Partial<Record<OrderStatus, number>>;
   const ex = Object.fromEntries(byExplanation.map((r) => [r.status, Number(r.n)])) as Partial<Record<ExplanationStatus, number>>;
@@ -28,6 +30,7 @@ export async function getStats(now = new Date()) {
     revenueCents: Number(revenue.cents ?? 0),
     reviewed: ex.reviewed ?? 0,
     draft: ex.draft ?? 0,
+    manual: Number(manual.n),
   };
 }
 
@@ -59,13 +62,14 @@ export async function listUsers({ q, limit = 100 }: { q?: string; limit?: number
     .limit(limit);
   if (!rows.length) return [];
   const ids = rows.map((r) => r.id);
-  const [paid, answered] = await Promise.all([
+  const [paid, answered, devices] = await Promise.all([
     db.selectDistinct({ userId: orders.userId }).from(orders).where(and(inArray(orders.userId, ids), eq(orders.status, "paid"))),
     db
       .select({ userId: answers.userId, n: count(), last: sql<Date>`max(${answers.answeredAt})` })
       .from(answers)
       .where(inArray(answers.userId, ids))
       .groupBy(answers.userId),
+    deviceCounts(ids),
   ]);
   const paidSet = new Set(paid.map((p) => p.userId));
   const ans = new Map(answered.map((a) => [a.userId, a]));
@@ -74,7 +78,33 @@ export async function listUsers({ q, limit = 100 }: { q?: string; limit?: number
     access: paidSet.has(r.id),
     answers: Number(ans.get(r.id)?.n ?? 0),
     lastActive: ans.get(r.id)?.last ? new Date(ans.get(r.id)!.last) : null,
+    devices30d: devices.get(r.id) ?? 0,
+    possiblyShared: (devices.get(r.id) ?? 0) > SHARING_DEVICE_THRESHOLD,
   }));
+}
+
+/** Viena lietotāja kartīte administratoram. */
+export async function getUserDetail(id: string) {
+  const u = await db.query.user.findFirst({ where: eq(user.id, id) });
+  if (!u) return null;
+  const [userOrders, sessions, logins, devices, [ans]] = await Promise.all([
+    db.select().from(orders).where(eq(orders.userId, id)).orderBy(desc(orders.createdAt)),
+    activeSessions(id),
+    recentLogins(id),
+    deviceCounts([id]),
+    db.select({ n: count() }).from(answers).where(eq(answers.userId, id)),
+  ]);
+  const devices30d = devices.get(id) ?? 0;
+  return {
+    user: u,
+    orders: userOrders,
+    access: userOrders.some((o) => o.status === "paid"),
+    sessions,
+    logins,
+    answers: Number(ans.n),
+    devices30d,
+    possiblyShared: devices30d > SHARING_DEVICE_THRESHOLD,
+  };
 }
 
 /** Jautājumi skaidrojumu pārbaudei. */

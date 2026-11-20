@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { refundOrderAction } from "@/app/actions/admin";
 
-export function RefundButton({ orderId, label }: { orderId: string; label: string }) {
+export function RefundButton({ orderId, label, revoke = false }: { orderId: string; label: string; revoke?: boolean }) {
   const [confirm, setConfirm] = useState(false);
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
   const [pending, start] = useTransition();
@@ -13,11 +13,11 @@ export function RefundButton({ orderId, label }: { orderId: string; label: strin
     <div className="flex flex-wrap items-center gap-2">
       {!confirm ? (
         <button type="button" onClick={() => setConfirm(true)} className="btn-ghost min-h-9 px-3 text-sm">
-          Atmaksāt
+          {revoke ? "Atsaukt piekļuvi" : "Atmaksāt"}
         </button>
       ) : (
         <>
-          <span className="text-sm">Atmaksāt {label} un slēgt piekļuvi?</span>
+          <span className="text-sm">{revoke ? "Slēgt pilnu piekļuvi?" : `Atmaksāt ${label} un slēgt piekļuvi?`}</span>
           <button
             type="button"
             disabled={pending}
@@ -30,7 +30,7 @@ export function RefundButton({ orderId, label }: { orderId: string; label: strin
             }
             className="inline-flex min-h-9 items-center rounded-lg bg-err px-3 text-sm font-semibold text-white disabled:opacity-60"
           >
-            {pending ? "Atmaksā…" : "Jā, atmaksāt"}
+            {pending ? "Notiek…" : revoke ? "Jā, atsaukt" : "Jā, atmaksāt"}
           </button>
           <button type="button" disabled={pending} onClick={() => setConfirm(false)} className="btn-ghost min-h-9 px-3 text-sm">
             Atcelt

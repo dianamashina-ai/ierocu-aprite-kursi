@@ -46,6 +46,10 @@ export default function TermsPage() {
       <H2>3. Konts un lietošana</H2>
       <List>
         <li>Konts ir personīgs. Nenododiet savus pieslēgšanās datus citām personām un neļaujiet citiem izmantot savu kontu.</li>
+        <li>
+          Vienlaikus kontā var būt pieslēgts ne vairāk kā trīs ierīcēs. Pieslēdzoties ceturtajā, vecākā ierīce tiek automātiski
+          izrakstīta.
+        </li>
         <li>Norādiet pareizu e-pasta adresi — uz to sūtām pieslēgšanās saites un rēķinus.</li>
         <li>
           Nodarbību un skaidrojumu teksti ir pakalpojuma sniedzēja autordarbs. Tos nedrīkst kopēt, pārpublicēt vai izplatīt bez

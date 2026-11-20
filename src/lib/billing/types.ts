@@ -1,6 +1,6 @@
 import type { OrderBuyer } from "@/db/schema";
 
-export type ProviderName = "stripe" | "montonio" | "dev";
+export type ProviderName = "stripe" | "montonio" | "dev" | "manual";
 
 export interface CheckoutInput {
   orderId: string;
