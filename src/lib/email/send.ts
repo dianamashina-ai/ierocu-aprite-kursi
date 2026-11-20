@@ -28,6 +28,7 @@ export async function sendEmail(email: Email) {
     body: JSON.stringify({
       from: process.env.EMAIL_FROM ?? "Ieroču atļauja <noreply@example.com>",
       to: email.to,
+      ...(process.env.EMAIL_REPLY_TO ? { reply_to: process.env.EMAIL_REPLY_TO } : {}),
       subject: email.subject,
       text: email.text,
       html: email.html,
