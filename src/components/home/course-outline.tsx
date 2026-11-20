@@ -20,8 +20,7 @@ export function CourseOutline({ modules, totals }: { modules: OutlineModule[]; t
     <section id="programma" aria-labelledby="programma-h" className="scroll-mt-6 bg-surface">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20 lg:py-24">
         <div className="lg:sticky lg:top-8 lg:self-start">
-          <span aria-hidden="true" className="block h-1 w-12 rounded-full bg-accent" />
-          <h2 id="programma-h" className="mt-6 text-5xl font-semibold tracking-tight sm:text-6xl">Ko mācīsies</h2>
+          <h2 id="programma-h" className="text-5xl font-semibold tracking-tight sm:text-6xl">Ko mācīsies</h2>
           <p className="mt-6 text-lg leading-relaxed text-muted">
             Kursā ir {totals.modules} moduļi un {totals.topics} tēmas — no ieroča uzbūves līdz atbildībai. Sāc ar pamatiem un zināšanas
             papildini pakāpeniski.
