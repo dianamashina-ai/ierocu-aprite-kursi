@@ -1,6 +1,6 @@
 "use client";
 
-import { TriangleAlert, X } from "lucide-react";
+import { ArrowRight, TriangleAlert, X } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
@@ -181,15 +181,18 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
   if (!q) return null;
 
   return (
-    <div className={`has-sticky-footer pb-24 lg:pb-0 ${pool.length > 1 ? "focus-mode" : ""}`}>
+    <div className={pool.length > 1 ? "has-sticky-footer focus-mode pb-24 lg:pb-0" : undefined}>
       {pool.length > 1 && (
         <div className="mb-8">
+          {/* telefonā — sava galvene (vietnes izvēlne paslēpta): virsraksts un krustiņš */}
+          <div className="-mt-2 flex items-center justify-between gap-4 pb-2 lg:hidden">
+            <span className="font-semibold">{mode === "review" ? t("titleReview") : t("titlePractice")}</span>
+            <Link href={exitHref ?? topicHref ?? "/"} aria-label={t("exit")} className="-mr-2 inline-flex size-10 items-center justify-center rounded-lg text-muted hover:bg-accent-soft hover:text-ink">
+              <X aria-hidden="true" className="size-5" />
+            </Link>
+          </div>
           <div className="flex items-center justify-between gap-3">
-            <span className="flex items-center gap-2 text-base font-semibold">
-              {/* telefonā lapas izvēlne paslēpta — ar šo krustiņu iziet no treniņa */}
-              <Link href={exitHref ?? topicHref ?? "/"} aria-label={t("exit")} className="-ml-2 inline-flex size-10 items-center justify-center rounded-lg text-muted hover:bg-accent-soft hover:text-ink lg:hidden">
-                <X aria-hidden="true" className="size-5" />
-              </Link>
+            <span className="text-base max-lg:text-sm max-lg:text-muted lg:font-semibold">
               {t("progress", { current: pos + 1, total: pool.length })}
             </span>
             <span className="text-sm tabular-nums text-muted">Nr. {q.id}</span>
@@ -313,21 +316,41 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
             )}
           </div>
 
-          {/* telefonā — vienmēr ekrāna apakšā (aktīva pēc atbildes); datorā — zem skaidrojuma, kad atbildēts */}
-          <div
-            className={`fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur lg:static lg:mt-4 lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none ${answered ? "" : "lg:hidden"}`}
-          >
-            {pool.length === 1 ? (
-              <button ref={nextRef} type="button" disabled={!answered} onClick={() => startRound([pool[0]])} className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-40 lg:w-auto">
-                {t("tryAgain")}
-              </button>
-            ) : (
-              <button ref={nextRef} type="button" disabled={!answered} onClick={next} className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-40 lg:w-auto">
-                {isLast ? t("finish") : t("next")}
-              </button>
-            )}
-          </div>
-
+          {pool.length === 1 ? (
+            answered && (
+              <div className="mt-4">
+                <button ref={nextRef} type="button" onClick={() => startRound([pool[0]])} className="btn-primary">
+                  {t("tryAgain")}
+                </button>
+              </div>
+            )
+          ) : (
+            <>
+              {/* dators: poga zem skaidrojuma, kad atbildēts */}
+              {answered && (
+                <div className="mt-4 hidden lg:block">
+                  <button ref={nextRef} type="button" onClick={next} className="btn-primary">
+                    {isLast ? t("finish") : t("next")}
+                  </button>
+                </div>
+              )}
+              {/* telefons: josla ekrāna apakšā — pa kreisi rezultāts, pa labi bultiņa */}
+              <div className="fixed inset-x-0 bottom-0 z-20 flex items-center justify-between gap-3 border-t border-line bg-white/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur lg:hidden">
+                <span aria-hidden="true" className={`font-semibold ${!answered ? "text-muted" : isCorrect ? "text-ok" : "text-err"}`}>
+                  {!answered ? t("chooseAnswer") : isCorrect ? t("correct") : t("wrong")}
+                </span>
+                <button
+                  type="button"
+                  aria-label={isLast ? t("finish") : t("next")}
+                  disabled={!answered}
+                  onClick={next}
+                  className="btn-primary size-12 px-0 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <ArrowRight aria-hidden="true" className="size-5" />
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </article>
     </div>

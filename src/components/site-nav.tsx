@@ -57,7 +57,7 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
         {signedIn ? (
           <>
             <Link href="/konts" aria-current={onAccount ? "page" : undefined} className={itemCls(onAccount)}>Mans konts</Link>
-            <SignOutButton icon={false} className={itemCls(false)} />
+            <SignOutButton className={itemCls(false)} />
             {showBuy && <Link href="/iegadaties" className="btn-primary ml-2 min-h-11 px-4 text-sm">Pilna piekļuve</Link>}
           </>
         ) : (
@@ -97,7 +97,7 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
                     <Link href="/konts" aria-current={onAccount ? "page" : undefined} className={mobileCls(onAccount)}>Mans konts</Link>
                   </li>
                   <li>
-                    <SignOutButton icon={false} className={mobileCls(false)} />
+                    <SignOutButton className={mobileCls(false)} />
                   </li>
                 </>
               )}

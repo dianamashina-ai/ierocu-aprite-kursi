@@ -16,8 +16,8 @@ export function SignOutButton({ className, icon = true }: { className?: string; 
         router.refresh();
       }}
     >
-      {icon && <LogOut aria-hidden="true" className="mr-1.5 inline size-4 align-[-3px]" />}
       Iziet
+      {icon && <LogOut aria-hidden="true" className="ml-1.5 inline size-4 shrink-0 align-[-3px]" />}
     </button>
   );
 }

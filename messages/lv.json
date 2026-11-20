@@ -58,6 +58,8 @@
     "lawReference": "Avots",
     "compareSimilar": "Salīdzināt līdzīgos ({count})",
     "exit": "Iziet no treniņa",
+    "titlePractice": "Treniņš",
+    "titleReview": "Kļūdu labošana",
     "outdated": "Likuma izmaiņas",
     "outdatedDisclaimer": "Šeit parādīta oficiālā atbilde no Valsts policijas jautājumu saraksta. Nav zināms, cik ātri izmaiņas parādīsies eksāmenā, tāpēc zini abus variantus.",
     "officialText": "Jautājuma un atbilžu teksts ir oficiāls, bez labojumiem.",
