@@ -10,6 +10,7 @@ import { MODULE_META } from "@/config/module-meta";
 import { ModuleIcon } from "@/components/module-icon";
 import { Hero } from "@/components/home/hero";
 import { CourseOutline } from "@/components/home/course-outline";
+import { WhoCanOwn } from "@/components/home/who-can-own";
 import { readLesson } from "@/lib/content/lessons";
 import { getPracticeQuestion } from "@/lib/content/queries";
 import { getExamConfig } from "@/lib/progress/service";
@@ -53,6 +54,7 @@ export default async function HomePage() {
               examQuestions: examCfg.questionCount,
             }}
           />
+          <WhoCanOwn />
           <CourseOutline
             totals={course.totals}
             modules={course.modules.map((m) => ({
