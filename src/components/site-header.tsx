@@ -19,7 +19,7 @@ export async function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-4 sm:h-20 sm:px-6">
         <Link href={user ? "/panelis" : "/"} className="flex shrink-0 items-center" aria-label="Ieroču atļauja — sadarbībā ar LPSC, uz sākumu">
           {/* eslint-disable-next-line @next/next/no-img-element -- vektora logotips, optimizācija nav vajadzīga */}
-          <img src="/logo.svg" alt="Ieroču atļauja — sadarbībā ar LPSC" width={236} height={41} className="h-9 w-auto sm:h-11" />
+          <img src="/logo.svg" alt="Ieroču atļauja — sadarbībā ar LPSC" width={235} height={40} className="h-9 w-auto sm:h-11" />
         </Link>
         <SiteNav items={items} signedIn={Boolean(user)} showBuy={Boolean(user) && !access} />
       </div>
