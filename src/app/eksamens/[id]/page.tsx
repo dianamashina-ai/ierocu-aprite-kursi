@@ -27,7 +27,7 @@ export default async function ExamPage({
 
   if (attempt.status === "in_progress") {
     return (
-      <div className="mx-auto max-w-2xl px-4 py-4 sm:py-8">
+      <div className="page-white">
         <h1 className="sr-only">Izmēģinājuma eksāmens</h1>
         <ExamRunner
           attemptId={attempt.id}

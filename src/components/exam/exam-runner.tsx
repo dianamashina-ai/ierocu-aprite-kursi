@@ -82,129 +82,140 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
 
   const lowTime = left < 5 * 60_000;
 
+  const firstUnanswered = questions.findIndex((x) => !selected[x.id]);
+  const progress = ((pos + 1) / questions.length) * 100;
+
   return (
-    <div className="space-y-5">
-      <div className="sticky top-0 z-10 -mx-4 border-b border-line bg-surface/95 px-4 py-3 backdrop-blur">
-        <div className="flex items-center justify-between gap-3">
-          <span className="text-sm text-muted">
-            Atbildēti {answeredCount} no {questions.length}
-          </span>
+    <div>
+      <div className="sticky top-0 z-10 border-b border-line bg-white/95 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-0.5">
+            <span className="text-base font-semibold">
+              Jautājums {pos + 1} no {questions.length}
+            </span>
+            <span className="text-sm text-muted">
+              Atbildēti {answeredCount} no {questions.length}
+            </span>
+          </div>
           <span
-            className={`rounded-lg px-3 py-1 font-bold tabular-nums ${lowTime ? "bg-err-soft text-err" : "bg-white text-ink"}`}
+            className={`rounded-lg px-3 py-1.5 text-lg font-bold tabular-nums ${lowTime ? "bg-err-soft text-err" : "bg-accent-soft text-ink"}`}
             role="timer"
             aria-label="Atlikušais laiks"
           >
             {fmt(left)}
           </span>
         </div>
+        <div
+          className="h-1 bg-line"
+          role="progressbar"
+          aria-label="Eksāmena progress"
+          aria-valuemin={1}
+          aria-valuemax={questions.length}
+          aria-valuenow={pos + 1}
+        >
+          <div className="h-full bg-accent transition-[width] duration-300 motion-reduce:transition-none" style={{ width: `${progress}%` }} />
+        </div>
       </div>
 
-      <nav aria-label="Jautājumi" className="flex flex-wrap gap-1.5">
-        {questions.map((x, i) => (
-          <button
-            key={x.id}
-            type="button"
-            onClick={() => setPos(i)}
-            aria-current={i === pos ? "step" : undefined}
-            aria-label={`Jautājums ${i + 1}${selected[x.id] ? ", atbildēts" : ""}`}
-            className={`size-10 rounded-lg text-sm font-semibold tabular-nums ${
-              i === pos
-                ? "bg-accent text-white"
-                : selected[x.id]
-                  ? "bg-accent-soft text-accent-strong"
-                  : "border border-line bg-white text-muted"
-            }`}
-          >
-            {i + 1}
-          </button>
-        ))}
-      </nav>
-
-      <article className="rounded-2xl border border-line bg-white p-5 sm:p-7" aria-labelledby={`eq-${q.id}`}>
-        <p className="text-sm text-muted">
-          {pos + 1}. jautājums no {questions.length}
-        </p>
-        <h2 id={`eq-${q.id}`} className="mt-1 text-lg font-semibold leading-snug sm:text-xl" lang="lv">
-          {q.text}
-        </h2>
-        <fieldset className="mt-5">
-          <legend className="sr-only">Izvēlies atbildi</legend>
-          <ul className="space-y-3">
-            {shown.map((o) => {
-              const isSel = selected[q.id] === o.originalKey;
-              return (
-                <li key={o.originalKey}>
-                  <button
-                    type="button"
-                    onClick={() => choose(o.originalKey)}
-                    aria-pressed={isSel}
-                    className={`flex min-h-14 w-full items-start gap-3 rounded-xl border-2 px-4 py-3 text-left ${
-                      isSel ? "border-accent bg-accent-soft" : "border-line bg-white hover:border-accent"
-                    }`}
-                  >
-                    <span
-                      aria-hidden="true"
-                      className={`mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full text-sm font-semibold ${
-                        isSel ? "bg-accent text-white" : "bg-accent-soft text-accent-strong"
-                      }`}
-                    >
-                      {o.displayKey}
-                    </span>
-                    <span className="flex-1" lang="lv">
-                      <span className="sr-only">{o.displayKey}. </span>
-                      {o.text}
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </fieldset>
-        {error && (
-          <p role="alert" className="mt-4 rounded-lg bg-err-soft px-3 py-2 text-sm text-err">
-            {error}
-          </p>
-        )}
-      </article>
-
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <button type="button" className="btn-secondary" disabled={pos === 0} onClick={() => setPos((p) => p - 1)}>
-          ← Iepriekšējais
-        </button>
-        {pos < questions.length - 1 ? (
-          <button type="button" className="btn-primary" onClick={() => setPos((p) => p + 1)}>
-            Nākamais →
-          </button>
-        ) : (
-          <button type="button" className="btn-primary" onClick={() => setConfirming(true)}>
-            Pabeigt eksāmenu
-          </button>
-        )}
-      </div>
-
-      <div className="border-t border-line pt-5">
-        {!confirming ? (
-          <button type="button" className="btn-ghost" onClick={() => setConfirming(true)}>
-            Pabeigt eksāmenu
-          </button>
-        ) : (
-          <div role="dialog" aria-labelledby="confirm-h" className="rounded-2xl border-2 border-accent bg-white p-5">
-            <p id="confirm-h" className="font-semibold">Pabeigt eksāmenu?</p>
-            <p className="mt-1 text-sm text-muted">
-              {answeredCount < questions.length
-                ? `Neatbildēti ${questions.length - answeredCount} jautājumi — tie tiks skaitīti kā nepareizi.`
-                : "Visi jautājumi atbildēti."}
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+        <article className="grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14" aria-labelledby={`eq-${q.id}`}>
+          <div className="lg:sticky lg:top-24 lg:self-start">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted">
+              Jautājums {pos + 1}
             </p>
-            <div className="mt-4 flex flex-wrap gap-3">
-              <button type="button" className="btn-primary" disabled={finishing} onClick={finish}>
-                Jā, pabeigt
+            <h2 id={`eq-${q.id}`} className="mt-3 text-2xl font-semibold leading-snug tracking-tight sm:text-3xl" lang="lv">
+              {q.text}
+            </h2>
+          </div>
+
+          <div>
+            <fieldset>
+              <legend className="sr-only">Izvēlies atbildi</legend>
+              <ul className="space-y-3">
+                {shown.map((o) => {
+                  const isSel = selected[q.id] === o.originalKey;
+                  return (
+                    <li key={o.originalKey}>
+                      <button
+                        type="button"
+                        onClick={() => choose(o.originalKey)}
+                        aria-pressed={isSel}
+                        className={`flex min-h-14 w-full items-start gap-3 rounded-xl border-2 bg-white px-4 py-3.5 text-left transition-colors ${
+                          isSel ? "border-accent bg-accent-soft" : "border-line hover:border-ink"
+                        }`}
+                      >
+                        <span
+                          aria-hidden="true"
+                          className={`mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full text-sm font-semibold ${
+                            isSel ? "bg-accent text-white" : "bg-accent-soft text-ink"
+                          }`}
+                        >
+                          {o.displayKey}
+                        </span>
+                        <span className="flex-1 text-[16px] leading-relaxed" lang="lv">
+                          <span className="sr-only">{o.displayKey}. </span>
+                          {o.text}
+                        </span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </fieldset>
+            {error && (
+              <p role="alert" className="mt-4 rounded-lg bg-err-soft px-3 py-2 text-sm text-err">
+                {error}
+              </p>
+            )}
+
+            <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
+              <button type="button" className="btn-secondary" disabled={pos === 0} onClick={() => setPos((p) => p - 1)}>
+                ← Iepriekšējais
               </button>
-              <button type="button" className="btn-secondary" onClick={() => setConfirming(false)}>
-                Turpināt
-              </button>
+              {pos < questions.length - 1 ? (
+                <button type="button" className="btn-primary" onClick={() => setPos((p) => p + 1)}>
+                  Nākamais →
+                </button>
+              ) : (
+                <button type="button" className="btn-primary" onClick={() => setConfirming(true)}>
+                  Pabeigt eksāmenu
+                </button>
+              )}
+            </div>
+
+            <div className="mt-8 border-t border-line pt-6">
+              {!confirming ? (
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+                  {firstUnanswered !== -1 && firstUnanswered !== pos && (
+                    <button type="button" className="btn-ghost px-0" onClick={() => setPos(firstUnanswered)}>
+                      Uz pirmo neatbildēto ({firstUnanswered + 1}.)
+                    </button>
+                  )}
+                  <button type="button" className="btn-ghost px-0" onClick={() => setConfirming(true)}>
+                    Pabeigt eksāmenu
+                  </button>
+                </div>
+              ) : (
+                <div role="dialog" aria-labelledby="confirm-h" className="rounded-2xl border-2 border-accent bg-white p-5">
+                  <p id="confirm-h" className="font-semibold">Pabeigt eksāmenu?</p>
+                  <p className="mt-1 text-sm text-muted">
+                    {answeredCount < questions.length
+                      ? `Neatbildēti ${questions.length - answeredCount} jautājumi — tie tiks skaitīti kā nepareizi.`
+                      : "Visi jautājumi atbildēti."}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <button type="button" className="btn-primary" disabled={finishing} onClick={finish}>
+                      Jā, pabeigt
+                    </button>
+                    <button type="button" className="btn-secondary" onClick={() => setConfirming(false)}>
+                      Turpināt
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
-        )}
+        </article>
       </div>
     </div>
   );

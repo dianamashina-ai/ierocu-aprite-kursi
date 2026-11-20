@@ -58,7 +58,8 @@ test("izmēģinājuma eksāmens: sākt, atbildēt, turpināt pēc pārlādes, pa
   await page.getByRole("button", { name: "Sākt eksāmenu" }).click();
   await expect(page).toHaveURL(/\/eksamens\/[0-9a-f-]+$/);
   await expect(page.getByRole("timer")).toHaveText(/^(40:00|39:\d\d)$/);
-  await expect(page.locator("nav[aria-label='Jautājumi'] button")).toHaveCount(40);
+  await expect(page.getByText("Jautājums 1 no 40")).toBeVisible();
+  await expect(page.getByRole("progressbar", { name: "Eksāmena progress" })).toBeVisible();
 
   // atbild uz pirmajiem 3, pārlādē, pārbauda, ka saglabāts
   for (let i = 0; i < 3; i++) {
