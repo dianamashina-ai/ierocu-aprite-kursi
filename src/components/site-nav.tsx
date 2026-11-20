@@ -25,7 +25,7 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
   const account = signedIn ? (
     <Link href="/panelis" className="btn-secondary min-h-11 px-4 text-sm">Mans konts</Link>
   ) : (
-    <Link href="/pieslegties" className="btn-secondary min-h-11 px-4 text-sm">Pieslēgties</Link>
+    <Link href="/pieslegties" className="btn-primary min-h-11 px-4 text-sm">Pieslēgties</Link>
   );
 
   return (
@@ -86,7 +86,7 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
             </ul>
             <div className="flex flex-wrap gap-2 py-3">
               {showBuy && <Link href="/iegadaties" className="btn-primary">Pilna piekļuve</Link>}
-              {signedIn ? <Link href="/panelis" className="btn-secondary">Mans konts</Link> : <Link href="/pieslegties" className="btn-secondary">Pieslēgties</Link>}
+              {signedIn ? <Link href="/panelis" className="btn-secondary">Mans konts</Link> : <Link href="/pieslegties" className="btn-primary">Pieslēgties</Link>}
               {signedIn && <SignOutButton className="btn-ghost" />}
             </div>
           </nav>
