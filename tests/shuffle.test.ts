@@ -140,3 +140,14 @@ describe("parsēšanas gadījumi", () => {
     expect(shuffleOptions(q.options, "s", { disabled: true }).map((o) => o.originalKey)).toEqual(["a", "b", "c", "d"]);
   });
 });
+
+import { uppercaseLetterRefs } from "@/lib/quiz/shuffle";
+
+describe("uppercaseLetterRefs", () => {
+  it("lielie burti tikai atsaucēs uz variantiem", () => {
+    expect(uppercaseLetterRefs("a un c variants")).toBe("A un C variants");
+    expect(uppercaseLetterRefs("a, b un c apakšpunktos norādītās atbildes")).toBe("A, B un C apakšpunktos norādītās atbildes");
+    expect(uppercaseLetterRefs("B un C kategorijas garstobra šaujamieroči")).toBe("B un C kategorijas garstobra šaujamieroči");
+    expect(uppercaseLetterRefs("visas atbildes ir pareizas")).toBe("visas atbildes ir pareizas");
+  });
+});

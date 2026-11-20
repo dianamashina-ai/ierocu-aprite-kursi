@@ -68,7 +68,9 @@ test("izmēģinājuma eksāmens: sākt, atbildēt, turpināt pēc pārlādes, pa
   }
   await page.waitForTimeout(700);
   await page.reload();
-  await expect(page.getByText("Atbildēti 3 no 40")).toBeVisible();
+  // atbildes saglabātas: pēc pārlādes turpinām no 4. jautājuma
+  await expect(page.getByText("Jautājums 4 no 40")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Nākamais →" })).toBeDisabled();
   // eksāmena laikā nav skaidrojumu un pareizo atbilžu
   await expect(page.getByText("Skaidrojums")).toHaveCount(0);
 
@@ -87,7 +89,7 @@ test("izmēģinājuma eksāmens: sākt, atbildēt, turpināt pēc pārlādes, pa
 test("viesis var trenēties, bet panelis prasa pieslēgšanos", async ({ page }) => {
   await page.goto("/tema/1-1/trenins");
   await page.locator("fieldset button").first().click();
-  await expect(page.getByText(/^(Pareizi|Nepareizi\. Pareizā atbilde: [a-f])$/)).toBeVisible();
+  await expect(page.getByText(/^(Pareizi|Nepareizi\. Pareizā atbilde: [A-F])$/)).toBeVisible();
   await page.goto("/kludas");
   await expect(page).toHaveURL(/\/pieslegties/);
 });

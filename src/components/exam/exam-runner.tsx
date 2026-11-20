@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { shuffleOptions } from "@/lib/quiz/shuffle";
+import { shuffleOptions, uppercaseLetterRefs } from "@/lib/quiz/shuffle";
 import { finishExamAction, saveExamAnswerAction } from "@/app/actions/progress";
 
 export interface ExamQuestion {
@@ -29,7 +29,11 @@ function fmt(ms: number) {
 
 export function ExamRunner({ attemptId, seed, questions, initialSelected, deadline, serverNow }: Props) {
   const router = useRouter();
-  const [pos, setPos] = useState(0);
+  // pēc pārlādes turpinām no pirmā neatbildētā jautājuma
+  const [pos, setPos] = useState(() => {
+    const i = questions.findIndex((x) => !initialSelected[x.id]);
+    return i === -1 ? questions.length - 1 : i;
+  });
   const [selected, setSelected] = useState<Record<string, string>>(initialSelected);
   const [confirming, setConfirming] = useState(false);
   const [finishing, setFinishing] = useState(false);
@@ -82,7 +86,6 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
 
   const lowTime = left < 5 * 60_000;
 
-  const firstUnanswered = questions.findIndex((x) => !selected[x.id]);
   const progress = ((pos + 1) / questions.length) * 100;
 
   return (
@@ -90,14 +93,9 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
       <div className="sticky top-0 z-10 bg-white/95 backdrop-blur">
         <div className="mx-auto max-w-6xl px-4 pt-4 sm:px-6 sm:pt-6">
           <div className="flex items-center justify-between gap-4 pb-3">
-            <div className="flex flex-wrap items-baseline gap-x-4 gap-y-0.5">
-              <span className="text-base font-semibold">
-                Jautājums {pos + 1} no {questions.length}
-              </span>
-              <span className="text-sm text-muted">
-                Atbildēti {answeredCount} no {questions.length}
-              </span>
-            </div>
+            <span className="text-base font-semibold">
+              Jautājums {pos + 1} no {questions.length}
+            </span>
             <span
               className={`rounded-lg px-3 py-1.5 text-lg font-bold tabular-nums ${lowTime ? "bg-err-soft text-err" : "bg-accent-soft text-ink"}`}
               role="timer"
@@ -125,7 +123,7 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted">
               Jautājums {pos + 1}
             </p>
-            <h2 id={`eq-${q.id}`} className="mt-3 text-2xl font-semibold leading-snug tracking-tight sm:text-3xl" lang="lv">
+            <h2 id={`eq-${q.id}`} className="mt-3 text-xl font-semibold leading-snug tracking-tight sm:text-2xl" lang="lv">
               {q.text}
             </h2>
           </div>
@@ -148,15 +146,15 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
                       >
                         <span
                           aria-hidden="true"
-                          className={`mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full text-sm font-semibold ${
+                          className={`mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full text-sm font-semibold uppercase ${
                             isSel ? "bg-accent text-white" : "bg-accent-soft text-ink"
                           }`}
                         >
                           {o.displayKey}
                         </span>
                         <span className="flex-1 text-[16px] leading-relaxed" lang="lv">
-                          <span className="sr-only">{o.displayKey}. </span>
-                          {o.text}
+                          <span className="sr-only">{o.displayKey.toUpperCase()}. </span>
+                          {uppercaseLetterRefs(o.text)}
                         </span>
                       </button>
                     </li>
@@ -175,11 +173,22 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
                 ← Iepriekšējais
               </button>
               {pos < questions.length - 1 ? (
-                <button type="button" className="btn-primary" onClick={() => setPos((p) => p + 1)}>
+                <button
+                  type="button"
+                  className="btn-primary disabled:cursor-not-allowed disabled:opacity-40"
+                  disabled={!selected[q.id]}
+                  title={selected[q.id] ? undefined : "Vispirms izvēlies atbildi"}
+                  onClick={() => setPos((p) => p + 1)}
+                >
                   Nākamais →
                 </button>
               ) : (
-                <button type="button" className="btn-primary" onClick={() => setConfirming(true)}>
+                <button
+                  type="button"
+                  className="btn-primary disabled:cursor-not-allowed disabled:opacity-40"
+                  disabled={!selected[q.id]}
+                  onClick={() => setConfirming(true)}
+                >
                   Pabeigt eksāmenu
                 </button>
               )}
@@ -187,16 +196,9 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
 
             <div className="mt-8 border-t border-line pt-6">
               {!confirming ? (
-                <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-                  {firstUnanswered !== -1 && firstUnanswered !== pos && (
-                    <button type="button" className="btn-ghost px-0" onClick={() => setPos(firstUnanswered)}>
-                      Uz pirmo neatbildēto ({firstUnanswered + 1}.)
-                    </button>
-                  )}
-                  <button type="button" className="btn-ghost px-0" onClick={() => setConfirming(true)}>
-                    Pabeigt eksāmenu
-                  </button>
-                </div>
+                <button type="button" className="btn-ghost px-0" onClick={() => setConfirming(true)}>
+                  Pabeigt eksāmenu
+                </button>
               ) : (
                 <div role="dialog" aria-labelledby="confirm-h" className="rounded-2xl border-2 border-accent bg-white p-5">
                   <p id="confirm-h" className="font-semibold">Pabeigt eksāmenu?</p>

@@ -1,3 +1,4 @@
+import { uppercaseLetterRefs } from "@/lib/quiz/shuffle";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/auth/session";
@@ -94,9 +95,9 @@ export default async function ExamPage({
                       key={o.originalKey}
                       className={`flex gap-3 rounded-xl border-2 px-3 py-2 text-sm ${isRight ? "border-ok bg-ok-soft" : isSel ? "border-err bg-err-soft" : "border-line text-muted"}`}
                     >
-                      <span className="font-semibold">{o.displayKey}</span>
+                      <span className="font-semibold uppercase">{o.displayKey}</span>
                       <span className="flex-1" lang="lv">
-                        {o.text}
+                        {uppercaseLetterRefs(o.text)}
                         {isSel && <span className="mt-0.5 block text-xs font-semibold">Tava atbilde</span>}
                       </span>
                     </li>

@@ -154,3 +154,8 @@ export function shuffleOptions(
     })),
   ];
 }
+
+/** Rādīšanai: burtu grupas pirms "variant…"/"apakšpunkt…" ar lielajiem burtiem ("a un c variants" → "A un C variants"). */
+export function uppercaseLetterRefs(text: string): string {
+  return text.replace(LETTER_GROUP, (group) => group.replace(/\b[a-f]\b/g, (l) => l.toUpperCase()));
+}

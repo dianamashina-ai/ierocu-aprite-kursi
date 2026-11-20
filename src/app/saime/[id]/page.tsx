@@ -1,3 +1,4 @@
+import { uppercaseLetterRefs } from "@/lib/quiz/shuffle";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
@@ -126,9 +127,9 @@ export default async function FamilyPage({
                 const refTexts = o.refersTo?.map((k) => q.options.find((x) => x.key === k)?.text).filter(Boolean);
                 return (
                   <li key={o.key} className={`flex gap-3 rounded-xl border-2 px-3 py-2.5 text-sm ${tone}`}>
-                    <span className={`font-semibold ${o.isCorrect ? "text-ok" : "text-muted"}`}>{o.key}</span>
+                    <span className={`font-semibold uppercase ${o.isCorrect ? "text-ok" : "text-muted"}`}>{o.key}</span>
                     <span className="flex-1" lang="lv">
-                      {o.tokens ? <Tokens tokens={o.tokens} /> : o.text}
+                      {o.tokens ? <Tokens tokens={o.tokens} /> : uppercaseLetterRefs(o.text)}
                       {o.isCorrect && <span className="sr-only"> — {t("legendCorrect")}</span>}
                       {refTexts && refTexts.length > 0 && (
                         <span className="mt-1 block text-xs text-muted">

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import type { PracticeQuestion } from "@/lib/quiz/types";
+import { uppercaseLetterRefs } from "@/lib/quiz/shuffle";
 import { COURSE_PRODUCT } from "@/config/pricing";
 import { formatEuro } from "@/lib/format";
 
@@ -70,7 +71,7 @@ export function Hero({ stats, sample }: { stats: Stats; sample: PracticeQuestion
 }
 
 function SampleQuestion({ q }: { q: PracticeQuestion }) {
-  const letters = "abcdef";
+  const letters = "ABCDEF";
   return (
     <figure className="relative">
       <div aria-hidden="true" className="absolute -inset-3 -z-0 rounded-[28px] bg-surface" />
@@ -91,7 +92,7 @@ function SampleQuestion({ q }: { q: PracticeQuestion }) {
                 <span className={`mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${right ? "bg-ok text-white" : "bg-accent-soft text-ink"}`}>
                   {right ? <Check aria-hidden="true" className="size-3.5" strokeWidth={3} /> : letters[i]}
                 </span>
-                <span>{o.text}</span>
+                <span>{uppercaseLetterRefs(o.text)}</span>
               </li>
             );
           })}

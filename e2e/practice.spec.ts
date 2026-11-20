@@ -24,7 +24,7 @@ test("treniņš: atbilde → atgriezeniskā saite → nākamais → rezultāts",
     expect(count).toBeGreaterThanOrEqual(2);
     expect(count).toBeLessThanOrEqual(6);
     await options.first().click();
-    await expect(page.getByText(/^(Pareizi|Nepareizi\. Pareizā atbilde: [a-f])$/)).toBeVisible();
+    await expect(page.getByText(/^(Pareizi|Nepareizi\. Pareizā atbilde: [A-F])$/)).toBeVisible();
     await expect(options.first()).toBeDisabled();
     await page.getByRole("button", { name: i < 7 ? "Nākamais jautājums" : "Skatīt rezultātu" }).click();
   }
@@ -54,7 +54,7 @@ test("tastatūra: burts izvēlas atbildi", async ({ page, isMobile }) => {
   await page.goto("/jautajums/1");
   await page.waitForLoadState("networkidle"); // jāsagaida hidratācija, citādi taustiņš vēl netiek apstrādāts
   await page.keyboard.press("b");
-  await expect(page.getByText(/^(Pareizi|Nepareizi\. Pareizā atbilde: [a-f])$/)).toBeVisible();
+  await expect(page.getByText(/^(Pareizi|Nepareizi\. Pareizā atbilde: [A-F])$/)).toBeVisible();
 });
 
 test("salīdzināt līdzīgos: no jautājuma uz saimi", async ({ page }) => {

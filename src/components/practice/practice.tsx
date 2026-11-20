@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { seededRandom, shuffleOptions } from "@/lib/quiz/shuffle";
+import { seededRandom, shuffleOptions, uppercaseLetterRefs } from "@/lib/quiz/shuffle";
 import { recordAnswerAction } from "@/app/actions/progress";
 import type { PracticeQuestion } from "@/lib/quiz/types";
 
@@ -50,7 +50,7 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true, 
   );
   const answered = selected !== null;
   const isCorrect = answered && selected === q?.correctKey;
-  const correctDisplay = shown.find((o) => o.originalKey === q?.correctKey)?.displayKey ?? "";
+  const correctDisplay = (shown.find((o) => o.originalKey === q?.correctKey)?.displayKey ?? "").toUpperCase();
   const isLast = pos === pool.length - 1;
 
   const choose = useCallback(
@@ -210,7 +210,7 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true, 
             </div>
           )}
           {pool.length === 1 && <p className="text-sm tabular-nums text-muted">Nr. {q.id}</p>}
-          <h2 id={`q-${q.id}`} className="text-2xl font-semibold leading-snug tracking-tight sm:text-3xl" lang="lv">
+          <h2 id={`q-${q.id}`} className="text-xl font-semibold leading-snug tracking-tight sm:text-2xl" lang="lv">
             {q.text}
           </h2>
         </div>
@@ -239,7 +239,7 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true, 
                     >
                       <span
                         aria-hidden="true"
-                        className={`mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full text-sm font-semibold ${
+                        className={`mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full text-sm font-semibold uppercase ${
                           answered && isRight
                             ? "bg-ok text-white"
                             : answered && isSel
@@ -250,8 +250,8 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true, 
                         {o.displayKey}
                       </span>
                       <span className="flex-1 text-[16px] leading-relaxed" lang="lv">
-                        <span className="sr-only">{o.displayKey}. </span>
-                        {o.text}
+                        <span className="sr-only">{o.displayKey.toUpperCase()}. </span>
+                        {uppercaseLetterRefs(o.text)}
                         {answered && isRight && <span className="sr-only"> — {t("correct")}</span>}
                         {answered && isSel && !isRight && <span className="sr-only"> — {t("wrong")}</span>}
                       </span>
