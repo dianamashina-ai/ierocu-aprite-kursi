@@ -94,7 +94,7 @@
     "limited": "Rādīti pirmie {count}. Precizē meklējumu."
   },
   "footer": {
-    "disclaimer": "Šī ir mācību platforma eksāmena sagatavošanai. Tā nav oficiālais eksāmens un nav saistīta ar Valsts policiju.",
+    "disclaimer": "Kvalifikācijas pārbaudījumu pieņem Valsts policija. Šī ir mācību platforma eksāmena sagatavošanai — tā nav oficiālais eksāmens un nav saistīta ar Valsts policiju.",
     "contentVersion": "Satura versija: {version}"
   }
 }

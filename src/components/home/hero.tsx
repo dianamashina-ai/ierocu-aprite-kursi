@@ -19,7 +19,7 @@ export function Hero({ stats, sample }: { stats: Stats; sample: PracticeQuestion
       <section className="border-b border-line bg-white">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:py-20">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">Kvalifikācijas pārbaudījums · Valsts policija</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">Sagatavošanās eksāmenam</p>
             <h1 className="mt-4 text-[2.6rem] font-semibold leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-[4.25rem]">
               Ceļš līdz <span className="text-accent">ieroču atļaujai</span> sākas šeit
             </h1>
