@@ -19,8 +19,8 @@ export async function SiteHeader() {
     <header className="relative border-b border-line bg-white print:hidden">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-4 sm:h-20 sm:px-6">
         <Link href={user ? "/panelis" : "/"} className="flex flex-col leading-none" aria-label="Ieroču atļauja — sadarbībā ar LPSC, uz sākumu">
-          <span className="text-[16px] font-semibold uppercase tracking-[0.01em] text-ink">Ieroču atļauja</span>
-          <span className="mt-1 text-[8px] font-normal uppercase tracking-[0.06em] text-ink">Sadarbībā ar LPSC</span>
+          <span className="text-[20px] font-semibold uppercase tracking-[0.01em] text-ink">Ieroču atļauja</span>
+          <span className="mt-2 text-[10px] font-normal uppercase tracking-[0.06em] text-ink">Sadarbībā ar LPSC</span>
         </Link>
         <SiteNav items={items} signedIn={Boolean(user)} showBuy={Boolean(user) && !access} />
       </div>
