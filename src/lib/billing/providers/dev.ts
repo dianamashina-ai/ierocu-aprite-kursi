@@ -8,4 +8,7 @@ export const devProvider: PaymentProvider = {
     const site = new URL(i.returnUrl).origin;
     return { redirectUrl: `${site}/maksajums/tests?order=${encodeURIComponent(i.orderId)}`, providerRef: `dev_${i.orderId}` };
   },
+  async refund() {
+    // testa maksājums — naudas nav, atmaksa notiek tikai datubāzē
+  },
 };

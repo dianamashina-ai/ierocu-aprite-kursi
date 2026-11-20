@@ -26,7 +26,15 @@ export interface PaymentEvent {
   status: "paid" | "failed" | "canceled" | "refunded" | "pending";
 }
 
+export interface RefundInput {
+  orderId: string;
+  providerRef: string | null;
+  amountCents: number;
+}
+
 export interface PaymentProvider {
   name: ProviderName;
   createCheckout(input: CheckoutInput): Promise<CheckoutResult>;
+  /** Pilna atmaksa maksājumu sistēmā. Kļūdas gadījumā met izņēmumu. */
+  refund(input: RefundInput): Promise<void>;
 }

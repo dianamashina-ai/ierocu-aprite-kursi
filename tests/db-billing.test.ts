@@ -73,4 +73,37 @@ describe.skipIf(!url)("maksājumi (DB)", async () => {
     expect(r.order).toMatchObject({ status: "refunded", invoiceNumber: "IE-2026-00002" });
     expect(await access.hasFullAccess("u1")).toBe(false);
   });
+
+  it("refundOrder (administrators): atmaksā apmaksātu, slēdz piekļuvi; neapmaksātu — atsaka", async () => {
+    const [o] = await db.select().from(schema.orders).where(sql`${schema.orders.invoiceNumber} = 'IE-2026-00001'`);
+    const r = await billing.refundOrder(o.id, { now: t0 });
+    expect(r.order).toMatchObject({ status: "refunded", invoiceNumber: "IE-2026-00001" });
+    expect(await access.hasFullAccess("u2")).toBe(false);
+    await expect(billing.refundOrder(o.id)).rejects.toThrow(/tikai apmaksātu/);
+    await expect(billing.refundOrder("nav-tada")).rejects.toThrow(/nav atrasts/);
+  });
+
+  it("administrācija: pārskats, pasūtījumu un lietotāju saraksti, meklēšana", async () => {
+    const admin = await import("@/lib/backoffice/service");
+    const s = await admin.getStats(t0);
+    expect(s).toMatchObject({ users: 2, paid: 0, refunded: 2, revenueCents: 0 });
+    expect(s.reviewed + s.draft).toBe(515);
+    const found = await admin.listOrders({ q: "IE-2026-00001" });
+    expect(found).toHaveLength(1);
+    expect(found[0].email).toBe("anna@example.com");
+    expect(await admin.listOrders({ status: "refunded" })).toHaveLength(2);
+    const users = await admin.listUsers({ q: "anna" });
+    expect(users).toMatchObject([{ email: "anna@example.com", access: false, answers: 0 }]);
+  });
+
+  it("administrācija: skaidrojuma saglabāšana un statuss", async () => {
+    const admin = await import("@/lib/backoffice/service");
+    const before = await admin.getQuestionForReview(422);
+    expect(before?.options.length).toBeGreaterThan(1);
+    await admin.saveExplanation(422, { explanation: "  Jauns teksts.  ", lawReference: "Ieroču aprites likums, 1. pants", outdatedNote: "", status: "reviewed" });
+    const after = await admin.getQuestionForReview(422);
+    expect(after).toMatchObject({ explanation: "Jauns teksts.", explanationStatus: "reviewed", possiblyOutdated: false, outdatedNote: null });
+    expect((await admin.listQuestionsForReview({ status: "reviewed" })).map((q) => q.id)).toContain(422);
+    expect(await admin.saveExplanation(99999, { explanation: null, lawReference: null, outdatedNote: null, status: "draft" })).toBeNull();
+  });
 });

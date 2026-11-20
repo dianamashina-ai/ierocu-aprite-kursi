@@ -78,6 +78,27 @@ export const montonioProvider: PaymentProvider = {
     if (!res.ok || !json.paymentUrl) throw new Error(`Montonio: ${json.message ?? res.status}`);
     return { redirectUrl: json.paymentUrl, providerRef: json.uuid ?? "" };
   },
+  /** Montonio Stargate: POST /refunds { orderUuid, amount, idempotencyKey } (jāpārbauda smilškastē pirms palaišanas). */
+  async refund(i) {
+    const { accessKey, secret } = keys();
+    if (!i.providerRef) throw new Error("Pasūtījumam nav Montonio identifikatora");
+    const payload = {
+      accessKey,
+      orderUuid: i.providerRef,
+      amount: i.amountCents / 100,
+      idempotencyKey: `refund-${i.orderId}`,
+      exp: Math.floor(Date.now() / 1000) + 600,
+    };
+    const res = await fetch(`${base()}/refunds`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${signJwt(payload, secret)}` },
+      body: JSON.stringify({ data: signJwt(payload, secret) }),
+    });
+    if (!res.ok) {
+      const json = (await res.json().catch(() => ({}))) as { message?: string };
+      throw new Error(`Montonio: ${json.message ?? res.status}`);
+    }
+  },
 };
 
 type MontonioToken = { uuid?: string; merchantReference?: string; paymentStatus?: string; accessKey?: string };

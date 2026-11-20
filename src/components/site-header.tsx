@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth/session";
 import { hasFullAccess } from "@/lib/billing/access";
+import { isAdmin } from "@/lib/admin";
 import { SiteNav, type NavItem } from "./site-nav";
 
 export async function SiteHeader() {
@@ -11,6 +12,7 @@ export async function SiteHeader() {
     ...(user ? [{ href: "/kludas", label: "Kļūdas" }] : []),
     { href: "/eksamens", label: "Eksāmens" },
     { href: "/meklet", label: "Meklēt" },
+    ...(isAdmin(user) ? [{ href: "/admin", label: "Admin", match: ["/labojumi"] }] : []),
   ];
 
   return (

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/auth/session";
-import { getOrderForUser } from "@/lib/billing/service";
+import { getOrderForUser, getOrderById } from "@/lib/billing/service";
+import { isAdmin } from "@/lib/admin";
 import { SELLER } from "@/config/seller";
 import { formatDate, formatEuro } from "@/lib/format";
 import { PrintButton } from "@/components/billing/print-button";
@@ -11,7 +12,8 @@ export const metadata = { title: "Rēķins", robots: { index: false } };
 export default async function InvoicePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const user = await requireUser(`/rekins/${id}`);
-  const order = await getOrderForUser(id, user.id);
+  // administrators drīkst atvērt jebkuru rēķinu
+  const order = isAdmin(user) ? await getOrderById(id) : await getOrderForUser(id, user.id);
   if (!order || !order.invoiceNumber || !order.paidAt) notFound();
   const b = order.buyer;
   const row = "flex justify-between gap-4 py-1";

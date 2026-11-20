@@ -41,3 +41,21 @@ export async function signOut(page: Page) {
   ]);
   await expect(page).toHaveURL(/\/$/);
 }
+
+export const ADMIN = "labotajs-e2e@example.com"; // playwright.config.ts → ADMIN_EMAILS
+
+export async function signInAdmin(page: Page) {
+  await page.goto("/registreties");
+  await page.getByLabel("E-pasts").fill(ADMIN);
+  await page.getByLabel(/Parole/).fill("drosa-parole-123");
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "Izveidot kontu" }).click();
+  // ja konts jau ir — pieslēdzamies
+  if (!(await page.waitForURL(/^https?:\/\/[^/]+\/$/, { timeout: 4000 }).then(() => true, () => false))) {
+    await page.goto("/pieslegties");
+    await page.getByLabel("E-pasts").fill(ADMIN);
+    await page.getByLabel("Parole").fill("drosa-parole-123");
+    await page.getByRole("button", { name: "Pieslēgties" }).click();
+    await expect(page).toHaveURL(/^https?:\/\/[^/]+\/$/);
+  }
+}

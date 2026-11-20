@@ -1,6 +1,6 @@
 import "server-only";
 import { createHmac, timingSafeEqual } from "node:crypto";
-import type { CheckoutInput, CheckoutResult, PaymentEvent, PaymentProvider } from "../types";
+import type { CheckoutInput, CheckoutResult, PaymentEvent, PaymentProvider, RefundInput } from "../types";
 
 /**
  * Stripe Checkout bez SDK (REST API, form-encoded).
@@ -38,6 +38,22 @@ export const stripeProvider: PaymentProvider = {
     const json = (await res.json()) as { id?: string; url?: string; error?: { message: string } };
     if (!res.ok || !json.url || !json.id) throw new Error(`Stripe: ${json.error?.message ?? res.status}`);
     return { redirectUrl: json.url, providerRef: json.id };
+  },
+  async refund(i: RefundInput) {
+    const key = process.env.STRIPE_SECRET_KEY;
+    if (!key) throw new Error("STRIPE_SECRET_KEY nav iestatīts");
+    if (!i.providerRef?.startsWith("cs_")) throw new Error("Pasūtījumam nav Stripe sesijas");
+    const auth = { Authorization: `Bearer ${key}` };
+    const sRes = await fetch(`${API}/checkout/sessions/${encodeURIComponent(i.providerRef)}`, { headers: auth });
+    const session = (await sRes.json()) as { payment_intent?: string | null; error?: { message: string } };
+    if (!sRes.ok || !session.payment_intent) throw new Error(`Stripe: ${session.error?.message ?? "maksājums nav atrasts"}`);
+    const res = await fetch(`${API}/refunds`, {
+      method: "POST",
+      headers: { ...auth, "Content-Type": "application/x-www-form-urlencoded", "Idempotency-Key": `refund-${i.orderId}` },
+      body: new URLSearchParams({ payment_intent: session.payment_intent, "metadata[order_id]": i.orderId }),
+    });
+    const json = (await res.json()) as { status?: string; error?: { message: string } };
+    if (!res.ok || json.status === "failed" || json.status === "canceled") throw new Error(`Stripe: ${json.error?.message ?? json.status ?? res.status}`);
   },
 };
 

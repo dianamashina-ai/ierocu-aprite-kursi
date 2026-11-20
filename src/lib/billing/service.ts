@@ -121,6 +121,33 @@ export async function getOrderForUser(orderId: string, userId: string) {
   );
 }
 
+export async function getOrderById(orderId: string) {
+  return (await db.query.orders.findFirst({ where: eq(schema.orders.id, orderId) })) ?? null;
+}
+
 export async function getOrdersForUser(userId: string) {
   return db.select().from(schema.orders).where(eq(schema.orders.userId, userId)).orderBy(desc(schema.orders.createdAt));
+}
+
+/**
+ * Pilna atmaksa (administratoram): vispirms maksājumu sistēmā, tad pasūtījums → refunded (piekļuve tiek slēgta).
+ * Ja maksājumu sistēma atmaksu noraida, datubāzē nekas nemainās.
+ */
+export async function refundOrder(orderId: string, opts: { now?: Date } = {}) {
+  const order = await db.query.orders.findFirst({ where: eq(schema.orders.id, orderId) });
+  if (!order) throw new BillingError("Pasūtījums nav atrasts");
+  if (order.status !== "paid") throw new BillingError("Atmaksāt var tikai apmaksātu pasūtījumu");
+  await providers[order.provider].refund({ orderId: order.id, providerRef: order.providerRef, amountCents: order.amountCents });
+  const result = await applyPaymentEvent({ orderId: order.id, status: "refunded" }, order.provider, opts);
+  if (result.changed && result.order) {
+    await sendEmail({
+      to: result.order.buyer.email,
+      subject: `Atmaksa veikta — rēķins ${result.order.invoiceNumber}`,
+      text:
+        `Sveiki, ${result.order.buyer.name}!\n\n` +
+        `Esam atmaksājuši ${formatEuro(result.order.amountCents)} par rēķinu ${result.order.invoiceNumber}. ` +
+        `Nauda atgriezīsies tajā pašā maksāšanas veidā dažu darba dienu laikā. Pilna piekļuve kursam ir slēgta, 1. modulis paliek pieejams.\n`,
+    }).catch((e) => console.error("Atmaksas e-pasts:", e));
+  }
+  return result;
 }
