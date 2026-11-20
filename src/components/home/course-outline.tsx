@@ -45,13 +45,13 @@ export function CourseOutline({ modules, totals }: { modules: OutlineModule[]; t
           {modules.map((m) => (
             <li key={m.id} className="border-b border-line">
               <details className="group">
-                <summary className="flex cursor-pointer list-none items-start gap-5 py-6 [&::-webkit-details-marker]:hidden">
-                  <span className="w-9 shrink-0 pt-0.5 text-2xl font-extrabold tabular-nums text-accent">{pad(m.order)}</span>
+                <summary className="flex cursor-pointer list-none items-center gap-5 py-6 [&::-webkit-details-marker]:hidden">
+                  <span className="w-9 shrink-0 text-2xl leading-none font-extrabold tabular-nums text-accent">{pad(m.order)}</span>
                   <span className="min-w-0 flex-1">
                     <span className="block text-lg font-semibold leading-snug group-hover:text-accent">{m.titleLv}</span>
                     {m.order === 1 && <span className="mt-1 block text-sm font-semibold text-ok">Bez maksas</span>}
                   </span>
-                  <ChevronDown aria-hidden="true" className="mt-1 size-5 shrink-0 text-muted transition-transform group-open:rotate-180" />
+                  <ChevronDown aria-hidden="true" className="size-5 shrink-0 text-muted transition-transform group-open:rotate-180" />
                 </summary>
                 <div className="pb-7 sm:pl-14">
                   <p className="text-[15px] leading-relaxed text-muted">{MODULE_META[m.id]?.description}</p>
