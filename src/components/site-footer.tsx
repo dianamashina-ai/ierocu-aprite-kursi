@@ -71,7 +71,7 @@ export async function SiteFooter() {
         <div className="flex flex-col gap-5 border-t border-line py-8 sm:flex-row sm:items-center sm:justify-between">
           <Link href="/" aria-label="Ieroču atļauja — uz sākumu" className="shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element -- vektora logotips */}
-            <img src="/logo.svg" alt="Ieroču atļauja — sadarbībā ar LPSC" width={235} height={40} className="h-9 w-auto" />
+            <img src="/logo-lpsc-2026.svg" alt="Ieroču atļauja — sadarbībā ar LPSC" width={235} height={40} className="h-9 w-auto" />
           </Link>
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
             <Link href="/noteikumi" className="hover:text-ink">Noteikumi</Link>
