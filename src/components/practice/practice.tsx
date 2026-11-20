@@ -304,17 +304,11 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true, 
                       {t("compareSimilar", { count: q.familySize })}
                     </Link>
                   )}
-                  {topicHref && (
-                    <Link href={topicHref} className="btn-ghost">
-                      {t("lesson")}
-                    </Link>
-                  )}
                 </div>
               </div>
             )}
           </div>
 
-          <p className="mt-6 hidden text-sm text-muted sm:block">{t("keyboardHint")}</p>
         </div>
       </article>
     </div>
