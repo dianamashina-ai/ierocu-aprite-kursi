@@ -24,10 +24,13 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
     ],
   },
   {
-    title: "Pirkums",
+    title: "Informācija",
     links: [
       { href: "/iegadaties", label: "Pilna piekļuve" },
       { href: "/noteikumi", label: "Lietošanas un pirkšanas noteikumi" },
+      { href: "/privatums", label: "Privātuma politika" },
+      { href: "/sikdatnes", label: "Sīkdatnes" },
+      { href: "/kontakti", label: "Kontakti" },
     ],
   },
 ];
@@ -60,6 +63,9 @@ export async function SiteFooter() {
               <p>Reģ. Nr. {SELLER.regNo}</p>
               <p>PVN Nr. {SELLER.vatNo}</p>
               <p>{SELLER.address}</p>
+              <p>
+                <a href={`mailto:${SELLER.email}`} className="transition-colors hover:text-ink">{SELLER.email}</a>
+              </p>
             </address>
           </div>
         </div>
@@ -75,6 +81,7 @@ export async function SiteFooter() {
           </Link>
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
             <Link href="/noteikumi" className="hover:text-ink">Noteikumi</Link>
+            <Link href="/privatums" className="hover:text-ink">Privātums</Link>
             <span>{t("contentVersion", { version })}</span>
           </div>
           <p className="text-sm text-muted">© {year} {SELLER.name}</p>

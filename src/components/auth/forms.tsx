@@ -53,13 +53,26 @@ export function lvError(code?: string, message?: string, status?: number) {
 
 function GoogleButton({ next }: { next: string }) {
   return (
-    <button
-      type="button"
-      onClick={() => authClient.signIn.social({ provider: "google", callbackURL: next })}
-      className="btn-secondary w-full"
-    >
-      Turpināt ar Google
-    </button>
+    <div className="space-y-2">
+      <button
+        type="button"
+        onClick={() => authClient.signIn.social({ provider: "google", callbackURL: next })}
+        className="btn-secondary w-full"
+      >
+        Turpināt ar Google
+      </button>
+      <p className="text-center text-xs text-muted">
+        Turpinot ar Google, tu piekrīti{" "}
+        <Link href="/noteikumi" target="_blank" className="underline underline-offset-2 hover:text-ink">
+          lietošanas noteikumiem
+        </Link>{" "}
+        un{" "}
+        <Link href="/privatums" target="_blank" className="underline underline-offset-2 hover:text-ink">
+          privātuma politikai
+        </Link>
+        .
+      </p>
+    </div>
   );
 }
 
@@ -197,8 +210,15 @@ export function SignUpForm({ next, google }: { next: string; google: boolean }) 
         <label className="flex items-start gap-3 text-sm">
           <input type="checkbox" required checked={agree} onChange={(e) => setAgree(e.target.checked)} className="mt-1 size-5 accent-accent" />
           <span>
-            Piekrītu lietošanas noteikumiem un privātuma politikai.
-            {/* TODO 6. posms: saites uz juridiskajām lapām */}
+            Piekrītu{" "}
+            <Link href="/noteikumi" target="_blank" className="font-semibold text-accent-strong underline underline-offset-4">
+              lietošanas noteikumiem
+            </Link>{" "}
+            un{" "}
+            <Link href="/privatums" target="_blank" className="font-semibold text-accent-strong underline underline-offset-4">
+              privātuma politikai
+            </Link>
+            .
           </span>
         </label>
         {error && <ErrorText>{error}</ErrorText>}
