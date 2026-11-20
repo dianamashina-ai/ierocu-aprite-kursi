@@ -47,9 +47,13 @@ export function CourseOutline({ modules, totals }: { modules: OutlineModule[]; t
               <details className="group">
                 <summary className="flex cursor-pointer list-none items-center gap-5 py-6 [&::-webkit-details-marker]:hidden">
                   <span className="w-9 shrink-0 text-2xl leading-none font-extrabold tabular-nums text-accent">{pad(m.order)}</span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block text-lg font-semibold leading-snug group-hover:text-accent">{m.titleLv}</span>
-                    {m.order === 1 && <span className="mt-1 block text-sm font-semibold text-ok">Bez maksas</span>}
+                  <span className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2.5 gap-y-1.5">
+                    <span className="text-lg font-semibold leading-snug group-hover:text-accent">{m.titleLv}</span>
+                    {m.order === 1 && (
+                      <span className="whitespace-nowrap rounded-full bg-ok-soft px-2.5 py-0.5 text-xs font-semibold text-ok">
+                        Bez maksas
+                      </span>
+                    )}
                   </span>
                   <ChevronDown aria-hidden="true" className="size-5 shrink-0 text-muted transition-transform group-open:rotate-180" />
                 </summary>
