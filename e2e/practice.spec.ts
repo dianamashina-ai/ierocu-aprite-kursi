@@ -4,7 +4,7 @@ import { paidUser } from "./helpers";
 test("ceļš: sākums → modulis → tēma → treniņš", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("ieroču atļaujai");
-  await expect(page.getByRole("link", { name: /Sākt bez maksas/ })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Sākt bez maksas/ }).first()).toBeVisible();
   await page.locator("#programma summary", { hasText: "Ierocis: uzbūve un darbība" }).click();
   await expect(page.locator("#programma").getByText("Pamatjēdzieni un darbības princips")).toBeVisible();
   await page.getByRole("link", { name: /Atvērt moduli/ }).first().click();
