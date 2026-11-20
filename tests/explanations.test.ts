@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { loadContent } from "@/lib/content/source";
-import { lawArticleIndex, parseLawReference, readExplanations, validateExplanations } from "@/lib/content/explanations";
+import { lawArticleIndex, parseLawReference, parseQuestionRefs, readExplanations, validateExplanations } from "@/lib/content/explanations";
 
 const content = loadContent();
 
@@ -21,6 +21,7 @@ describe("skaidrojumu melnraksti", () => {
       { law: "kl", article: "237" },
     ]);
     expect(parseLawReference("Ieroču aprites likums, 1. panta 2. punkts")).toEqual([{ law: "ial", article: "1" }]);
+    expect(parseQuestionRefs("MK noteikumi Nr. 494, 35. punkts; Kvalifikācijas pārbaudījuma jautājumi Nr. 428–430, 497 (oficiālās atbildes)")).toEqual([428, 429, 430, 497]);
     expect(parseLawReference("MK noteikumi Nr. 210, 15. un 21.^1 punkts")).toEqual([
       { law: "mk210", article: "15" },
       { law: "mk210", article: "21.^1" },

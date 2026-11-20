@@ -24,8 +24,8 @@ def category(todo):
 rows, tot = [], [0, 0, 0, 0]
 outdated, missing, partial = [], {}, []
 for m, entries in mods.items():
-    full = sum(1 for e in entries if e["explanation"] and "TODO" not in e["explanation"])
-    part = [e["id"] for e in entries if e["explanation"] and "TODO" in e["explanation"]]
+    full = sum(1 for e in entries if e["explanation"] and not e.get("todo"))
+    part = [e["id"] for e in entries if e["explanation"] and e.get("todo")]
     none = [e for e in entries if not e["explanation"]]
     rows.append(f"| {m} | {len(entries)} | {full} | {len(part)} | {len(none)} |")
     for i, v in enumerate((len(entries), full, len(part), len(none))):
@@ -61,7 +61,7 @@ out = [
     "",
     *[f"- **{k}** ({len(v)}): {', '.join(map(str, v))}" for k, v in missing.items()],
     "",
-    f"**Daļēji** ({len(partial)}): skaidrojums balstīts tiesību aktā, bet kāda atbildes detaļa tajā nav atrodama (apzīmēts ar «TODO» tekstā). Jautājumi: {', '.join(map(str, partial))}",
+    f"**Daļēji** ({len(partial)}): skaidrojums balstīts tiesību aktā, bet kāda atbildes detaļa tajā nav atrodama (piezīme laukā `todo`, skolēnam netiek rādīta). Jautājumi: {', '.join(map(str, partial))}",
     "",
 ]
 open(os.path.join(EXPL, "README.md"), "w", encoding="utf-8").write("\n".join(out))

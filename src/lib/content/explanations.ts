@@ -79,6 +79,21 @@ export function parseLawReference(ref: string) {
   return out;
 }
 
+/** "Kvalifikācijas pārbaudījuma jautājumi Nr. 428–431, 497" → [428, 429, 430, 431, 497] */
+export function parseQuestionRefs(ref: string): number[] {
+  const out: number[] = [];
+  for (const raw of ref.split(";")) {
+    const m = raw.match(/Kvalifikācijas pārbaudījuma jautājum\w*\s+Nr\.\s*([\d\s,–-]+)/);
+    if (!m) continue;
+    for (const r of m[1].matchAll(/(\d+)(?:\s*[–-]\s*(\d+))?/g)) {
+      const a = Number(r[1]);
+      const b = r[2] ? Number(r[2]) : a;
+      for (let i = a; i <= b; i++) out.push(i);
+    }
+  }
+  return out;
+}
+
 export function validateExplanations(content: Content) {
   const problems: string[] = [];
   const { entries, dupes } = readExplanations();
@@ -102,7 +117,9 @@ export function validateExplanations(content: Content) {
       problems.push(`Q${id}: skaidrojums atsaucas uz varianta vietu vai burtu (varianti tiek jaukti)`);
     if (e.law_reference) {
       const refs = parseLawReference(e.law_reference);
-      if (!refs.length) problems.push(`Q${id}: atsaucē nav atpazīts neviens pants: "${e.law_reference}"`);
+      const qRefs = parseQuestionRefs(e.law_reference);
+      if (!refs.length && !qRefs.length) problems.push(`Q${id}: atsaucē nav atpazīts neviens pants: "${e.law_reference}"`);
+      for (const n of qRefs) if (!byId.has(n)) problems.push(`Q${id}: atsauce uz neeksistējošu jautājumu Nr. ${n}`);
       for (const r of refs)
         if (!index[r.law]?.has(r.article))
           problems.push(`Q${id}: atsauce uz ${r.law} ${r.article}. pantu/punktu, kura nav content/law tekstā`);

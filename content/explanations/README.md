@@ -12,8 +12,8 @@ Sēklošana (`npm run db:seed`) ieraksta skaidrojumus datubāzē tikai jautājum
 
 | Modulis | Jautājumi | Skaidrojums | Daļējs (ar TODO) | Nav (TODO) |
 |---|---|---|---|---|
-| M1 | 66 | 33 | 1 | 32 |
-| M2 | 28 | 0 | 0 | 28 |
+| M1 | 66 | 65 | 1 | 0 |
+| M2 | 28 | 28 | 0 | 0 |
 | M3 | 32 | 31 | 1 | 0 |
 | M4 | 80 | 80 | 0 | 0 |
 | M5 | 69 | 68 | 0 | 1 |
@@ -21,7 +21,7 @@ Sēklošana (`npm run db:seed`) ieraksta skaidrojumus datubāzē tikai jautājum
 | M7 | 17 | 17 | 0 | 0 |
 | M8 | 97 | 70 | 27 | 0 |
 | M9 | 58 | 51 | 7 | 0 |
-| **Kopā** | **515** | **416** | **38** | **61** |
+| **Kopā** | **515** | **476** | **38** | **1** |
 
 ## Iespējams novecojis (atbilde no PDF nav mainīta)
 
@@ -39,8 +39,6 @@ Sēklošana (`npm run db:seed`) ieraksta skaidrojumus datubāzē tikai jautājum
 
 ## Kāpēc daļai jautājumu nav skaidrojuma
 
-- **Ieroču uzbūve un kļūmes — tehniska informācija, kuras tiesību aktos nav** (32): 428, 429, 430, 431, 459, 460, 461, 462, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479, 480, 481, 482, 483, 484, 485, 486, 487
-- **Drošība rīkojoties ar ieroci — izjaukšana, salikšana, pielādēšana, izlādēšana** (28): 488, 489, 490, 491, 492, 493, 494, 495, 496, 497, 498, 499, 500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511, 512, 513, 514, 515
 - **Procedūra, kas nav atrasta ne likumā, ne MK noteikumos** (1): 117
 
-**Daļēji** (38): skaidrojums balstīts tiesību aktā, bet kāda atbildes detaļa tajā nav atrodama (apzīmēts ar «TODO» tekstā). Jautājumi: 463, 3, 201, 247, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 324, 325, 303, 304, 305, 333, 334, 335, 336, 342, 345, 379, 380, 397, 415, 418, 420, 421
+**Daļēji** (38): skaidrojums balstīts tiesību aktā, bet kāda atbildes detaļa tajā nav atrodama (piezīme laukā `todo`, skolēnam netiek rādīta). Jautājumi: 463, 3, 201, 247, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 324, 325, 303, 304, 305, 333, 334, 335, 336, 342, 345, 379, 380, 397, 415, 418, 420, 421
