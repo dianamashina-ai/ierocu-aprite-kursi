@@ -43,7 +43,7 @@ function items(exam: { questions: number; minutes: number; maxWrong: number }, t
     },
     {
       q: "Cik maksā pilns kurss un kā to apmaksāt?",
-      a: `${formatEuro(COURSE_PRODUCT.amountCents)} ar PVN — vienreizējs maksājums, nevis abonements. Apmaksa notiek tiešsaistē, un PVN rēķins tiek nosūtīts uz e-pastu. Rēķinu var izrakstīt arī uzņēmumam.`,
+      a: `${formatEuro(COURSE_PRODUCT.amountCents)} ar PVN — vienreizējs maksājums, nevis abonements. Apmaksa notiek tiešsaistē, un PVN rēķins tiek nosūtīts uz e-pastu.`,
     },
     {
       q: "Vai varu atteikties no pirkuma?",

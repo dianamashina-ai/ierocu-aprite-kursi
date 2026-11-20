@@ -42,20 +42,7 @@ export default async function InvoicePage({ params }: { params: Promise<{ id: st
           </section>
           <section>
             <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">Pircējs</h2>
-            {b.company ? (
-              <>
-                <p className="mt-2 font-semibold">{b.company}</p>
-                {b.regNo && <p className="text-sm">Reģ. Nr. {b.regNo}</p>}
-                {b.vatNo && <p className="text-sm">PVN Nr. {b.vatNo}</p>}
-                {b.address && <p className="text-sm">{b.address}</p>}
-                <p className="text-sm">Kontaktpersona: {b.name}</p>
-              </>
-            ) : (
-              <>
-                <p className="mt-2 font-semibold">{b.name}</p>
-                {b.address && <p className="text-sm">{b.address}</p>}
-              </>
-            )}
+            <p className="mt-2 font-semibold">{b.name}</p>
             <p className="text-sm">{b.email}</p>
           </section>
         </div>

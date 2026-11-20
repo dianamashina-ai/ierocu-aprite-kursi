@@ -8,18 +8,8 @@ import { activeProviderName, applyPaymentEvent, BillingError, getOrderForUser, s
 
 export type CheckoutState = { error?: string; fields?: Record<string, string> };
 
-const opt = z
-  .string()
-  .trim()
-  .max(200)
-  .transform((v) => v || undefined);
-
 const BuyerForm = z.object({
   name: z.string().trim().min(2, "Ievadi vārdu un uzvārdu").max(120),
-  company: opt,
-  regNo: opt,
-  vatNo: opt,
-  address: opt,
   waiver: z.literal("on", { message: "Lai turpinātu, jāapstiprina piekrišana" }),
   terms: z.literal("on", { message: "Lai turpinātu, jāpiekrīt lietošanas noteikumiem" }),
 });
@@ -35,15 +25,14 @@ async function requestOrigin() {
 export async function checkoutAction(_prev: CheckoutState, form: FormData): Promise<CheckoutState> {
   const user = await getCurrentUser();
   if (!user) redirect("/pieslegties?next=/iegadaties");
-  const raw = Object.fromEntries(["name", "company", "regNo", "vatNo", "address", "waiver", "terms"].map((k) => [k, String(form.get(k) ?? "")]));
+  const raw = Object.fromEntries(["name", "waiver", "terms"].map((k) => [k, String(form.get(k) ?? "")]));
   const parsed = BuyerForm.safeParse(raw);
   if (!parsed.success) return { error: parsed.error.issues[0].message, fields: raw };
-  const { name, company, regNo, vatNo, address } = parsed.data;
-  if (company && !address) return { error: "Uzņēmumam norādi juridisko adresi", fields: raw };
+  const { name } = parsed.data;
 
   let url: string;
   try {
-    url = await startCheckout(user.id, { name, email: user.email, company, regNo, vatNo, address }, await requestOrigin());
+    url = await startCheckout(user.id, { name, email: user.email }, await requestOrigin());
   } catch (e) {
     if (e instanceof BillingError) return { error: e.message, fields: raw };
     console.error(e);

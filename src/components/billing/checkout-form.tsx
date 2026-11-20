@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useState } from "react";
+import { useActionState } from "react";
 import { checkoutAction, type CheckoutState } from "@/app/actions/billing";
 
 const input = "mt-1 block min-h-12 w-full rounded-xl border-2 border-line bg-white px-4 text-base focus:border-accent focus:outline-none";
@@ -9,7 +9,6 @@ const input = "mt-1 block min-h-12 w-full rounded-xl border-2 border-line bg-whi
 export function CheckoutForm({ email, defaultName, priceLabel }: { email: string; defaultName: string; priceLabel: string }) {
   const [state, action, pending] = useActionState<CheckoutState, FormData>(checkoutAction, {});
   const f = state.fields ?? {};
-  const [isCompany, setIsCompany] = useState(Boolean(f.company));
 
   return (
     <form action={action} className="space-y-5">
@@ -20,34 +19,6 @@ export function CheckoutForm({ email, defaultName, priceLabel }: { email: string
       <p className="text-sm text-muted">
         Rēķins tiks nosūtīts uz <strong className="text-ink">{email}</strong>.
       </p>
-
-      <label className="flex items-center gap-3">
-        <input type="checkbox" checked={isCompany} onChange={(e) => setIsCompany(e.target.checked)} className="size-5 accent-[var(--color-accent)]" />
-        <span>Rēķins uzņēmumam</span>
-      </label>
-      {isCompany && (
-        <fieldset className="space-y-4 rounded-xl border border-line bg-surface p-4">
-          <legend className="sr-only">Uzņēmuma rekvizīti</legend>
-          <label className="block">
-            <span className="text-sm font-semibold">Uzņēmuma nosaukums</span>
-            <input name="company" defaultValue={f.company} className={input} />
-          </label>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <label className="block">
-              <span className="text-sm font-semibold">Reģistrācijas Nr.</span>
-              <input name="regNo" defaultValue={f.regNo} className={input} />
-            </label>
-            <label className="block">
-              <span className="text-sm font-semibold">PVN Nr. (ja ir)</span>
-              <input name="vatNo" defaultValue={f.vatNo} className={input} />
-            </label>
-          </div>
-          <label className="block">
-            <span className="text-sm font-semibold">Juridiskā adrese</span>
-            <input name="address" defaultValue={f.address} className={input} />
-          </label>
-        </fieldset>
-      )}
 
       <div className="space-y-3 border-t border-line pt-5">
         <label className="flex items-start gap-3">
