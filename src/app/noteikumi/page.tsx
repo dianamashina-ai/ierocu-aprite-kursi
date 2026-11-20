@@ -14,7 +14,7 @@ export default function TermsPage() {
       <h1 className="text-3xl font-semibold">Lietošanas un pirkšanas noteikumi</h1>
       <p className="mt-2 rounded-lg bg-warn-soft px-3 py-2 text-sm text-warn">Melnraksts — tiek precizēts.</p>
       <div className="mt-6 space-y-3 leading-relaxed">
-        <h2 className={h}>1. Pārdevējs</h2>
+        <h2 className={h}>1. Piegādātājs</h2>
         <p>
           {SELLER.name}, reģistrācijas Nr. {SELLER.regNo}, PVN maksātāja Nr. {SELLER.vatNo}, juridiskā adrese: {SELLER.address}.
         </p>

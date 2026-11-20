@@ -1,4 +1,4 @@
-/** Pārdevējs — rēķinos, juridiskajās lapās un vietnes kājenē. Publiska informācija, nav noslēpums. */
+/** Piegādātājs — rēķinos, juridiskajās lapās un vietnes kājenē. Publiska informācija, nav noslēpums. */
 export const SELLER = {
   name: "SIA „Latvijas Praktiskās Šaušanas Centrs”",
   shortName: "LPSC",

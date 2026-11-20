@@ -34,7 +34,7 @@ export default async function InvoicePage({ params }: { params: Promise<{ id: st
 
         <div className="grid gap-6 py-6 sm:grid-cols-2">
           <section>
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">Pārdevējs</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">Piegādātājs</h2>
             <p className="mt-2 font-semibold">{SELLER.name}</p>
             <p className="text-sm">Reģ. Nr. {SELLER.regNo}</p>
             <p className="text-sm">PVN Nr. {SELLER.vatNo}</p>

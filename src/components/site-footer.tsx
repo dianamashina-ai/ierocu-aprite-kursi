@@ -54,7 +54,7 @@ export async function SiteFooter() {
             </nav>
           ))}
           <div className="col-span-2 lg:col-span-1">
-            <h2 className="text-base font-semibold tracking-normal">Pārdevējs</h2>
+            <h2 className="text-base font-semibold tracking-normal">Piegādātājs</h2>
             <address className="mt-5 space-y-1.5 text-[15px] not-italic text-muted">
               <p>{SELLER.name}</p>
               <p>Reģ. Nr. {SELLER.regNo}</p>
