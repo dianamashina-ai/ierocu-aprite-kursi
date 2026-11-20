@@ -107,6 +107,12 @@ export default async function ExamPage({
               <div className="mt-3 rounded-xl bg-surface p-3 text-sm text-muted">
                 {q.explanation ?? "Skaidrojums šim jautājumam vēl tiek gatavots."}
               </div>
+              {q.possiblyOutdated && q.outdatedNote && (
+                <p className="mt-3 rounded-xl bg-warn-soft p-3 text-sm text-ink">
+                  <span className="font-semibold text-warn">Likuma izmaiņas. </span>
+                  {q.outdatedNote}
+                </p>
+              )}
               {q.familyId && q.familySize > 1 && (
                 <Link href={`/saime/${q.familyId}?no=${q.id}`} className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-accent-strong underline underline-offset-4">
                   Salīdzināt līdzīgos ({q.familySize})

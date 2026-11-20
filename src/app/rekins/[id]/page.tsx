@@ -41,7 +41,7 @@ export default async function InvoicePage({ params }: { params: Promise<{ id: st
             <p className="text-sm">{SELLER.address}</p>
           </section>
           <section>
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">Pircējs</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">Saņēmējs</h2>
             <p className="mt-2 font-semibold">{b.name}</p>
             <p className="text-sm">{b.email}</p>
           </section>

@@ -1,5 +1,6 @@
 "use client";
 
+import { TriangleAlert } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
@@ -204,10 +205,14 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true, 
       <article className="grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14" aria-labelledby={`q-${q.id}`}>
         <div className="lg:sticky lg:top-8 lg:self-start">
           {q.possiblyOutdated && (
-            <div className="mb-5 rounded-lg bg-warn-soft px-3 py-2 text-sm text-warn">
-              <p className="font-semibold">{t("outdated")}</p>
-              {q.outdatedNote && <p className="mt-1">{q.outdatedNote}</p>}
-            </div>
+            <aside className="mb-5 rounded-xl border border-warn/30 bg-warn-soft px-4 py-3 text-sm leading-relaxed text-ink" aria-label={t("outdated")}>
+              <p className="flex items-center gap-1.5 font-semibold text-warn">
+                <TriangleAlert aria-hidden="true" className="size-4 shrink-0" />
+                {t("outdated")}
+              </p>
+              {q.outdatedNote && <p className="mt-1.5">{q.outdatedNote}</p>}
+              <p className="mt-1.5 text-muted">{t("outdatedDisclaimer")}</p>
+            </aside>
           )}
           {pool.length === 1 && <p className="text-sm tabular-nums text-muted">Nr. {q.id}</p>}
           <h2 id={`q-${q.id}`} className="text-xl font-semibold leading-snug tracking-tight sm:text-2xl" lang="lv">
