@@ -8,10 +8,16 @@ import { getCurrentUser } from "@/lib/auth/session";
 import { isAdmin } from "@/lib/admin";
 import "@fontsource-variable/figtree";
 import "./globals.css";
+import { indexingAllowed } from "@/lib/site/indexing";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("meta");
-  return { title: { default: t("title"), template: `%s · ${t("title")}` }, description: t("description") };
+  return {
+    title: { default: t("title"), template: `%s · ${t("title")}` },
+    description: t("description"),
+    // līdz palaišanai vietne netiek indeksēta (SITE_INDEXING=1 to ieslēdz)
+    ...(indexingAllowed() ? {} : { robots: { index: false, follow: false } }),
+  };
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
