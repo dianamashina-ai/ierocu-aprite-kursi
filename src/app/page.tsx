@@ -11,6 +11,7 @@ import { ModuleIcon } from "@/components/module-icon";
 import { Hero } from "@/components/home/hero";
 import { CourseOutline } from "@/components/home/course-outline";
 import { WhoCanOwn } from "@/components/home/who-can-own";
+import { Faq } from "@/components/home/faq";
 import { readLesson } from "@/lib/content/lessons";
 import { getPracticeQuestion } from "@/lib/content/queries";
 import { getExamConfig } from "@/lib/progress/service";
@@ -61,6 +62,14 @@ export default async function HomePage() {
               ...m,
               topics: m.topics.map((t) => ({ id: t.id, titleLv: t.titleLv, questionCount: t.questionCount, minutes: readLesson(t.id)?.minutes ?? null })),
             }))}
+          />
+          <Faq
+            totalQuestions={course.totals.questions}
+            exam={{
+              questions: examCfg.questionCount,
+              minutes: examCfg.durationMinutes,
+              maxWrong: examCfg.questionCount - Math.ceil((examCfg.questionCount * examCfg.passPercent) / 100),
+            }}
           />
         </>
       )}
