@@ -117,13 +117,10 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
         </div>
       </div>
 
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+      <div className="has-sticky-footer mx-auto max-w-6xl px-4 pt-8 pb-28 sm:px-6 sm:pt-12 lg:pb-12">
         <article className="grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14" aria-labelledby={`eq-${q.id}`}>
           <div className="lg:sticky lg:top-24 lg:self-start">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted">
-              Jautājums {pos + 1}
-            </p>
-            <h2 id={`eq-${q.id}`} className="mt-3 text-xl font-semibold leading-snug tracking-tight sm:text-2xl" lang="lv">
+            <h2 id={`eq-${q.id}`} className="text-xl font-semibold leading-snug tracking-tight sm:text-2xl" lang="lv">
               {q.text}
             </h2>
           </div>
@@ -168,14 +165,15 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
               </p>
             )}
 
-            <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
-              <button type="button" className="btn-secondary" disabled={pos === 0} onClick={() => setPos((p) => p - 1)}>
+            {/* telefonā — piestiprināts ekrāna apakšā, datorā — zem atbildēm */}
+            <div className="fixed inset-x-0 bottom-0 z-20 flex items-center justify-between gap-3 border-t border-line bg-white/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur lg:static lg:mt-8 lg:flex-wrap lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
+              <button type="button" className="btn-secondary flex-1 lg:flex-none" disabled={pos === 0} onClick={() => setPos((p) => p - 1)}>
                 ← Iepriekšējais
               </button>
               {pos < questions.length - 1 ? (
                 <button
                   type="button"
-                  className="btn-primary disabled:cursor-not-allowed disabled:opacity-40"
+                  className="btn-primary flex-1 disabled:cursor-not-allowed disabled:opacity-40 lg:flex-none"
                   disabled={!selected[q.id]}
                   title={selected[q.id] ? undefined : "Vispirms izvēlies atbildi"}
                   onClick={() => setPos((p) => p + 1)}
@@ -185,7 +183,7 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
               ) : (
                 <button
                   type="button"
-                  className="btn-primary disabled:cursor-not-allowed disabled:opacity-40"
+                  className="btn-primary flex-1 disabled:cursor-not-allowed disabled:opacity-40 lg:flex-none"
                   disabled={!selected[q.id]}
                   onClick={() => setConfirming(true)}
                 >

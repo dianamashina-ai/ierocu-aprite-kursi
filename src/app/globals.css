@@ -68,3 +68,13 @@ main:has(> .page-white) {
     @apply text-accent-strong underline-offset-4 hover:underline;
   }
 }
+
+/* Lapas ar piestiprinātu pogu joslu telefonā (eksāmens): kājene un “Labot” poga netiek aizsegtas */
+@media (max-width: 1023.98px) {
+  body:has(.has-sticky-footer) footer {
+    padding-bottom: 5rem;
+  }
+  body:has(.has-sticky-footer) .notes-fab {
+    bottom: 5.5rem;
+  }
+}

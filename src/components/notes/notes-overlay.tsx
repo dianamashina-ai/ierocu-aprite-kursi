@@ -202,7 +202,7 @@ export function NotesOverlay() {
         </div>
       ))}
 
-      <div className="fixed bottom-4 right-4 z-[80] flex flex-col items-end gap-2 print:hidden">
+      <div className="notes-fab fixed bottom-4 right-4 z-[80] flex flex-col items-end gap-2 print:hidden">
         {active && (
           <div className="rounded-xl bg-ink px-3 py-2 text-xs text-white shadow-lg">
             Noklikšķini uz elementa · Esc — iziet{missing > 0 ? ` · ${missing} piezīmes šeit nav redzamas` : ""}
