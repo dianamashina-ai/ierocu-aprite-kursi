@@ -22,11 +22,13 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
   const [open, setOpen] = useState(false);
   useEffect(() => setOpen(false), [path]);
 
-  const account = signedIn ? (
-    <Link href="/konts" className="btn-secondary min-h-11 px-4 text-sm">Mans konts</Link>
-  ) : (
-    <Link href="/pieslegties" className="btn-primary min-h-11 px-4 text-sm">Pieslēgties</Link>
-  );
+  const itemCls = (active: boolean) =>
+    `inline-flex min-h-11 items-center whitespace-nowrap rounded-lg px-3 text-[15px] transition-colors hover:bg-accent-soft ${
+      active ? "font-semibold text-ink" : "font-normal text-muted hover:text-ink"
+    }`;
+  const mobileCls = (active: boolean) =>
+    `-mx-2 flex min-h-12 w-[calc(100%+1rem)] items-center rounded-lg px-2 text-left text-base hover:bg-accent-soft ${active ? "font-semibold text-ink" : "font-normal text-muted"}`;
+  const onAccount = path === "/konts" || path.startsWith("/konts/");
 
   return (
     <>
@@ -51,10 +53,16 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
         </ul>
       </nav>
 
-      <div className="hidden items-center gap-2 xl:flex">
-        {showBuy && <Link href="/iegadaties" className="btn-primary min-h-11 px-4 text-sm">Pilna piekļuve</Link>}
-        {account}
-        {signedIn && <SignOutButton className="inline-flex min-h-11 items-center whitespace-nowrap px-2 text-sm text-muted hover:text-ink" />}
+      <div className="hidden items-center gap-1 xl:flex">
+        {signedIn ? (
+          <>
+            <Link href="/konts" aria-current={onAccount ? "page" : undefined} className={itemCls(onAccount)}>Mans konts</Link>
+            <SignOutButton icon={false} className={itemCls(false)} />
+            {showBuy && <Link href="/iegadaties" className="btn-primary ml-2 min-h-11 px-4 text-sm">Pilna piekļuve</Link>}
+          </>
+        ) : (
+          <Link href="/pieslegties" className="btn-primary ml-2 min-h-11 px-4 text-sm">Pieslēgties</Link>
+        )}
       </div>
 
       <button
@@ -77,18 +85,29 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
                   <Link
                     href={it.href}
                     aria-current={isActive(path, it) ? "page" : undefined}
-                    className={`-mx-2 flex min-h-12 items-center rounded-lg px-2 text-base hover:bg-accent-soft ${isActive(path, it) ? "font-semibold text-ink" : "font-normal text-muted"}`}
+                    className={mobileCls(isActive(path, it))}
                   >
                     {it.label}
                   </Link>
                 </li>
               ))}
+              {signedIn && (
+                <>
+                  <li>
+                    <Link href="/konts" aria-current={onAccount ? "page" : undefined} className={mobileCls(onAccount)}>Mans konts</Link>
+                  </li>
+                  <li>
+                    <SignOutButton icon={false} className={mobileCls(false)} />
+                  </li>
+                </>
+              )}
             </ul>
-            <div className="flex flex-wrap gap-2 py-3">
-              {showBuy && <Link href="/iegadaties" className="btn-primary">Pilna piekļuve</Link>}
-              {signedIn ? <Link href="/konts" className="btn-secondary">Mans konts</Link> : <Link href="/pieslegties" className="btn-primary">Pieslēgties</Link>}
-              {signedIn && <SignOutButton className="btn-ghost" />}
-            </div>
+            {(showBuy || !signedIn) && (
+              <div className="flex flex-wrap gap-2 py-3">
+                {showBuy && <Link href="/iegadaties" className="btn-primary">Pilna piekļuve</Link>}
+                {!signedIn && <Link href="/pieslegties" className="btn-primary">Pieslēgties</Link>}
+              </div>
+            )}
           </nav>
         </div>
       )}

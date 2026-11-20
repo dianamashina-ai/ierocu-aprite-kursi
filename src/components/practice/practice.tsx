@@ -1,6 +1,6 @@
 "use client";
 
-import { TriangleAlert } from "lucide-react";
+import { TriangleAlert, X } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
@@ -13,6 +13,8 @@ interface Props {
   seed: string;
   /** Saite uz tēmas lapu (nodarbība) */
   topicHref?: string;
+  /** kur ved krustiņš telefonā (pēc noklusējuma — tēma) */
+  exitHref?: string;
   /** Vai jaukt jautājumu secību (vienam jautājumam — nē) */
   shuffleQuestions?: boolean;
   /** Pieslēgts lietotājs → atbildes tiek saglabātas */
@@ -33,7 +35,7 @@ function shuffledIndexes(n: number, seed: string, enabled: boolean) {
   return idx;
 }
 
-export function Practice({ questions, seed, topicHref, shuffleQuestions = true, signedIn = false, mode = "practice" }: Props) {
+export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestions = true, signedIn = false, mode = "practice" }: Props) {
   const t = useTranslations("practice");
   const [round, setRound] = useState(0);
   const [pool, setPool] = useState<number[]>(() => shuffledIndexes(questions.length, seed, shuffleQuestions));
@@ -179,11 +181,17 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true, 
   if (!q) return null;
 
   return (
-    <div className="has-sticky-footer pb-24 lg:pb-0">
+    <div className={`has-sticky-footer pb-24 lg:pb-0 ${pool.length > 1 ? "focus-mode" : ""}`}>
       {pool.length > 1 && (
         <div className="mb-8">
-          <div className="flex items-baseline justify-between gap-3">
-            <span className="text-base font-semibold">{t("progress", { current: pos + 1, total: pool.length })}</span>
+          <div className="flex items-center justify-between gap-3">
+            <span className="flex items-center gap-2 text-base font-semibold">
+              {/* telefonā lapas izvēlne paslēpta — ar šo krustiņu iziet no treniņa */}
+              <Link href={exitHref ?? topicHref ?? "/"} aria-label={t("exit")} className="-ml-2 inline-flex size-10 items-center justify-center rounded-lg text-muted hover:bg-accent-soft hover:text-ink lg:hidden">
+                <X aria-hidden="true" className="size-5" />
+              </Link>
+              {t("progress", { current: pos + 1, total: pool.length })}
+            </span>
             <span className="text-sm tabular-nums text-muted">Nr. {q.id}</span>
           </div>
           <div

@@ -1,5 +1,8 @@
 "use client";
 
+import Link from "next/link";
+import { X } from "lucide-react";
+
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { shuffleOptions, uppercaseLetterRefs } from "@/lib/quiz/shuffle";
@@ -89,11 +92,15 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
   const progress = ((pos + 1) / questions.length) * 100;
 
   return (
-    <div>
+    <div className="focus-mode">
       <div className="sticky top-0 z-10 bg-white/95 backdrop-blur">
         <div className="mx-auto max-w-6xl px-4 pt-4 sm:px-6 sm:pt-6">
           <div className="flex items-center justify-between gap-4 pb-3">
-            <span className="text-base font-semibold">
+            <span className="flex items-center gap-2 text-base font-semibold">
+              {/* telefonā lapas izvēlne paslēpta; atbildes ir saglabātas, eksāmenu var turpināt vēlāk */}
+              <Link href="/eksamens" aria-label="Iziet (atbildes saglabātas, vari turpināt vēlāk)" className="-ml-2 inline-flex size-10 items-center justify-center rounded-lg text-muted hover:bg-accent-soft hover:text-ink lg:hidden">
+                <X aria-hidden="true" className="size-5" />
+              </Link>
               Jautājums {pos + 1} no {questions.length}
             </span>
             <span

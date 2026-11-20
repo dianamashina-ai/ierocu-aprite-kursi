@@ -36,7 +36,7 @@ export default async function PracticePage({ params }: { params: Promise<{ slug:
           { label: "Treniņš" },
         ]}
       />
-      <div className="mt-5">
+      <div className="mt-5 max-lg:[body:has(.focus-mode)_&]:mt-0">
         {/* sēkla katram apmeklējumam jauna → cita jautājumu un variantu secība */}
         {allowed ? (
           <Practice signedIn={Boolean(user)} questions={questions} seed={randomUUID()} topicHref={topicHref} />

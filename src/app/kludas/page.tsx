@@ -20,16 +20,16 @@ export default async function ReviewPage({ searchParams }: { searchParams: Promi
 
   return (
     <div className="page-white mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
-      <h1 className="text-3xl font-semibold">{all ? "Visas kļūdas" : "Kļūdu labošana"}</h1>
-      <p className="mt-2 text-muted">
+      <h1 className="focus-hide text-3xl font-semibold">{all ? "Visas kļūdas" : "Kļūdu labošana"}</h1>
+      <p className="focus-hide mt-2 text-muted">
         {all
           ? "Jautājumi, uz kuriem pēdējā atbilde bija nepareiza."
           : "Kļūdains jautājums atgriežas pēc 1, 3 un 7 dienām. Kad trīs reizes pēc kārtas atbildi pareizi, tas skaitās apgūts."}
       </p>
 
       {qs.length > 0 ? (
-        <div className="mt-6">
-          <Practice questions={qs} seed={randomUUID()} signedIn mode={all ? "practice" : "review"} />
+        <div className="mt-6 max-lg:mt-0">
+          <Practice exitHref="/" questions={qs} seed={randomUUID()} signedIn mode={all ? "practice" : "review"} />
         </div>
       ) : (
         <div className="mt-8 space-y-6">
