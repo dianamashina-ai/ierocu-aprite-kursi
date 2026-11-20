@@ -35,7 +35,7 @@ export default async function InvoicePage({ params }: { params: Promise<{ id: st
         <div className="grid gap-6 py-6 sm:grid-cols-2">
           <section>
             <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">Pārdevējs</h2>
-            <p className="mt-2 font-medium">{SELLER.name}</p>
+            <p className="mt-2 font-semibold">{SELLER.name}</p>
             <p className="text-sm">Reģ. Nr. {SELLER.regNo}</p>
             <p className="text-sm">PVN Nr. {SELLER.vatNo}</p>
             <p className="text-sm">{SELLER.address}</p>
@@ -44,7 +44,7 @@ export default async function InvoicePage({ params }: { params: Promise<{ id: st
             <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">Pircējs</h2>
             {b.company ? (
               <>
-                <p className="mt-2 font-medium">{b.company}</p>
+                <p className="mt-2 font-semibold">{b.company}</p>
                 {b.regNo && <p className="text-sm">Reģ. Nr. {b.regNo}</p>}
                 {b.vatNo && <p className="text-sm">PVN Nr. {b.vatNo}</p>}
                 {b.address && <p className="text-sm">{b.address}</p>}
@@ -52,7 +52,7 @@ export default async function InvoicePage({ params }: { params: Promise<{ id: st
               </>
             ) : (
               <>
-                <p className="mt-2 font-medium">{b.name}</p>
+                <p className="mt-2 font-semibold">{b.name}</p>
                 {b.address && <p className="text-sm">{b.address}</p>}
               </>
             )}
@@ -63,10 +63,10 @@ export default async function InvoicePage({ params }: { params: Promise<{ id: st
         <table className="w-full text-sm">
           <thead>
             <tr className="border-y border-line text-left text-muted">
-              <th className="py-2 font-medium">Nosaukums</th>
-              <th className="py-2 pl-3 text-right font-medium">Daudz.</th>
-              <th className="hidden py-2 pl-3 text-right font-medium sm:table-cell">Cena bez PVN</th>
-              <th className="py-2 pl-3 text-right font-medium">Summa bez PVN</th>
+              <th className="py-2 font-semibold">Nosaukums</th>
+              <th className="py-2 pl-3 text-right font-semibold">Daudz.</th>
+              <th className="hidden py-2 pl-3 text-right font-semibold sm:table-cell">Cena bez PVN</th>
+              <th className="py-2 pl-3 text-right font-semibold">Summa bez PVN</th>
             </tr>
           </thead>
           <tbody>

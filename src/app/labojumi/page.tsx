@@ -18,7 +18,7 @@ export default async function NotesPage({ searchParams }: { searchParams: Promis
     <Link
       href={s === "open" ? "/labojumi" : "/labojumi?status=done"}
       aria-current={status === s ? "page" : undefined}
-      className={`inline-flex min-h-11 items-center rounded-lg px-4 text-sm font-medium ${status === s ? "bg-accent-soft text-accent" : "hover:bg-accent-soft"}`}
+      className={`inline-flex min-h-11 items-center rounded-lg px-4 text-sm font-semibold ${status === s ? "bg-accent-soft text-accent" : "hover:bg-accent-soft"}`}
     >
       {label}
     </Link>
@@ -42,7 +42,7 @@ export default async function NotesPage({ searchParams }: { searchParams: Promis
           {notes.map((n) => (
             <li key={n.id} className="rounded-2xl border border-line bg-white p-5">
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">
-                <Link href={n.path} className="font-medium text-accent underline underline-offset-2">{n.path}</Link>
+                <Link href={n.path} className="font-semibold text-accent underline underline-offset-2">{n.path}</Link>
                 <span>{n.viewportWidth < 768 ? "📱" : "🖥"} {n.viewportWidth}×{n.viewportHeight}</span>
                 <span>{formatDateTime(n.createdAt)}</span>
               </div>

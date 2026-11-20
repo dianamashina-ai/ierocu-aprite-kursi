@@ -66,7 +66,7 @@ export function WhoCanOwn() {
                 >
                   <Icon className="size-5" strokeWidth={1.75} />
                 </span>
-                <span className={`text-xl font-extrabold tabular-nums ${highlight ? "text-white/70" : "text-accent"}`}>{String(i + 1).padStart(2, "0")}</span>
+                <span className={`text-xl font-bold tabular-nums ${highlight ? "text-white/70" : "text-accent"}`}>{String(i + 1).padStart(2, "0")}</span>
               </div>
               <h3 className="mt-5 text-lg font-semibold">{title}</h3>
               <p className={`mt-2 flex-1 text-[15px] leading-relaxed ${highlight ? "text-white/90" : "text-muted"}`}>{text}</p>

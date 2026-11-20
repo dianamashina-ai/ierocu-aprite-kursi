@@ -15,7 +15,7 @@ export const metadata = { title: "Panelis" };
 function Stat({ value, label, href }: { value: React.ReactNode; label: string; href?: string }) {
   const body = (
     <>
-      <span className="block text-2xl font-extrabold tabular-nums">{value}</span>
+      <span className="block text-2xl font-bold tabular-nums">{value}</span>
       <span className="text-sm text-muted">{label}</span>
     </>
   );
@@ -85,7 +85,7 @@ export default async function DashboardPage() {
             {d.weakTopics.map((t) => (
               <li key={t.id} className="rounded-xl border border-line bg-white p-4">
                 <p className="text-sm text-muted">Tēma {t.id}</p>
-                <p className="font-medium">{t.title}</p>
+                <p className="font-semibold">{t.title}</p>
                 <p className="mt-1 text-sm text-err">Pareizi {Math.round((t.accuracy ?? 0) * 100)} % no atbildētajiem</p>
                 <Link href={`/tema/${topicSlug(t.id)}/trenins`} className="mt-3 inline-flex min-h-11 items-center font-semibold text-accent-strong underline underline-offset-4">
                   Trenēties
@@ -105,7 +105,7 @@ export default async function DashboardPage() {
               <details>
                 <summary className="flex min-h-14 cursor-pointer list-none flex-col gap-2 p-4 [&::-webkit-details-marker]:hidden">
                   <span className="flex items-baseline justify-between gap-3">
-                    <span className="font-medium"><span className="text-accent">{m.order}.</span> {m.title}</span>
+                    <span className="font-semibold"><span className="text-accent">{m.order}.</span> {m.title}</span>
                     <span className="shrink-0 text-sm tabular-nums text-muted">{m.percent} %</span>
                   </span>
                   <ProgressBar percent={m.percent} label={`${m.title}: ${m.percent} %`} />
@@ -160,7 +160,7 @@ export default async function DashboardPage() {
             {invoices.map((o) => (
               <li key={o.id}>
                 <Link href={`/rekins/${o.id}`} className="flex items-center justify-between gap-3 px-4 py-3 hover:bg-accent-soft">
-                  <span className="font-medium">{o.invoiceNumber}</span>
+                  <span className="font-semibold">{o.invoiceNumber}</span>
                   <span className="text-sm text-muted">{formatDate(o.paidAt!)}</span>
                   <span className="tabular-nums">{formatEuro(o.amountCents)}</span>
                   {o.status === "refunded" && <span className="text-xs font-semibold text-err">atmaksāts</span>}

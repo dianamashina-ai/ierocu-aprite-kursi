@@ -23,7 +23,7 @@ export function Hero({ stats, sample }: { stats: Stats; sample: PracticeQuestion
             <h1 className="mt-4 text-[2.6rem] font-semibold leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-[4.25rem]">
               Ceļš līdz <span className="text-accent">ieroču atļaujai</span> sākas šeit
             </h1>
-            <p className="mt-5 text-xl font-medium text-ink">Saproti likumu, nevis iekal atbildes.</p>
+            <p className="mt-5 text-xl font-semibold text-ink">Saproti likumu, nevis iekal atbildes.</p>
             <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-muted">
               Īsas nodarbības latviešu valodā, visi oficiālie eksāmena jautājumi ar skaidrojumiem un atsaucēm uz likumu,
               kā arī eksāmena simulācija — telefonā vai datorā, savā tempā.
@@ -57,7 +57,7 @@ export function Hero({ stats, sample }: { stats: Stats; sample: PracticeQuestion
             <div key={label} className={`py-8 lg:py-10 px-5 sm:px-8 ${["", "border-l", "border-t lg:border-l lg:border-t-0", "border-l border-t lg:border-t-0"][i]} border-white/20`}>
               <dt className="sr-only">{label}</dt>
               <dd>
-                <span className="block whitespace-nowrap text-4xl font-extrabold tabular-nums tracking-tight sm:text-6xl">{value}</span>
+                <span className="block whitespace-nowrap text-4xl font-bold tabular-nums tracking-tight sm:text-6xl">{value}</span>
                 <span className="mt-2 block text-sm text-white/80">{label}</span>
               </dd>
             </div>

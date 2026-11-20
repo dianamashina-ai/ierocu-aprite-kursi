@@ -21,9 +21,9 @@ export default async function ExamStartPage() {
       <p className="mt-2 text-muted">Jautājumi tiek izvēlēti nejauši no visām 10 oficiālajām sadaļām proporcionāli to lielumam.</p>
 
       <dl className="mt-6 grid grid-cols-3 gap-3 text-center">
-        <div className="rounded-xl border border-line bg-white p-4"><dt className="text-sm text-muted">Jautājumi</dt><dd className="text-2xl font-extrabold">{cfg.questionCount}</dd></div>
-        <div className="rounded-xl border border-line bg-white p-4"><dt className="text-sm text-muted">Laiks</dt><dd className="text-2xl font-extrabold">{cfg.durationMinutes} min</dd></div>
-        <div className="rounded-xl border border-line bg-white p-4"><dt className="text-sm text-muted">Drīkst kļūdīties</dt><dd className="text-2xl font-extrabold">{maxWrong}</dd></div>
+        <div className="rounded-xl border border-line bg-white p-4"><dt className="text-sm text-muted">Jautājumi</dt><dd className="text-2xl font-bold">{cfg.questionCount}</dd></div>
+        <div className="rounded-xl border border-line bg-white p-4"><dt className="text-sm text-muted">Laiks</dt><dd className="text-2xl font-bold">{cfg.durationMinutes} min</dd></div>
+        <div className="rounded-xl border border-line bg-white p-4"><dt className="text-sm text-muted">Drīkst kļūdīties</dt><dd className="text-2xl font-bold">{maxWrong}</dd></div>
       </dl>
       <ul className="mt-6 list-disc space-y-1 pl-5 text-sm text-muted">
         <li>Eksāmena laikā skaidrojumi netiek rādīti. Pareizās atbildes redzēsi beigās.</li>

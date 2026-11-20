@@ -90,7 +90,7 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
             Atbildēti {answeredCount} no {questions.length}
           </span>
           <span
-            className={`rounded-lg px-3 py-1 font-extrabold tabular-nums ${lowTime ? "bg-err-soft text-err" : "bg-white text-ink"}`}
+            className={`rounded-lg px-3 py-1 font-bold tabular-nums ${lowTime ? "bg-err-soft text-err" : "bg-white text-ink"}`}
             role="timer"
             aria-label="Atlikušais laiks"
           >

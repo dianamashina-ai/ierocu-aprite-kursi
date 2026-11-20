@@ -125,7 +125,7 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
                   </div>
                 )}
                 <p className="mt-10 border-t border-line pt-4 text-sm text-muted">
-                  <span className="font-medium text-ink">{t("lessonSources")}:</span> {lesson.sources}
+                  <span className="font-semibold text-ink">{t("lessonSources")}:</span> {lesson.sources}
                 </p>
                 <p className="mt-1 text-xs text-muted">{t("lessonDraft")}</p>
                 {allowed && (

@@ -39,8 +39,8 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
                 <Link
                   href={it.href}
                   aria-current={active ? "page" : undefined}
-                  className={`inline-flex min-h-11 items-center rounded-lg px-3.5 text-[15px] font-medium transition-colors ${
-                    active ? "bg-accent-soft text-accent" : "text-ink hover:bg-accent-soft hover:text-accent"
+                  className={`inline-flex min-h-11 items-center rounded-lg px-3.5 text-[15px] transition-colors hover:bg-accent-soft ${
+                    active ? "font-semibold text-ink" : "font-normal text-muted hover:text-ink"
                   }`}
                 >
                   {it.label}
@@ -77,7 +77,7 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
                   <Link
                     href={it.href}
                     aria-current={isActive(path, it) ? "page" : undefined}
-                    className={`-mx-2 flex min-h-12 items-center rounded-lg px-2 text-base font-medium ${isActive(path, it) ? "bg-accent-soft text-accent" : ""}`}
+                    className={`-mx-2 flex min-h-12 items-center rounded-lg px-2 text-base hover:bg-accent-soft ${isActive(path, it) ? "font-semibold text-ink" : "font-normal text-muted"}`}
                   >
                     {it.label}
                   </Link>

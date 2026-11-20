@@ -87,7 +87,7 @@ export function NumberCards({ cards, modules, topicTitles }: Props) {
   }, [view, done, flipped, answer]);
 
   const toggle = (active: boolean) =>
-    `min-h-11 rounded-lg px-3 text-sm font-medium ${active ? "bg-accent text-white" : "text-muted hover:bg-accent-soft"}`;
+    `min-h-11 rounded-lg px-3 text-sm font-semibold ${active ? "bg-accent text-white" : "text-muted hover:bg-accent-soft"}`;
 
   return (
     <div className="space-y-6">
@@ -184,13 +184,13 @@ export function NumberCards({ cards, modules, topicTitles }: Props) {
             {mode === "prompt" ? (
               <span className="text-lg leading-snug sm:text-xl">{card.prompt}</span>
             ) : (
-              <span className="text-4xl font-extrabold tabular-nums text-accent-strong sm:text-5xl">{card.value}</span>
+              <span className="text-4xl font-bold tabular-nums text-accent-strong sm:text-5xl">{card.value}</span>
             )}
             <span aria-live="polite" className="w-full">
               {flipped ? (
                 <span className="block border-t border-line pt-4">
                   {mode === "prompt" ? (
-                    <span className="block text-4xl font-extrabold tabular-nums text-accent-strong sm:text-5xl">{card.value}</span>
+                    <span className="block text-4xl font-bold tabular-nums text-accent-strong sm:text-5xl">{card.value}</span>
                   ) : (
                     <span className="block text-lg leading-snug">{card.prompt}</span>
                   )}

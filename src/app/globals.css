@@ -33,6 +33,14 @@ body {
 }
 
 
+/* Figtree biezumi: 400 — teksts, 600 — virsraksti, pogas, izvēlne, izcēlumi, 700 — akcenta skaitļi */
+@layer base {
+  strong,
+  b {
+    font-weight: 600;
+  }
+}
+
 :focus-visible {
   outline: 3px solid var(--color-accent);
   outline-offset: 2px;

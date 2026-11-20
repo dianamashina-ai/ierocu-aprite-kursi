@@ -144,7 +144,7 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true, 
               <li key={questions[i].id}>
                 <Link
                   href={`/jautajums/${questions[i].id}`}
-                  className="inline-flex min-h-11 items-center rounded-lg bg-err-soft px-3 text-sm font-medium text-err"
+                  className="inline-flex min-h-11 items-center rounded-lg bg-err-soft px-3 text-sm font-semibold text-err"
                 >
                   Nr. {questions[i].id}
                 </Link>
@@ -272,7 +272,7 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true, 
                 <h3 className="flex flex-wrap items-center gap-2 font-semibold">
                   {t("explanation")}
                   {q.explanation && q.explanationStatus === "draft" && (
-                    <span className="rounded-full bg-warn-soft px-2 py-0.5 text-xs font-medium text-warn">
+                    <span className="rounded-full bg-warn-soft px-2 py-0.5 text-xs font-semibold text-warn">
                       {t("explanationDraft")}
                     </span>
                   )}
@@ -280,7 +280,7 @@ export function Practice({ questions, seed, topicHref, shuffleQuestions = true, 
                 <p className="mt-1 text-muted">{q.explanation ?? t("explanationMissing")}</p>
                 {q.lawReference && (
                   <p className="mt-2 text-sm">
-                    <span className="font-medium">{t("lawReference")}:</span> {q.lawReference}
+                    <span className="font-semibold">{t("lawReference")}:</span> {q.lawReference}
                   </p>
                 )}
               </div>

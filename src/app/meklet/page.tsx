@@ -32,7 +32,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
 
       {results && (
         <section className="mt-8" aria-live="polite">
-          <p className="font-medium">{t("results", { count: results.length })}</p>
+          <p className="font-semibold">{t("results", { count: results.length })}</p>
           {results.length === 0 && <p className="mt-1 text-muted">{t("noResults")}</p>}
           {results.length === LIMIT && <p className="mt-1 text-sm text-muted">{t("limited", { count: LIMIT })}</p>}
           <ol className="mt-4 divide-y divide-line rounded-xl border border-line bg-white">

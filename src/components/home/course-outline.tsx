@@ -33,7 +33,7 @@ export function CourseOutline({ modules, totals }: { modules: OutlineModule[]; t
 
           <div className="mt-10 rounded-2xl bg-ink p-6 text-white">
             <p className="text-sm text-white/70">Pilns kurss</p>
-            <p className="mt-1 text-4xl font-extrabold tabular-nums">{formatEuro(COURSE_PRODUCT.amountCents)}</p>
+            <p className="mt-1 text-4xl font-bold tabular-nums">{formatEuro(COURSE_PRODUCT.amountCents)}</p>
             <p className="mt-1 text-sm text-white/70">Vienreizējs maksājums, ar PVN. Bez abonementa.</p>
             <Link href="/iegadaties" className="mt-5 inline-flex min-h-12 items-center gap-2 rounded-xl bg-white px-5 font-semibold text-ink hover:bg-white/90">
               Iegūt pilnu piekļuvi <ArrowUpRight aria-hidden="true" className="size-4" />
@@ -46,7 +46,7 @@ export function CourseOutline({ modules, totals }: { modules: OutlineModule[]; t
             <li key={m.id} className="border-b border-line">
               <details className="group">
                 <summary className="flex cursor-pointer list-none items-center gap-5 py-6 [&::-webkit-details-marker]:hidden">
-                  <span className="w-9 shrink-0 text-2xl leading-none font-extrabold tabular-nums text-accent">{pad(m.order)}</span>
+                  <span className="w-9 shrink-0 text-2xl leading-none font-bold tabular-nums text-accent">{pad(m.order)}</span>
                   <span className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2.5 gap-y-1.5">
                     <span className="text-lg font-semibold leading-snug group-hover:text-accent">{m.titleLv}</span>
                     {m.order === 1 && (

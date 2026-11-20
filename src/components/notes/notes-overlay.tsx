@@ -185,7 +185,7 @@ export function NotesOverlay() {
           <button
             type="button"
             onClick={() => setOpenPin(openPin === n.id ? null : n.id)}
-            className="flex size-7 items-center justify-center rounded-full bg-accent text-xs font-bold text-white shadow-lg ring-2 ring-white"
+            className="flex size-7 items-center justify-center rounded-full bg-accent text-xs font-semibold text-white shadow-lg ring-2 ring-white"
             aria-label={`Piezīme ${i + 1}`}
           >
             {i + 1}

@@ -77,7 +77,7 @@ export default async function HomePage() {
                 </p>
               </div>
               <div className="shrink-0 border-line lg:border-l lg:pl-10">
-                <p className="font-extrabold tabular-nums leading-none text-accent">
+                <p className="font-bold tabular-nums leading-none text-accent">
                   <span className="text-6xl">{topicsDone}</span>
                   <span className="text-3xl text-accent-strong">
                     /{course.totals.topics}
@@ -143,7 +143,7 @@ export default async function HomePage() {
               >
                 <div className="flex items-start justify-between">
                   <ModuleIcon moduleId={m.id} />
-                  <span className="text-2xl font-extrabold tabular-nums text-accent-strong">
+                  <span className="text-2xl font-bold tabular-nums text-accent-strong">
                     {pad(m.order)}
                   </span>
                 </div>
@@ -184,7 +184,7 @@ export default async function HomePage() {
                     </>
                   ) : !user ? (
                     free ? (
-                      <span className="font-medium text-ok">Bez maksas</span>
+                      <span className="font-semibold text-ok">Bez maksas</span>
                     ) : (
                       "Pieejams"
                     )

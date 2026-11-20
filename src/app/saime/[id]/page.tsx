@@ -68,7 +68,7 @@ export default async function FamilyPage({
       <h1 className="mt-3 text-2xl font-semibold sm:text-3xl">{t("heading")}</h1>
       <p className="mt-2 max-w-2xl text-muted">{t("lead", { count: qs.length })}</p>
 
-      <blockquote className="mt-6 rounded-xl border-l-4 border-accent bg-white px-5 py-4 text-lg font-medium" lang="lv">
+      <blockquote className="mt-6 rounded-xl border-l-4 border-accent bg-white px-5 py-4 text-lg font-semibold" lang="lv">
         {sharedText}
       </blockquote>
 
@@ -111,7 +111,7 @@ export default async function FamilyPage({
             </div>
             {q.textTokens && (
               <p className="mt-2 text-sm" lang="lv">
-                <span className="font-medium text-warn">{t("textDiffers")}: </span>
+                <span className="font-semibold text-warn">{t("textDiffers")}: </span>
                 <Tokens tokens={q.textTokens} />
               </p>
             )}

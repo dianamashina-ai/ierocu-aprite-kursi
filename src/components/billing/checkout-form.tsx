@@ -14,7 +14,7 @@ export function CheckoutForm({ email, defaultName, priceLabel }: { email: string
   return (
     <form action={action} className="space-y-5">
       <label className="block">
-        <span className="text-sm font-medium">Vārds, uzvārds (rēķinam)</span>
+        <span className="text-sm font-semibold">Vārds, uzvārds (rēķinam)</span>
         <input name="name" required autoComplete="name" defaultValue={f.name ?? defaultName} className={input} />
       </label>
       <p className="text-sm text-muted">
@@ -29,21 +29,21 @@ export function CheckoutForm({ email, defaultName, priceLabel }: { email: string
         <fieldset className="space-y-4 rounded-xl border border-line bg-surface p-4">
           <legend className="sr-only">Uzņēmuma rekvizīti</legend>
           <label className="block">
-            <span className="text-sm font-medium">Uzņēmuma nosaukums</span>
+            <span className="text-sm font-semibold">Uzņēmuma nosaukums</span>
             <input name="company" defaultValue={f.company} className={input} />
           </label>
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="block">
-              <span className="text-sm font-medium">Reģistrācijas Nr.</span>
+              <span className="text-sm font-semibold">Reģistrācijas Nr.</span>
               <input name="regNo" defaultValue={f.regNo} className={input} />
             </label>
             <label className="block">
-              <span className="text-sm font-medium">PVN Nr. (ja ir)</span>
+              <span className="text-sm font-semibold">PVN Nr. (ja ir)</span>
               <input name="vatNo" defaultValue={f.vatNo} className={input} />
             </label>
           </div>
           <label className="block">
-            <span className="text-sm font-medium">Juridiskā adrese</span>
+            <span className="text-sm font-semibold">Juridiskā adrese</span>
             <input name="address" defaultValue={f.address} className={input} />
           </label>
         </fieldset>
@@ -54,7 +54,7 @@ export function CheckoutForm({ email, defaultName, priceLabel }: { email: string
           <input type="checkbox" name="terms" required defaultChecked={f.terms === "on"} className="mt-1 size-5 shrink-0 accent-[var(--color-accent)]" />
           <span className="text-sm">
             Esmu iepazinies un piekrītu{" "}
-            <Link href="/noteikumi" target="_blank" className="font-medium text-accent-strong underline underline-offset-2">
+            <Link href="/noteikumi" target="_blank" className="font-semibold text-accent-strong underline underline-offset-2">
               lietošanas un pirkšanas noteikumiem
             </Link>
             .
