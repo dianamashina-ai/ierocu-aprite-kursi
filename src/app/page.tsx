@@ -110,7 +110,7 @@ export default async function HomePage() {
               type="search"
               name="q"
               placeholder="Meklēt jautājumu vai numuru…"
-              className="block min-h-12 w-full rounded-xl border border-line bg-white pl-11 pr-4 text-base placeholder:text-muted focus:border-accent focus:outline-none"
+              className="block min-h-12 w-full rounded-xl border border-line bg-white pl-11 pr-4 text-base placeholder:text-muted"
             />
           </form>
         </div>

@@ -8,6 +8,7 @@ const ITEMS = [
   { href: "/admin/pasutijumi", label: "Pasūtījumi" },
   { href: "/admin/lietotaji", label: "Lietotāji" },
   { href: "/admin/skaidrojumi", label: "Skaidrojumi" },
+  { href: "/admin/dizaina-sistema", label: "Dizaina sistēma" },
   { href: "/labojumi", label: "Dizaina labojumi" },
 ];
 

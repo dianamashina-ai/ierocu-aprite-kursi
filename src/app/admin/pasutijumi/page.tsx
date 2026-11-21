@@ -50,7 +50,7 @@ export default async function OrdersPage({ searchParams }: { searchParams: Promi
             name="q"
             defaultValue={q}
             placeholder="E-pasts, vārds vai rēķina Nr."
-            className="min-h-10 w-full rounded-lg border border-line bg-white px-3 text-sm focus:border-accent focus:outline-none sm:w-72"
+            className="min-h-10 w-full rounded-lg border border-line bg-white px-3 text-sm sm:w-72"
           />
           <button className="btn-secondary min-h-10 px-4 text-sm">Meklēt</button>
         </form>

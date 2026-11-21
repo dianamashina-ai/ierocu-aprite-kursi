@@ -7,23 +7,23 @@ import { Eye, EyeOff } from "lucide-react";
 import { isStrongPassword, PASSWORD_RULES, WEAK_PASSWORD_MESSAGE } from "@/lib/auth/password-rules";
 import { authClient } from "@/lib/auth/client";
 
-const input =
-  "mt-1 block min-h-12 w-full rounded-xl border-2 border-line bg-white px-4 text-base focus:border-accent focus:outline-none";
 
 export function Field({ label, ...props }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <label className="block">
       <span className="text-sm font-semibold">{label}</span>
-      <input className={input} {...props} />
+      <input className={`mt-1 ${FIELD_CLASS}`} {...props} />
     </label>
   );
 }
 
 /** Pieslēgšanās lapu lauks: pelēks fons, noapaļots; paroles laukam — rādīt/slēpt. */
-const authInput =
-  "block min-h-12 w-full rounded-xl border border-line bg-surface px-4 text-base placeholder:text-muted focus:border-accent focus:bg-white focus:outline-none focus:ring-1 focus:ring-accent";
+/** Teksta lauka stils visā vietnē (fokusā — tikai vispārējā zīmola apmale, sk. globals.css :focus-visible). */
+export const FIELD_CLASS =
+  "block min-h-12 w-full rounded-xl border border-line bg-surface px-4 text-base placeholder:text-muted focus:bg-white";
+const authInput = FIELD_CLASS;
 
-function AuthField({ label, type, ...props }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
+export function AuthField({ label, type, ...props }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
   const [show, setShow] = useState(false);
   const isPassword = type === "password";
   return (

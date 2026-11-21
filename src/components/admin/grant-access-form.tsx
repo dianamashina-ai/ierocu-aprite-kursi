@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, useTransition } from "react";
 import { grantAccessAction } from "@/app/actions/admin";
 
-const input = "mt-1 block min-h-11 w-full rounded-lg border border-line bg-white px-3 text-sm focus:border-accent focus:outline-none";
+const input = "mt-1 block min-h-11 w-full rounded-lg border border-line bg-white px-3 text-sm";
 
 export function GrantAccessForm({ defaultEmail = "", defaultOpen = false }: { defaultEmail?: string; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);

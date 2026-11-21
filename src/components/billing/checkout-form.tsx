@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useActionState } from "react";
 import { checkoutAction, type CheckoutState } from "@/app/actions/billing";
 
-const input = "mt-1 block min-h-12 w-full rounded-xl border-2 border-line bg-white px-4 text-base focus:border-accent focus:outline-none";
+const input = "mt-1 block min-h-12 w-full rounded-xl border-2 border-line bg-white px-4 text-base";
 
 export function CheckoutForm({ email, defaultName, priceLabel }: { email: string; defaultName: string; priceLabel: string }) {
   const [state, action, pending] = useActionState<CheckoutState, FormData>(checkoutAction, {});

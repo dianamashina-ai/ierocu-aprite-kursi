@@ -24,7 +24,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
             defaultValue={query}
             placeholder={t("placeholder")}
             autoFocus={!query}
-            className="mt-1 block min-h-12 w-full rounded-xl border-2 border-line bg-white px-4 text-base focus:border-accent focus:outline-none"
+            className="mt-1 block min-h-12 w-full rounded-xl border-2 border-line bg-white px-4 text-base"
           />
         </label>
         <button type="submit" className="btn-primary">{t("submit")}</button>

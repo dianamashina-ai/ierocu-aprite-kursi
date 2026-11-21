@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { saveExplanationAction } from "@/app/actions/admin";
 
-const field = "mt-1 block w-full rounded-xl border-2 border-line bg-white px-4 py-3 text-base leading-relaxed focus:border-accent focus:outline-none";
+const field = "mt-1 block w-full rounded-xl border-2 border-line bg-white px-4 py-3 text-base leading-relaxed";
 
 export function ExplanationEditor(props: {
   id: number;

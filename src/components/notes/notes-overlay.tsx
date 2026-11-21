@@ -167,7 +167,7 @@ export function NotesOverlay() {
                 if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) save();
               }}
               rows={3}
-              className="mt-1.5 block w-full rounded-lg border border-line p-2 text-[15px] focus:border-accent focus:outline-none"
+              className="mt-1.5 block w-full rounded-lg border border-line p-2 text-[15px]"
               placeholder="Piem.: lielāku virsrakstu, mazāk atstarpes…"
             />
             <div className="mt-2 flex justify-end gap-2">
