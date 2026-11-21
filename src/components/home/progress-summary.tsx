@@ -54,22 +54,19 @@ export function ProgressSummary({ d, totalTopics }: { d: Dashboard; totalTopics:
           <div className="flex items-start justify-between gap-3">
             <p className="text-sm text-muted">{ready ? "Gatavs eksāmenam" : "Kursa progress"}</p>
             <p className="text-sm tabular-nums text-muted">
-              <span className="font-semibold text-ink">{topicsDone}</span> no {totalTopics} tēmām
+              {topicsDone} no {totalTopics} tēmām apgūtas
             </p>
           </div>
-          <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <p className="text-5xl font-bold leading-none tracking-tight tabular-nums">{topicsPct}%</p>
-            <ul aria-label={`Apgūtas ${topicsDone} no ${totalTopics} tēmām`} className="grid w-full grid-cols-[repeat(19,minmax(0,1fr))] gap-1 sm:w-[62%]">
-              {topics.map((t) => (
-                <li
-                  key={t.id}
-                  title={`${t.id} ${t.title}: ${t.percent} %`}
-                  className={`aspect-square w-full max-w-3.5 rounded-full ${
-                    t.percent >= READY_TOPIC_PERCENT ? "bg-accent" : t.answered > 0 ? "bg-accent/25" : "bg-accent-soft"
-                  }`}
-                />
-              ))}
-            </ul>
+          <p className="mt-3 text-5xl font-bold leading-none tracking-tight tabular-nums">{topicsPct}%</p>
+          <div
+            role="progressbar"
+            aria-label="Kursa progress"
+            aria-valuenow={topicsPct}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            className="mt-4 h-2 overflow-hidden rounded-full bg-accent-soft"
+          >
+            <div className="h-full rounded-full bg-accent" style={{ width: `${topicsPct}%` }} />
           </div>
           <div className="mt-auto flex flex-wrap items-center justify-between gap-x-4 gap-y-2 pt-5">
             <Link href={next.href} className="btn-primary">
@@ -89,14 +86,14 @@ export function ProgressSummary({ d, totalTopics }: { d: Dashboard; totalTopics:
             </p>
           </Tile>
 
-          <Tile label="Izmēģinājuma eksāmeni" href="/eksamens" value={`${d.readiness.examsPassed}/3`}>
-            <div className="flex items-center gap-1.5" aria-label="Pēdējie 3 eksāmeni">
+          <Tile label="Izmēģinājuma eksāmeni" href="/eksamens" value={`${d.readiness.examsPassed} no 3`}>
+            <div className="flex items-center gap-1.5" aria-hidden="true">
               {[0, 1, 2].map((i) => {
                 const e = lastExams[i];
                 return <span key={i} className={`size-3.5 rounded-full ${!e ? "bg-accent-soft" : e.passed ? "bg-ok" : "bg-err"}`} />;
               })}
-              <span className="ml-1 text-xs text-muted">pēdējie 3</span>
             </div>
+            <p className="mt-2 text-xs text-muted">Nokārto 3 eksāmenus pēc kārtas — tad būsi gatavs īstajam.</p>
           </Tile>
         </div>
       </div>

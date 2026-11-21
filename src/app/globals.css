@@ -94,3 +94,7 @@ body:has(.auth-page) header.site-header,
 body:has(.auth-page) footer {
   display: none;
 }
+
+html {
+  scroll-padding-top: 6rem;
+}

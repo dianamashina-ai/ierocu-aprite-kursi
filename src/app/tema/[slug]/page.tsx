@@ -5,7 +5,7 @@ import { getTopic, topicIdFromSlug, topicSlug } from "@/lib/content/queries";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LessonBody } from "@/components/lesson-body";
 import { lessonHeadings } from "@/lib/content/lesson-markdown";
-import { ArrowUpRight, Clock, Target, Check } from "lucide-react";
+import { ArrowUpRight, Clock, Target, Check, ChevronDown, TriangleAlert } from "lucide-react";
 import { readLesson } from "@/lib/content/lessons";
 import { getCurrentUser } from "@/lib/auth/session";
 import { canAccessModule } from "@/lib/billing/access";
@@ -245,12 +245,13 @@ export default async function TopicPage({
                         <p className="font-semibold" lang="lv">
                           <span className="mr-2 font-normal tabular-nums text-muted">{q.id}.</span>
                           {q.text}
-                          {q.familyId && (
-                            <span className="ml-2 inline-block rounded-full bg-accent-soft px-2 py-0.5 align-middle text-xs font-normal text-accent-strong">
-                              {t("similarBadge")}
-                            </span>
-                          )}
                         </p>
+                        {q.familyId && (
+                          <p className="mt-1.5 flex items-center gap-1.5 text-sm text-warn">
+                            <TriangleAlert aria-hidden="true" className="size-4 shrink-0" />
+                            {t("similarBadge")}
+                          </p>
+                        )}
                         <ul className="mt-2 space-y-1.5" lang="lv">
                           {q.options.map((o) => {
                             const correct = allowed && o.key === q.correctKey;
@@ -285,12 +286,18 @@ export default async function TopicPage({
                           })}
                         </ul>
                         {allowed && (
-                          <Link
-                            href={`/jautajums/${q.id}`}
-                            className="mt-2 inline-block text-sm font-semibold text-accent-strong hover:underline"
-                          >
-                            Skaidrojums →
-                          </Link>
+                          <details className="group/sk mt-2">
+                            <summary className="inline-flex min-h-10 cursor-pointer list-none items-center gap-1 text-sm font-semibold text-accent-strong [&::-webkit-details-marker]:hidden">
+                              Skaidrojums
+                              <ChevronDown aria-hidden="true" className="size-4 transition-transform group-open/sk:rotate-180" />
+                            </summary>
+                            <div className="rounded-lg border border-line p-3 text-[15px] leading-relaxed" lang="lv">
+                              {q.explanation ?? "Skaidrojums šim jautājumam vēl tiek gatavots."}
+                              {q.explanation && q.explanationStatus === "draft" && (
+                                <p className="mt-2 text-xs text-muted">Skaidrojums tiek pārbaudīts.</p>
+                              )}
+                            </div>
+                          </details>
                         )}
                       </div>
                     </div>

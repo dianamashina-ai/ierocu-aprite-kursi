@@ -11,7 +11,7 @@ test("ceļš: sākums → modulis → tēma → treniņš", async ({ page }) => 
   await expect(page).toHaveURL(/\/modulis\/M1$/);
   await page.getByRole("link", { name: /Pamatjēdzieni un darbības princips/ }).click();
   await expect(page).toHaveURL(/\/tema\/1-1$/);
-  await page.getByRole("link", { name: /Trenēties \(15\)/ }).click();
+  await page.getByRole("link", { name: "Trenēt tēmas jautājumus" }).click();
   await expect(page.getByText("Jautājums 1 no 15")).toBeVisible();
 });
 

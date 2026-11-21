@@ -72,14 +72,14 @@ export function TrainingBuilder({ modules }: { modules: BuilderModule[] }) {
     <div className="max-w-xl rounded-2xl border border-line bg-white p-5 sm:p-6">
       {/* Moduļi */}
       <div ref={boxRef} className="relative">
-        <p id="moduli-l" className="text-sm font-semibold">Moduļi</p>
+        <p id="moduli-l" className="sr-only">Moduļi</p>
         <button
           type="button"
           aria-haspopup="listbox"
           aria-expanded={open}
           aria-labelledby="moduli-l moduli-v"
           onClick={() => setOpen((o) => !o)}
-          className="mt-1 flex min-h-12 w-full items-center justify-between gap-3 rounded-xl border border-line bg-surface px-4 text-left text-base"
+          className="flex min-h-12 w-full items-center justify-between gap-3 rounded-xl border border-line bg-surface px-4 text-left text-base"
         >
           <span id="moduli-v" className="truncate">{summary}</span>
           <ChevronDown aria-hidden="true" className={`size-5 shrink-0 text-muted transition-transform ${open ? "rotate-180" : ""}`} />
