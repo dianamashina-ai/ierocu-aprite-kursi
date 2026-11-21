@@ -5,7 +5,7 @@ import { getTopic, topicIdFromSlug, topicSlug } from "@/lib/content/queries";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LessonBody } from "@/components/lesson-body";
 import { lessonHeadings } from "@/lib/content/lesson-markdown";
-import { ArrowUpRight, Clock, Target } from "lucide-react";
+import { ArrowUpRight, Clock, Target, ChevronDown } from "lucide-react";
 import { readLesson } from "@/lib/content/lessons";
 import { getCurrentUser } from "@/lib/auth/session";
 import { canAccessModule } from "@/lib/billing/access";
@@ -146,7 +146,7 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
           <details className="group mt-12 rounded-2xl border border-line bg-white">
             <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 px-5 font-semibold">
               {t("questionsHeading")} ({questions.length})
-              <span aria-hidden="true" className="text-muted transition-transform group-open:rotate-180">⌄</span>
+              <ChevronDown aria-hidden="true" className="size-5 shrink-0 text-muted transition-transform group-open:rotate-180" />
             </summary>
             <ol className="divide-y divide-line border-t border-line">
               {questions.map((q) => (

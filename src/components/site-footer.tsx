@@ -19,7 +19,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
       { href: "/pieslegties", label: "Pieslēgties" },
       { href: "/registreties", label: "Izveidot kontu" },
       { href: "/konts", label: "Mans konts" },
-      { href: "/kludas", label: "Kļūdu labošana" },
+      { href: "/trenins", label: "Trenēties" },
       { href: "/parole/aizmirsta", label: "Aizmirsi paroli?" },
     ],
   },

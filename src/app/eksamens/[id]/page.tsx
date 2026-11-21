@@ -65,7 +65,7 @@ export default async function ExamPage({
 
       <div className="mt-6 flex flex-wrap gap-3">
         <Link href="/eksamens" className="btn-primary">Jauns eksāmens</Link>
-        <Link href="/kludas" className="btn-secondary">Kļūdu labošana</Link>
+        <Link href="/trenins" className="btn-secondary">Trenēties</Link>
       </div>
 
       <div className="mt-10 flex flex-wrap items-baseline justify-between gap-3">

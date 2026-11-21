@@ -152,7 +152,7 @@ export default async function HomePage() {
                 </p>
                 <div className="mt-6 flex items-center justify-between gap-3 text-sm">
                   <span>
-                    {m.topics.length} tēmas · Jautājumi: {m.questionCount}
+                    {m.topics.length} tēmas • {m.questionCount} jautājumi
                   </span>
                   <ArrowUpRight
                     aria-hidden="true"

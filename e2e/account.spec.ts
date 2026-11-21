@@ -54,9 +54,23 @@ test("atbildes saglabājas; kļūda nonāk kļūdu sarakstā; panelis rāda prog
   await page.waitForTimeout(500); // servera darbība
   await page.goto("/");
   await expect(page.getByText(/514 vēl nav atbildēti/)).toBeVisible();
-  await page.goto("/kludas?visas=1");
-  if (wasCorrect) await expect(page.getByText("Kļūdu nav.")).toBeVisible();
-  else await expect(page.locator("fieldset button").first()).toBeVisible();
+  // kļūda redzama treniņa izvēlē pie tēmas
+  await page.goto("/trenins");
+  if (wasCorrect) await expect(page.getByText(/\d+ kļūd/)).toHaveCount(0);
+  else await expect(page.getByText("1 kļūda").first()).toBeVisible();
+});
+
+test("trenēties: izvēlas tēmu un skaitu → treniņš ar izvēlēto jautājumu skaitu", async ({ page }) => {
+  await signUp(page, uniqueEmail("trenins"));
+  await buyAccess(page);
+  await page.goto("/trenins");
+  await expect(page.getByRole("heading", { name: "Trenēties", level: 1 })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Sākt treniņu/ })).toBeDisabled();
+  await page.getByLabel(/1\.1 Pamatjēdzieni/).check();
+  await page.getByRole("radio", { name: "10" }).check({ force: true });
+  await page.getByRole("button", { name: "Sākt treniņu · 10 jaut." }).click();
+  await expect(page).toHaveURL(/\/trenins\/sakt\?temas=1\.1&skaits=10/);
+  await expect(page.getByText("Jautājums 1 no 10")).toBeVisible();
 });
 
 test("izmēģinājuma eksāmens: sākt, atbildēt, turpināt pēc pārlādes, pabeigt, rezultāts", async ({ page }) => {
@@ -113,7 +127,7 @@ test("viesis var trenēties, bet kļūdu saraksts prasa pieslēgšanos", async (
   await page.goto("/tema/1-1/trenins");
   await page.locator("fieldset button").first().click();
   await expect(page.getByText(/^(Pareizi|Nepareizi\. Pareizā atbilde: [A-F])$/).first()).toBeVisible();
-  await page.goto("/kludas");
+  await page.goto("/trenins");
   await expect(page).toHaveURL(/\/pieslegties/);
 });
 

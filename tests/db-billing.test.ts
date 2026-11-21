@@ -167,4 +167,30 @@ describe.skipIf(!url)("maksājumi (DB)", async () => {
     expect((await db.query.user.findFirst({ where: eq(schema.user.id, "g1") }))?.emailVerified).toBe(true);
     expect(await db.select().from(schema.account).where(eq(schema.account.userId, "g2"))).toHaveLength(1);
   });
+
+  it("treniņš: izvēlētās tēmas, limits; “tikai kļūdas” — kļūdainākie vispirms", async () => {
+    const training = await import("@/lib/training/service");
+    const { eq } = await import("drizzle-orm");
+    const [q] = await db.select().from(schema.questions).where(eq(schema.questions.id, 422));
+    const sameTopic = (await db.select({ id: schema.questions.id }).from(schema.questions).where(eq(schema.questions.topicId, q.topicId))).map((r) => r.id);
+    const other = sameTopic.find((id) => id !== 422)!;
+    await db.insert(schema.answers).values([
+      { userId: "u1", questionId: other, selectedKey: "a", isCorrect: false, mode: "practice" },
+      { userId: "u1", questionId: 422, selectedKey: "a", isCorrect: false, mode: "practice" },
+      { userId: "u1", questionId: 422, selectedKey: "b", isCorrect: false, mode: "practice" },
+      { userId: "u1", questionId: 422, selectedKey: "c", isCorrect: true, mode: "practice" },
+    ]);
+    const all = await training.buildTraining("u1", { topicIds: [q.topicId], mistakesOnly: false, limit: 0 });
+    expect(all.sort((a, b) => a - b)).toEqual([...sameTopic].sort((a, b) => a - b));
+    expect(await training.buildTraining("u1", { topicIds: [q.topicId], mistakesOnly: false, limit: 5 })).toHaveLength(5);
+    expect(await training.buildTraining("u1", { topicIds: [q.topicId], mistakesOnly: true, limit: 0 })).toEqual([422, other]);
+    expect((await training.getMistakesByTopic("u1")).get(q.topicId)).toBe(2);
+    expect(await training.buildTraining("u1", { topicIds: [], mistakesOnly: false, limit: 0 })).toEqual([]);
+    expect(training.parseTrainingParams({ temas: "1.1,9.2,x;drop,10.10", kludas: "1", skaits: "20" })).toEqual({
+      topicIds: ["1.1", "9.2", "10.10"],
+      mistakesOnly: true,
+      limit: 20,
+    });
+    expect(training.parseTrainingParams({ skaits: "999" }).limit).toBe(0);
+  });
 });

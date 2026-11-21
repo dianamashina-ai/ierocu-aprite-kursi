@@ -9,7 +9,7 @@ export async function SiteHeader() {
   const access = await hasFullAccess(user?.id);
   const items: NavItem[] = [
     { href: "/", label: "Mācību kurss", match: ["/modulis", "/tema", "/jautajums", "/saime"] },
-    ...(user ? [{ href: "/kludas", label: "Kļūdas" }] : []),
+    ...(user ? [{ href: "/trenins", label: "Trenēties" }] : []),
     { href: "/eksamens", label: "Eksāmens" },
     { href: "/meklet", label: "Meklēt" },
     ...(isAdmin(user) ? [{ href: "/admin", label: "Admin", match: ["/labojumi"] }] : []),

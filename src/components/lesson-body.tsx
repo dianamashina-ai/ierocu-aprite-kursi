@@ -34,7 +34,7 @@ export function LessonBody({ markdown }: { markdown: string }) {
             const items = rest.filter((l) => l.startsWith("- ")).map((l) => l.slice(2));
             const text = rest.filter((l) => !l.startsWith("- "));
             return (
-              <aside key={i} className="rounded-xl border-l-4 border-brand bg-accent-soft p-4">
+              <aside key={i} className="rounded-xl bg-surface p-4">
                 <p className="font-semibold text-accent-strong">{inline(title)}</p>
                 {text.map((t, j) => <p key={j} className="mt-1">{inline(t)}</p>)}
                 {items.length > 0 && (

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { topicSlug } from "@/lib/content/queries";
 import { READY_TOPIC_PERCENT } from "@/lib/progress/readiness";
 import type { getDashboard } from "@/lib/progress/service";
 
@@ -45,7 +44,7 @@ export function ProgressSummary({ d, totalTopics }: { d: Dashboard; totalTopics:
     !started
       ? { href: "/modulis/M1", label: "Sākt ar 1. moduli" }
       : d.dueReviews > 0
-        ? { href: "/kludas", label: `Atkārtot kļūdas (${d.dueReviews})` }
+        ? { href: "/trenins/sakt?atkartot=1", label: `Atkārtot kļūdas (${d.dueReviews})` }
         : { href: "/eksamens", label: "Izmēģinājuma eksāmens" };
 
   return (
@@ -79,14 +78,6 @@ export function ProgressSummary({ d, totalTopics }: { d: Dashboard; totalTopics:
             <Link href={next.href} className="btn-primary">
               {next.label}
             </Link>
-            {d.weakTopics.length > 0 && (
-              <p className="text-sm text-muted">
-                Vājākā tēma:{" "}
-                <Link href={`/tema/${topicSlug(d.weakTopics[0].id)}/trenins`} className="font-semibold text-ink underline underline-offset-4">
-                  {d.weakTopics[0].id} {d.weakTopics[0].title}
-                </Link>
-              </p>
-            )}
           </div>
         </div>
 
@@ -101,7 +92,7 @@ export function ProgressSummary({ d, totalTopics }: { d: Dashboard; totalTopics:
             </div>
           </Tile>
 
-          <Tile label="Kļūdas" href="/kludas" value={d.dueReviews}>
+          <Tile label="Kļūdas" href={d.dueReviews > 0 ? "/trenins/sakt?atkartot=1" : "/trenins"} value={d.dueReviews}>
             <p className="text-xs text-muted">{d.dueReviews > 0 ? "jāatkārto šodien" : "šodien nekas nav jāatkārto"}</p>
           </Tile>
 

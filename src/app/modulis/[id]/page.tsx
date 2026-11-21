@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowUpRight, Lock, Target } from "lucide-react";
+import { ArrowRight, Lock, Target } from "lucide-react";
 import { getModule, topicSlug } from "@/lib/content/queries";
 import { readLesson } from "@/lib/content/lessons";
 import { Breadcrumbs } from "@/components/breadcrumbs";
@@ -68,7 +68,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
                       </span>
                     </span>
                     {allowed ? (
-                      <ArrowUpRight aria-hidden="true" className="size-5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                      <ArrowRight aria-hidden="true" className="size-5 shrink-0 transition-transform group-hover:translate-x-0.5" />
                     ) : (
                       <Lock aria-label="slēgts" className="size-4 shrink-0 text-muted" />
                     )}
@@ -93,7 +93,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
                 Šajā modulī ir {m.questionCount} jautājumi. Pēc katras atbildes redzēsi skaidrojumu ar atsauci uz likumu.
               </p>
               <Link href={`/modulis/${m.id}/trenins`} className="btn-primary mt-6 w-full gap-2">
-                Trenēties visā modulī <ArrowUpRight aria-hidden="true" className="size-4" />
+                Trenēties visā modulī <ArrowRight aria-hidden="true" className="size-4" />
               </Link>
             </div>
           ) : (
