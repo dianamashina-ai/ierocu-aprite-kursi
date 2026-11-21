@@ -105,11 +105,9 @@ function GoogleButton({ next }: { next: string }) {
     <button
       type="button"
       onClick={() => authClient.signIn.social({ provider: "google", callbackURL: next, errorCallbackURL: "/pieslegties" })}
-      className="btn-primary w-full gap-3"
+      className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-xl border border-line bg-white px-5 font-semibold text-ink transition-colors hover:border-ink hover:bg-surface"
     >
-      <span className="flex size-7 items-center justify-center rounded-full bg-white">
-        <GoogleIcon />
-      </span>
+      <GoogleIcon />
       Turpināt ar Google
     </button>
   );
@@ -218,7 +216,7 @@ export function SignInForm({ next, google, initialEmail }: { next: string; googl
             </div>
           )}
           {error && <ErrorText>{error}</ErrorText>}
-          <button type="submit" disabled={busy} className={`${google ? "btn-secondary" : "btn-primary"} w-full disabled:opacity-60`}>
+          <button type="submit" disabled={busy} className="btn-primary w-full disabled:opacity-60">
             {tab === "password" ? "Pieslēgties" : "Sūtīt saiti"}
           </button>
         </form>
@@ -276,7 +274,7 @@ export function SignUpForm({ next, google }: { next: string; google: boolean }) 
           onChange={(e) => setPassword(e.target.value)}
         />
         {error && <ErrorText>{error}</ErrorText>}
-        <button type="submit" disabled={busy} className={`${google ? "btn-secondary" : "btn-primary"} w-full disabled:opacity-60`}>
+        <button type="submit" disabled={busy} className="btn-primary w-full disabled:opacity-60">
           Izveidot kontu
         </button>
       </form>
