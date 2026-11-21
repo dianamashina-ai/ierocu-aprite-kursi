@@ -17,14 +17,14 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
       <h1 className="text-3xl font-semibold">{t("heading")}</h1>
       <form action="/meklet" method="get" role="search" className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-end">
         <label className="flex-1">
-          <span className="text-sm text-muted">{t("label")}</span>
+          <span className="sr-only">{t("label")}</span>
           <input
             type="search"
             name="q"
             defaultValue={query}
             placeholder={t("placeholder")}
             autoFocus={!query}
-            className="mt-1 block min-h-12 w-full rounded-xl border-2 border-line bg-white px-4 text-base"
+            className="block min-h-12 w-full rounded-xl border border-line bg-white px-4 text-base placeholder:text-muted"
           />
         </label>
         <button type="submit" className="btn-primary">{t("submit")}</button>

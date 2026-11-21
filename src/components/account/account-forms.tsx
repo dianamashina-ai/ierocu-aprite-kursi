@@ -36,9 +36,9 @@ export function NameForm({ name }: { name: string }) {
         router.refresh();
       }}
     >
-      <Field label="Vārds" name="name" autoComplete="name" value={value} onChange={(e) => setValue(e.target.value)} maxLength={100} />
+      <Field label="Vārds un uzvārds" name="name" required autoComplete="name" value={value} onChange={(e) => setValue(e.target.value)} maxLength={100} />
       {error && <ErrorText>{error}</ErrorText>}
-      {saved && <Saved>Vārds saglabāts.</Saved>}
+      {saved && <Saved>Saglabāts.</Saved>}
       <button type="submit" className="btn-secondary" disabled={busy || value.trim() === name}>
         Saglabāt
       </button>

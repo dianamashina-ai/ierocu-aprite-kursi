@@ -194,7 +194,7 @@ export default function DesignSystemPage() {
 
       <Section id="pazinojumi" title="Paziņojumi">
         <div className="grid max-w-2xl gap-3">
-          <p role="status" className="rounded-lg bg-ok-soft px-4 py-3 text-sm text-ok">Vārds saglabāts.</p>
+          <p role="status" className="rounded-lg bg-ok-soft px-4 py-3 text-sm text-ok">Saglabāts.</p>
           <p className="rounded-lg bg-err-soft px-4 py-3 text-sm text-err">Atmaksa neizdevās: maksājums nav atrasts.</p>
           <p className="rounded-xl bg-warn-soft px-4 py-3 text-sm text-warn">
             Ieslēgti <strong>testa maksājumi</strong> — īstu maksājumu vēl nav.

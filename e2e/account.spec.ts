@@ -141,11 +141,11 @@ test("mans konts: vārds, parole, e-pasta maiņa ar apstiprinājumu", async ({ p
   const email = uniqueEmail("konts");
   await signUp(page, email);
   await page.goto("/konts");
-  await expect(page.getByRole("heading", { name: "Mans konts" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Profils" })).toBeVisible();
 
-  await page.getByLabel("Vārds").fill("Anna");
+  await page.getByLabel("Vārds un uzvārds").fill("Anna");
   await page.getByRole("button", { name: "Saglabāt" }).click();
-  await expect(page.getByText("Vārds saglabāts.")).toBeVisible();
+  await expect(page.getByText("Saglabāts.")).toBeVisible();
 
   await page.getByLabel("Pašreizējā parole").fill("nepareiza-parole");
   await page.getByLabel("Jaunā parole", { exact: true }).fill("Jauna-Parole-456!");
