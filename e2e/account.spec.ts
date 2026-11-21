@@ -54,7 +54,6 @@ test("atbildes saglabājas; kļūda nonāk kļūdu sarakstā; panelis rāda prog
   await page.waitForTimeout(500); // servera darbība
   await page.goto("/");
   await expect(page.getByText(wasCorrect ? /^1 no 515$/ : /^0 no 515$/)).toBeVisible();
-  await expect(page.getByRole("link", { name: wasCorrect ? "Izmēģinājuma eksāmens" : "Labot kļūdas (1)" }).first()).toBeVisible();
   // kļūda redzama treniņa izvēlē pie tēmas
   await page.goto("/trenins");
   if (wasCorrect) await expect(page.getByText("Kļūdu pagaidām nav.")).toBeVisible();

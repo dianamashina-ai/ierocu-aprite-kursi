@@ -68,7 +68,7 @@ export default function DesignSystemPage() {
         Šeit ir īstie vietnes komponenti. Ja kaut kas jāmaina, spied <strong>Labot</strong> un atzīmē elementu — izmaiņas tiks
         piemērotas visā vietnē.
       </p>
-      <nav aria-label="Saturs" className="mt-6 flex flex-wrap gap-2">
+      <nav aria-label="Saturs" className="mb-8 mt-6 flex flex-wrap gap-2">
         {TOC.map(([id, label]) => (
           <a key={id} href={`#${id}`} className="rounded-full border border-line px-3 py-1.5 text-sm text-muted hover:border-ink hover:text-ink">
             {label}

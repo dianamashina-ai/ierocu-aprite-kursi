@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Lock, Search } from "lucide-react";
+import { ArrowUpRight, Lock } from "lucide-react";
 import { getCourseOverview } from "@/lib/content/queries";
 import { getCurrentUser } from "@/lib/auth/session";
 import { hasFullAccess, isFreeModule } from "@/lib/billing/access";
@@ -88,34 +88,14 @@ export default async function HomePage() {
 
         <div
           id="moduli"
-          className={`mt-14 flex scroll-mt-6 flex-col gap-4 border-y border-line py-5 sm:flex-row sm:items-center sm:justify-between`}
+          className="mt-14 scroll-mt-24"
         >
           <h2 className="text-3xl font-semibold tracking-tight">
             Moduļi
           </h2>
-          <form
-            action="/meklet"
-            role="search"
-            className="relative w-full sm:w-80"
-          >
-            <Search
-              aria-hidden="true"
-              className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-muted"
-            />
-            <label htmlFor="home-search" className="sr-only">
-              Meklēt jautājumu
-            </label>
-            <input
-              id="home-search"
-              type="search"
-              name="q"
-              placeholder="Meklēt jautājumu vai numuru…"
-              className="block min-h-12 w-full rounded-xl border border-line bg-white pl-11 pr-4 text-base placeholder:text-muted"
-            />
-          </form>
         </div>
 
-        <ol className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ol className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {course.modules.map((m) => {
             const free = isFreeModule(m.id);
             const locked = !free && !access;

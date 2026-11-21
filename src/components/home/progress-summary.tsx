@@ -36,14 +36,8 @@ export function ProgressSummary({ d, totalTopics }: { d: Dashboard; totalTopics:
   const topicsPct = totalTopics ? Math.round((topicsDone / totalTopics) * 100) : 0;
   const masteredPct = d.totalQuestions ? Math.round((d.masteredQuestions / d.totalQuestions) * 100) : 0;
   const lastExams = d.exams.slice(0, 3);
-  const started = d.answeredQuestions > 0;
   const ready = d.readiness.ready;
 
-  const next = !started
-    ? { href: "/modulis/M1", label: "Sākt ar 1. moduli" }
-    : d.mistakes > 0
-      ? { href: "/trenins/sakt?kludas=1", label: `Labot kļūdas (${d.mistakes})` }
-      : { href: "/eksamens", label: "Izmēģinājuma eksāmens" };
 
   return (
     <section aria-labelledby="progress-h" className="mt-10">
@@ -68,12 +62,7 @@ export function ProgressSummary({ d, totalTopics }: { d: Dashboard; totalTopics:
           >
             <div className="h-full rounded-full bg-accent" style={{ width: `${topicsPct}%` }} />
           </div>
-          <div className="mt-auto flex flex-wrap items-center justify-between gap-x-4 gap-y-2 pt-5">
-            <Link href={next.href} className="btn-primary">
-              {next.label}
-            </Link>
-            <p className="text-xs text-muted">Tēma apgūta, ja pareizi atbildēts uz {READY_TOPIC_PERCENT} % jautājumu.</p>
-          </div>
+          <p className="mt-4 text-xs text-muted">Tēma apgūta, ja pareizi atbildēts uz {READY_TOPIC_PERCENT} % jautājumu.</p>
         </div>
 
         <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:contents">
