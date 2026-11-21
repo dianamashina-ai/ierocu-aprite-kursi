@@ -202,12 +202,9 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
               )}
             </div>
 
-            <div className="mt-8 border-t border-line pt-6">
-              {!confirming ? (
-                <button type="button" className="btn-ghost px-0" onClick={() => setConfirming(true)}>
-                  Pabeigt eksāmenu
-                </button>
-              ) : (
+            {/* apstiprinājums — tikai no pēdējā jautājuma pogas “Pabeigt eksāmenu” */}
+            {confirming && (
+              <div className="mt-8">
                 <div
                   role="dialog"
                   aria-labelledby="confirm-h"
@@ -228,8 +225,8 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
                     </button>
                   </div>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </article>
       </div>

@@ -84,16 +84,21 @@ test("izmēģinājuma eksāmens: sākt, atbildēt, turpināt pēc pārlādes, pa
   await expect(page).toHaveURL(examUrl);
   await expect(page.getByText("Jautājums 4 no 40")).toBeVisible();
 
-  await page.getByRole("button", { name: "Pabeigt eksāmenu" }).last().click();
-  await expect(page.getByText(/Neatbildēti 37 jautājumi/)).toBeVisible();
+  // pirms pēdējā jautājuma pabeigt nevar — nav pogas “Pabeigt eksāmenu”
+  await expect(page.getByRole("button", { name: "Pabeigt eksāmenu" })).toHaveCount(0);
+  for (let i = 3; i < 40; i++) {
+    await page.locator("fieldset button").first().click();
+    if (i < 39) await page.getByRole("button", { name: /^Nākamais/ }).click();
+  }
+  await expect(page.getByText("Jautājums 40 no 40")).toBeVisible();
+  await page.getByRole("button", { name: "Pabeigt eksāmenu" }).click();
+  await expect(page.getByText("Visi jautājumi atbildēti.")).toBeVisible();
   await page.getByRole("button", { name: "Jā, pabeigt" }).click();
-  await expect(page.getByRole("heading", { name: "Eksāmens nav nokārtots" })).toBeVisible();
-  await expect(page.getByText("Nav atbildēts").first()).toBeVisible();
-  await page.getByRole("link", { name: "Rādīt tikai kļūdas" }).click();
-  await expect(page.locator("ol > li")).toHaveCount(await page.locator("ol > li").count());
+  await expect(page.getByRole("heading", { name: /^Eksāmens (nav )?nokārtots$/ })).toBeVisible();
 
   await page.goto("/eksamens");
-  await expect(page.getByText("Nav nokārtots").first()).toBeVisible();
+  await expect(page.getByRole("button", { name: "Sākt eksāmenu" })).toBeVisible();
+  await expect(page.getByText(/^(Nokārtots|Nav nokārtots)$/).first()).toBeVisible();
 });
 
 test("viesis var trenēties, bet kļūdu saraksts prasa pieslēgšanos", async ({ page }) => {
