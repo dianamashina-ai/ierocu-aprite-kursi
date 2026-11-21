@@ -76,7 +76,7 @@ test("administrācija: manuāla piekļuve jaunam lietotājam un uzaicinājums", 
   await page.goto(link);
   await expect(page.getByRole("heading", { name: "Iestati paroli" })).toBeVisible();
   await expect(page.getByText(email)).toBeVisible();
-  await page.getByLabel(/Jaunā parole/).fill("klienta-parole-1");
+  await page.getByLabel(/Jaunā parole/).fill("Klienta-Parole-1!");
   await page.getByRole("button", { name: "Saglabāt un sākt mācīties" }).click();
   await expect(page).toHaveURL(/^https?:\/\/[^/]+\/$/);
   await page.goto("/konts");

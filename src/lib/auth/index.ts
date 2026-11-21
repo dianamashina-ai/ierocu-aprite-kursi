@@ -1,5 +1,7 @@
 import "server-only";
 import { betterAuth } from "better-auth";
+import { APIError, createAuthMiddleware } from "better-auth/api";
+import { isStrongPassword, WEAK_PASSWORD_MESSAGE } from "./password-rules";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 import { magicLink } from "better-auth/plugins/magic-link";
@@ -25,6 +27,7 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 8,
+    maxPasswordLength: 128,
     autoSignIn: true,
     // paroles iestatīšana pēc saites e-pastā apliecina, ka e-pasts pieder lietotājam
     onPasswordReset: async ({ user }) => {
@@ -59,6 +62,19 @@ export const auth = betterAuth({
   session: {
     expiresIn: 60 * 60 * 24 * 60, // 60 dienas
     updateAge: 60 * 60 * 24,
+  },
+  // Stipra parole visur, kur to iestata (reģistrācija, atjaunošana, maiņa)
+  hooks: {
+    before: createAuthMiddleware(async (ctx) => {
+      const pw =
+        ctx.path === "/sign-up/email" ? ctx.body?.password : ctx.path === "/reset-password" || ctx.path === "/change-password" ? ctx.body?.newPassword : undefined;
+      if (typeof pw === "string" && !isStrongPassword(pw)) {
+        throw new APIError("BAD_REQUEST", { message: WEAK_PASSWORD_MESSAGE, code: "WEAK_PASSWORD" });
+      }
+      if (ctx.path === "/sign-up/email" && typeof ctx.body?.name === "string" && ctx.body.name.trim().length < 2) {
+        throw new APIError("BAD_REQUEST", { message: "Norādi vārdu un uzvārdu.", code: "NAME_REQUIRED" });
+      }
+    }),
   },
   // Google pieslēgšanās piesaistās esošam kontam ar to pašu e-pastu (Google e-pastu ir pārbaudījis)
   account: {

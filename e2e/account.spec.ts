@@ -15,7 +15,7 @@ test("reģistrācija → mācību kurss ar progresu → iziet → pieslēgties a
   await page.getByLabel("Parole").fill("nepareiza-parole");
   await page.getByRole("button", { name: "Pieslēgties" }).click();
   await expect(page.locator("form [role=alert]")).toHaveText("Nepareizs e-pasts vai parole.");
-  await page.getByLabel("Parole").fill("drosa-parole-123");
+  await page.getByLabel("Parole").fill("Drosa-Parole-123!");
   await page.getByRole("button", { name: "Pieslēgties" }).click();
   await expect(page).toHaveURL(/\/konts$/);
 });
@@ -35,11 +35,11 @@ test("aizmirsta parole: saite e-pastā → jauna parole → pieslēgšanās", as
   const mail = outbox.find((m: { to: string; subject: string }) => m.to === email && /Paroles/.test(m.subject));
   await page.goto(mail.text.match(/https?:\/\/\S+/)[0]);
   await expect(page).toHaveURL(/\/parole\/jauna\?token=/);
-  await page.getByLabel(/Jaunā parole/).fill("jauna-parole-789");
+  await page.getByLabel(/Jaunā parole/).fill("Jauna-Parole-789!");
   await page.getByRole("button", { name: "Saglabāt paroli" }).click();
   await expect(page).toHaveURL(/\/pieslegties\?parole=mainita/);
   await page.getByLabel("E-pasts").fill(email);
-  await page.getByLabel("Parole", { exact: true }).fill("jauna-parole-789");
+  await page.getByLabel("Parole", { exact: true }).fill("Jauna-Parole-789!");
   await page.getByRole("button", { name: "Pieslēgties" }).click();
   await expect(page).toHaveURL(/^https?:\/\/[^/]+\/$/);
 });
@@ -128,11 +128,11 @@ test("mans konts: vārds, parole, e-pasta maiņa ar apstiprinājumu", async ({ p
   await expect(page.getByText("Vārds saglabāts.")).toBeVisible();
 
   await page.getByLabel("Pašreizējā parole").fill("nepareiza-parole");
-  await page.getByLabel("Jaunā parole", { exact: true }).fill("jauna-parole-456");
-  await page.getByLabel("Jaunā parole vēlreiz").fill("jauna-parole-456");
+  await page.getByLabel("Jaunā parole", { exact: true }).fill("Jauna-Parole-456!");
+  await page.getByLabel("Jaunā parole vēlreiz").fill("Jauna-Parole-456!");
   await page.getByRole("button", { name: "Mainīt paroli" }).click();
   await expect(page.getByText("Pašreizējā parole nav pareiza.")).toBeVisible();
-  await page.getByLabel("Pašreizējā parole").fill("drosa-parole-123");
+  await page.getByLabel("Pašreizējā parole").fill("Drosa-Parole-123!");
   await page.getByRole("button", { name: "Mainīt paroli" }).click();
   await expect(page.getByText(/Parole nomainīta/)).toBeVisible();
 
@@ -149,7 +149,7 @@ test("mans konts: vārds, parole, e-pasta maiņa ar apstiprinājumu", async ({ p
   await signOut(page);
   await page.goto("/pieslegties");
   await page.getByLabel("E-pasts").fill(newEmail);
-  await page.getByLabel("Parole").fill("jauna-parole-456");
+  await page.getByLabel("Parole").fill("Jauna-Parole-456!");
   await page.getByRole("button", { name: "Pieslēgties" }).click();
   await expect(page).toHaveURL(/^https?:\/\/[^/]+\/$/);
 });

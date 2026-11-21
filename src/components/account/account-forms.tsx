@@ -3,7 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { authClient } from "@/lib/auth/client";
-import { ErrorText, Field, lvError } from "@/components/auth/forms";
+import { ErrorText, Field, lvError, PasswordRules } from "@/components/auth/forms";
+import { isStrongPassword } from "@/lib/auth/password-rules";
 
 function Saved({ children }: { children: React.ReactNode }) {
   return (
@@ -101,7 +102,7 @@ export function PasswordForm() {
         setError(null);
         setSaved(false);
         if (next !== repeat) return setError("Jaunās paroles nesakrīt.");
-        if (next.length < 8) return setError(lvError("PASSWORD_TOO_SHORT"));
+        if (!isStrongPassword(next)) return setError(lvError("WEAK_PASSWORD"));
         setBusy(true);
         const { error } = await authClient.changePassword({ currentPassword: current, newPassword: next, revokeOtherSessions: true });
         setBusy(false);
@@ -113,7 +114,10 @@ export function PasswordForm() {
       }}
     >
       <Field label="Pašreizējā parole" type="password" name="current-password" autoComplete="current-password" required value={current} onChange={(e) => setCurrent(e.target.value)} />
-      <Field label="Jaunā parole" type="password" name="new-password" autoComplete="new-password" required minLength={8} value={next} onChange={(e) => setNext(e.target.value)} />
+      <div>
+        <Field label="Jaunā parole" type="password" name="new-password" autoComplete="new-password" required minLength={8} value={next} onChange={(e) => setNext(e.target.value)} />
+        <PasswordRules password={next} />
+      </div>
       <Field label="Jaunā parole vēlreiz" type="password" name="repeat-password" autoComplete="new-password" required minLength={8} value={repeat} onChange={(e) => setRepeat(e.target.value)} />
       {error && <ErrorText>{error}</ErrorText>}
       {saved && <Saved>Parole nomainīta. Citās ierīcēs būs jāpieslēdzas no jauna.</Saved>}

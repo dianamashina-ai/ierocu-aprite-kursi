@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { Check, Eye, EyeOff } from "lucide-react";
+import { isStrongPassword, PASSWORD_RULES, WEAK_PASSWORD_MESSAGE } from "@/lib/auth/password-rules";
 import { authClient } from "@/lib/auth/client";
 
 const input =
@@ -42,6 +43,26 @@ function AuthField({ label, type, ...props }: { label: string } & React.InputHTM
         )}
       </span>
     </label>
+  );
+}
+
+/** Paroles prasību saraksts zem lauka — izpildītās ar zaļu ķeksīti. */
+export function PasswordRules({ password }: { password: string }) {
+  return (
+    <ul className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-xs" aria-label="Prasības jaunajai parolei">
+      {PASSWORD_RULES.map((r) => {
+        const ok = r.test(password);
+        return (
+          <li key={r.id} className={`flex items-center gap-1.5 ${ok ? "text-ok" : "text-muted"}`}>
+            <span className={`flex size-4 shrink-0 items-center justify-center rounded-full ${ok ? "bg-ok text-white" : "border border-line"}`}>
+              {ok && <Check aria-hidden="true" className="size-3" strokeWidth={3} />}
+            </span>
+            {r.label}
+            <span className="sr-only">{ok ? " — izpildīts" : " — nav izpildīts"}</span>
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 
@@ -84,7 +105,10 @@ export function lvError(code?: string, message?: string, status?: number) {
     case "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL":
       return "Konts ar šo e-pastu jau ir. Pieslēdzies vai atjauno paroli.";
     case "PASSWORD_TOO_SHORT":
-      return "Parolei jābūt vismaz 8 rakstzīmes garai.";
+    case "WEAK_PASSWORD":
+      return WEAK_PASSWORD_MESSAGE;
+    case "NAME_REQUIRED":
+      return "Norādi vārdu un uzvārdu.";
     case "INVALID_EMAIL":
       return "Pārbaudi e-pasta adresi.";
     case "INVALID_PASSWORD":
@@ -199,9 +223,10 @@ export function SignUpForm({ next, google }: { next: string; google: boolean }) 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    if (password.length < 8) return setError(lvError("PASSWORD_TOO_SHORT"));
+    if (name.trim().length < 2) return setError(lvError("NAME_REQUIRED"));
+    if (!isStrongPassword(password)) return setError(lvError("WEAK_PASSWORD"));
     setBusy(true);
-    const { error } = await authClient.signUp.email({ email, password, name: name.trim() || email.split("@")[0] });
+    const { error } = await authClient.signUp.email({ email, password, name: name.trim() });
     setBusy(false);
     if (error) return setError(lvError(error.code, error.message, error.status));
     router.push(next);
@@ -217,18 +242,21 @@ export function SignUpForm({ next, google }: { next: string; google: boolean }) 
         </>
       )}
       <form onSubmit={submit} className="space-y-4">
-        <AuthField label="Vārds (nav obligāts)" name="name" autoComplete="given-name" value={name} onChange={(e) => setName(e.target.value)} />
+        <AuthField label="Vārds un uzvārds" name="name" autoComplete="name" required value={name} onChange={(e) => setName(e.target.value)} />
         <AuthField label="E-pasts" type="email" name="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-        <AuthField
-          label="Parole (vismaz 8 rakstzīmes)"
-          type="password"
-          name="password"
-          autoComplete="new-password"
-          minLength={8}
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div>
+          <AuthField
+            label="Parole"
+            type="password"
+            name="password"
+            autoComplete="new-password"
+            minLength={8}
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <PasswordRules password={password} />
+        </div>
         {error && <ErrorText>{error}</ErrorText>}
         <button type="submit" disabled={busy} className="btn-primary w-full disabled:opacity-60">
           Izveidot kontu
@@ -279,6 +307,7 @@ export function ResetPasswordForm({ token, email }: { token: string | null; emai
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!token) return;
+    if (!isStrongPassword(password)) return setError(lvError("WEAK_PASSWORD"));
     setError(null);
     setBusy(true);
     const { error } = await authClient.resetPassword({ newPassword: password, token });
@@ -304,7 +333,10 @@ export function ResetPasswordForm({ token, email }: { token: string | null; emai
           E-pasts: <span className="font-semibold">{email}</span>
         </p>
       )}
-      <AuthField label="Jaunā parole (vismaz 8 rakstzīmes)" type="password" autoComplete="new-password" minLength={8} required value={password} onChange={(e) => setPassword(e.target.value)} />
+      <div>
+        <AuthField label="Jaunā parole" type="password" autoComplete="new-password" minLength={8} required value={password} onChange={(e) => setPassword(e.target.value)} />
+        <PasswordRules password={password} />
+      </div>
       {error && <ErrorText>{error}</ErrorText>}
       <button type="submit" disabled={!token || busy} className="btn-primary w-full disabled:opacity-60">
         {email ? "Saglabāt un sākt mācīties" : "Saglabāt paroli"}
