@@ -234,6 +234,16 @@ export async function getExamHistory(userId: string, limit = 20) {
 
 // ── Panelis ────────────────────────────────────────────────────
 
+/** Pēdējās n dienas (vecākā pirmā): vai tajā dienā bija atbildes. */
+function lastDays(days: string[], today: string, n: number) {
+  const set = new Set(days);
+  const base = new Date(`${today}T12:00:00Z`);
+  return Array.from({ length: n }, (_, i) => {
+    const d = new Date(base.getTime() - (n - 1 - i) * 86_400_000).toISOString().slice(0, 10);
+    return { day: d, active: set.has(d) };
+  });
+}
+
 export async function getDashboard(userId: string, now = new Date()) {
   const [mods, tops, perTopic, progressByTopic, dayRows, due, history] = await Promise.all([
     db.select().from(modules).orderBy(asc(modules.order)),
@@ -295,6 +305,7 @@ export async function getDashboard(userId: string, now = new Date()) {
     unanswered: totalQuestions - answeredQuestions,
     masteredQuestions: topicStats.reduce((s, t) => s + t.mastered, 0),
     streak: currentStreak(dayRows.map((r) => r.day), rigaDay(now)),
+    week: lastDays(dayRows.map((r) => r.day), rigaDay(now), 7),
     dueReviews: due.length,
     weakTopics,
     exams: history,

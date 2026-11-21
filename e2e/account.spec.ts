@@ -5,8 +5,8 @@ test("reģistrācija → mācību kurss ar progresu → iziet → pieslēgties a
   const email = uniqueEmail("pw");
   await signUp(page, email);
   await expect(page.getByRole("heading", { name: /^Sveiki/, level: 1 })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Ceļš līdz gatavībai" })).toBeVisible();
-  await expect(page.getByText("vēl nav atbildēti")).toBeVisible();
+  await expect(page.getByText("Tēmas apgūtas")).toBeVisible();
+  await expect(page.getByText(/515 vēl nav atbildēti/)).toBeVisible();
   await signOut(page);
 
   await page.goto("/konts");
@@ -53,7 +53,7 @@ test("atbildes saglabājas; kļūda nonāk kļūdu sarakstā; panelis rāda prog
   const wasCorrect = await page.getByText("Pareizi", { exact: true }).isVisible();
   await page.waitForTimeout(500); // servera darbība
   await page.goto("/");
-  await expect(page.getByText("vēl nav atbildēti").locator("..")).toContainText("514");
+  await expect(page.getByText(/514 vēl nav atbildēti/)).toBeVisible();
   await page.goto("/kludas?visas=1");
   if (wasCorrect) await expect(page.getByText("Kļūdu nav.")).toBeVisible();
   else await expect(page.locator("fieldset button").first()).toBeVisible();
