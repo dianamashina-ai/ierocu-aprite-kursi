@@ -30,7 +30,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
 
   return (
     <div className="page-white mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
-      <Breadcrumbs items={[{ href: "/", label: "Mācību kurss" }, { label: m.titleLv }]} />
+      <Breadcrumbs items={[{ href: "/#moduli", label: "Moduļi" }, { label: m.titleLv }]} />
 
       <header className="mt-6 flex items-start gap-5 sm:gap-8">
         <span className="hidden text-7xl font-bold leading-none tabular-nums text-accent-strong sm:block lg:text-8xl">{pad(m.order)}</span>

@@ -46,7 +46,7 @@ export async function getTopic(id: string) {
   const idx = flat.findIndex((t) => t.id === id);
   if (idx === -1) return null;
   const qs = await db
-    .select({ id: questions.id, text: questions.text, familyId: questions.familyId, correctKey: questions.correctKey, explanation: questions.explanation, explanationStatus: questions.explanationStatus })
+    .select({ id: questions.id, text: questions.text, familyId: questions.familyId, correctKey: questions.correctKey, explanation: questions.explanation, explanationStatus: questions.explanationStatus, lawReference: questions.lawReference })
     .from(questions)
     .where(eq(questions.topicId, id))
     .orderBy(asc(questions.id));

@@ -5,7 +5,7 @@ import { getTopic, topicIdFromSlug, topicSlug } from "@/lib/content/queries";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LessonBody } from "@/components/lesson-body";
 import { lessonHeadings } from "@/lib/content/lesson-markdown";
-import { ArrowUpRight, Clock, Target, Check, ChevronDown, TriangleAlert } from "lucide-react";
+import { ArrowUpRight, Target, Check, ChevronDown } from "lucide-react";
 import { readLesson } from "@/lib/content/lessons";
 import { getCurrentUser } from "@/lib/auth/session";
 import { canAccessModule } from "@/lib/billing/access";
@@ -66,7 +66,7 @@ export default async function TopicPage({
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
       <Breadcrumbs
         items={[
-          { href: "/", label: "Mācību kurss" },
+          { href: "/#moduli", label: "Moduļi" },
           { href: `/modulis/${topic.module.id}`, label: topic.module.titleLv },
           { label: tc("topic", { id: topic.id }) },
         ]}
@@ -111,10 +111,7 @@ export default async function TopicPage({
           <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
             <span>Tēma {topic.id}</span>
             {lesson && (
-              <span className="inline-flex items-center gap-1.5 normal-case tracking-normal">
-                <Clock aria-hidden="true" className="size-4" /> {lesson.minutes}{" "}
-                min
-              </span>
+              <span className="normal-case tracking-normal">~{lesson.minutes} min lasīšanai</span>
             )}
           </p>
           <h1 className="mt-3 text-4xl font-semibold leading-[1.1] tracking-tight text-balance sm:text-5xl">
@@ -240,18 +237,12 @@ export default async function TopicPage({
               <ol className="divide-y divide-line">
                 {questions.map((q) => (
                   <li key={q.id} className="py-5">
-                    <div>
-                      <div>
+                    <div className="flex gap-3">
+                      <span className="w-9 shrink-0 pt-px tabular-nums text-muted">{q.id}</span>
+                      <div className="min-w-0 flex-1">
                         <p className="font-semibold" lang="lv">
-                          <span className="mr-2 font-normal tabular-nums text-muted">{q.id}.</span>
                           {q.text}
                         </p>
-                        {q.familyId && (
-                          <p className="mt-1.5 flex items-center gap-1.5 text-sm text-warn">
-                            <TriangleAlert aria-hidden="true" className="size-4 shrink-0" />
-                            {t("similarBadge")}
-                          </p>
-                        )}
                         <ul className="mt-2 space-y-1.5" lang="lv">
                           {q.options.map((o) => {
                             const correct = allowed && o.key === q.correctKey;
@@ -291,10 +282,17 @@ export default async function TopicPage({
                               Skaidrojums
                               <ChevronDown aria-hidden="true" className="size-4 transition-transform group-open/sk:rotate-180" />
                             </summary>
-                            <div className="rounded-lg border border-line p-3 text-[15px] leading-relaxed" lang="lv">
-                              {q.explanation ?? "Skaidrojums šim jautājumam vēl tiek gatavots."}
+                            <div className="mt-1 rounded-xl bg-surface p-4" lang="lv">
                               {q.explanation && q.explanationStatus === "draft" && (
-                                <p className="mt-2 text-xs text-muted">Skaidrojums tiek pārbaudīts.</p>
+                                <span className="mb-2 inline-block rounded-full bg-warn-soft px-2 py-0.5 text-xs font-semibold text-warn">
+                                  Skaidrojums tiek pārbaudīts
+                                </span>
+                              )}
+                              <p className="text-muted">{q.explanation ?? "Skaidrojums šim jautājumam vēl tiek gatavots."}</p>
+                              {q.lawReference && (
+                                <p className="mt-2 text-sm">
+                                  <span className="font-semibold">Avots:</span> {q.lawReference}
+                                </p>
                               )}
                             </div>
                           </details>

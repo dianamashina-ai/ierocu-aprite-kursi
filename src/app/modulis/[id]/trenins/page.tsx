@@ -24,7 +24,7 @@ export default async function ModulePracticePage({ params }: { params: Promise<{
 
   return (
     <div className="page-white mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
-      <Breadcrumbs items={[{ href: "/", label: "Mācību kurss" }, { href: `/modulis/${id}`, label: data.module.titleLv }, { label: "Treniņš" }]} />
+      <Breadcrumbs items={[{ href: "/#moduli", label: "Moduļi" }, { href: `/modulis/${id}`, label: data.module.titleLv }, { label: "Treniņš" }]} />
       <div className="mt-5 max-lg:[body:has(.focus-mode)_&]:mt-0">
         {allowed ? (
           <Practice signedIn={Boolean(user)} questions={questions} seed={randomUUID()} topicHref={`/modulis/${id}`} />
