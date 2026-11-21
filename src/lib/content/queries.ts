@@ -46,11 +46,19 @@ export async function getTopic(id: string) {
   const idx = flat.findIndex((t) => t.id === id);
   if (idx === -1) return null;
   const qs = await db
-    .select({ id: questions.id, text: questions.text, familyId: questions.familyId })
+    .select({ id: questions.id, text: questions.text, familyId: questions.familyId, correctKey: questions.correctKey })
     .from(questions)
     .where(eq(questions.topicId, id))
     .orderBy(asc(questions.id));
-  return { topic: flat[idx], questions: qs, prev: flat[idx - 1] ?? null, next: flat[idx + 1] ?? null };
+  const opts = qs.length
+    ? await db
+        .select({ questionId: questionOptions.questionId, key: questionOptions.key, text: questionOptions.text })
+        .from(questionOptions)
+        .where(inArray(questionOptions.questionId, qs.map((q) => q.id)))
+        .orderBy(asc(questionOptions.questionId), asc(questionOptions.position))
+    : [];
+  const withOptions = qs.map((q) => ({ ...q, options: opts.filter((o) => o.questionId === q.id) }));
+  return { topic: flat[idx], questions: withOptions, prev: flat[idx - 1] ?? null, next: flat[idx + 1] ?? null };
 }
 
 export type { PracticeQuestion };

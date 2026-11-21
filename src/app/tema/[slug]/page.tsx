@@ -5,7 +5,7 @@ import { getTopic, topicIdFromSlug, topicSlug } from "@/lib/content/queries";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LessonBody } from "@/components/lesson-body";
 import { lessonHeadings } from "@/lib/content/lesson-markdown";
-import { ArrowUpRight, Clock, Target, ChevronDown } from "lucide-react";
+import { ArrowUpRight, Clock, Target, ChevronDown, Check } from "lucide-react";
 import { readLesson } from "@/lib/content/lessons";
 import { getCurrentUser } from "@/lib/auth/session";
 import { canAccessModule } from "@/lib/billing/access";
@@ -150,16 +150,43 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
             </summary>
             <ol className="divide-y divide-line border-t border-line">
               {questions.map((q) => (
-                <li key={q.id}>
-                  <Link href={`/jautajums/${q.id}`} className="flex gap-3 px-5 py-3 hover:bg-accent-soft">
+                <li key={q.id} className="px-5 py-4">
+                  <div className="flex gap-3">
                     <span className="w-10 shrink-0 tabular-nums text-muted">{q.id}</span>
-                    <span className="flex-1" lang="lv">{q.text}</span>
-                    {q.familyId && (
-                      <span className="h-fit shrink-0 rounded-full bg-accent-soft px-2 py-0.5 text-xs text-accent-strong">
-                        {t("similarBadge")}
-                      </span>
-                    )}
-                  </Link>
+                    <div className="min-w-0 flex-1">
+                      <p className="font-semibold" lang="lv">
+                        {q.text}
+                        {q.familyId && (
+                          <span className="ml-2 inline-block rounded-full bg-accent-soft px-2 py-0.5 align-middle text-xs font-normal text-accent-strong">
+                            {t("similarBadge")}
+                          </span>
+                        )}
+                      </p>
+                      <ul className="mt-2 space-y-1.5" lang="lv">
+                        {q.options.map((o) => {
+                          const correct = allowed && o.key === q.correctKey;
+                          return (
+                            <li key={o.key} className={`flex gap-2 rounded-lg px-3 py-2 text-[15px] ${correct ? "bg-ok-soft text-ink" : "bg-surface text-muted"}`}>
+                              {correct ? (
+                                <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-ok" strokeWidth={3} />
+                              ) : (
+                                <span aria-hidden="true" className="mt-2 size-1.5 shrink-0 rounded-full bg-muted/40" />
+                              )}
+                              <span>
+                                {o.text}
+                                {correct && <span className="sr-only"> (pareizā atbilde)</span>}
+                              </span>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                      {allowed && (
+                        <Link href={`/jautajums/${q.id}`} className="mt-2 inline-block text-sm font-semibold text-accent-strong hover:underline">
+                          Skaidrojums →
+                        </Link>
+                      )}
+                    </div>
+                  </div>
                 </li>
               ))}
             </ol>

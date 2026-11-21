@@ -6,7 +6,6 @@ import type { getDashboard } from "@/lib/progress/service";
 type Dashboard = Awaited<ReturnType<typeof getDashboard>>;
 
 const tile = "relative flex flex-col rounded-2xl border border-line bg-white p-4 sm:p-5";
-const WEEKDAYS = ["Sv", "P", "O", "T", "C", "Pk", "S"];
 
 /** Maza kartīte: virsraksts (+ bultiņa, ja saite), liels skaitlis, vizualizācija vai paskaidrojums. */
 function Tile({ label, href, value, children }: { label: string; href?: string; value: React.ReactNode; children?: React.ReactNode }) {
@@ -24,13 +23,13 @@ function Tile({ label, href, value, children }: { label: string; href?: string; 
         </p>
         {href && <ArrowUpRight aria-hidden="true" className="size-4 shrink-0 text-muted" />}
       </div>
-      <p className="mt-3 text-3xl font-bold leading-none tabular-nums">{value}</p>
-      {children && <div className="mt-auto pt-3">{children}</div>}
+      <p className="mt-3 text-4xl font-bold leading-none tabular-nums">{value}</p>
+      {children && <div className="mt-auto pt-4">{children}</div>}
     </div>
   );
 }
 
-/** Kompakts progresa bloks “Mācību kurss” lapas augšā (pieslēgtiem lietotājiem). */
+/** Kompakts progresa bloks (pieslēgtiem lietotājiem): kurss kopā, jautājumi, izmēģinājuma eksāmeni. */
 export function ProgressSummary({ d, totalTopics }: { d: Dashboard; totalTopics: number }) {
   const topics = d.modules.flatMap((m) => m.topics);
   const topicsDone = topics.filter((t) => t.percent >= READY_TOPIC_PERCENT).length;
@@ -40,48 +39,56 @@ export function ProgressSummary({ d, totalTopics }: { d: Dashboard; totalTopics:
   const started = d.answeredQuestions > 0;
   const ready = d.readiness.ready;
 
-  const next =
-    !started
-      ? { href: "/modulis/M1", label: "Sākt ar 1. moduli" }
-      : d.mistakes > 0
-        ? { href: "/trenins/sakt?kludas=1", label: `Labot kļūdas (${d.mistakes})` }
-        : { href: "/eksamens", label: "Izmēģinājuma eksāmens" };
+  const next = !started
+    ? { href: "/modulis/M1", label: "Sākt ar 1. moduli" }
+    : d.mistakes > 0
+      ? { href: "/trenins/sakt?kludas=1", label: `Labot kļūdas (${d.mistakes})` }
+      : { href: "/eksamens", label: "Izmēģinājuma eksāmens" };
 
   return (
     <section aria-labelledby="progress-h" className="mt-10">
       <h2 id="progress-h" className="sr-only">Tavs progress</h2>
-      <div className="grid gap-3 sm:gap-4 lg:grid-cols-[minmax(0,6fr)_minmax(0,3fr)_minmax(0,3fr)]">
-        {/* Galvenā kartīte: apgūtās tēmas — katra tēma ir viens punkts */}
-        <div className={`${tile} lg:row-span-2 ${ready ? "border-ok" : ""}`}>
+      <div className="grid gap-3 sm:gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)]">
+        {/* Kurss kopā — katra tēma ir viens punkts */}
+        <div className={`${tile} ${ready ? "border-ok" : ""}`}>
           <div className="flex items-start justify-between gap-3">
-            <p className="text-sm text-muted">{ready ? "Gatavs eksāmenam" : "Tēmas apgūtas"}</p>
-            <p className="text-sm font-semibold tabular-nums">
-              {topicsDone} no {totalTopics}
+            <p className="text-sm text-muted">{ready ? "Gatavs eksāmenam" : "Kursa progress"}</p>
+            <p className="text-sm tabular-nums text-muted">
+              <span className="font-semibold text-ink">{topicsDone}</span> no {totalTopics} tēmām
             </p>
           </div>
-          <div className="mt-4 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-            <p className="text-6xl font-bold leading-none tracking-tight tabular-nums sm:text-7xl">{topicsPct}%</p>
-            <ul aria-label={`Apgūtas ${topicsDone} no ${totalTopics} tēmām`} className="grid w-full grid-cols-[repeat(13,minmax(0,1fr))] gap-1.5 sm:w-[60%] sm:max-w-80">
+          <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <p className="text-5xl font-bold leading-none tracking-tight tabular-nums">{topicsPct}%</p>
+            <ul aria-label={`Apgūtas ${topicsDone} no ${totalTopics} tēmām`} className="grid w-full grid-cols-[repeat(19,minmax(0,1fr))] gap-1 sm:w-[62%]">
               {topics.map((t) => (
                 <li
                   key={t.id}
                   title={`${t.id} ${t.title}: ${t.percent} %`}
-                  className={`aspect-square w-full max-w-4 rounded-full ${
+                  className={`aspect-square w-full max-w-3.5 rounded-full ${
                     t.percent >= READY_TOPIC_PERCENT ? "bg-accent" : t.answered > 0 ? "bg-accent/25" : "bg-accent-soft"
                   }`}
                 />
               ))}
             </ul>
           </div>
-          <p className="mt-4 text-xs text-muted">Tēma skaitās apgūta, ja pareizi atbildēts uz {READY_TOPIC_PERCENT} % tās jautājumu.</p>
-          <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-5">
+          <div className="mt-auto flex flex-wrap items-center justify-between gap-x-4 gap-y-2 pt-5">
             <Link href={next.href} className="btn-primary">
               {next.label}
             </Link>
+            <p className="text-xs text-muted">Tēma apgūta, ja pareizi atbildēts uz {READY_TOPIC_PERCENT} % jautājumu.</p>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:contents">
+          <Tile label="Jautājumi apgūti" value={`${masteredPct}%`}>
+            <div className="h-1.5 overflow-hidden rounded-full bg-accent-soft" aria-hidden="true">
+              <div className="h-full rounded-full bg-accent" style={{ width: `${masteredPct}%` }} />
+            </div>
+            <p className="mt-2 text-xs tabular-nums text-muted">
+              {d.masteredQuestions} no {d.totalQuestions}
+            </p>
+          </Tile>
+
           <Tile label="Izmēģinājuma eksāmeni" href="/eksamens" value={`${d.readiness.examsPassed}/3`}>
             <div className="flex items-center gap-1.5" aria-label="Pēdējie 3 eksāmeni">
               {[0, 1, 2].map((i) => {
@@ -90,27 +97,6 @@ export function ProgressSummary({ d, totalTopics }: { d: Dashboard; totalTopics:
               })}
               <span className="ml-1 text-xs text-muted">pēdējie 3</span>
             </div>
-          </Tile>
-
-          <Tile label="Kļūdas" href={d.mistakes > 0 ? "/trenins/sakt?kludas=1" : "/trenins"} value={d.mistakes}>
-            <p className="text-xs text-muted">{d.mistakes > 0 ? "jautājumi, kuros kļūdījies" : "kļūdu nav"}</p>
-          </Tile>
-
-          <Tile label="Sērija" value={`${d.streak} d.`}>
-            <div className="flex items-end gap-1" aria-label="Pēdējās 7 dienas">
-              {d.week.map((w) => (
-                <span key={w.day} className="flex flex-1 flex-col items-center gap-1">
-                  <span className={`w-full rounded-full ${w.active ? "h-5 bg-accent" : "h-2 bg-accent-soft"}`} />
-                  <span className="text-[10px] leading-none text-muted">{WEEKDAYS[new Date(`${w.day}T12:00:00Z`).getUTCDay()]}</span>
-                </span>
-              ))}
-            </div>
-          </Tile>
-
-          <Tile label="Jautājumi" value={`${masteredPct}%`}>
-            <p className="text-xs text-muted">
-              apgūti · {d.unanswered} vēl nav atbildēti
-            </p>
           </Tile>
         </div>
       </div>

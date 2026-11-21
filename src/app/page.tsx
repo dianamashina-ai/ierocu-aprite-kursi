@@ -190,6 +190,18 @@ export default async function HomePage() {
             );
           })}
         </ol>
+
+        <section aria-labelledby="exam-cta-h" className="mt-10 flex flex-col gap-5 rounded-2xl bg-accent p-6 text-white sm:flex-row sm:items-center sm:justify-between sm:p-8">
+          <div>
+            <h2 id="exam-cta-h" className="text-2xl font-semibold tracking-tight">Izmēģinājuma eksāmens</h2>
+            <p className="mt-2 max-w-xl text-white/80">
+              {examCfg.questionCount} jautājumi, {examCfg.durationMinutes} minūtes — tāpat kā īstajā eksāmenā. Pārbaudi, vai esi gatavs.
+            </p>
+          </div>
+          <Link href="/eksamens" className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-6 font-semibold text-accent-strong transition-colors hover:bg-accent-soft">
+            Sākt eksāmenu <ArrowUpRight aria-hidden="true" className="size-4" />
+          </Link>
+        </section>
       </div>
       )}
     </>
