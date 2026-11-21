@@ -5,7 +5,7 @@ import { nextCookies } from "better-auth/next-js";
 import { magicLink } from "better-auth/plugins/magic-link";
 import { db, schema } from "@/db";
 import { sendEmail } from "@/lib/email/send";
-import { afterGoogleLinked, afterSessionCreated } from "./devices";
+import { afterGoogleLinked, afterSessionCreated, markEmailVerified } from "./devices";
 
 const googleEnabled = Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
 
@@ -26,6 +26,10 @@ export const auth = betterAuth({
     enabled: true,
     minPasswordLength: 8,
     autoSignIn: true,
+    // paroles iestatīšana pēc saites e-pastā apliecina, ka e-pasts pieder lietotājam
+    onPasswordReset: async ({ user }) => {
+      await markEmailVerified(user.id);
+    },
     sendResetPassword: async ({ user, url }) => {
       await sendEmail({
         to: user.email,

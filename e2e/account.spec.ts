@@ -20,19 +20,27 @@ test("reģistrācija → mācību kurss ar progresu → iziet → pieslēgties a
   await expect(page).toHaveURL(/\/konts$/);
 });
 
-test("pieslēgšanās ar saiti e-pastā", async ({ page, request }) => {
-  const email = uniqueEmail("ml");
+test("aizmirsta parole: saite e-pastā → jauna parole → pieslēgšanās", async ({ page, request }) => {
+  const email = uniqueEmail("reset");
   await signUp(page, email);
   await signOut(page);
   await page.goto("/pieslegties");
-  await page.getByRole("tab", { name: "Saite e-pastā" }).click();
+  await expect(page.getByRole("tab")).toHaveCount(0); // vairs nav pārslēgšanas “Saite e-pastā”
+  await page.getByRole("link", { name: "Aizmirsi paroli?" }).click();
+  await expect(page.getByRole("heading", { name: "Aizmirsi paroli?" })).toBeVisible();
   await page.getByLabel("E-pasts").fill(email);
   await page.getByRole("button", { name: "Sūtīt saiti" }).click();
-  await expect(page.getByRole("status")).toContainText("Saite nosūtīta");
+  await expect(page.getByRole("status")).toContainText("nosūtījām saiti");
   const outbox = await (await request.get("/api/dev/outbox")).json();
-  const mail = outbox.find((m: { to: string }) => m.to === email);
-  const link = mail.text.match(/https?:\/\/\S+/)[0];
-  await page.goto(link);
+  const mail = outbox.find((m: { to: string; subject: string }) => m.to === email && /Paroles/.test(m.subject));
+  await page.goto(mail.text.match(/https?:\/\/\S+/)[0]);
+  await expect(page).toHaveURL(/\/parole\/jauna\?token=/);
+  await page.getByLabel(/Jaunā parole/).fill("jauna-parole-789");
+  await page.getByRole("button", { name: "Saglabāt paroli" }).click();
+  await expect(page).toHaveURL(/\/pieslegties\?parole=mainita/);
+  await page.getByLabel("E-pasts").fill(email);
+  await page.getByLabel("Parole", { exact: true }).fill("jauna-parole-789");
+  await page.getByRole("button", { name: "Pieslēgties" }).click();
   await expect(page).toHaveURL(/^https?:\/\/[^/]+\/$/);
 });
 

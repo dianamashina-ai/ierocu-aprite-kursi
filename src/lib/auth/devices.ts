@@ -86,3 +86,7 @@ export async function afterGoogleLinked(userId: string) {
     console.error("Google piesaiste:", e);
   }
 }
+
+export async function markEmailVerified(userId: string) {
+  await db.update(schema.user).set({ emailVerified: true, updatedAt: new Date() }).where(eq(schema.user.id, userId));
+}

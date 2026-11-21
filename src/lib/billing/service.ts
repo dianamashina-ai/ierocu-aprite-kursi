@@ -1,5 +1,5 @@
 import "server-only";
-import { randomUUID } from "node:crypto";
+import { randomBytes, randomUUID } from "node:crypto";
 import { and, desc, eq, sql } from "drizzle-orm";
 import { db, schema } from "@/db";
 import type { OrderBuyer } from "@/db/schema";
@@ -153,6 +153,22 @@ export async function refundOrder(orderId: string, opts: { now?: Date } = {}) {
   return result;
 }
 
+export const INVITE_TOKEN_DAYS = 3;
+
+/** Paroles iestatīšanas žetons uzaicinājumam (tāds pats formāts kā better-auth paroles atjaunošanai, tikai ilgāks). */
+async function createInviteToken(userId: string, now: Date) {
+  const token = randomBytes(18).toString("base64url");
+  await db.insert(schema.verification).values({
+    id: randomUUID(),
+    identifier: `reset-password:${token}`,
+    value: userId,
+    expiresAt: new Date(now.getTime() + INVITE_TOKEN_DAYS * 24 * 3600 * 1000),
+    createdAt: now,
+    updatedAt: now,
+  });
+  return token;
+}
+
 export type ManualMethod = "cash" | "free";
 export const MANUAL_METHOD_LABEL: Record<ManualMethod, string> = { cash: "Skaidra nauda", free: "Bez maksas" };
 
@@ -207,14 +223,17 @@ export async function grantManualAccess(
     .returning();
 
   const login = `${siteUrl()}/pieslegties?epasts=${encodeURIComponent(email)}`;
+  // jaunam kontam — saite paroles iestatīšanai (derīga INVITE_TOKEN_DAYS dienas)
+  const setPassword = created ? `${siteUrl()}/parole/jauna?token=${await createInviteToken(account.id, now)}&epasts=${encodeURIComponent(email)}` : null;
   await sendEmail({
     to: email,
     subject: "Tev atvērta pilna piekļuve kursam “Ieroču atļauja”",
     text:
       `Sveiki!\n\nTev ir atvērta pilna piekļuve mācību kursam sagatavošanās ieroču atļaujas kvalifikācijas pārbaudījumam: ` +
       `visi moduļi, nodarbības, skaidrojumi un izmēģinājuma eksāmens.\n\n` +
-      (created
-        ? `Konts jau ir izveidots ar šo e-pasta adresi. Lai pieslēgtos, atver saiti un izvēlies «Saite e-pastā» — atsūtīsim pieslēgšanās saiti:\n${login}\n\nParoli vari iestatīt vēlāk ar «Aizmirsi paroli?».\n`
+      (setPassword
+        ? `Konts jau ir izveidots ar šo e-pasta adresi. Iestati paroli un sāc mācīties (saite derīga ${INVITE_TOKEN_DAYS} dienas):\n${setPassword}\n\n` +
+          `Ja tev ir Google konts ar šo pašu e-pastu, vari arī vienkārši pieslēgties ar «Turpināt ar Google»: ${login}\n`
         : `Pieslēdzies ar savu kontu:\n${login}\n`),
   }).catch((e) => console.error("Piekļuves e-pasts:", e));
   return { order, created };

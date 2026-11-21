@@ -131,30 +131,20 @@ function Consent({ google }: { google: boolean }) {
 
 export function SignInForm({ next, google, initialEmail }: { next: string; google: boolean; initialEmail?: string }) {
   const router = useRouter();
-  // no uzaicinājuma vēstules (?epasts=…) — uzreiz pieslēgšanās ar saiti e-pastā
-  const [tab, setTab] = useState<"password" | "link">(initialEmail ? "link" : "password");
   const [email, setEmail] = useState(initialEmail ?? "");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [sent, setSent] = useState(false);
   const [busy, setBusy] = useState(false);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setBusy(true);
-    if (tab === "password") {
-      const { error } = await authClient.signIn.email({ email, password });
-      setBusy(false);
-      if (error) return setError(lvError(error.code, error.message, error.status));
-      router.push(next);
-      router.refresh();
-    } else {
-      const { error } = await authClient.signIn.magicLink({ email, callbackURL: next });
-      setBusy(false);
-      if (error) return setError(lvError(error.code, error.message, error.status));
-      setSent(true);
-    }
+    const { error } = await authClient.signIn.email({ email, password });
+    setBusy(false);
+    if (error) return setError(lvError(error.code, error.message, error.status));
+    router.push(next);
+    router.refresh();
   };
 
   return (
@@ -165,63 +155,29 @@ export function SignInForm({ next, google, initialEmail }: { next: string; googl
           <OrDivider />
         </>
       )}
-
-      <div role="tablist" aria-label="Pieslēgšanās veids" className="grid grid-cols-2 gap-1 rounded-xl bg-surface p-1">
-        {(
-          [
-            ["password", "Ar paroli"],
-            ["link", "Saite e-pastā"],
-          ] as const
-        ).map(([k, label]) => (
-          <button
-            key={k}
-            type="button"
-            role="tab"
-            aria-selected={tab === k}
-            onClick={() => {
-              setTab(k);
-              setError(null);
-              setSent(false);
-            }}
-            className={`min-h-10 rounded-lg text-sm ${tab === k ? "bg-white font-semibold text-ink shadow-sm" : "text-muted hover:text-ink"}`}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
-
-      {sent ? (
-        <div role="status" className="rounded-xl bg-ok-soft p-4 text-ok">
-          Saite nosūtīta uz <b>{email}</b>. Atver e-pastu un spied saiti — tā derīga 15 minūtes.
+      <form onSubmit={submit} className="space-y-4">
+        <AuthField label="E-pasts" type="email" name="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+        <div>
+          <AuthField
+            label="Parole"
+            type="password"
+            name="password"
+            autoComplete="current-password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <p className="mt-2 text-right text-sm">
+            <Link href="/parole/aizmirsta" className="text-muted underline-offset-4 hover:text-ink hover:underline">
+              Aizmirsi paroli?
+            </Link>
+          </p>
         </div>
-      ) : (
-        <form onSubmit={submit} className="space-y-4">
-          <AuthField label="E-pasts" type="email" name="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-          {tab === "password" && (
-            <div>
-              <AuthField
-                label="Parole"
-                type="password"
-                name="password"
-                autoComplete="current-password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <p className="mt-2 text-right text-sm">
-                <Link href="/parole/aizmirsta" className="text-muted underline-offset-4 hover:text-ink hover:underline">
-                  Aizmirsi paroli?
-                </Link>
-              </p>
-            </div>
-          )}
-          {error && <ErrorText>{error}</ErrorText>}
-          <button type="submit" disabled={busy} className="btn-primary w-full disabled:opacity-60">
-            {tab === "password" ? "Pieslēgties" : "Sūtīt saiti"}
-          </button>
-        </form>
-      )}
-
+        {error && <ErrorText>{error}</ErrorText>}
+        <button type="submit" disabled={busy} className="btn-primary w-full disabled:opacity-60">
+          Pieslēgties
+        </button>
+      </form>
       <p className="pt-2 text-center text-sm text-muted">
         Nav konta?{" "}
         <Link href={`/registreties?next=${encodeURIComponent(next)}`} className="font-semibold text-ink underline underline-offset-4">
@@ -315,22 +271,49 @@ export function ForgotPasswordForm() {
   );
 }
 
-export function ResetPasswordForm({ token }: { token: string | null }) {
+export function ResetPasswordForm({ token, email }: { token: string | null; email?: string }) {
   const router = useRouter();
   const [password, setPassword] = useState("");
+  const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(token ? null : lvError("INVALID_TOKEN"));
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!token) return;
+    setError(null);
+    setBusy(true);
     const { error } = await authClient.resetPassword({ newPassword: password, token });
-    if (error) return setError(lvError(error.code, error.message, error.status));
+    if (error) {
+      setBusy(false);
+      return setError(lvError(error.code, error.message, error.status));
+    }
+    // uzaicinājums (zināms e-pasts) — uzreiz pieslēdzam
+    if (email) {
+      const r = await authClient.signIn.email({ email, password });
+      if (!r.error) {
+        router.push("/");
+        router.refresh();
+        return;
+      }
+    }
     router.push("/pieslegties?parole=mainita");
   };
   return (
     <form onSubmit={submit} className="space-y-4">
+      {email && (
+        <p className="rounded-xl bg-surface px-4 py-3 text-sm">
+          E-pasts: <span className="font-semibold">{email}</span>
+        </p>
+      )}
       <AuthField label="Jaunā parole (vismaz 8 rakstzīmes)" type="password" autoComplete="new-password" minLength={8} required value={password} onChange={(e) => setPassword(e.target.value)} />
       {error && <ErrorText>{error}</ErrorText>}
-      <button type="submit" disabled={!token} className="btn-primary w-full disabled:opacity-60">Saglabāt paroli</button>
+      <button type="submit" disabled={!token || busy} className="btn-primary w-full disabled:opacity-60">
+        {email ? "Saglabāt un sākt mācīties" : "Saglabāt paroli"}
+      </button>
+      {!token || error ? (
+        <p className="text-center text-sm text-muted">
+          <Link href="/parole/aizmirsta" className="underline underline-offset-4 hover:text-ink">Pieprasīt jaunu saiti</Link>
+        </p>
+      ) : null}
     </form>
   );
 }

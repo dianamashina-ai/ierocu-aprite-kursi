@@ -67,19 +67,18 @@ test("administrācija: manuāla piekļuve jaunam lietotājam un uzaicinājums", 
   await expect(admin.getByText("Piešķirts")).toBeVisible();
   await adminCtx.close();
 
-  // uzaicinājums: saite uz pieslēgšanos ar aizpildītu e-pastu
+  // uzaicinājums: saite paroles iestatīšanai → uzreiz pieslēgts ar pilnu piekļuvi
   const outbox = await (await request.get("/api/dev/outbox")).json();
   const mail = outbox.find((m: { to: string; subject: string }) => m.to === email && /pilna piekļuve/.test(m.subject));
-  const link = mail.text.match(/https?:\/\/\S+pieslegties\S*/)[0];
+  const link = mail.text.match(/https?:\/\/\S+parole\/jauna\S*/)[0];
   const ctx = await browser.newContext();
   const page = await ctx.newPage();
   await page.goto(link);
-  await expect(page.getByLabel("E-pasts")).toHaveValue(email);
-  await page.getByRole("button", { name: "Sūtīt saiti" }).click();
-  await expect(page.getByRole("status")).toContainText("Saite nosūtīta");
-  const outbox2 = await (await request.get("/api/dev/outbox")).json();
-  const magic = outbox2.find((m: { to: string; subject: string }) => m.to === email && /Pieslēgšanās saite/.test(m.subject));
-  await page.goto(magic.text.match(/https?:\/\/\S+/)[0]);
+  await expect(page.getByRole("heading", { name: "Iestati paroli" })).toBeVisible();
+  await expect(page.getByText(email)).toBeVisible();
+  await page.getByLabel(/Jaunā parole/).fill("klienta-parole-1");
+  await page.getByRole("button", { name: "Saglabāt un sākt mācīties" }).click();
+  await expect(page).toHaveURL(/^https?:\/\/[^/]+\/$/);
   await page.goto("/konts");
   await expect(page.locator("#saturs").getByText("Pilna piekļuve", { exact: true })).toBeVisible();
   await ctx.close();
