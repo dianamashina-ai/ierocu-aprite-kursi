@@ -148,4 +148,23 @@ describe.skipIf(!url)("maksājumi (DB)", async () => {
     await devices.signOutEverywhere("u2");
     expect(await devices.activeSessions("u2")).toHaveLength(0);
   });
+
+  it("Google piesaiste: neapstiprinātam kontam dzēš paroli un apstiprina e-pastu; apstiprinātam — neko nemaina", async () => {
+    const devices = await import("@/lib/auth/devices");
+    const { eq } = await import("drizzle-orm");
+    const now = new Date();
+    await db.insert(schema.user).values([
+      { id: "g1", name: "G1", email: "g1@example.com", emailVerified: false },
+      { id: "g2", name: "G2", email: "g2@example.com", emailVerified: true },
+    ]);
+    await db.insert(schema.account).values([
+      { id: "a1", accountId: "g1", providerId: "credential", userId: "g1", password: "x", createdAt: now, updatedAt: now },
+      { id: "a2", accountId: "g2", providerId: "credential", userId: "g2", password: "x", createdAt: now, updatedAt: now },
+    ]);
+    await devices.afterGoogleLinked("g1");
+    await devices.afterGoogleLinked("g2");
+    expect(await db.select().from(schema.account).where(eq(schema.account.userId, "g1"))).toHaveLength(0);
+    expect((await db.query.user.findFirst({ where: eq(schema.user.id, "g1") }))?.emailVerified).toBe(true);
+    expect(await db.select().from(schema.account).where(eq(schema.account.userId, "g2"))).toHaveLength(1);
+  });
 });

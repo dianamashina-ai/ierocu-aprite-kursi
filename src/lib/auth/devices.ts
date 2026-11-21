@@ -69,3 +69,20 @@ export async function activeSessions(userId: string, now = new Date()) {
 export async function signOutEverywhere(userId: string) {
   await db.delete(schema.session).where(eq(schema.session.userId, userId));
 }
+
+/**
+ * Pēc Google konta piesaistes: e-pasts ir apstiprināts (to pārbaudījis Google).
+ * Ja kontam bija parole, bet e-pasts nebija apstiprināts, paroli dzēšam — citādi kāds varētu iepriekš
+ * reģistrēt svešu e-pastu ar savu paroli un pēc īstā īpašnieka Google pieslēgšanās iekļūt viņa kontā.
+ * Īstais īpašnieks paroli var iestatīt no jauna ar “Aizmirsi paroli?”.
+ */
+export async function afterGoogleLinked(userId: string) {
+  try {
+    const u = await db.query.user.findFirst({ columns: { emailVerified: true }, where: eq(schema.user.id, userId) });
+    if (!u || u.emailVerified) return;
+    await db.delete(schema.account).where(and(eq(schema.account.userId, userId), eq(schema.account.providerId, "credential")));
+    await db.update(schema.user).set({ emailVerified: true, updatedAt: new Date() }).where(eq(schema.user.id, userId));
+  } catch (e) {
+    console.error("Google piesaiste:", e);
+  }
+}

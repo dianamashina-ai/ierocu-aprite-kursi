@@ -5,7 +5,7 @@ import { nextCookies } from "better-auth/next-js";
 import { magicLink } from "better-auth/plugins/magic-link";
 import { db, schema } from "@/db";
 import { sendEmail } from "@/lib/email/send";
-import { afterSessionCreated } from "./devices";
+import { afterGoogleLinked, afterSessionCreated } from "./devices";
 
 const googleEnabled = Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
 
@@ -56,8 +56,19 @@ export const auth = betterAuth({
     expiresIn: 60 * 60 * 24 * 60, // 60 dienas
     updateAge: 60 * 60 * 24,
   },
+  // Google pieslēgšanās piesaistās esošam kontam ar to pašu e-pastu (Google e-pastu ir pārbaudījis)
+  account: {
+    accountLinking: { enabled: true, trustedProviders: ["google"], requireLocalEmailVerified: false },
+  },
   // Vienlaikus ne vairāk kā MAX_DEVICES ierīces; pieslēgšanās vēsture koplietošanas pazīmēm
   databaseHooks: {
+    account: {
+      create: {
+        after: async (acc) => {
+          if (acc.providerId === "google") await afterGoogleLinked(acc.userId);
+        },
+      },
+    },
     session: {
       create: {
         after: async (s) => {

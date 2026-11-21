@@ -56,7 +56,7 @@ function GoogleButton({ next }: { next: string }) {
     <div className="space-y-2">
       <button
         type="button"
-        onClick={() => authClient.signIn.social({ provider: "google", callbackURL: next })}
+        onClick={() => authClient.signIn.social({ provider: "google", callbackURL: next, errorCallbackURL: "/pieslegties" })}
         className="btn-secondary w-full"
       >
         Turpināt ar Google
