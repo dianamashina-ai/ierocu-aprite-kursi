@@ -6,7 +6,6 @@ export async function signUp(page: Page, email: string) {
   await page.goto("/registreties");
   await page.getByLabel("E-pasts").fill(email);
   await page.getByLabel(/Parole/).fill("drosa-parole-123");
-  await page.getByRole("checkbox").check();
   await page.getByRole("button", { name: "Izveidot kontu" }).click();
   await expect(page).toHaveURL(/^https?:\/\/[^/]+\/$/);
 }
@@ -48,7 +47,6 @@ export async function signInAdmin(page: Page) {
   await page.goto("/registreties");
   await page.getByLabel("E-pasts").fill(ADMIN);
   await page.getByLabel(/Parole/).fill("drosa-parole-123");
-  await page.getByRole("checkbox").check();
   await page.getByRole("button", { name: "Izveidot kontu" }).click();
   // ja konts jau ir — pieslēdzamies
   if (!(await page.waitForURL(/^https?:\/\/[^/]+\/$/, { timeout: 4000 }).then(() => true, () => false))) {

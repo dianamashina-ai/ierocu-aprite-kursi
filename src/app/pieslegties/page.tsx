@@ -27,7 +27,7 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
   const next = safeNext(sp.next);
   if (await getCurrentUser()) redirect(next);
   return (
-    <AuthShell title="Pieslēgties" error={sp.error ? oauthError(sp.error) : undefined} lead={sp.parole === "mainita" ? "Parole nomainīta. Pieslēdzies ar jauno paroli." : "Progress tiek saglabāts un sinhronizēts visās ierīcēs."}>
+    <AuthShell title="Sveiki atpakaļ!" error={sp.error ? oauthError(sp.error) : undefined} lead={sp.parole === "mainita" ? "Parole nomainīta. Pieslēdzies ar jauno paroli." : "Pieslēdzies, lai turpinātu mācības."}>
       <SignInForm next={next} google={isGoogleEnabled} initialEmail={sp.epasts?.slice(0, 200)} />
     </AuthShell>
   );

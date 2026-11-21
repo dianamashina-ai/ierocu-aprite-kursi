@@ -11,7 +11,7 @@ export default async function SignUpPage({ searchParams }: { searchParams: Promi
   const next = safeNext((await searchParams).next);
   if (await getCurrentUser()) redirect(next);
   return (
-    <AuthShell title="Izveidot kontu" lead="Konts ir bez maksas. Ar to tiek saglabāts progress, kļūdas un izmēģinājuma eksāmeni.">
+    <AuthShell title="Izveidot kontu" lead="Konts ir bez maksas. Tajā saglabājas progress, kļūdas un izmēģinājuma eksāmeni.">
       <SignUpForm next={next} google={isGoogleEnabled} />
     </AuthShell>
   );

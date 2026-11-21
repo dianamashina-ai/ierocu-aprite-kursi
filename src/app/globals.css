@@ -88,3 +88,9 @@ main:has(> .page-white) {
     display: none;
   }
 }
+
+/* Pieslēgšanās / reģistrācija — atsevišķa lapa bez vietnes galvenes un kājenes */
+body:has(.auth-page) header.site-header,
+body:has(.auth-page) footer {
+  display: none;
+}

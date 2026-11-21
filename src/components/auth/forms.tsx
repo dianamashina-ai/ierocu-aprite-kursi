@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 import { authClient } from "@/lib/auth/client";
 
 const input =
@@ -14,6 +15,54 @@ export function Field({ label, ...props }: { label: string } & React.InputHTMLAt
       <span className="text-sm font-semibold">{label}</span>
       <input className={input} {...props} />
     </label>
+  );
+}
+
+/** Pieslēgšanās lapu lauks: pelēks fons, noapaļots; paroles laukam — rādīt/slēpt. */
+const authInput =
+  "block min-h-12 w-full rounded-xl border border-line bg-surface px-4 text-base placeholder:text-muted focus:border-accent focus:bg-white focus:outline-none focus:ring-1 focus:ring-accent";
+
+function AuthField({ label, type, ...props }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
+  const [show, setShow] = useState(false);
+  const isPassword = type === "password";
+  return (
+    <label className="block">
+      <span className="text-sm font-semibold">{label}</span>
+      <span className="relative mt-1 block">
+        <input type={isPassword && show ? "text" : type} className={`${authInput} ${isPassword ? "pr-12" : ""}`} {...props} />
+        {isPassword && (
+          <button
+            type="button"
+            onClick={() => setShow((v) => !v)}
+            aria-label={show ? "Slēpt paroli" : "Rādīt paroli"}
+            className="absolute inset-y-0 right-1 my-auto inline-flex size-10 items-center justify-center rounded-lg text-muted hover:text-ink"
+          >
+            {show ? <EyeOff aria-hidden="true" className="size-5" /> : <Eye aria-hidden="true" className="size-5" />}
+          </button>
+        )}
+      </span>
+    </label>
+  );
+}
+
+function GoogleIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 48 48" className="size-5">
+      <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.1 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z" />
+      <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.1 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" />
+      <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z" />
+      <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z" />
+    </svg>
+  );
+}
+
+function OrDivider() {
+  return (
+    <div className="flex items-center gap-3 text-sm text-muted" aria-hidden="true">
+      <span className="h-px flex-1 bg-line" />
+      vai
+      <span className="h-px flex-1 bg-line" />
+    </div>
   );
 }
 
@@ -53,26 +102,32 @@ export function lvError(code?: string, message?: string, status?: number) {
 
 function GoogleButton({ next }: { next: string }) {
   return (
-    <div className="space-y-2">
-      <button
-        type="button"
-        onClick={() => authClient.signIn.social({ provider: "google", callbackURL: next, errorCallbackURL: "/pieslegties" })}
-        className="btn-secondary w-full"
-      >
-        Turpināt ar Google
-      </button>
-      <p className="text-center text-xs text-muted">
-        Turpinot ar Google, tu piekrīti{" "}
-        <Link href="/noteikumi" target="_blank" className="underline underline-offset-2 hover:text-ink">
-          lietošanas noteikumiem
-        </Link>{" "}
-        un{" "}
-        <Link href="/privatums" target="_blank" className="underline underline-offset-2 hover:text-ink">
-          privātuma politikai
-        </Link>
-        .
-      </p>
-    </div>
+    <button
+      type="button"
+      onClick={() => authClient.signIn.social({ provider: "google", callbackURL: next, errorCallbackURL: "/pieslegties" })}
+      className="btn-primary w-full gap-3"
+    >
+      <span className="flex size-7 items-center justify-center rounded-full bg-white">
+        <GoogleIcon />
+      </span>
+      Turpināt ar Google
+    </button>
+  );
+}
+
+function Consent({ google }: { google: boolean }) {
+  return (
+    <p className="text-center text-xs leading-relaxed text-muted">
+      {google ? "Turpinot tu piekrīti" : "Izveidojot kontu, tu piekrīti"}{" "}
+      <Link href="/noteikumi" target="_blank" className="underline underline-offset-2 hover:text-ink">
+        lietošanas noteikumiem
+      </Link>{" "}
+      un{" "}
+      <Link href="/privatums" target="_blank" className="underline underline-offset-2 hover:text-ink">
+        privātuma politikai
+      </Link>
+      .
+    </p>
   );
 }
 
@@ -105,8 +160,15 @@ export function SignInForm({ next, google, initialEmail }: { next: string; googl
   };
 
   return (
-    <div className="space-y-5">
-      <div role="tablist" aria-label="Pieslēgšanās veids" className="grid grid-cols-2 gap-1 rounded-xl bg-accent-soft p-1">
+    <div className="space-y-6">
+      {google && (
+        <>
+          <GoogleButton next={next} />
+          <OrDivider />
+        </>
+      )}
+
+      <div role="tablist" aria-label="Pieslēgšanās veids" className="grid grid-cols-2 gap-1 rounded-xl bg-surface p-1">
         {(
           [
             ["password", "Ar paroli"],
@@ -123,7 +185,7 @@ export function SignInForm({ next, google, initialEmail }: { next: string; googl
               setError(null);
               setSent(false);
             }}
-            className={`min-h-11 rounded-lg text-sm font-semibold ${tab === k ? "bg-white text-accent-strong shadow-sm" : "text-muted"}`}
+            className={`min-h-10 rounded-lg text-sm ${tab === k ? "bg-white font-semibold text-ink shadow-sm" : "text-muted hover:text-ink"}`}
           >
             {label}
           </button>
@@ -136,35 +198,35 @@ export function SignInForm({ next, google, initialEmail }: { next: string; googl
         </div>
       ) : (
         <form onSubmit={submit} className="space-y-4">
-          <Field label="E-pasts" type="email" name="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+          <AuthField label="E-pasts" type="email" name="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
           {tab === "password" && (
-            <Field
-              label="Parole"
-              type="password"
-              name="password"
-              autoComplete="current-password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div>
+              <AuthField
+                label="Parole"
+                type="password"
+                name="password"
+                autoComplete="current-password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <p className="mt-2 text-right text-sm">
+                <Link href="/parole/aizmirsta" className="text-muted underline-offset-4 hover:text-ink hover:underline">
+                  Aizmirsi paroli?
+                </Link>
+              </p>
+            </div>
           )}
           {error && <ErrorText>{error}</ErrorText>}
-          <button type="submit" disabled={busy} className="btn-primary w-full disabled:opacity-60">
+          <button type="submit" disabled={busy} className={`${google ? "btn-secondary" : "btn-primary"} w-full disabled:opacity-60`}>
             {tab === "password" ? "Pieslēgties" : "Sūtīt saiti"}
           </button>
-          {tab === "password" && (
-            <p className="text-center text-sm">
-              <Link href="/parole/aizmirsta" className="text-accent-strong underline underline-offset-4">
-                Aizmirsi paroli?
-              </Link>
-            </p>
-          )}
         </form>
       )}
-      {google && <GoogleButton next={next} />}
-      <p className="text-center text-sm text-muted">
+
+      <p className="pt-2 text-center text-sm text-muted">
         Nav konta?{" "}
-        <Link href={`/registreties?next=${encodeURIComponent(next)}`} className="font-semibold text-accent-strong underline underline-offset-4">
+        <Link href={`/registreties?next=${encodeURIComponent(next)}`} className="font-semibold text-ink underline underline-offset-4">
           Reģistrēties
         </Link>
       </p>
@@ -177,7 +239,6 @@ export function SignUpForm({ next, google }: { next: string; google: boolean }) 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [agree, setAgree] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -194,11 +255,17 @@ export function SignUpForm({ next, google }: { next: string; google: boolean }) 
   };
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
+      {google && (
+        <>
+          <GoogleButton next={next} />
+          <OrDivider />
+        </>
+      )}
       <form onSubmit={submit} className="space-y-4">
-        <Field label="Vārds (nav obligāts)" name="name" autoComplete="given-name" value={name} onChange={(e) => setName(e.target.value)} />
-        <Field label="E-pasts" type="email" name="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-        <Field
+        <AuthField label="Vārds (nav obligāts)" name="name" autoComplete="given-name" value={name} onChange={(e) => setName(e.target.value)} />
+        <AuthField label="E-pasts" type="email" name="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+        <AuthField
           label="Parole (vismaz 8 rakstzīmes)"
           type="password"
           name="password"
@@ -208,29 +275,15 @@ export function SignUpForm({ next, google }: { next: string; google: boolean }) 
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <label className="flex items-start gap-3 text-sm">
-          <input type="checkbox" required checked={agree} onChange={(e) => setAgree(e.target.checked)} className="mt-1 size-5 accent-accent" />
-          <span>
-            Piekrītu{" "}
-            <Link href="/noteikumi" target="_blank" className="font-semibold text-accent-strong underline underline-offset-4">
-              lietošanas noteikumiem
-            </Link>{" "}
-            un{" "}
-            <Link href="/privatums" target="_blank" className="font-semibold text-accent-strong underline underline-offset-4">
-              privātuma politikai
-            </Link>
-            .
-          </span>
-        </label>
         {error && <ErrorText>{error}</ErrorText>}
-        <button type="submit" disabled={busy} className="btn-primary w-full disabled:opacity-60">
+        <button type="submit" disabled={busy} className={`${google ? "btn-secondary" : "btn-primary"} w-full disabled:opacity-60`}>
           Izveidot kontu
         </button>
       </form>
-      {google && <GoogleButton next={next} />}
+      <Consent google={google} />
       <p className="text-center text-sm text-muted">
         Jau ir konts?{" "}
-        <Link href={`/pieslegties?next=${encodeURIComponent(next)}`} className="font-semibold text-accent-strong underline underline-offset-4">
+        <Link href={`/pieslegties?next=${encodeURIComponent(next)}`} className="font-semibold text-ink underline underline-offset-4">
           Pieslēgties
         </Link>
       </p>
@@ -254,9 +307,12 @@ export function ForgotPasswordForm() {
     </p>
   ) : (
     <form onSubmit={submit} className="space-y-4">
-      <Field label="E-pasts" type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+      <AuthField label="E-pasts" type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
       {error && <ErrorText>{error}</ErrorText>}
       <button type="submit" className="btn-primary w-full">Sūtīt saiti</button>
+      <p className="text-center text-sm text-muted">
+        <Link href="/pieslegties" className="underline underline-offset-4 hover:text-ink">Atpakaļ uz pieslēgšanos</Link>
+      </p>
     </form>
   );
 }
@@ -274,7 +330,7 @@ export function ResetPasswordForm({ token }: { token: string | null }) {
   };
   return (
     <form onSubmit={submit} className="space-y-4">
-      <Field label="Jaunā parole (vismaz 8 rakstzīmes)" type="password" autoComplete="new-password" minLength={8} required value={password} onChange={(e) => setPassword(e.target.value)} />
+      <AuthField label="Jaunā parole (vismaz 8 rakstzīmes)" type="password" autoComplete="new-password" minLength={8} required value={password} onChange={(e) => setPassword(e.target.value)} />
       {error && <ErrorText>{error}</ErrorText>}
       <button type="submit" disabled={!token} className="btn-primary w-full disabled:opacity-60">Saglabāt paroli</button>
     </form>
