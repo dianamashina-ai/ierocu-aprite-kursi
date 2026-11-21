@@ -27,7 +27,7 @@ export default async function BuyPage() {
     `Visi ${course.totals.modules} moduļi un ${course.totals.topics} īsas nodarbības`,
     `Visi ${course.totals.questions} oficiālie jautājumi ar skaidrojumiem un atsaucēm uz likumu`,
     "Neierobežoti izmēģinājuma eksāmeni (40 jautājumi, 40 minūtes)",
-    "Kļūdu atkārtošana pēc 1, 3 un 7 dienām",
+    "Treniņš ar jautājumiem, kuros kļūdies",
   ];
 
   return (

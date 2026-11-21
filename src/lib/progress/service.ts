@@ -304,6 +304,8 @@ export async function getDashboard(userId: string, now = new Date()) {
     answeredQuestions,
     unanswered: totalQuestions - answeredQuestions,
     masteredQuestions: topicStats.reduce((s, t) => s + t.mastered, 0),
+    /** pašreizējās kļūdas: pēdējā atbilde nepareiza */
+    mistakes: topicStats.reduce((s, t) => s + (t.answered - t.mastered), 0),
     streak: currentStreak(dayRows.map((r) => r.day), rigaDay(now)),
     week: lastDays(dayRows.map((r) => r.day), rigaDay(now), 7),
     dueReviews: due.length,

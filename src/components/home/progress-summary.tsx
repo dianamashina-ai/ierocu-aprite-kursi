@@ -43,8 +43,8 @@ export function ProgressSummary({ d, totalTopics }: { d: Dashboard; totalTopics:
   const next =
     !started
       ? { href: "/modulis/M1", label: "Sākt ar 1. moduli" }
-      : d.dueReviews > 0
-        ? { href: "/trenins/sakt?atkartot=1", label: `Atkārtot kļūdas (${d.dueReviews})` }
+      : d.mistakes > 0
+        ? { href: "/trenins/sakt?kludas=1", label: `Labot kļūdas (${d.mistakes})` }
         : { href: "/eksamens", label: "Izmēģinājuma eksāmens" };
 
   return (
@@ -92,8 +92,8 @@ export function ProgressSummary({ d, totalTopics }: { d: Dashboard; totalTopics:
             </div>
           </Tile>
 
-          <Tile label="Kļūdas" href={d.dueReviews > 0 ? "/trenins/sakt?atkartot=1" : "/trenins"} value={d.dueReviews}>
-            <p className="text-xs text-muted">{d.dueReviews > 0 ? "jāatkārto šodien" : "šodien nekas nav jāatkārto"}</p>
+          <Tile label="Kļūdas" href={d.mistakes > 0 ? "/trenins/sakt?kludas=1" : "/trenins"} value={d.mistakes}>
+            <p className="text-xs text-muted">{d.mistakes > 0 ? "jautājumi, kuros kļūdījies" : "kļūdu nav"}</p>
           </Tile>
 
           <Tile label="Sērija" value={`${d.streak} d.`}>

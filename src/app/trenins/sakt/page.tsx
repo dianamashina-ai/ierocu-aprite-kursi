@@ -13,7 +13,7 @@ export const metadata = { title: "Treniņš" };
 export default async function TrainingRunPage({
   searchParams,
 }: {
-  searchParams: Promise<{ temas?: string; kludas?: string; skaits?: string; atkartot?: string }>;
+  searchParams: Promise<{ moduli?: string; kludas?: string; skaits?: string; atkartot?: string }>;
 }) {
   const sp = await searchParams;
   const user = await requireUser("/trenins");
@@ -31,8 +31,8 @@ export default async function TrainingRunPage({
       ) : (
         <div className="mx-auto max-w-md py-16 text-center">
           <h1 className="text-2xl font-semibold">{review ? "Šodien nekas nav jāatkārto" : "Jautājumu nav"}</h1>
-          <p className="mt-2 text-muted">{review ? "Lieliski! Vari trenēties izvēlētās tēmās." : "Izvēlētajās tēmās nav atbilstošu jautājumu."}</p>
-          <Link href="/trenins" className="btn-primary mt-6">Izvēlēties tēmas</Link>
+          <p className="mt-2 text-muted">{review ? "Lieliski! Vari trenēties izvēlētajos moduļos." : "Izvēlētajos moduļos nav atbilstošu jautājumu."}</p>
+          <Link href="/trenins" className="btn-primary mt-6">Uz treniņa izvēli</Link>
         </div>
       )}
     </div>

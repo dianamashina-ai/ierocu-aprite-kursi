@@ -168,29 +168,43 @@ describe.skipIf(!url)("maksājumi (DB)", async () => {
     expect(await db.select().from(schema.account).where(eq(schema.account.userId, "g2"))).toHaveLength(1);
   });
 
-  it("treniņš: izvēlētās tēmas, limits; “tikai kļūdas” — kļūdainākie vispirms", async () => {
+  it("treniņš: izvēlētie moduļi, limits; “tikai kļūdas” — pašreizējās kļūdas, biežāk kļūdainās vispirms", async () => {
     const training = await import("@/lib/training/service");
     const { eq } = await import("drizzle-orm");
     const [q] = await db.select().from(schema.questions).where(eq(schema.questions.id, 422));
-    const sameTopic = (await db.select({ id: schema.questions.id }).from(schema.questions).where(eq(schema.questions.topicId, q.topicId))).map((r) => r.id);
-    const other = sameTopic.find((id) => id !== 422)!;
+    const [t] = await db.select().from(schema.topics).where(eq(schema.topics.id, q.topicId));
+    const moduleQs = (
+      await db
+        .select({ id: schema.questions.id })
+        .from(schema.questions)
+        .innerJoin(schema.topics, eq(schema.topics.id, schema.questions.topicId))
+        .where(eq(schema.topics.moduleId, t.moduleId))
+    ).map((r) => r.id);
+    const [other, fixed] = moduleQs.filter((id) => id !== 422);
+    const now = new Date();
     await db.insert(schema.answers).values([
       { userId: "u1", questionId: other, selectedKey: "a", isCorrect: false, mode: "practice" },
       { userId: "u1", questionId: 422, selectedKey: "a", isCorrect: false, mode: "practice" },
       { userId: "u1", questionId: 422, selectedKey: "b", isCorrect: false, mode: "practice" },
-      { userId: "u1", questionId: 422, selectedKey: "c", isCorrect: true, mode: "practice" },
+      { userId: "u1", questionId: fixed, selectedKey: "a", isCorrect: false, mode: "practice" },
+      { userId: "u1", questionId: fixed, selectedKey: "b", isCorrect: true, mode: "practice" },
     ]);
-    const all = await training.buildTraining("u1", { topicIds: [q.topicId], mistakesOnly: false, limit: 0 });
-    expect(all.sort((a, b) => a - b)).toEqual([...sameTopic].sort((a, b) => a - b));
-    expect(await training.buildTraining("u1", { topicIds: [q.topicId], mistakesOnly: false, limit: 5 })).toHaveLength(5);
-    expect(await training.buildTraining("u1", { topicIds: [q.topicId], mistakesOnly: true, limit: 0 })).toEqual([422, other]);
-    expect((await training.getMistakesByTopic("u1")).get(q.topicId)).toBe(2);
-    expect(await training.buildTraining("u1", { topicIds: [], mistakesOnly: false, limit: 0 })).toEqual([]);
-    expect(training.parseTrainingParams({ temas: "1.1,9.2,x;drop,10.10", kludas: "1", skaits: "20" })).toEqual({
-      topicIds: ["1.1", "9.2", "10.10"],
+    await db.insert(schema.questionProgress).values([
+      { userId: "u1", questionId: 422, lastCorrect: false, lastAnsweredAt: now },
+      { userId: "u1", questionId: other, lastCorrect: false, lastAnsweredAt: now },
+      { userId: "u1", questionId: fixed, lastCorrect: true, lastAnsweredAt: now }, // izlabota — nav kļūda
+    ]);
+    const all = await training.buildTraining("u1", { moduleIds: [t.moduleId], mistakesOnly: false, limit: 0 });
+    expect(all.sort((a, b) => a - b)).toEqual([...moduleQs].sort((a, b) => a - b));
+    expect(await training.buildTraining("u1", { moduleIds: [t.moduleId], mistakesOnly: false, limit: 10 })).toHaveLength(10);
+    expect(await training.buildTraining("u1", { moduleIds: [t.moduleId], mistakesOnly: true, limit: 0 })).toEqual([422, other]);
+    expect(await training.buildTraining("u1", { moduleIds: [], mistakesOnly: false, limit: 0 })).toHaveLength(515);
+    expect((await training.getMistakesByModule("u1")).get(t.moduleId)).toBe(2);
+    expect(training.parseTrainingParams({ moduli: "M1,M9,x;drop,1.1", kludas: "1", skaits: "20" })).toEqual({
+      moduleIds: ["M1", "M9"],
       mistakesOnly: true,
       limit: 20,
     });
-    expect(training.parseTrainingParams({ skaits: "999" }).limit).toBe(0);
+    expect(training.parseTrainingParams({ skaits: "999" })).toEqual({ moduleIds: [], mistakesOnly: false, limit: 0 });
   });
 });

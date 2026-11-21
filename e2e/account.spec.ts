@@ -56,20 +56,25 @@ test("atbildes saglabājas; kļūda nonāk kļūdu sarakstā; panelis rāda prog
   await expect(page.getByText(/514 vēl nav atbildēti/)).toBeVisible();
   // kļūda redzama treniņa izvēlē pie tēmas
   await page.goto("/trenins");
-  if (wasCorrect) await expect(page.getByText(/\d+ kļūd/)).toHaveCount(0);
-  else await expect(page.getByText("1 kļūda").first()).toBeVisible();
+  if (wasCorrect) await expect(page.getByText("Kļūdu pagaidām nav.")).toBeVisible();
+  else await expect(page.getByText(/^1 jautājums · biežāk kļūdainie vispirms$/)).toBeVisible();
 });
 
-test("trenēties: izvēlas tēmu un skaitu → treniņš ar izvēlēto jautājumu skaitu", async ({ page }) => {
+test("trenēties: izvēlas moduli un skaitu → treniņš ar izvēlēto jautājumu skaitu", async ({ page }) => {
   await signUp(page, uniqueEmail("trenins"));
   await buyAccess(page);
   await page.goto("/trenins");
   await expect(page.getByRole("heading", { name: "Trenēties", level: 1 })).toBeVisible();
+  // pēc noklusējuma — visi moduļi
+  await expect(page.getByRole("button", { name: /Visi moduļi/ })).toBeVisible();
+  await page.getByRole("button", { name: /Visi moduļi/ }).click();
+  await page.getByRole("button", { name: "Visi moduļi", exact: true }).click(); // notīra
   await expect(page.getByRole("button", { name: /^Sākt treniņu/ })).toBeDisabled();
-  await page.getByLabel(/1\.1 Pamatjēdzieni/).check();
+  await page.getByRole("option", { name: /01 Ierocis/ }).getByRole("button").click();
+  await page.keyboard.press("Escape");
   await page.getByRole("radio", { name: "10" }).check({ force: true });
   await page.getByRole("button", { name: "Sākt treniņu · 10 jaut." }).click();
-  await expect(page).toHaveURL(/\/trenins\/sakt\?temas=1\.1&skaits=10/);
+  await expect(page).toHaveURL(/\/trenins\/sakt\?moduli=M1&skaits=10/);
   await expect(page.getByText("Jautājums 1 no 10")).toBeVisible();
 });
 
