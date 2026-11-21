@@ -176,7 +176,7 @@ export function ExamRunner({ attemptId, seed, questions, initialSelected, deadli
             )}
 
             {/* telefonā — piestiprināts ekrāna apakšā, datorā — zem atbildēm */}
-            <div className="fixed inset-x-0 bottom-0 z-20 flex items-center justify-between gap-3 border-t border-line bg-white/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur lg:static lg:mt-8 lg:flex-wrap lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
+            <div className="fixed inset-x-0 bottom-0 z-20 flex items-center justify-between gap-3 border-t border-line bg-white/95 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur lg:static lg:mt-8 lg:flex-wrap lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
               <button type="button" className="btn-secondary flex-1 disabled:cursor-not-allowed disabled:opacity-40 lg:flex-none" disabled={pos === 0} onClick={() => setPos((p) => p - 1)}>
                 ← Iepriekšējais
               </button>

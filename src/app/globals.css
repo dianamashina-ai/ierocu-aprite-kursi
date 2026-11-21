@@ -28,7 +28,7 @@ html {
 }
 
 body {
-  background: var(--color-surface);
+  background: #ffffff;
   color: var(--color-ink);
 }
 
@@ -62,7 +62,7 @@ main:has(> .page-white) {
     @apply bg-accent text-white hover:bg-accent-strong;
   }
   .btn-secondary {
-    @apply bg-accent-soft text-ink hover:bg-line;
+    @apply border border-line bg-white text-ink hover:border-ink hover:bg-surface;
   }
   .btn-ghost {
     @apply text-accent-strong underline-offset-4 hover:underline;

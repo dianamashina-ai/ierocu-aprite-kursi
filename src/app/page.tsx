@@ -134,10 +134,10 @@ export default async function HomePage() {
                 className="group relative flex flex-col rounded-2xl border border-line bg-white p-6 transition-shadow hover:shadow-[0_8px_30px_-12px_rgba(39,23,38,0.25)]"
               >
                 <div className="flex items-start justify-between">
-                  <ModuleIcon moduleId={m.id} />
                   <span className="text-2xl font-bold tabular-nums text-accent-strong">
                     {pad(m.order)}
                   </span>
+                  <ModuleIcon moduleId={m.id} />
                 </div>
                 <h3 className="mt-6 text-xl font-semibold leading-snug tracking-tight">
                   <Link

@@ -15,8 +15,8 @@ const COLORS: { token: string; hex: string; use: string; dark?: boolean }[] = [
   { token: "ink", hex: "#222222", use: "Pamata teksts, virsraksti, sekundārās pogas apmale", dark: true },
   { token: "muted", hex: "#5C5C5C", use: "Sekundārais teksts, paskaidrojumi, neaktīvi izvēlnes punkti", dark: true },
   { token: "line", hex: "#E3E3E3", use: "Apmales, atdalītāji, lauku rāmji" },
-  { token: "surface", hex: "#F8F8F8", use: "Lapas fons, lauku fons, kreisās paneļi" },
-  { token: "white", hex: "#FFFFFF", use: "Kartītes, lapas ar baltu fonu" },
+  { token: "surface", hex: "#F8F8F8", use: "Lauku fons, hover fons, izcelti bloki" },
+  { token: "white", hex: "#FFFFFF", use: "Lapas fons visur, kartītes" },
   { token: "accent (zīmols)", hex: "#6C3441", use: "Galvenās pogas, fokusa apmale, akcenti, progress", dark: true },
   { token: "accent-strong", hex: "#522630", use: "Galvenās pogas hover, saites", dark: true },
   { token: "accent-soft", hex: "#EFEFEF", use: "Hover fons izvēlnē, burtu apļi atbildēs" },
@@ -136,7 +136,7 @@ export default function DesignSystemPage() {
             <button type="button" className="btn-primary" disabled style={{ opacity: 0.4 }}>Neaktīva</button>
           </div>
         </Spec>
-        <Spec name="Sekundārā (neitrāli pelēka) · btn-secondary">
+        <Spec name="Sekundārā (plāna pelēka apmale) · btn-secondary">
           <div className="flex flex-wrap gap-3">
             <button type="button" className="btn-secondary">← Iepriekšējais</button>
             <button type="button" className="btn-secondary" disabled style={{ opacity: 0.4 }}>Neaktīva</button>
@@ -247,8 +247,8 @@ export default function DesignSystemPage() {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <div className="flex flex-col rounded-2xl border border-line bg-white p-6">
             <div className="flex items-start justify-between">
-              <ModuleIcon moduleId="M1" />
               <span className="text-2xl font-bold tabular-nums text-accent-strong">01</span>
+              <ModuleIcon moduleId="M1" />
             </div>
             <h3 className="mt-6 text-xl font-semibold leading-snug tracking-tight">Ierocis: uzbūve un darbība</h3>
             <p className="mt-2 text-[15px] leading-relaxed text-muted">Šaujamieroča un munīcijas jēdzieni, veidi, mehānismi.</p>

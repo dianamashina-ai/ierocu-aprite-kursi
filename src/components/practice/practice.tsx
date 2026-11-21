@@ -335,7 +335,7 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
                 </div>
               )}
               {/* telefons: poga ekrāna apakšā (aktīva pēc atbildes) */}
-              <div className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur lg:hidden">
+              <div className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white/95 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur lg:hidden">
                 <button type="button" disabled={!answered} onClick={next} className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-40">
                   {isLast ? t("finish") : t("next")}
                 </button>
