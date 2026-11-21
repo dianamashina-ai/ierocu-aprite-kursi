@@ -136,7 +136,7 @@ export default function DesignSystemPage() {
             <button type="button" className="btn-primary" disabled style={{ opacity: 0.4 }}>Neaktīva</button>
           </div>
         </Spec>
-        <Spec name="Sekundārā · btn-secondary">
+        <Spec name="Sekundārā (neitrāli pelēka) · btn-secondary">
           <div className="flex flex-wrap gap-3">
             <button type="button" className="btn-secondary">← Iepriekšējais</button>
             <button type="button" className="btn-secondary" disabled style={{ opacity: 0.4 }}>Neaktīva</button>
