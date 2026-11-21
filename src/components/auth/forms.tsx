@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Check, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { isStrongPassword, PASSWORD_RULES, WEAK_PASSWORD_MESSAGE } from "@/lib/auth/password-rules";
 import { authClient } from "@/lib/auth/client";
 
@@ -46,23 +46,17 @@ function AuthField({ label, type, ...props }: { label: string } & React.InputHTM
   );
 }
 
-/** Paroles prasību saraksts zem lauka — izpildītās ar zaļu ķeksīti. */
-export function PasswordRules({ password }: { password: string }) {
+/** Paroles prasības zem lauka — mazs teksts, punktu saraksts. */
+export function PasswordRules() {
   return (
-    <ul className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-xs" aria-label="Prasības jaunajai parolei">
-      {PASSWORD_RULES.map((r) => {
-        const ok = r.test(password);
-        return (
-          <li key={r.id} className={`flex items-center gap-1.5 ${ok ? "text-ok" : "text-muted"}`}>
-            <span className={`flex size-4 shrink-0 items-center justify-center rounded-full ${ok ? "bg-ok text-white" : "border border-line"}`}>
-              {ok && <Check aria-hidden="true" className="size-3" strokeWidth={3} />}
-            </span>
-            {r.label}
-            <span className="sr-only">{ok ? " — izpildīts" : " — nav izpildīts"}</span>
-          </li>
-        );
-      })}
-    </ul>
+    <div className="mt-2 text-xs text-muted">
+      <p>Parolē jābūt vismaz:</p>
+      <ul className="mt-1 list-disc space-y-0.5 pl-4">
+        {PASSWORD_RULES.map((r) => (
+          <li key={r.id}>{r.label}</li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -255,7 +249,7 @@ export function SignUpForm({ next, google }: { next: string; google: boolean }) 
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <PasswordRules password={password} />
+          <PasswordRules />
         </div>
         {error && <ErrorText>{error}</ErrorText>}
         <button type="submit" disabled={busy} className="btn-primary w-full disabled:opacity-60">
@@ -335,7 +329,7 @@ export function ResetPasswordForm({ token, email }: { token: string | null; emai
       )}
       <div>
         <AuthField label="Jaunā parole" type="password" autoComplete="new-password" minLength={8} required value={password} onChange={(e) => setPassword(e.target.value)} />
-        <PasswordRules password={password} />
+        <PasswordRules />
       </div>
       {error && <ErrorText>{error}</ErrorText>}
       <button type="submit" disabled={!token || busy} className="btn-primary w-full disabled:opacity-60">

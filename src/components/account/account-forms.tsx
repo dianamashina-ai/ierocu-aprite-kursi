@@ -116,7 +116,7 @@ export function PasswordForm() {
       <Field label="Pašreizējā parole" type="password" name="current-password" autoComplete="current-password" required value={current} onChange={(e) => setCurrent(e.target.value)} />
       <div>
         <Field label="Jaunā parole" type="password" name="new-password" autoComplete="new-password" required minLength={8} value={next} onChange={(e) => setNext(e.target.value)} />
-        <PasswordRules password={next} />
+        <PasswordRules />
       </div>
       <Field label="Jaunā parole vēlreiz" type="password" name="repeat-password" autoComplete="new-password" required minLength={8} value={repeat} onChange={(e) => setRepeat(e.target.value)} />
       {error && <ErrorText>{error}</ErrorText>}

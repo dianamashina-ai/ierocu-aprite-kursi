@@ -1,6 +1,6 @@
 /** Paroles prasības — kopīgas pārlūkam (saraksts zem lauka) un serverim (better-auth āķis). */
 export const PASSWORD_RULES = [
-  { id: "len", label: "vismaz 8 rakstzīmes", test: (p: string) => p.length >= 8 },
+  { id: "len", label: "8 rakstzīmes", test: (p: string) => p.length >= 8 },
   { id: "upper", label: "1 lielais burts", test: (p: string) => /\p{Lu}/u.test(p) },
   { id: "digit", label: "1 cipars", test: (p: string) => /\d/.test(p) },
   { id: "symbol", label: "1 simbols (piem., ! ? # -)", test: (p: string) => /[^\p{L}\d\s]/u.test(p) },
