@@ -69,24 +69,17 @@ main:has(> .page-white) {
   }
 }
 
-/* Lapas ar piestiprinātu pogu joslu telefonā (eksāmens): kājene un “Labot” poga netiek aizsegtas */
-@media (max-width: 1023.98px) {
-  body:has(.has-sticky-footer) footer {
-    padding-bottom: 5rem;
-  }
-  body:has(.has-sticky-footer) .notes-fab {
-    bottom: 5.5rem;
-  }
+/* Lapas ar piestiprinātu pogu joslu (eksāmens, treniņš): “Labot” poga netiek aizsegta */
+body:has(.has-sticky-footer) .notes-fab {
+  bottom: 5.5rem;
 }
 
-/* Telefonā eksāmens un treniņš atveras “pilnekrāna” režīmā: bez vietnes galvenes, kājenes un ceļa */
-@media (max-width: 1023.98px) {
-  body:has(.focus-mode) > header,
-  body:has(.focus-mode) header.site-header,
-  body:has(.focus-mode) footer,
-  body:has(.focus-mode) .focus-hide {
-    display: none;
-  }
+/* Eksāmens un treniņš atveras “fokusa” režīmā: bez vietnes galvenes, kājenes un ceļa (visos ekrānos) */
+body:has(.focus-mode) > header,
+body:has(.focus-mode) header.site-header,
+body:has(.focus-mode) footer,
+body:has(.focus-mode) .focus-hide {
+  display: none;
 }
 
 /* Pieslēgšanās / reģistrācija — atsevišķa lapa bez vietnes galvenes un kājenes */

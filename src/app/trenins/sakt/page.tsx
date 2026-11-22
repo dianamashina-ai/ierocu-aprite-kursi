@@ -25,7 +25,7 @@ export default async function TrainingRunPage({
   const qs = ids.map((id) => byId.get(id)).filter((q): q is NonNullable<typeof q> => Boolean(q) && (access || isFreeModule(moduleOfTopic(q!.topicId))));
 
   return (
-    <div className="page-white mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
+    <div className="page-white mx-auto max-w-6xl px-4 py-8 has-[.focus-mode]:pt-0 sm:px-6 sm:py-10">
       {qs.length > 0 ? (
         <Practice exitHref="/trenins" questions={qs} seed={randomUUID()} signedIn mode={review ? "review" : "practice"} shuffleQuestions={!sp.kludas} />
       ) : (

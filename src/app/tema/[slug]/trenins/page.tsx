@@ -33,7 +33,7 @@ export default async function PracticePage({ params }: { params: Promise<{ slug:
     allowed && isFreeModule(meta.moduleId) && !(await hasFullAccess(user?.id)) ? <FullCourseUpsell {...(await lockedTotals())} /> : null;
 
   return (
-    <div className="page-white mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
+    <div className="page-white mx-auto max-w-6xl px-4 py-6 has-[.focus-mode]:pt-0 sm:px-6 sm:py-10">
       <Breadcrumbs
         items={[
           { href: `/modulis/${meta.moduleId}`, label: tc("module", { order: meta.moduleOrder }) },
@@ -41,7 +41,7 @@ export default async function PracticePage({ params }: { params: Promise<{ slug:
           { label: "Treniņš" },
         ]}
       />
-      <div className="mt-5 max-lg:[body:has(.focus-mode)_&]:mt-0">
+      <div className="mt-5 [body:has(.focus-mode)_&]:mt-0">
         {/* sēkla katram apmeklējumam jauna → cita jautājumu un variantu secība */}
         {allowed ? (
           <Practice upsell={upsell} signedIn={Boolean(user)} questions={questions} seed={randomUUID()} topicHref={topicHref} />

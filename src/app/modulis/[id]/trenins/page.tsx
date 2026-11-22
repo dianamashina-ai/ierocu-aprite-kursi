@@ -28,9 +28,9 @@ export default async function ModulePracticePage({ params }: { params: Promise<{
   const questions = allowed ? await getPracticeQuestionsForModule(id) : [];
 
   return (
-    <div className="page-white mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
+    <div className="page-white mx-auto max-w-6xl px-4 py-6 has-[.focus-mode]:pt-0 sm:px-6 sm:py-10">
       <Breadcrumbs items={[{ href: "/#moduli", label: "Moduļi" }, { href: `/modulis/${id}`, label: data.module.titleLv }, { label: "Treniņš" }]} />
-      <div className="mt-5 max-lg:[body:has(.focus-mode)_&]:mt-0">
+      <div className="mt-5 [body:has(.focus-mode)_&]:mt-0">
         {allowed ? (
           <Practice upsell={upsell} signedIn={Boolean(user)} questions={questions} seed={randomUUID()} topicHref={`/modulis/${id}`} />
         ) : (

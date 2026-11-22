@@ -186,18 +186,18 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
   if (!q) return null;
 
   return (
-    <div className={pool.length > 1 ? "has-sticky-footer focus-mode pb-24 lg:pb-0" : undefined}>
+    <div className={pool.length > 1 ? "has-sticky-footer focus-mode pb-28" : undefined}>
       {pool.length > 1 && (
-        <div className="mb-8">
-          {/* telefonā — sava galvene (vietnes izvēlne paslēpta): virsraksts un krustiņš */}
-          <div className="-mt-2 flex items-center justify-between gap-4 pb-2 lg:hidden">
+        <div className="sticky top-0 z-10 -mx-4 mb-8 border-b border-line bg-white/95 px-4 pt-3 pb-3 backdrop-blur sm:-mx-6 sm:px-6">
+          {/* fokusa režīma galvene (vietnes izvēlne paslēpta): virsraksts un krustiņš */}
+          <div className="flex items-center justify-between gap-4 pb-2">
             <span className="font-semibold">{mode === "review" ? t("titleReview") : t("titlePractice")}</span>
             <Link href={exitHref ?? topicHref ?? "/"} aria-label={t("exit")} className="-mr-2 inline-flex size-10 items-center justify-center rounded-lg text-muted hover:bg-accent-soft hover:text-ink">
               <X aria-hidden="true" className="size-5" />
             </Link>
           </div>
           <div className="flex items-center justify-between gap-3">
-            <span className="text-base max-lg:text-sm max-lg:text-muted lg:font-semibold">
+            <span className="text-sm text-muted">
               {t("progress", { current: pos + 1, total: pool.length })}
             </span>
             <span className="text-sm tabular-nums text-muted">Nr. {q.id}</span>
@@ -219,7 +219,7 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
       )}
 
       <article className="grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14" aria-labelledby={`q-${q.id}`}>
-        <div className="lg:sticky lg:top-8 lg:self-start">
+        <div className="lg:sticky lg:top-32 lg:self-start">
           {q.possiblyOutdated && (
             <aside className="mb-5 rounded-xl border border-warn/30 bg-warn-soft px-4 py-3 text-sm leading-relaxed text-ink" aria-label={t("outdated")}>
               <p className="flex items-center gap-1.5 font-semibold text-warn">
@@ -331,19 +331,13 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
             )
           ) : (
             <>
-              {/* dators: poga zem skaidrojuma, kad atbildēts */}
-              {answered && (
-                <div className="mt-4 hidden lg:block">
-                  <button ref={nextRef} type="button" onClick={next} className="btn-primary">
+              {/* poga ekrāna apakšā (aktīva pēc atbildes) */}
+              <div className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white/95 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur">
+                <div className="mx-auto flex max-w-6xl justify-end sm:px-2">
+                  <button ref={nextRef} type="button" disabled={!answered} onClick={next} className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-40 lg:w-auto lg:min-w-48">
                     {isLast ? t("finish") : t("next")}
                   </button>
                 </div>
-              )}
-              {/* telefons: poga ekrāna apakšā (aktīva pēc atbildes) */}
-              <div className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white/95 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur lg:hidden">
-                <button type="button" disabled={!answered} onClick={next} className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-40">
-                  {isLast ? t("finish") : t("next")}
-                </button>
               </div>
             </>
           )}
