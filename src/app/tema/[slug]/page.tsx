@@ -5,7 +5,8 @@ import { getTopic, topicIdFromSlug, topicSlug } from "@/lib/content/queries";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LessonBody } from "@/components/lesson-body";
 import { lessonHeadings } from "@/lib/content/lesson-markdown";
-import { ArrowUpRight, Target, Check, ChevronDown } from "lucide-react";
+import { ArrowUpRight, Target } from "lucide-react";
+import { QuestionCard } from "@/components/questions/question-card";
 import { readLesson } from "@/lib/content/lessons";
 import { getCurrentUser } from "@/lib/auth/session";
 import { canAccessModule } from "@/lib/billing/access";
@@ -237,68 +238,7 @@ export default async function TopicPage({
               <ol className="divide-y divide-line">
                 {questions.map((q) => (
                   <li key={q.id} className="py-5">
-                    <div className="flex gap-3">
-                      <span className="w-9 shrink-0 pt-px tabular-nums text-muted">{q.id}</span>
-                      <div className="min-w-0 flex-1">
-                        <p className="font-semibold" lang="lv">
-                          {q.text}
-                        </p>
-                        <ul className="mt-2 space-y-1.5" lang="lv">
-                          {q.options.map((o) => {
-                            const correct = allowed && o.key === q.correctKey;
-                            return (
-                              <li
-                                key={o.key}
-                                className={`flex gap-2 rounded-lg px-3 py-2 text-[15px] ${correct ? "bg-ok-soft text-ink" : "bg-surface text-muted"}`}
-                              >
-                                {correct ? (
-                                  <Check
-                                    aria-hidden="true"
-                                    className="mt-0.5 size-4 shrink-0 text-ok"
-                                    strokeWidth={3}
-                                  />
-                                ) : (
-                                  <span
-                                    aria-hidden="true"
-                                    className="mt-2 size-1.5 shrink-0 rounded-full bg-muted/40"
-                                  />
-                                )}
-                                <span>
-                                  {o.text}
-                                  {correct && (
-                                    <span className="sr-only">
-                                      {" "}
-                                      (pareizā atbilde)
-                                    </span>
-                                  )}
-                                </span>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                        {allowed && (
-                          <details className="group/sk mt-2">
-                            <summary className="inline-flex min-h-10 cursor-pointer list-none items-center gap-1 text-sm font-semibold text-accent-strong [&::-webkit-details-marker]:hidden">
-                              Skaidrojums
-                              <ChevronDown aria-hidden="true" className="size-4 transition-transform group-open/sk:rotate-180" />
-                            </summary>
-                            <div className="mt-1 rounded-xl bg-surface p-4" lang="lv">
-                              {q.explanation && q.explanationStatus === "draft" && (
-                                <span className="mb-2 inline-block rounded-full bg-warn-soft px-2 py-0.5 text-xs font-semibold text-warn">
-                                  Skaidrojums tiek pārbaudīts
-                                </span>
-                              )}
-                              <p className="text-muted">{q.explanation ?? "Skaidrojums šim jautājumam vēl tiek gatavots."}</p>
-                              {q.lawReference && (
-                                <p className="mt-2 text-sm">
-                                  <span className="font-semibold">Avots:</span> {q.lawReference}
-                                </p>
-                              )}
-                            </div>
-                          </details>
-                        )}
-                      </div>
-                    </div>
+                    <QuestionCard q={q} allowed={allowed} />
                   </li>
                 ))}
               </ol>

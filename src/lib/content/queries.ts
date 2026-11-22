@@ -133,6 +133,32 @@ export async function getTopicMeta(topicId: string) {
   return row[0] ?? null;
 }
 
+/** Pilni jautājumu dati kartītēm (ar atbilžu variantiem), saglabājot doto secību. */
+export async function getQuestionCards(ids: number[]) {
+  if (!ids.length) return [];
+  const [qs, opts] = await Promise.all([
+    db
+      .select({
+        id: questions.id,
+        text: questions.text,
+        topicId: questions.topicId,
+        correctKey: questions.correctKey,
+        explanation: questions.explanation,
+        explanationStatus: questions.explanationStatus,
+        lawReference: questions.lawReference,
+      })
+      .from(questions)
+      .where(inArray(questions.id, ids)),
+    db
+      .select({ questionId: questionOptions.questionId, key: questionOptions.key, text: questionOptions.text })
+      .from(questionOptions)
+      .where(inArray(questionOptions.questionId, ids))
+      .orderBy(asc(questionOptions.questionId), asc(questionOptions.position)),
+  ]);
+  const byId = new Map(qs.map((q) => [q.id, { ...q, options: opts.filter((o) => o.questionId === q.id) }]));
+  return ids.map((id) => byId.get(id)).filter((q): q is NonNullable<typeof q> => !!q);
+}
+
 export async function searchQuestions(query: string, limit = 50) {
   const q = query.trim();
   if (!q) return [];
