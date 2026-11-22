@@ -52,7 +52,8 @@ describe.skipIf(!url)("progress un eksāmens (DB)", async () => {
     expect(d.unanswered).toBe(513);
     expect(d.streak).toBe(1);
     const t31 = d.modules.flatMap((m) => m.topics).find((t) => t.id === "3.1")!;
-    expect(t31.mastered).toBe(1); // Q1 pēdējā atbilde pareiza
+    expect(t31.mastered).toBe(0); // Q1: nepareizi, tad pareizi — vēl nav 2 pareizas pēc kārtas
+    expect(d.mistakes).toBe(0); // pēdējā atbilde pareiza — kļūdu sarakstā nav
     expect(d.readiness.ready).toBe(false);
   });
 

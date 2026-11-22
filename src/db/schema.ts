@@ -221,6 +221,10 @@ export const questionProgress = pgTable(
     attempts: integer("attempts").notNull().default(0),
     correctCount: integer("correct_count").notNull().default(0),
     lastCorrect: boolean("last_correct").notNull(),
+    /** apgūts: 2 pareizas pēc kārtas; zūd tikai pēc 2 nepareizām pēc kārtas (sk. lib/progress/mastery.ts) */
+    mastered: boolean("mastered").notNull().default(false),
+    /** >0 pareizas pēc kārtas, <0 nepareizas pēc kārtas */
+    streak: integer("streak").notNull().default(0),
     lastAnsweredAt: timestamp("last_answered_at", { withTimezone: true }).notNull(),
     reviewStage: integer("review_stage").notNull().default(0),
     nextReviewAt: timestamp("next_review_at", { withTimezone: true }),

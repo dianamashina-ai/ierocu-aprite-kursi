@@ -53,7 +53,7 @@ test("atbildes saglabājas; kļūda nonāk kļūdu sarakstā; panelis rāda prog
   const wasCorrect = await page.getByText("Pareizi", { exact: true }).isVisible();
   await page.waitForTimeout(500); // servera darbība
   await page.goto("/");
-  await expect(page.getByText(wasCorrect ? "1 no 515 jautājumiem apgūti" : "0 no 515 jautājumiem apgūti")).toBeVisible();
+  await expect(page.getByText("0 no 515 jautājumiem apgūti") /* viena pareiza atbilde vēl nav “apgūts” */).toBeVisible();
   // kļūda redzama treniņa izvēlē pie tēmas
   await page.goto("/trenins");
   if (wasCorrect) await expect(page.getByText("Kļūdu pagaidām nav.")).toBeVisible();

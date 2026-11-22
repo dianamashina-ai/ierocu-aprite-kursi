@@ -4,6 +4,7 @@ import { and, asc, desc, eq, gt, inArray, isNotNull, lte, sql } from "drizzle-or
 import { db, schema } from "@/db";
 import { DEFAULT_EXAM_CONFIG, type ExamConfig } from "@/config/exam";
 import { nextReviewState } from "./review";
+import { nextMastery } from "./mastery";
 import { currentStreak, rigaDay } from "./streak";
 import { readiness } from "./readiness";
 import { sampleExam } from "@/lib/exam/sample";
@@ -46,6 +47,7 @@ export async function recordAnswer(
       .where(and(eq(questionProgress.userId, userId), eq(questionProgress.questionId, questionId)))
       .for("update");
     const review = nextReviewState(prev ? { reviewStage: prev.reviewStage, nextReviewAt: prev.nextReviewAt } : null, isCorrect, now);
+    const mastery = nextMastery(prev ? { mastered: prev.mastered, streak: prev.streak } : null, isCorrect);
 
     if (prev) {
       await t
@@ -55,6 +57,7 @@ export async function recordAnswer(
           correctCount: prev.correctCount + (isCorrect ? 1 : 0),
           lastCorrect: isCorrect,
           lastAnsweredAt: now,
+          ...mastery,
           ...review,
         })
         .where(and(eq(questionProgress.userId, userId), eq(questionProgress.questionId, questionId)));
@@ -66,6 +69,7 @@ export async function recordAnswer(
         correctCount: isCorrect ? 1 : 0,
         lastCorrect: isCorrect,
         lastAnsweredAt: now,
+        ...mastery,
         ...review,
       });
     }
@@ -253,7 +257,8 @@ export async function getDashboard(userId: string, now = new Date()) {
       .select({
         topicId: questions.topicId,
         answered: sql<number>`count(*)::int`,
-        lastCorrect: sql<number>`count(*) filter (where ${questionProgress.lastCorrect})::int`,
+        mastered: sql<number>`count(*) filter (where ${questionProgress.mastered})::int`,
+        wrong: sql<number>`count(*) filter (where not ${questionProgress.lastCorrect})::int`,
       })
       .from(questionProgress)
       .innerJoin(questions, eq(questions.id, questionProgress.questionId))
@@ -273,7 +278,8 @@ export async function getDashboard(userId: string, now = new Date()) {
     const total = totals.get(t.id) ?? 0;
     const p = prog.get(t.id);
     const answered = p?.answered ?? 0;
-    const mastered = p?.lastCorrect ?? 0;
+    const mastered = p?.mastered ?? 0;
+    const wrong = p?.wrong ?? 0;
     return {
       id: t.id,
       moduleId: t.moduleId,
@@ -282,7 +288,8 @@ export async function getDashboard(userId: string, now = new Date()) {
       answered,
       mastered,
       percent: total ? Math.round((mastered / total) * 100) : 0,
-      accuracy: answered ? mastered / answered : null,
+      wrong,
+      accuracy: answered ? (answered - wrong) / answered : null,
     };
   });
   const moduleStats = mods.map((m) => {
@@ -305,7 +312,7 @@ export async function getDashboard(userId: string, now = new Date()) {
     unanswered: totalQuestions - answeredQuestions,
     masteredQuestions: topicStats.reduce((s, t) => s + t.mastered, 0),
     /** pašreizējās kļūdas: pēdējā atbilde nepareiza */
-    mistakes: topicStats.reduce((s, t) => s + (t.answered - t.mastered), 0),
+    mistakes: topicStats.reduce((s, t) => s + t.wrong, 0),
     streak: currentStreak(dayRows.map((r) => r.day), rigaDay(now)),
     week: lastDays(dayRows.map((r) => r.day), rigaDay(now), 7),
     dueReviews: due.length,
@@ -334,7 +341,7 @@ export async function getTopicProgress(userId: string) {
     .select({
       topicId: questions.topicId,
       answered: sql<number>`count(*)::int`,
-      mastered: sql<number>`count(*) filter (where ${questionProgress.lastCorrect})::int`,
+      mastered: sql<number>`count(*) filter (where ${questionProgress.mastered})::int`,
     })
     .from(questionProgress)
     .innerJoin(questions, eq(questions.id, questionProgress.questionId))
