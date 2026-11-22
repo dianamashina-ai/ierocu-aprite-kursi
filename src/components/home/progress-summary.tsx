@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Check, Lock, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Lock, X } from "lucide-react";
 import { READY_LAST_EXAMS } from "@/lib/progress/readiness";
 import { FREE_MODULE_IDS } from "@/config/exam";
 import type { getDashboard } from "@/lib/progress/service";
@@ -44,7 +44,7 @@ export function ProgressSummary({
   return (
     <section
       aria-labelledby="progress-h"
-      className={`mt-10 grid gap-3 sm:gap-4 ${showExams ? "lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]" : ""}`}
+      className={`mt-10 grid gap-3 sm:gap-4 ${showExams || freeOnly ? "lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]" : ""}`}
     >
       <h2 id="progress-h" className="sr-only">
         Tavs progress
@@ -83,8 +83,8 @@ export function ProgressSummary({
               </div>
               <div
                 aria-hidden="true"
-                className="h-full flex-1 rounded-full"
-                style={{ backgroundImage: "repeating-linear-gradient(135deg, var(--color-line) 0 6px, transparent 6px 10px)" }}
+                className="h-full flex-1 rounded-full bg-surface"
+                style={{ backgroundImage: "repeating-linear-gradient(135deg, var(--color-line) 0 1.5px, transparent 1.5px 6px)" }}
               />
             </div>
             <div className="mt-2 flex items-center justify-between gap-3 text-xs text-muted">
@@ -110,6 +110,21 @@ export function ProgressSummary({
           </div>
         )}
       </div>
+
+      {freeOnly && (
+        <div className="flex flex-col rounded-2xl bg-ink p-5 text-white sm:p-6">
+          <p className="text-lg font-semibold tracking-tight">Atver visu kursu</p>
+          <p className="mt-1.5 text-sm text-white/70">
+            Vēl {d.modules.length - free.length} moduļi, {d.totalQuestions - total} jautājumi ar skaidrojumiem un izmēģinājuma eksāmens.
+          </p>
+          <Link
+            href="/iegadaties"
+            className="mt-4 inline-flex min-h-11 items-center justify-center gap-2 self-start rounded-xl bg-white px-4 text-sm font-semibold text-ink transition-colors hover:bg-white/90 lg:mt-auto"
+          >
+            Iegādāties pilnu kursu <ArrowRight aria-hidden="true" className="size-4" />
+          </Link>
+        </div>
+      )}
 
       {showExams && (
         <ExamAttemptsCard
