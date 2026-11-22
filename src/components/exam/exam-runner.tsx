@@ -117,7 +117,7 @@ export function ExamRunner({
   return (
     <div className="focus-mode">
       <div className="sticky top-0 z-10 border-b border-line bg-white/95 backdrop-blur">
-        <div className="px-4 pt-3 pb-3 sm:px-6 lg:px-8">
+        <div className="p-4">
           {/* fokusa režīma galvene (vietnes izvēlne paslēpta): virsraksts un krustiņš */}
           <div className="flex items-center justify-between gap-4 pb-2">
             <span className="font-semibold">Izmēģinājuma eksāmens</span>
@@ -226,7 +226,7 @@ export function ExamRunner({
 
             {/* telefonā — piestiprināts ekrāna apakšā, datorā — zem atbildēm */}
             <div className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white/95 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur">
-              <div className="flex items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+              <div className="flex items-center justify-between gap-3 px-4">
                 <button
                   type="button"
                   className="btn-secondary flex-1 disabled:cursor-not-allowed disabled:opacity-40 lg:min-w-48 lg:flex-none"
