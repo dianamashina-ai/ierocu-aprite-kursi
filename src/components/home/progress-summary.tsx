@@ -1,91 +1,125 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { READY_TOPIC_PERCENT } from "@/lib/progress/readiness";
+import { Check } from "lucide-react";
+import { READY_LAST_EXAMS, READY_TOPIC_PERCENT } from "@/lib/progress/readiness";
 import type { getDashboard } from "@/lib/progress/service";
 
 type Dashboard = Awaited<ReturnType<typeof getDashboard>>;
 
-const tile = "relative flex flex-col rounded-2xl border border-line bg-white p-4 sm:p-5";
-
-/** Maza kartīte: virsraksts (+ bultiņa, ja saite), liels skaitlis, vizualizācija vai paskaidrojums. */
-function Tile({ label, href, value, children }: { label: string; href?: string; value: React.ReactNode; children?: React.ReactNode }) {
+/** Viens solis ceļā uz eksāmenu: numurs/ķeksītis, nosaukums, paskaidrojums, josla un skaitītājs. */
+function Step({
+  n,
+  done,
+  title,
+  hint,
+  value,
+  total,
+  unit,
+  href,
+  action,
+  children,
+}: {
+  n: number;
+  done: boolean;
+  title: string;
+  hint: string;
+  value: number;
+  total: number;
+  unit: string;
+  href: string;
+  action: string;
+  children?: React.ReactNode;
+}) {
+  const pct = total ? Math.round((value / total) * 100) : 0;
   return (
-    <div className={`${tile} ${href ? "transition-colors hover:border-ink" : ""}`}>
-      <div className="flex items-start justify-between gap-2">
-        <p className="text-sm text-muted">
-          {href ? (
-            <Link href={href} className="after:absolute after:inset-0 after:rounded-2xl">
-              {label}
-            </Link>
-          ) : (
-            label
-          )}
-        </p>
-        {href && <ArrowUpRight aria-hidden="true" className="size-4 shrink-0 text-muted" />}
+    <li className="flex gap-4 py-5 first:pt-0 last:pb-0">
+      <span
+        aria-hidden="true"
+        className={`flex size-8 shrink-0 items-center justify-center rounded-full text-sm font-bold ${done ? "bg-ok text-white" : "bg-accent-soft text-accent-strong"}`}
+      >
+        {done ? <Check className="size-4" strokeWidth={3} /> : n}
+      </span>
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <h3 className="font-semibold">
+            {title}
+            {done && <span className="sr-only"> — izpildīts</span>}
+          </h3>
+          <p className="text-sm tabular-nums">
+            <span className="font-semibold">{value}</span> <span className="text-muted">no {total} {unit}</span>
+          </p>
+        </div>
+        <p className="mt-0.5 text-sm text-muted">{hint}</p>
+        {children ?? (
+          <div className="mt-3 h-2 overflow-hidden rounded-full bg-accent-soft" aria-hidden="true">
+            <div className={`h-full rounded-full ${done ? "bg-ok" : "bg-accent"}`} style={{ width: `${pct}%` }} />
+          </div>
+        )}
+        {!done && (
+          <Link href={href} className="mt-3 inline-block text-sm font-semibold text-accent-strong hover:underline">
+            {action} →
+          </Link>
+        )}
       </div>
-      <p className="mt-3 text-4xl font-bold leading-none tabular-nums">{value}</p>
-      {children && <div className="mt-auto pt-4">{children}</div>}
-    </div>
+    </li>
   );
 }
 
-/** Kompakts progresa bloks (pieslēgtiem lietotājiem): kurss kopā, jautājumi, izmēģinājuma eksāmeni. */
+/** Progresa bloks (pieslēgtiem lietotājiem): divi soļi līdz gatavībai eksāmenam. */
 export function ProgressSummary({ d, totalTopics }: { d: Dashboard; totalTopics: number }) {
-  const topics = d.modules.flatMap((m) => m.topics);
-  const topicsDone = topics.filter((t) => t.percent >= READY_TOPIC_PERCENT).length;
-  const topicsPct = totalTopics ? Math.round((topicsDone / totalTopics) * 100) : 0;
-  const masteredPct = d.totalQuestions ? Math.round((d.masteredQuestions / d.totalQuestions) * 100) : 0;
-  const lastExams = d.exams.slice(0, 3);
+  const topicsDone = d.modules.flatMap((m) => m.topics).filter((t) => t.percent >= READY_TOPIC_PERCENT).length;
+  // pēc kārtas nokārtotie eksāmeni (no jaunākā), ne vairāk par 3
+  let streak = 0;
+  for (const e of d.exams) {
+    if (!e.passed) break;
+    streak++;
+  }
+  streak = Math.min(streak, READY_LAST_EXAMS);
+  const topicsOk = topicsDone === totalTopics && totalTopics > 0;
+  const examsOk = streak === READY_LAST_EXAMS;
+  const doneSteps = Number(topicsOk) + Number(examsOk);
   const ready = d.readiness.ready;
 
-
   return (
-    <section aria-labelledby="progress-h" className="mt-10">
-      <h2 id="progress-h" className="sr-only">Tavs progress</h2>
-      <div className="grid gap-3 sm:gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)]">
-        {/* Kurss kopā — katra tēma ir viens punkts */}
-        <div className={`${tile} ${ready ? "border-ok" : ""}`}>
-          <div className="flex items-start justify-between gap-3">
-            <p className="text-sm text-muted">{ready ? "Gatavs eksāmenam" : "Kursa progress"}</p>
-            <p className="text-sm tabular-nums text-muted">
-              {topicsDone} no {totalTopics} tēmām apgūtas
-            </p>
-          </div>
-          <p className="mt-3 text-5xl font-bold leading-none tracking-tight tabular-nums">{topicsPct}%</p>
-          <div
-            role="progressbar"
-            aria-label="Kursa progress"
-            aria-valuenow={topicsPct}
-            aria-valuemin={0}
-            aria-valuemax={100}
-            className="mt-4 h-2 overflow-hidden rounded-full bg-accent-soft"
-          >
-            <div className="h-full rounded-full bg-accent" style={{ width: `${topicsPct}%` }} />
-          </div>
-          <p className="mt-4 text-xs text-muted">Tēma apgūta, ja pareizi atbildēts uz {READY_TOPIC_PERCENT} % jautājumu.</p>
-        </div>
-
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:contents">
-          <Tile label="Jautājumi apgūti" value={`${masteredPct}%`}>
-            <div className="h-1.5 overflow-hidden rounded-full bg-accent-soft" aria-hidden="true">
-              <div className="h-full rounded-full bg-accent" style={{ width: `${masteredPct}%` }} />
-            </div>
-            <p className="mt-2 text-xs tabular-nums text-muted">
-              {d.masteredQuestions} no {d.totalQuestions}
-            </p>
-          </Tile>
-
-          <Tile label="Izmēģinājuma eksāmeni" href="/eksamens" value={`${d.readiness.examsPassed} no 3`}>
-            <div className="flex items-center gap-1.5" aria-hidden="true">
-              {[0, 1, 2].map((i) => {
-                const e = lastExams[i];
-                return <span key={i} className={`size-3.5 rounded-full ${!e ? "bg-accent-soft" : e.passed ? "bg-ok" : "bg-err"}`} />;
-              })}
-            </div>
-            <p className="mt-2 text-xs text-muted">Nokārto 3 eksāmenus pēc kārtas — tad būsi gatavs īstajam.</p>
-          </Tile>
-        </div>
+    <section aria-labelledby="progress-h" className={`mt-10 rounded-2xl border bg-white p-5 sm:p-6 ${ready ? "border-ok" : "border-line"}`}>
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <h2 id="progress-h" className="text-xl font-semibold tracking-tight">
+          {ready ? "Tu esi gatavs eksāmenam" : "Ceļš līdz eksāmenam"}
+        </h2>
+        <p className="text-sm text-muted">
+          {ready ? "Abi soļi izpildīti — vari pieteikties eksāmenam." : `Izpildīti ${doneSteps} no 2 soļiem`}
+        </p>
       </div>
+
+      <ol className="mt-5 divide-y divide-line">
+        <Step
+          n={1}
+          done={topicsOk}
+          title="Apgūsti visas tēmas"
+          hint={`Tēma apgūta, kad pareizi atbildēts uz ${READY_TOPIC_PERCENT} % tās jautājumu. Kopā pareizi atbildēti ${d.masteredQuestions} no ${d.totalQuestions} jautājumiem.`}
+          value={topicsDone}
+          total={totalTopics}
+          unit="tēmām"
+          href={d.answeredQuestions === 0 ? "/modulis/M1" : d.mistakes > 0 ? "/trenins/sakt?kludas=1" : "/trenins"}
+          action={d.answeredQuestions === 0 ? "Sākt mācīties" : d.mistakes > 0 ? `Labot kļūdas (${d.mistakes})` : "Trenēties"}
+        />
+        <Step
+          n={2}
+          done={examsOk}
+          title="Nokārto 3 izmēģinājuma eksāmenus pēc kārtas"
+          hint="Tāpat kā īstajā eksāmenā. Ja kāds netiek nokārtots, skaitīšana sākas no jauna."
+          value={streak}
+          total={READY_LAST_EXAMS}
+          unit="pēc kārtas"
+          href="/eksamens"
+          action="Kārtot izmēģinājuma eksāmenu"
+        >
+          <div className="mt-3 flex gap-1.5" aria-hidden="true">
+            {Array.from({ length: READY_LAST_EXAMS }, (_, i) => (
+              <span key={i} className={`h-2 flex-1 rounded-full ${i < streak ? (examsOk ? "bg-ok" : "bg-accent") : "bg-accent-soft"}`} />
+            ))}
+          </div>
+        </Step>
+      </ol>
     </section>
   );
 }

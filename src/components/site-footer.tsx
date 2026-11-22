@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { getContentVersion } from "@/lib/content/queries";
 import { SELLER } from "@/config/seller";
+import { getCurrentUser } from "@/lib/auth/session";
 
 const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
   {
@@ -36,8 +37,27 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
 ];
 
 export async function SiteFooter() {
-  const [t, version] = await Promise.all([getTranslations("footer"), getContentVersion()]);
+  const [t, version, user] = await Promise.all([getTranslations("footer"), getContentVersion(), getCurrentUser()]);
   const year = new Date().getFullYear();
+
+  // Pieslēgtam lietotājam — kompakta kājene: saites, piegādātājs, satura versija
+  if (user)
+    return (
+      <footer className="border-t border-line bg-white print:hidden">
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-6 text-sm text-muted sm:px-6 lg:flex-row lg:items-center lg:justify-between">
+          <nav aria-label="Informācija" className="flex flex-wrap gap-x-5 gap-y-2">
+            <Link href="/noteikumi" className="hover:text-ink">Noteikumi</Link>
+            <Link href="/privatums" className="hover:text-ink">Privātums</Link>
+            <Link href="/sikdatnes" className="hover:text-ink">Sīkdatnes</Link>
+            <Link href="/kontakti" className="hover:text-ink">Kontakti</Link>
+          </nav>
+          <p>
+            © {year} {SELLER.name} · {t("contentVersion", { version })}
+          </p>
+        </div>
+      </footer>
+    );
+
   return (
     <footer className="border-t border-line bg-white print:hidden">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
