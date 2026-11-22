@@ -225,8 +225,8 @@ export function ExamRunner({
             )}
 
             {/* telefonā — piestiprināts ekrāna apakšā, datorā — zem atbildēm */}
-            <div className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white/95 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur">
-              <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 sm:px-2">
+            <div className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white/95 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur">
+              <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
                 <button
                   type="button"
                   className="btn-secondary flex-1 disabled:cursor-not-allowed disabled:opacity-40 lg:min-w-48 lg:flex-none"

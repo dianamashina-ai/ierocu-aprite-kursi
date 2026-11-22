@@ -27,7 +27,12 @@ export function ProgressSummary({
   const total = freeOnly
     ? free.reduce((s, m) => s + m.total, 0)
     : d.totalQuestions;
+  const learning = freeOnly
+    ? free.reduce((s, m) => s + m.learning, 0)
+    : d.learningQuestions;
   const pct = total ? Math.round((mastered / total) * 100) : 0;
+  /** gaišākā daļa joslā: pareizi atbildēti 1×, vēl nav apgūti */
+  const learningPct = total ? (learning / total) * 100 : 0;
   /** bezmaksas daļas platums visa kursa joslā (%) */
   const freeShare = d.totalQuestions ? Math.max(8, (total / d.totalQuestions) * 100) : 100;
   const label = freeOnly ? "1. moduļa progress" : "Tavs progress";
@@ -79,7 +84,10 @@ export function ProgressSummary({
                 className="h-full shrink-0 overflow-hidden rounded-full bg-accent-soft"
                 style={{ width: `${freeShare}%` }}
               >
-                <div className="h-full rounded-full bg-accent" style={{ width: `${pct}%` }} />
+                <div className="flex h-full">
+                  <div className="h-full bg-ok" style={{ width: `${pct}%` }} />
+                  <div className="h-full bg-ok/30" style={{ width: `${learningPct}%` }} />
+                </div>
               </div>
               <div
                 aria-hidden="true"
@@ -103,10 +111,10 @@ export function ProgressSummary({
             aria-valuemax={100}
             className="mt-4 h-2 overflow-hidden rounded-full bg-accent-soft"
           >
-            <div
-              className={`h-full rounded-full ${ready ? "bg-ok" : "bg-accent"}`}
-              style={{ width: `${pct}%` }}
-            />
+            <div className="flex h-full">
+              <div className="h-full bg-ok" style={{ width: `${pct}%` }} />
+              <div className="h-full bg-ok/30" style={{ width: `${learningPct}%` }} />
+            </div>
           </div>
         )}
       </div>

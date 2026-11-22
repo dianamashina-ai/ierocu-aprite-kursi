@@ -4,7 +4,11 @@ import { TriangleAlert, X } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { seededRandom, shuffleOptions, uppercaseLetterRefs } from "@/lib/quiz/shuffle";
+import {
+  seededRandom,
+  shuffleOptions,
+  uppercaseLetterRefs,
+} from "@/lib/quiz/shuffle";
 import { recordAnswerAction } from "@/app/actions/progress";
 import type { PracticeQuestion } from "@/lib/quiz/types";
 
@@ -37,10 +41,21 @@ function shuffledIndexes(n: number, seed: string, enabled: boolean) {
   return idx;
 }
 
-export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestions = true, signedIn = false, mode = "practice", upsell }: Props) {
+export function Practice({
+  questions,
+  seed,
+  topicHref,
+  exitHref,
+  shuffleQuestions = true,
+  signedIn = false,
+  mode = "practice",
+  upsell,
+}: Props) {
   const t = useTranslations("practice");
   const [round, setRound] = useState(0);
-  const [pool, setPool] = useState<number[]>(() => shuffledIndexes(questions.length, seed, shuffleQuestions));
+  const [pool, setPool] = useState<number[]>(() =>
+    shuffledIndexes(questions.length, seed, shuffleQuestions),
+  );
   const [pos, setPos] = useState(0);
   const [selected, setSelected] = useState<string | null>(null); // oriģinālais burts
   const [results, setResults] = useState<Record<number, boolean>>({});
@@ -50,12 +65,19 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
 
   const q = questions[pool[pos]];
   const shown = useMemo(
-    () => (q ? shuffleOptions(q.options, `${seed}:${round}:${q.id}`, { disabled: q.shuffleDisabled }) : []),
+    () =>
+      q
+        ? shuffleOptions(q.options, `${seed}:${round}:${q.id}`, {
+            disabled: q.shuffleDisabled,
+          })
+        : [],
     [q, seed, round],
   );
   const answered = selected !== null;
   const isCorrect = answered && selected === q?.correctKey;
-  const correctDisplay = (shown.find((o) => o.originalKey === q?.correctKey)?.displayKey ?? "").toUpperCase();
+  const correctDisplay = (
+    shown.find((o) => o.originalKey === q?.correctKey)?.displayKey ?? ""
+  ).toUpperCase();
   const isLast = pos === pool.length - 1;
 
   const choose = useCallback(
@@ -66,7 +88,10 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
       if (signedIn) {
         recordAnswerAction(q.id, originalKey, mode).then(
           (r) => setSaveError(r.ok ? null : r.error),
-          () => setSaveError("Neizdevās saglabāt atbildi. Pārbaudi interneta savienojumu."),
+          () =>
+            setSaveError(
+              "Neizdevās saglabāt atbildi. Pārbaudi interneta savienojumu.",
+            ),
         );
       }
     },
@@ -90,7 +115,8 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
 
   // ritinām uz kartītes sākumu, mainoties jautājumam
   useEffect(() => {
-    if (pos > 0 || phase === "summary") window.scrollTo({ top: 0, behavior: "smooth" });
+    if (pos > 0 || phase === "summary")
+      window.scrollTo({ top: 0, behavior: "smooth" });
   }, [pos, phase]);
 
   useEffect(() => {
@@ -104,7 +130,13 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
       if (opt && !answered) {
         e.preventDefault();
         choose(opt.originalKey);
-      } else if (e.key === "Enter" && answered && pool.length > 1 && target.tagName !== "BUTTON" && target.tagName !== "A") {
+      } else if (
+        e.key === "Enter" &&
+        answered &&
+        pool.length > 1 &&
+        target.tagName !== "BUTTON" &&
+        target.tagName !== "A"
+      ) {
         e.preventDefault();
         next();
       }
@@ -116,7 +148,13 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
   const startRound = (indexes: number[]) => {
     const r = round + 1;
     setRound(r);
-    setPool(shuffleQuestions ? shuffledIndexes(indexes.length, `${seed}:${r}`, true).map((i) => indexes[i]) : indexes);
+    setPool(
+      shuffleQuestions
+        ? shuffledIndexes(indexes.length, `${seed}:${r}`, true).map(
+            (i) => indexes[i],
+          )
+        : indexes,
+    );
     setPos(0);
     setSelected(null);
     setResults({});
@@ -129,56 +167,78 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
     const wrongIdx = pool.filter((i) => !results[questions[i].id]);
     return (
       <>
-      <section aria-labelledby="summary-h" className="mx-auto max-w-2xl rounded-2xl border border-line bg-white p-6 sm:p-8">
-        <h2 id="summary-h" className="text-2xl font-semibold">
-          {t("summaryHeading")}
-        </h2>
-        <p className="mt-2 text-lg">{t("summaryScore", { correct, total: ids.length })}</p>
-        <div className="mt-4 h-3 overflow-hidden rounded-full bg-accent-soft" aria-hidden="true">
-          <div className="h-full bg-accent" style={{ width: `${(correct / ids.length) * 100}%` }} />
-        </div>
-        {!signedIn && (
-          <p className="mt-4 rounded-xl bg-accent-soft p-4 text-sm">
-            <Link href="/registreties" className="font-semibold text-accent-strong underline underline-offset-4">Izveido kontu</Link>, lai progress un kļūdas tiktu saglabāti un atkārtoti pēc 1, 3 un 7 dienām.
+        <section
+          aria-labelledby="summary-h"
+          className="mx-auto max-w-2xl rounded-2xl border border-line bg-white p-6 sm:p-8"
+        >
+          <h2 id="summary-h" className="text-2xl font-semibold">
+            {t("summaryHeading")}
+          </h2>
+          <p className="mt-2 text-lg">
+            {t("summaryScore", { correct, total: ids.length })}
           </p>
-        )}
-        {wrongIdx.length === 0 ? (
-          <p className="mt-4 text-ok">{t("allCorrect")}</p>
-        ) : (
-          <ul className="mt-5 flex flex-wrap gap-2">
-            {wrongIdx.map((i) => (
-              <li key={questions[i].id}>
-                <Link
-                  href={`/jautajums/${questions[i].id}`}
-                  className="inline-flex min-h-11 items-center rounded-lg bg-err-soft px-3 text-sm font-semibold text-err"
-                >
-                  Nr. {questions[i].id}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-        <div className="mt-6 flex flex-wrap gap-3">
-          {wrongIdx.length > 0 && (
-            <button type="button" onClick={() => startRound(wrongIdx)} className="btn-primary">
-              {t("retryWrong", { count: wrongIdx.length })}
-            </button>
-          )}
-          <button
-            type="button"
-            onClick={() => startRound(questions.map((_, i) => i))}
-            className={wrongIdx.length > 0 ? "btn-secondary" : "btn-primary"}
+          <div
+            className="mt-4 h-3 overflow-hidden rounded-full bg-accent-soft"
+            aria-hidden="true"
           >
-            {t("restart")}
-          </button>
-          {topicHref && (
-            <Link href={topicHref} className="btn-secondary">
-              {t("backToTopic")}
-            </Link>
+            <div
+              className="h-full bg-accent"
+              style={{ width: `${(correct / ids.length) * 100}%` }}
+            />
+          </div>
+          {!signedIn && (
+            <p className="mt-4 rounded-xl bg-accent-soft p-4 text-sm">
+              <Link
+                href="/registreties"
+                className="font-semibold text-accent-strong underline underline-offset-4"
+              >
+                Izveido kontu
+              </Link>
+              , lai progress un kļūdas tiktu saglabāti un atkārtoti pēc 1, 3 un
+              7 dienām.
+            </p>
           )}
-        </div>
-      </section>
-      {upsell && <div className="mx-auto mt-6 max-w-2xl">{upsell}</div>}
+          {wrongIdx.length === 0 ? (
+            <p className="mt-4 text-ok">{t("allCorrect")}</p>
+          ) : (
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {wrongIdx.map((i) => (
+                <li key={questions[i].id}>
+                  <Link
+                    href={`/jautajums/${questions[i].id}`}
+                    className="inline-flex min-h-11 items-center rounded-lg bg-err-soft px-3 text-sm font-semibold text-err"
+                  >
+                    Nr. {questions[i].id}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+          <div className="mt-6 flex flex-wrap gap-3">
+            {wrongIdx.length > 0 && (
+              <button
+                type="button"
+                onClick={() => startRound(wrongIdx)}
+                className="btn-primary"
+              >
+                {t("retryWrong", { count: wrongIdx.length })}
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => startRound(questions.map((_, i) => i))}
+              className={wrongIdx.length > 0 ? "btn-secondary" : "btn-primary"}
+            >
+              {t("restart")}
+            </button>
+            {topicHref && (
+              <Link href={topicHref} className="btn-secondary">
+                {t("backToTopic")}
+              </Link>
+            )}
+          </div>
+        </section>
+        {upsell && <div className="mx-auto mt-6 max-w-2xl">{upsell}</div>}
       </>
     );
   }
@@ -186,42 +246,64 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
   if (!q) return null;
 
   return (
-    <div className={pool.length > 1 ? "has-sticky-footer focus-mode pb-28" : undefined}>
+    <div
+      className={
+        pool.length > 1 ? "has-sticky-footer focus-mode pb-28" : undefined
+      }
+    >
       {pool.length > 1 && (
-        <div className="sticky top-0 z-10 -mx-4 mb-8 border-b border-line bg-white/95 px-4 pt-3 pb-3 backdrop-blur sm:-mx-6 sm:px-6">
-          {/* fokusa režīma galvene (vietnes izvēlne paslēpta): virsraksts un krustiņš */}
-          <div className="flex items-center justify-between gap-4 pb-2">
-            <span className="font-semibold">{mode === "review" ? t("titleReview") : t("titlePractice")}</span>
-            <Link href={exitHref ?? topicHref ?? "/"} aria-label={t("exit")} className="-mr-2 inline-flex size-10 items-center justify-center rounded-lg text-muted hover:bg-accent-soft hover:text-ink">
-              <X aria-hidden="true" className="size-5" />
-            </Link>
-          </div>
-          <div className="flex items-center justify-between gap-3">
-            <span className="text-sm text-muted">
-              {t("progress", { current: pos + 1, total: pool.length })}
-            </span>
-            <span className="text-sm tabular-nums text-muted">Nr. {q.id}</span>
-          </div>
-          <div
-            className="mt-3 h-1 overflow-hidden rounded-full bg-line"
-            role="progressbar"
-            aria-label={t("progressLabel")}
-            aria-valuemin={0}
-            aria-valuemax={pool.length}
-            aria-valuenow={pos + (answered ? 1 : 0)}
-          >
+        <div className="sticky top-0 z-10 mx-[calc(50%-50vw)] mb-8 border-b border-line bg-white/95 backdrop-blur">
+          <div className="mx-auto max-w-6xl px-4 pt-3 pb-3 sm:px-6">
+            {/* fokusa režīma galvene (vietnes izvēlne paslēpta): virsraksts un krustiņš */}
+            <div className="flex items-center justify-between gap-4 pb-2">
+              <span className="font-semibold">
+                {mode === "review" ? t("titleReview") : t("titlePractice")}
+              </span>
+              <Link
+                href={exitHref ?? topicHref ?? "/"}
+                aria-label={t("exit")}
+                className="-mr-2 inline-flex size-10 items-center justify-center rounded-lg text-muted hover:bg-accent-soft hover:text-ink"
+              >
+                <X aria-hidden="true" className="size-5" />
+              </Link>
+            </div>
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-sm text-muted">
+                {t("progress", { current: pos + 1, total: pool.length })}
+              </span>
+              <span className="text-sm tabular-nums text-muted">
+                Nr. {q.id}
+              </span>
+            </div>
             <div
-              className="h-full bg-accent transition-[width] duration-300 motion-reduce:transition-none"
-              style={{ width: `${((pos + (answered ? 1 : 0)) / pool.length) * 100}%` }}
-            />
+              className="mt-3 h-1 overflow-hidden rounded-full bg-line"
+              role="progressbar"
+              aria-label={t("progressLabel")}
+              aria-valuemin={0}
+              aria-valuemax={pool.length}
+              aria-valuenow={pos + (answered ? 1 : 0)}
+            >
+              <div
+                className="h-full bg-accent transition-[width] duration-300 motion-reduce:transition-none"
+                style={{
+                  width: `${((pos + (answered ? 1 : 0)) / pool.length) * 100}%`,
+                }}
+              />
+            </div>
           </div>
         </div>
       )}
 
-      <article className="grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14" aria-labelledby={`q-${q.id}`}>
+      <article
+        className="grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14"
+        aria-labelledby={`q-${q.id}`}
+      >
         <div className="lg:sticky lg:top-32 lg:self-start">
           {q.possiblyOutdated && (
-            <aside className="mb-5 rounded-xl border border-warn/30 bg-warn-soft px-4 py-3 text-sm leading-relaxed text-ink" aria-label={t("outdated")}>
+            <aside
+              className="mb-5 rounded-xl border border-warn/30 bg-warn-soft px-4 py-3 text-sm leading-relaxed text-ink"
+              aria-label={t("outdated")}
+            >
               <p className="flex items-center gap-1.5 font-semibold text-warn">
                 <TriangleAlert aria-hidden="true" className="size-4 shrink-0" />
                 {t("outdated")}
@@ -230,8 +312,14 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
               <p className="mt-1.5 text-muted">{t("outdatedDisclaimer")}</p>
             </aside>
           )}
-          {pool.length === 1 && <p className="text-sm tabular-nums text-muted">Nr. {q.id}</p>}
-          <h2 id={`q-${q.id}`} className="text-xl font-semibold leading-snug tracking-tight sm:text-2xl" lang="lv">
+          {pool.length === 1 && (
+            <p className="text-sm tabular-nums text-muted">Nr. {q.id}</p>
+          )}
+          <h2
+            id={`q-${q.id}`}
+            className="text-xl font-semibold leading-snug tracking-tight sm:text-2xl"
+            lang="lv"
+          >
             {q.text}
           </h2>
         </div>
@@ -270,11 +358,20 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
                       >
                         {o.displayKey}
                       </span>
-                      <span className="flex-1 text-[16px] leading-relaxed" lang="lv">
-                        <span className="sr-only">{o.displayKey.toUpperCase()}. </span>
+                      <span
+                        className="flex-1 text-[16px] leading-relaxed"
+                        lang="lv"
+                      >
+                        <span className="sr-only">
+                          {o.displayKey.toUpperCase()}.{" "}
+                        </span>
                         {uppercaseLetterRefs(o.text)}
-                        {answered && isRight && <span className="sr-only"> — {t("correct")}</span>}
-                        {answered && isSel && !isRight && <span className="sr-only"> — {t("wrong")}</span>}
+                        {answered && isRight && (
+                          <span className="sr-only"> — {t("correct")}</span>
+                        )}
+                        {answered && isSel && !isRight && (
+                          <span className="sr-only"> — {t("wrong")}</span>
+                        )}
                       </span>
                     </button>
                   </li>
@@ -287,10 +384,19 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
             {answered && (
               <div className="mt-6 space-y-4">
                 {saveError && (
-                  <p role="alert" className="rounded-lg bg-err-soft px-3 py-2 text-sm text-err">{saveError}</p>
+                  <p
+                    role="alert"
+                    className="rounded-lg bg-err-soft px-3 py-2 text-sm text-err"
+                  >
+                    {saveError}
+                  </p>
                 )}
-                <p className={`text-lg font-semibold ${isCorrect ? "text-ok" : "text-err"}`}>
-                  {isCorrect ? t("correct") : `${t("wrong")}. ${t("correctAnswerIs", { key: correctDisplay })}`}
+                <p
+                  className={`text-lg font-semibold ${isCorrect ? "text-ok" : "text-err"}`}
+                >
+                  {isCorrect
+                    ? t("correct")
+                    : `${t("wrong")}. ${t("correctAnswerIs", { key: correctDisplay })}`}
                 </p>
 
                 <div className="rounded-xl bg-surface p-4">
@@ -302,17 +408,25 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
                       </span>
                     )}
                   </h3>
-                  <p className="mt-1 text-muted">{q.explanation ?? t("explanationMissing")}</p>
+                  <p className="mt-1 text-muted">
+                    {q.explanation ?? t("explanationMissing")}
+                  </p>
                   {q.lawReference && (
                     <p className="mt-2 text-sm">
-                      <span className="font-semibold">{t("lawReference")}:</span> {q.lawReference}
+                      <span className="font-semibold">
+                        {t("lawReference")}:
+                      </span>{" "}
+                      {q.lawReference}
                     </p>
                   )}
                 </div>
 
                 {q.familyId && q.familySize > 1 && (
                   <div>
-                    <Link href={`/saime/${q.familyId}?no=${q.id}`} className="btn-secondary">
+                    <Link
+                      href={`/saime/${q.familyId}?no=${q.id}`}
+                      className="btn-secondary"
+                    >
                       {t("compareSimilar", { count: q.familySize })}
                     </Link>
                   </div>
@@ -324,7 +438,12 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
           {pool.length === 1 ? (
             answered && (
               <div className="mt-4">
-                <button ref={nextRef} type="button" onClick={() => startRound([pool[0]])} className="btn-primary">
+                <button
+                  ref={nextRef}
+                  type="button"
+                  onClick={() => startRound([pool[0]])}
+                  className="btn-primary"
+                >
                   {t("tryAgain")}
                 </button>
               </div>
@@ -332,9 +451,15 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
           ) : (
             <>
               {/* poga ekrāna apakšā (aktīva pēc atbildes) */}
-              <div className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white/95 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur">
-                <div className="mx-auto flex max-w-6xl justify-end sm:px-2">
-                  <button ref={nextRef} type="button" disabled={!answered} onClick={next} className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-40 lg:w-auto lg:min-w-48">
+              <div className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white/95 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur">
+                <div className="mx-auto flex max-w-6xl justify-end px-4 sm:px-6">
+                  <button
+                    ref={nextRef}
+                    type="button"
+                    disabled={!answered}
+                    onClick={next}
+                    className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-40 lg:w-auto lg:min-w-48"
+                  >
                     {isLast ? t("finish") : t("next")}
                   </button>
                 </div>
