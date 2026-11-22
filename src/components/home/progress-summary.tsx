@@ -9,10 +9,14 @@ type Dashboard = Awaited<ReturnType<typeof getDashboard>>;
  * Pieslēgtiem lietotājiem: kopējais progress (apgūto jautājumu daļa, kā moduļu kartītēs)
  * un maza kartīte ar pēdējiem READY_LAST_EXAMS izmēģinājuma eksāmeniem.
  */
+/** No kāda kopējā progresa sākumlapā rādām izmēģinājuma eksāmenu kartīti (ja vēl nav neviena mēģinājuma). */
+export const EXAM_CARD_FROM_PERCENT = 70;
+
 export function ProgressSummary({ d }: { d: Dashboard }) {
   const pct = d.totalQuestions
     ? Math.round((d.masteredQuestions / d.totalQuestions) * 100)
     : 0;
+  const showExams = pct >= EXAM_CARD_FROM_PERCENT || d.exams.length > 0;
   const ready = d.readiness.ready;
   // pēdējie mēģinājumi: vecākais pa kreisi, jaunākais pa labi
   const last = d.exams.slice(0, READY_LAST_EXAMS).reverse();
@@ -24,7 +28,7 @@ export function ProgressSummary({ d }: { d: Dashboard }) {
   return (
     <section
       aria-labelledby="progress-h"
-      className="mt-10 grid gap-3 sm:gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]"
+      className={`mt-10 grid gap-3 sm:gap-4 ${showExams ? "lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]" : ""}`}
     >
       <h2 id="progress-h" className="sr-only">
         Tavs progress
@@ -61,9 +65,11 @@ export function ProgressSummary({ d }: { d: Dashboard }) {
         </div>
       </div>
 
-      <ExamAttemptsCard
-        results={slots.map((e) => (e ? Boolean(e.passed) : null))}
-      />
+      {showExams && (
+        <ExamAttemptsCard
+          results={slots.map((e) => (e ? Boolean(e.passed) : null))}
+        />
+      )}
     </section>
   );
 }
@@ -89,7 +95,10 @@ export function ExamAttemptsCard({ results }: { results: (boolean | null)[] }) {
           className="size-4 shrink-0 text-muted"
         />
       </div>
-      <ol aria-label={`Pēdējie ${READY_LAST_EXAMS} mēģinājumi`} className="mt-3 flex gap-1.5">
+      <ol
+        aria-label={`Pēdējie ${READY_LAST_EXAMS} mēģinājumi`}
+        className="mt-3 flex gap-1.5"
+      >
         {results.map((e, i) => (
           <li
             key={i}
