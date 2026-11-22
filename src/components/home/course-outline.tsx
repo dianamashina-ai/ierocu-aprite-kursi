@@ -23,15 +23,19 @@ export function CourseOutline({ modules, totals }: { modules: OutlineModule[]; t
             Kursā ir {totals.modules} moduļi un {totals.topics} tēmas — no ieroča uzbūves līdz atbildībai. Sāc ar pamatiem un zināšanas
             papildini pakāpeniski.
           </p>
-          <p className="mt-6 font-semibold">1. modulis ir bez maksas.</p>
-          <p className="mt-1 text-muted">Moduļi 2–{totals.modules}, skaidrojumi un eksāmena simulācija ir pieejami pilnajā kursā.</p>
-          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <Link href="/modulis/M1" className="btn-secondary gap-2">
-              Izmēģināt 1. moduli <ArrowUpRight aria-hidden="true" className="size-4" />
-            </Link>
-            <Link href="/iegadaties" className="inline-flex min-h-11 items-center font-semibold hover:text-accent">
-              Iegādāties pilnu piekļuvi
-            </Link>
+          <div className="mt-8 rounded-2xl bg-ink p-6 text-white sm:p-7">
+            <p className="text-lg font-semibold">1. modulis ir bez maksas</p>
+            <p className="mt-2 text-white/70">
+              Moduļi 2–{totals.modules}, skaidrojumi un eksāmena simulācija ir pieejami pilnajā kursā.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <Link href="/modulis/M1" className="inline-flex min-h-12 items-center gap-2 rounded-xl bg-white px-5 font-semibold text-ink transition-colors hover:bg-white/90">
+                Izmēģināt 1. moduli <ArrowUpRight aria-hidden="true" className="size-4" />
+              </Link>
+              <Link href="/iegadaties" className="inline-flex min-h-11 items-center font-semibold text-white/90 hover:text-white hover:underline">
+                Iegādāties pilnu piekļuvi
+              </Link>
+            </div>
           </div>
         </div>
 
