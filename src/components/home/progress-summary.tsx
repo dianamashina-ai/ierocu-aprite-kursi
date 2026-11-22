@@ -44,14 +44,14 @@ export function ProgressSummary({
   return (
     <section
       aria-labelledby="progress-h"
-      className={`mt-10 grid gap-3 sm:gap-4 ${showExams || freeOnly ? "lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]" : ""}`}
+      className="mt-10 grid gap-5 lg:grid-cols-3"
     >
       <h2 id="progress-h" className="sr-only">
         Tavs progress
       </h2>
 
       <div
-        className={`rounded-2xl border bg-white p-5 sm:p-6 ${ready ? "border-ok" : "border-line"}`}
+        className={`rounded-2xl border bg-white p-5 sm:p-6 ${showExams || freeOnly ? "lg:col-span-2" : "lg:col-span-3"} ${ready ? "border-ok" : "border-line"}`}
       >
         <div className="flex items-end justify-between gap-4">
           <div>
