@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Check, X } from "lucide-react";
+import { ArrowUpRight, Check, Lock, X } from "lucide-react";
 import { READY_LAST_EXAMS } from "@/lib/progress/readiness";
 import { FREE_MODULE_IDS } from "@/config/exam";
 import type { getDashboard } from "@/lib/progress/service";
@@ -28,6 +28,8 @@ export function ProgressSummary({
     ? free.reduce((s, m) => s + m.total, 0)
     : d.totalQuestions;
   const pct = total ? Math.round((mastered / total) * 100) : 0;
+  /** bezmaksas daļas platums visa kursa joslā (%) */
+  const freeShare = d.totalQuestions ? Math.max(8, (total / d.totalQuestions) * 100) : 100;
   const label = freeOnly ? "1. moduļa progress" : "Tavs progress";
   // kartīte parādās, kad pirmo reizi sasniegti 70 % (EXAMS_UNLOCK_PERCENT), un paliek
   const showExams = !freeOnly && d.examsUnlocked;
@@ -64,19 +66,49 @@ export function ProgressSummary({
             {mastered} no {total} jautājumiem apgūti
           </p>
         </div>
-        <div
-          role="progressbar"
-          aria-label={label}
-          aria-valuenow={pct}
-          aria-valuemin={0}
-          aria-valuemax={100}
-          className="mt-4 h-2 overflow-hidden rounded-full bg-accent-soft"
-        >
+        {freeOnly ? (
+          // Visa kursa josla: bezmaksas modulis — neliels sākuma posms, pārējais slēgts
+          <>
+            <div className="mt-4 flex h-2 gap-1">
+              <div
+                role="progressbar"
+                aria-label={label}
+                aria-valuenow={pct}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                className="h-full shrink-0 overflow-hidden rounded-full bg-accent-soft"
+                style={{ width: `${freeShare}%` }}
+              >
+                <div className="h-full rounded-full bg-accent" style={{ width: `${pct}%` }} />
+              </div>
+              <div
+                aria-hidden="true"
+                className="h-full flex-1 rounded-full"
+                style={{ backgroundImage: "repeating-linear-gradient(135deg, var(--color-line) 0 6px, transparent 6px 10px)" }}
+              />
+            </div>
+            <div className="mt-2 flex items-center justify-between gap-3 text-xs text-muted">
+              <span>1. modulis · bez maksas</span>
+              <Link href="/iegadaties" className="inline-flex items-center gap-1 hover:text-ink">
+                <Lock aria-hidden="true" className="size-3" /> Moduļi 2–{d.modules.length} · pilnajā kursā
+              </Link>
+            </div>
+          </>
+        ) : (
           <div
-            className={`h-full rounded-full ${ready ? "bg-ok" : "bg-accent"}`}
-            style={{ width: `${pct}%` }}
-          />
-        </div>
+            role="progressbar"
+            aria-label={label}
+            aria-valuenow={pct}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            className="mt-4 h-2 overflow-hidden rounded-full bg-accent-soft"
+          >
+            <div
+              className={`h-full rounded-full ${ready ? "bg-ok" : "bg-accent"}`}
+              style={{ width: `${pct}%` }}
+            />
+          </div>
+        )}
       </div>
 
       {showExams && (

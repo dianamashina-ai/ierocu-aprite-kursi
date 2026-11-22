@@ -141,7 +141,7 @@ export default async function HomePage() {
                   key={m.id}
                   className={`group relative flex flex-col rounded-2xl border border-line p-6 ${
                     locked
-                      ? "bg-surface"
+                      ? "bg-surface opacity-55"
                       : "bg-white transition-shadow hover:shadow-[0_8px_30px_-12px_rgba(39,23,38,0.25)]"
                   }`}
                 >
