@@ -55,11 +55,9 @@ export function CourseOutline({ modules, totals }: { modules: OutlineModule[]; t
                   <p className="text-[15px] leading-relaxed text-muted">{MODULE_META[m.id]?.description}</p>
                   <ul className="mt-4 space-y-2">
                     {m.topics.map((t) => (
-                      <li key={t.id} className="flex items-baseline justify-between gap-4 text-[15px]">
-                        <span>
-                          <span className="mr-2 tabular-nums text-muted">{t.id}</span>
-                          {t.titleLv}
-                        </span>
+                      <li key={t.id} className="flex items-baseline gap-3 text-[15px]">
+                        <span className="w-8 shrink-0 tabular-nums text-muted">{t.id}</span>
+                        <span className="min-w-0 flex-1">{t.titleLv}</span>
                         <span className="shrink-0 text-sm tabular-nums text-muted">
                           {t.minutes ? `${t.minutes} min · ` : ""}
                           {t.questionCount} jaut.
