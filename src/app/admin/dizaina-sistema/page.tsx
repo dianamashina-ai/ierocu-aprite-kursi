@@ -271,7 +271,7 @@ export default function DesignSystemPage() {
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {(
             [
-              ["Vēl nav kārtots", [null, null, null, null, null]],
+              ["Tukšs stāvoklis (no 70 % progresa)", [null, null, null, null, null]],
               ["1 mēģinājums — nav nokārtots", [false, null, null, null, null]],
               ["1 mēģinājums — nokārtots", [true, null, null, null, null]],
               ["Jaukti rezultāti", [true, false, true, true, null]],

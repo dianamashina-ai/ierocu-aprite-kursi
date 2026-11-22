@@ -77,6 +77,23 @@ export function ProgressSummary({ d }: { d: Dashboard }) {
 /** Pēdējie READY_LAST_EXAMS izmēģinājuma eksāmeni: true — nokārtots, false — nav, null — vēl nav kārtots (vecākais pa kreisi). */
 export function ExamAttemptsCard({ results }: { results: (boolean | null)[] }) {
   const allPassed = results.length > 0 && results.every((r) => r === true);
+
+  // Tukšs stāvoklis: vēl neviena mēģinājuma — aicinājums un poga
+  if (results.every((r) => r === null))
+    return (
+      <div className="flex flex-col rounded-2xl border border-line bg-white p-5 sm:p-6">
+        <p className="text-sm text-muted">Izmēģinājuma eksāmeni</p>
+        <p className="mt-2 font-semibold">Laiks pārbaudīt sevi</p>
+        <p className="mt-1 text-sm text-muted">
+          Nokārto {READY_LAST_EXAMS} izmēģinājuma eksāmenus pēc kārtas — un būsi
+          gatavs īstajam.
+        </p>
+        <Link href="/eksamens" className="btn-primary mt-4 self-start">
+          Sākt eksāmenu
+        </Link>
+      </div>
+    );
+
   return (
     <div
       className={`relative flex flex-col rounded-2xl border bg-white p-5 transition-colors hover:border-ink sm:p-6 ${allPassed ? "border-ok" : "border-line"}`}
