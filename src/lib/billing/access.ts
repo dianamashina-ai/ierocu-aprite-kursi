@@ -1,5 +1,6 @@
 import "server-only";
 import { cache } from "react";
+import { redirect } from "next/navigation";
 import { and, eq } from "drizzle-orm";
 import { db, schema } from "@/db";
 import { FREE_MODULE_IDS } from "@/config/exam";
@@ -17,8 +18,14 @@ export const hasFullAccess = cache(async (userId: string | null | undefined): Pr
   return Boolean(row);
 });
 
+/** Bezmaksas modulis — tikai reģistrētiem; pārējie — ar pilnu piekļuvi. */
 export async function canAccessModule(userId: string | null | undefined, moduleId: string) {
-  return isFreeModule(moduleId) || (await hasFullAccess(userId));
+  return (isFreeModule(moduleId) && Boolean(userId)) || (await hasFullAccess(userId));
+}
+
+/** Viesis bezmaksas moduļa lapā → uz reģistrāciju (pēc tam atpakaļ uz to pašu lapu). */
+export function requireSignUpForFreeModule(userId: string | null | undefined, moduleId: string, path: string) {
+  if (!userId && isFreeModule(moduleId)) redirect(`/registreties?next=${encodeURIComponent(path)}`);
 }
 
 export async function canAccessQuestion(userId: string | null | undefined, questionId: number) {

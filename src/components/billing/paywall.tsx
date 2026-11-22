@@ -14,7 +14,7 @@ export function Paywall({ title = "Šī daļa pieejama ar pilnu piekļuvi", chil
       </p>
       <div className="mt-5 flex flex-wrap gap-3">
         <Link href="/iegadaties" className="btn-primary">Iegūt pilnu piekļuvi</Link>
-        <Link href="/modulis/M1" className="btn-secondary">Izmēģināt 1. moduli</Link>
+        <Link href="/modulis/M1" className="btn-secondary">Sākt ar 1. moduli bez maksas</Link>
       </div>
     </section>
   );

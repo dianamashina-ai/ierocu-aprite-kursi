@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { paidUser } from "./helpers";
+import { paidUser, signUp, uniqueEmail } from "./helpers";
 
 test("ceļš: sākums → modulis → tēma → treniņš", async ({ page }) => {
   await page.goto("/");
@@ -9,6 +9,7 @@ test("ceļš: sākums → modulis → tēma → treniņš", async ({ page }) => 
   await expect(page.locator("#programma").getByText("Pamatjēdzieni un darbības princips")).toBeVisible();
   await page.locator("#programma details").first().getByRole("link", { name: /Sākt bez maksas/ }).click();
   await expect(page).toHaveURL(/\/registreties$/);
+  await signUp(page, uniqueEmail("cels"));
   await page.goto("/modulis/M1");
   await page.getByRole("link", { name: /Pamatjēdzieni un darbības princips/ }).click();
   await expect(page).toHaveURL(/\/tema\/1-1$/);

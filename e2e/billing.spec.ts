@@ -1,9 +1,11 @@
 import { expect, test } from "@playwright/test";
 import { buyAccess, signUp, uniqueEmail } from "./helpers";
 
-test("viesis: 1. modulis atvērts, pārējie slēgti", async ({ page }) => {
+test("viesis: 1. modulis prasa reģistrāciju, pārējie slēgti", async ({ page }) => {
   await page.goto("/tema/1-1/trenins");
-  await expect(page.locator("fieldset button").first()).toBeVisible();
+  await expect(page).toHaveURL(/\/registreties\?next=%2Ftema%2F1-1%2Ftrenins$/);
+  await page.goto("/modulis/M1");
+  await expect(page).toHaveURL(/\/registreties\?next=%2Fmodulis%2FM1$/);
   await page.goto("/tema/5-3/trenins");
   await expect(page.getByRole("heading", { name: "Šī daļa pieejama ar pilnu piekļuvi" })).toBeVisible();
   await expect(page.locator("fieldset")).toHaveCount(0);

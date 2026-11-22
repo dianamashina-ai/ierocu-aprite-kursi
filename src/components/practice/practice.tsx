@@ -20,6 +20,8 @@ interface Props {
   /** Pieslēgts lietotājs → atbildes tiek saglabātas */
   signedIn?: boolean;
   mode?: "practice" | "review";
+  /** Rāda zem rezultātiem (piem., aicinājums uz pilno kursu) */
+  upsell?: React.ReactNode;
 }
 
 type Phase = "question" | "summary";
@@ -35,7 +37,7 @@ function shuffledIndexes(n: number, seed: string, enabled: boolean) {
   return idx;
 }
 
-export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestions = true, signedIn = false, mode = "practice" }: Props) {
+export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestions = true, signedIn = false, mode = "practice", upsell }: Props) {
   const t = useTranslations("practice");
   const [round, setRound] = useState(0);
   const [pool, setPool] = useState<number[]>(() => shuffledIndexes(questions.length, seed, shuffleQuestions));
@@ -126,6 +128,7 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
     const correct = ids.filter((id) => results[id]).length;
     const wrongIdx = pool.filter((i) => !results[questions[i].id]);
     return (
+      <>
       <section aria-labelledby="summary-h" className="max-w-2xl rounded-2xl border border-line bg-white p-6 sm:p-8">
         <h2 id="summary-h" className="text-2xl font-semibold">
           {t("summaryHeading")}
@@ -175,6 +178,8 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
           )}
         </div>
       </section>
+      {upsell && <div className="mt-6 max-w-2xl">{upsell}</div>}
+      </>
     );
   }
 

@@ -15,10 +15,10 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
   const query = ((await searchParams).q ?? "").slice(0, 200);
   const t = await getTranslations("search");
   const found = query.trim() ? await searchQuestions(query, LIMIT) : null;
-  const [results, course, full] = await Promise.all([
+  const [results, course, acc] = await Promise.all([
     found ? getQuestionCards(found.map((r) => r.id)) : null,
     found?.length ? getCourseOverview() : null,
-    getCurrentUser().then((u) => hasFullAccess(u?.id)),
+    getCurrentUser().then(async (u) => ({ signedIn: Boolean(u), full: await hasFullAccess(u?.id) })),
   ]);
   const topicTitle = new Map(course?.modules.flatMap((m) => m.topics.map((t) => [t.id, t.titleLv] as const)) ?? []);
   const stems = searchStems(query);
@@ -51,7 +51,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
               <li key={q.id} className="py-5">
                 <QuestionCard
                   q={q}
-                  allowed={full || isFreeModule(moduleOfTopic(q.topicId))}
+                  allowed={acc.full || (acc.signedIn && isFreeModule(moduleOfTopic(q.topicId)))}
                   stems={stems}
                   meta={
                     <Link href={`/tema/${topicSlug(q.topicId)}`} className="mt-1 inline-block text-sm text-muted hover:text-accent-strong hover:underline">

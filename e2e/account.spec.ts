@@ -128,10 +128,17 @@ test("izmēģinājuma eksāmens: sākt, atbildēt, turpināt pēc pārlādes, pa
   await expect(page.getByText(/^(Nokārtots|Nav nokārtots)$/).first()).toBeVisible();
 });
 
-test("viesis var trenēties, bet kļūdu saraksts prasa pieslēgšanos", async ({ page }) => {
+test("viesis: bezmaksas modulis → reģistrācija, pēc tās atpakaļ uz to pašu lapu; kļūdu saraksts prasa pieslēgšanos", async ({ page }) => {
   await page.goto("/tema/1-1/trenins");
+  await expect(page).toHaveURL(/\/registreties\?next=/);
+  await page.getByLabel("Vārds un uzvārds").fill("Testa Viesis");
+  await page.getByLabel("E-pasts").fill(uniqueEmail("viesis"));
+  await page.getByLabel(/Parole/).fill("Drosa-Parole-123!");
+  await page.getByRole("button", { name: "Izveidot kontu" }).click();
+  await expect(page).toHaveURL(/\/tema\/1-1\/trenins$/);
   await page.locator("fieldset button").first().click();
   await expect(page.getByText(/^(Pareizi|Nepareizi\. Pareizā atbilde: [A-F])$/).first()).toBeVisible();
+  await page.context().clearCookies();
   await page.goto("/trenins");
   await expect(page).toHaveURL(/\/pieslegties/);
 });

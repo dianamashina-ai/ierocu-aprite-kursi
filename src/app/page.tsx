@@ -125,15 +125,19 @@ export default async function HomePage() {
             return (
               <li
                 key={m.id}
-                className="group relative flex flex-col rounded-2xl border border-line bg-white p-6 transition-shadow hover:shadow-[0_8px_30px_-12px_rgba(39,23,38,0.25)]"
+                className={`group relative flex flex-col rounded-2xl border border-line p-6 ${
+                  locked ? "bg-surface" : "bg-white transition-shadow hover:shadow-[0_8px_30px_-12px_rgba(39,23,38,0.25)]"
+                }`}
               >
                 <div className="flex items-start justify-between">
-                  <span className="text-2xl font-bold tabular-nums text-accent-strong">
+                  <span className={`text-2xl font-bold tabular-nums ${locked ? "text-muted/60" : "text-accent-strong"}`}>
                     {pad(m.order)}
                   </span>
-                  <ModuleIcon moduleId={m.id} />
+                  <span className={locked ? "opacity-40 grayscale" : ""}>
+                    <ModuleIcon moduleId={m.id} />
+                  </span>
                 </div>
-                <h3 className="mt-6 text-xl font-semibold leading-snug tracking-tight">
+                <h3 className={`mt-6 text-xl font-semibold leading-snug tracking-tight ${locked ? "text-muted" : ""}`}>
                   <Link
                     href={`/modulis/${m.id}`}
                     className="after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none"
@@ -141,28 +145,32 @@ export default async function HomePage() {
                     {m.titleLv}
                   </Link>
                 </h3>
-                <p className="mt-2 flex-1 text-[15px] leading-relaxed text-muted">
+                <p className={`mt-2 flex-1 text-[15px] leading-relaxed ${locked ? "text-muted/70" : "text-muted"}`}>
                   {MODULE_META[m.id]?.description}
                 </p>
-                <div className="mt-6 flex items-center justify-between gap-3 text-sm">
+                <div className={`mt-6 flex items-center justify-between gap-3 text-sm ${locked ? "text-muted/70" : ""}`}>
                   <span>
                     {m.topics.length} tēmas • {m.questionCount} jautājumi
                   </span>
-                  <ArrowUpRight
-                    aria-hidden="true"
-                    className="size-4 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  />
+                  {!locked && (
+                    <ArrowUpRight
+                      aria-hidden="true"
+                      className="size-4 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    />
+                  )}
                 </div>
-                <div
-                  className="mt-4 h-1 overflow-hidden rounded-full bg-line"
-                  aria-hidden="true"
-                >
+                {!locked && (
                   <div
-                    className="h-full rounded-full bg-accent"
-                    style={{ width: `${percent}%` }}
-                  />
-                </div>
-                <p className="mt-3 flex items-center gap-1.5 text-sm text-muted">
+                    className="mt-4 h-1 overflow-hidden rounded-full bg-line"
+                    aria-hidden="true"
+                  >
+                    <div
+                      className="h-full rounded-full bg-accent"
+                      style={{ width: `${percent}%` }}
+                    />
+                  </div>
+                )}
+                <p className={`flex items-center gap-1.5 text-sm text-muted ${locked ? "mt-4 border-t border-line pt-4" : "mt-3"}`}>
                   {locked ? (
                     <>
                       <Lock aria-hidden="true" className="size-3.5" /> Pilnajā

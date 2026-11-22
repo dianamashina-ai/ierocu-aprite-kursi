@@ -32,7 +32,8 @@ describe.skipIf(!url)("maksājumi (DB)", async () => {
     expect(await access.hasFullAccess("u1")).toBe(false);
     expect(await access.canAccessModule("u1", "M1")).toBe(true);
     expect(await access.canAccessModule("u1", "M5")).toBe(false);
-    expect(await access.canAccessQuestion(null, 422)).toBe(true); // M1
+    expect(await access.canAccessQuestion("u1", 422)).toBe(true); // M1, reģistrēts
+    expect(await access.canAccessQuestion(null, 422)).toBe(false); // M1, viesis — vajag kontu
     expect(await access.canAccessQuestion(null, 1)).toBe(false); // M3
   });
 

@@ -6,7 +6,7 @@ import { getPracticeQuestion, getTopicMeta, topicSlug } from "@/lib/content/quer
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Practice } from "@/components/practice/practice";
 import { getCurrentUser } from "@/lib/auth/session";
-import { canAccessModule, moduleOfTopic } from "@/lib/billing/access";
+import { canAccessModule, moduleOfTopic, requireSignUpForFreeModule } from "@/lib/billing/access";
 import { Paywall } from "@/components/billing/paywall";
 
 export const dynamic = "force-dynamic";
@@ -25,6 +25,7 @@ export default async function QuestionPage({ params }: { params: Promise<{ id: s
   const [meta, tc, tp] = await Promise.all([getTopicMeta(q.topicId), getTranslations("common"), getTranslations("practice")]);
   const topicHref = `/tema/${topicSlug(q.topicId)}`;
   const user = await getCurrentUser();
+  requireSignUpForFreeModule(user?.id, moduleOfTopic(q.topicId), `/jautajums/${q.id}`);
   const allowed = await canAccessModule(user?.id, moduleOfTopic(q.topicId));
 
   return (

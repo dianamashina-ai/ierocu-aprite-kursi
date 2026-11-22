@@ -9,7 +9,9 @@ import { ArrowUpRight, Target } from "lucide-react";
 import { QuestionCard } from "@/components/questions/question-card";
 import { readLesson } from "@/lib/content/lessons";
 import { getCurrentUser } from "@/lib/auth/session";
-import { canAccessModule } from "@/lib/billing/access";
+import { canAccessModule, hasFullAccess, isFreeModule, moduleOfTopic, requireSignUpForFreeModule } from "@/lib/billing/access";
+import { FullCourseUpsell } from "@/components/billing/full-course-upsell";
+import { lockedTotals } from "@/lib/billing/upsell";
 import { Paywall } from "@/components/billing/paywall";
 
 export const dynamic = "force-dynamic";
@@ -51,10 +53,14 @@ export default async function TopicPage({
     getTranslations("common"),
   ]);
   const lesson = readLesson(topic.id);
-  const allowed = await canAccessModule(
-    (await getCurrentUser())?.id,
-    topic.module.id,
-  );
+  const userId = (await getCurrentUser())?.id;
+  requireSignUpForFreeModule(userId, topic.module.id, `/tema/${topicSlug(topic.id)}`);
+  const allowed = await canAccessModule(userId, topic.module.id);
+  // pēdējā bezmaksas tēma: nākamā ir slēgta → aicinājums uz pilno kursu
+  const upsell =
+    allowed && next && isFreeModule(topic.module.id) && !isFreeModule(moduleOfTopic(next.id)) && !(await hasFullAccess(userId)) ? (
+      <FullCourseUpsell title="Šī ir pēdējā bezmaksas tēma" {...(await lockedTotals())} />
+    ) : null;
   // bez piekļuves — nodarbības sākums (pirmās divas rindkopas) un aicinājums iegādāties
   const lessonBody =
     lesson && !allowed ? lessonTeaser(lesson.body) : lesson?.body;
@@ -244,6 +250,8 @@ export default async function TopicPage({
               </ol>
             </section>
           )}
+
+          {upsell && <div className="mt-10">{upsell}</div>}
 
           <nav
             className="mt-10 flex flex-wrap justify-between gap-3 text-sm"

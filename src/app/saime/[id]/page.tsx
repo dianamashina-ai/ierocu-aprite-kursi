@@ -6,7 +6,7 @@ import { getFamily } from "@/lib/content/queries";
 import { buildFamilyComparison, type DiffToken } from "@/lib/quiz/diff";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { getCurrentUser } from "@/lib/auth/session";
-import { canAccessModule, moduleOfTopic } from "@/lib/billing/access";
+import { canAccessModule, moduleOfTopic, requireSignUpForFreeModule } from "@/lib/billing/access";
 import { Paywall } from "@/components/billing/paywall";
 
 export const dynamic = "force-dynamic";
@@ -42,6 +42,7 @@ export default async function FamilyPage({
   const qs = familyId ? await getFamily(familyId) : [];
   if (qs.length < 2) notFound();
   const user = await getCurrentUser();
+  requireSignUpForFreeModule(user?.id, moduleOfTopic(qs[0].topicId), `/saime/${id}`);
   if (!(await canAccessModule(user?.id, moduleOfTopic(qs[0].topicId)))) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-8 sm:py-12">

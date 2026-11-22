@@ -5,7 +5,9 @@ import { getModule, topicSlug } from "@/lib/content/queries";
 import { readLesson } from "@/lib/content/lessons";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { getCurrentUser } from "@/lib/auth/session";
-import { canAccessModule } from "@/lib/billing/access";
+import { canAccessModule, hasFullAccess, isFreeModule, requireSignUpForFreeModule } from "@/lib/billing/access";
+import { FullCourseUpsell } from "@/components/billing/full-course-upsell";
+import { lockedTotals } from "@/lib/billing/upsell";
 import { getTopicProgress } from "@/lib/progress/service";
 import { Paywall } from "@/components/billing/paywall";
 import { MODULE_META } from "@/config/module-meta";
@@ -24,7 +26,9 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
   if (!data) notFound();
   const { module: m, prev, next } = data;
   const user = await getCurrentUser();
+  requireSignUpForFreeModule(user?.id, m.id, `/modulis/${m.id}`);
   const [allowed, progress] = await Promise.all([canAccessModule(user?.id, m.id), user ? getTopicProgress(user.id) : Promise.resolve(null)]);
+  const upsell = allowed && isFreeModule(m.id) && !(await hasFullAccess(user?.id)) ? <FullCourseUpsell {...(await lockedTotals())} /> : null;
   const lessons = new Map(m.topics.map((tp) => [tp.id, readLesson(tp.id)]));
   const minutes = [...lessons.values()].reduce((s, l) => s + (l?.minutes ?? 0), 0);
 
@@ -101,6 +105,8 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
           )}
         </aside>
       </div>
+
+      {upsell && <div className="mt-12">{upsell}</div>}
 
       <nav className="mt-12 flex flex-wrap justify-between gap-3 text-sm" aria-label="Moduļi">
         {prev ? <Link className="btn-ghost" href={`/modulis/${prev.id}`}>← {prev.titleLv}</Link> : <span />}
