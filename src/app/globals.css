@@ -95,3 +95,12 @@ body:has(.auth-page) footer {
 html {
   scroll-padding-top: 6rem;
 }
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

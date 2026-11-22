@@ -9,6 +9,7 @@ import {
   shuffleOptions,
   uppercaseLetterRefs,
 } from "@/lib/quiz/shuffle";
+import { FamilyDrawer } from "@/components/compare/family-drawer";
 import { recordAnswerAction } from "@/app/actions/progress";
 import type { PracticeQuestion } from "@/lib/quiz/types";
 
@@ -213,22 +214,7 @@ export function Practice({
               7 dienām.
             </p>
           )}
-          {wrongIdx.length === 0 ? (
-            <p className="mt-4 text-ok">{t("allCorrect")}</p>
-          ) : (
-            <ul className="mt-5 flex flex-wrap gap-2">
-              {wrongIdx.map((i) => (
-                <li key={questions[i].id}>
-                  <Link
-                    href={`/jautajums/${questions[i].id}`}
-                    className="inline-flex min-h-11 items-center rounded-lg bg-err-soft px-3 text-sm font-semibold text-err"
-                  >
-                    Nr. {questions[i].id}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
+          {wrongIdx.length === 0 && <p className="mt-4 text-ok">{t("allCorrect")}</p>}
           <div className="mt-6 flex flex-wrap gap-3">
             {wrongIdx.length > 0 && (
               <button
@@ -438,12 +424,11 @@ export function Practice({
 
                 {q.familyId && q.familySize > 1 && (
                   <div>
-                    <Link
-                      href={`/saime/${q.familyId}?no=${q.id}`}
-                      className="btn-secondary"
-                    >
-                      {t("compareSimilar", { count: q.familySize })}
-                    </Link>
+                    <FamilyDrawer
+                      familyId={q.familyId}
+                      from={q.id}
+                      label={t("compareSimilar", { count: q.familySize })}
+                    />
                   </div>
                 )}
               </div>

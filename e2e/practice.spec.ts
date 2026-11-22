@@ -59,14 +59,21 @@ test("tastatūra: burts izvēlas atbildi", async ({ page, isMobile }) => {
   await expect(page.getByText(/^(Pareizi|Nepareizi\. Pareizā atbilde: [A-F])$/).first()).toBeVisible();
 });
 
-test("salīdzināt līdzīgos: no jautājuma uz saimi", async ({ page }) => {
+test("salīdzināt līdzīgos: izbīdāms panelis, lapa paliek tā pati", async ({ page }) => {
   await paidUser(page, "p595");
   await page.goto("/jautajums/58");
   await page.locator("fieldset button").first().click();
-  await page.getByRole("link", { name: /Salīdzināt līdzīgos \(4\)/ }).click();
-  await expect(page).toHaveURL(/\/saime\/54\?no=58/);
+  await page.getByRole("button", { name: /Salīdzināt līdzīgos \(4\)/ }).click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog.getByRole("heading", { name: "Līdzīgie jautājumi" })).toBeVisible();
+  await expect(dialog.getByText("Formulējums nedaudz atšķiras")).toBeVisible();
+  await expect(dialog.locator("article")).toHaveCount(4);
+  await expect(page).toHaveURL(/\/jautajums\/58$/);
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
+  // atsevišķā lapa joprojām darbojas
+  await page.goto("/saime/54?no=58");
   await expect(page.getByRole("heading", { name: "Līdzīgie jautājumi", level: 1 })).toBeVisible();
-  await expect(page.getByText("Formulējums nedaudz atšķiras")).toBeVisible();
   await expect(page.locator("article")).toHaveCount(4);
 });
 

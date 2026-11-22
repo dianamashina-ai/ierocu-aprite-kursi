@@ -70,9 +70,6 @@ export default async function ExamPage({
 
       <div className="mt-10 flex flex-wrap items-baseline justify-between gap-3">
         <h2 className="text-xl font-semibold">Atbilžu analīze</h2>
-        <Link href={onlyWrong ? `/eksamens/${id}` : `/eksamens/${id}?kludas=1`} className="text-sm font-semibold text-accent-strong underline underline-offset-4">
-          {onlyWrong ? "Rādīt visus" : "Rādīt tikai kļūdas"}
-        </Link>
       </div>
 
       <ol className="mt-4 space-y-4">

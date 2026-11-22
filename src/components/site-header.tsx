@@ -14,7 +14,6 @@ export async function SiteHeader() {
         { href: "/trenins", label: "Trenēties" },
         { href: "/eksamens", label: "Eksāmens" },
         { href: "/meklet", label: "Meklēt" },
-        ...(isAdmin(user) ? [{ href: "/admin", label: "Admin", match: ["/labojumi"] }] : []),
       ]
     : [
         { href: "/#ka-notiek", label: "Kā notiek" },
@@ -31,7 +30,7 @@ export async function SiteHeader() {
           {/* eslint-disable-next-line @next/next/no-img-element -- vektora logotips, optimizācija nav vajadzīga */}
           <img src="/logo-lpsc-2026.svg" alt="Ieroču atļauja — sadarbībā ar LPSC" width={235} height={40} className="h-9 w-auto sm:h-11" />
         </Link>
-        <SiteNav items={items} signedIn={Boolean(user)} showBuy={Boolean(user) && !access} />
+        <SiteNav items={items} signedIn={Boolean(user)} showBuy={Boolean(user) && !access} admin={isAdmin(user)} />
       </div>
     </header>
   );
