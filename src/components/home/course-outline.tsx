@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { MODULE_META } from "@/config/module-meta";
-import { COURSE_PRODUCT } from "@/config/pricing";
-import { formatEuro } from "@/lib/format";
 
 interface OutlineModule {
   id: string;
@@ -17,10 +15,10 @@ const pad = (n: number) => String(n).padStart(2, "0");
 /** Sākumlapas programma viesiem: moduļi akordeonā ar aprakstu un tēmām. */
 export function CourseOutline({ modules, totals }: { modules: OutlineModule[]; totals: { modules: number; topics: number } }) {
   return (
-    <section id="programma" aria-labelledby="programma-h" className="scroll-mt-6 bg-white">
+    <section id="programma" aria-labelledby="programma-h" className="scroll-mt-6 border-t border-line bg-white">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20 lg:py-24">
         <div className="lg:sticky lg:top-8 lg:self-start">
-          <h2 id="programma-h" className="text-5xl font-semibold tracking-tight sm:text-6xl">Ko mācīsies</h2>
+          <h2 id="programma-h" className="text-4xl font-semibold tracking-tight sm:text-5xl">Ko mācīsies</h2>
           <p className="mt-6 text-lg leading-relaxed text-muted">
             Kursā ir {totals.modules} moduļi un {totals.topics} tēmas — no ieroča uzbūves līdz atbildībai. Sāc ar pamatiem un zināšanas
             papildini pakāpeniski.
@@ -30,15 +28,6 @@ export function CourseOutline({ modules, totals }: { modules: OutlineModule[]; t
           <Link href="/modulis/M1" className="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold hover:text-accent">
             Izmēģināt 1. moduli <ArrowUpRight aria-hidden="true" className="size-4" />
           </Link>
-
-          <div className="mt-10 rounded-2xl bg-ink p-6 text-white">
-            <p className="text-sm text-white/70">Pilns kurss</p>
-            <p className="mt-1 text-4xl font-bold tabular-nums">{formatEuro(COURSE_PRODUCT.amountCents)}</p>
-            <p className="mt-1 text-sm text-white/70">Vienreizējs maksājums, ar PVN. Bez abonementa.</p>
-            <Link href="/iegadaties" className="mt-5 inline-flex min-h-12 items-center gap-2 rounded-xl bg-white px-5 font-semibold text-ink hover:bg-white/90">
-              Iegūt pilnu piekļuvi <ArrowUpRight aria-hidden="true" className="size-4" />
-            </Link>
-          </div>
         </div>
 
         <ol className="border-t border-line">

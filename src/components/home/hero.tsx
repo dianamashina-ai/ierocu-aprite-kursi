@@ -13,64 +13,57 @@ interface Stats {
   examQuestions: number;
 }
 
-/** Sākumlapas galvenais ekrāns viesiem: virsraksts, aicinājums un īsts treniņa jautājuma paraugs. */
-export function Hero({ stats, sample }: { stats: Stats; sample: PracticeQuestion | null }) {
+/** Sākumlapas galvenais ekrāns viesiem: virsraksts, aicinājums un kurss skaitļos. */
+export function Hero({ stats }: { stats: Stats }) {
+  const items: [string, string][] = [
+    [String(stats.modules), "moduļi no ieroča uzbūves līdz atbildībai"],
+    [String(stats.topics), "īsas nodarbības pēc likuma teksta"],
+    [String(stats.questions), "oficiālie jautājumi ar skaidrojumiem"],
+    [`${stats.examMinutes} min`, `eksāmena simulācija — ${stats.examQuestions} jautājumi`],
+  ];
   return (
-    <>
-      <section className="bg-white">
-        <div className="mx-auto grid max-w-6xl gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:py-20">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">Sagatavošanās eksāmenam</p>
-            <h1 className="mt-4 text-[2.6rem] font-semibold leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-[4.25rem]">
-              Ceļš līdz <span className="text-accent">ieroču atļaujai</span> sākas šeit
-            </h1>
-            <p className="mt-5 text-xl font-semibold text-ink">Saproti likumu, nevis iekal atbildes.</p>
-            <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-muted">
-              Īsas nodarbības latviešu valodā, visi oficiālie eksāmena jautājumi ar skaidrojumiem un atsaucēm uz likumu,
-              kā arī eksāmena simulācija — telefonā vai datorā, savā tempā.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-              <Link href="/registreties" className="btn-primary gap-2">
-                Sākt bez maksas <ArrowUpRight aria-hidden="true" className="size-4" />
-              </Link>
-              <Link href="/tema/1-1/trenins" className="inline-flex min-h-12 items-center gap-2 font-semibold hover:text-accent">
-                Izmēģināt jautājumus <ArrowRight aria-hidden="true" className="size-4" />
-              </Link>
-            </div>
-            <p className="mt-5 max-w-md text-sm text-muted">
-              1. modulis ir bez maksas, maksājumu karte nav vajadzīga. Pilns kurss — {formatEuro(COURSE_PRODUCT.amountCents)}, vienreizējs maksājums.
-            </p>
+    <section className="border-b border-line bg-white">
+      <div className="mx-auto grid max-w-6xl gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:py-20">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">Sagatavošanās eksāmenam</p>
+          <h1 className="mt-4 text-[2.6rem] font-semibold leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-[4.25rem]">
+            Ceļš līdz <span className="text-accent">ieroču atļaujai</span> sākas šeit
+          </h1>
+          <p className="mt-5 text-xl font-semibold text-ink">Saproti likumu, nevis iekal atbildes.</p>
+          <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-muted">
+            Īsas nodarbības latviešu valodā, visi oficiālie eksāmena jautājumi ar skaidrojumiem un atsaucēm uz likumu,
+            kā arī eksāmena simulācija — telefonā vai datorā, savā tempā.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <Link href="/registreties" className="btn-primary gap-2">
+              Sākt bez maksas <ArrowUpRight aria-hidden="true" className="size-4" />
+            </Link>
+            <Link href="/tema/1-1/trenins" className="inline-flex min-h-12 items-center gap-2 font-semibold hover:text-accent">
+              Izmēģināt jautājumus <ArrowRight aria-hidden="true" className="size-4" />
+            </Link>
           </div>
-
-          {sample && <SampleQuestion q={sample} />}
+          <p className="mt-5 max-w-md text-sm text-muted">
+            1. modulis ir bez maksas, maksājumu karte nav vajadzīga. Pilns kurss — {formatEuro(COURSE_PRODUCT.amountCents)}, vienreizējs maksājums.
+          </p>
         </div>
-      </section>
 
-      <section aria-label="Kurss skaitļos" className="border-b border-line bg-white">
-        <div className="mx-auto max-w-6xl px-4 pb-14 sm:px-6 lg:pb-20">
-        <dl className="grid grid-cols-2 rounded-2xl bg-accent text-white lg:grid-cols-4">
-          {[
-            [String(stats.modules), "moduļi no ieroča uzbūves līdz atbildībai"],
-            [String(stats.topics), "īsas nodarbības pēc likuma teksta"],
-            [String(stats.questions), "oficiālie jautājumi ar skaidrojumiem"],
-            [`${stats.examMinutes} min`, `eksāmena simulācija — ${stats.examQuestions} jautājumi`],
-          ].map(([value, label], i) => (
-            <div key={label} className={`py-8 lg:py-10 px-5 sm:px-8 ${["", "border-l", "border-t lg:border-l lg:border-t-0", "border-l border-t lg:border-t-0"][i]} border-white/20`}>
+        <dl aria-label="Kurss skaitļos" className="grid grid-cols-2 overflow-hidden rounded-2xl bg-accent text-white">
+          {items.map(([value, label], i) => (
+            <div key={label} className={`border-white/20 px-5 py-8 sm:px-8 sm:py-10 ${["", "border-l", "border-t", "border-l border-t"][i]}`}>
               <dt className="sr-only">{label}</dt>
               <dd>
-                <span className="block whitespace-nowrap text-4xl font-bold tabular-nums tracking-tight sm:text-6xl">{value}</span>
+                <span className="block whitespace-nowrap text-4xl font-bold tabular-nums tracking-tight sm:text-5xl">{value}</span>
                 <span className="mt-2 block text-sm text-white/80">{label}</span>
               </dd>
             </div>
           ))}
         </dl>
-        </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
 
-function SampleQuestion({ q }: { q: PracticeQuestion }) {
+export function SampleQuestion({ q }: { q: PracticeQuestion }) {
   const letters = "ABCDEF";
   return (
     <figure className="relative">

@@ -48,7 +48,6 @@ export default async function HomePage() {
       {!user && (
         <>
           <Hero
-            sample={sample}
             stats={{
               ...course.totals,
               examMinutes: examCfg.durationMinutes,
@@ -56,12 +55,12 @@ export default async function HomePage() {
             }}
           />
           <HowItWorks
-            topics={course.totals.topics}
+            modules={course.totals.modules}
             questions={course.totals.questions}
             examQuestions={examCfg.questionCount}
             examMinutes={examCfg.durationMinutes}
+            sample={sample}
           />
-          <WhoCanOwn />
           <CourseOutline
             totals={course.totals}
             modules={course.modules.map((m) => ({
@@ -69,6 +68,7 @@ export default async function HomePage() {
               topics: m.topics.map((t) => ({ id: t.id, titleLv: t.titleLv, questionCount: t.questionCount, minutes: readLesson(t.id)?.minutes ?? null })),
             }))}
           />
+          <WhoCanOwn />
           <Pricing included={courseIncluded(course.totals, { questions: examCfg.questionCount, minutes: examCfg.durationMinutes })} />
           <Faq
             totalQuestions={course.totals.questions}

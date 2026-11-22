@@ -18,8 +18,8 @@ export async function SiteHeader() {
       ]
     : [
         { href: "/#ka-notiek", label: "Kā notiek" },
-        { href: "/#prasibas", label: "Prasības" },
         { href: "/#programma", label: "Programma" },
+        { href: "/#prasibas", label: "Prasības" },
         { href: "/#cena", label: "Cena" },
         { href: "/#buj", label: "BUJ" },
       ];

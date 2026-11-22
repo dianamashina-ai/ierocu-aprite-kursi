@@ -10,7 +10,7 @@ export function Pricing({ included }: { included: string[] }) {
     <section id="cena" aria-labelledby="cena-h" className="scroll-mt-6 border-t border-line bg-white">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20 lg:py-24">
         <div>
-          <h2 id="cena-h" className="text-5xl font-semibold tracking-tight sm:text-6xl">Cena</h2>
+          <h2 id="cena-h" className="text-4xl font-semibold tracking-tight sm:text-5xl">Cena</h2>
           <p className="mt-6 text-lg leading-relaxed text-muted">
             Sāc ar 1. moduli bez maksas — maksājumu karte nav vajadzīga. Ja patīk, atver pilnu kursu ar vienu maksājumu.
           </p>

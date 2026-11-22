@@ -63,7 +63,7 @@ export function Faq({ exam, totalQuestions }: { exam: { questions: number; minut
     <section id="buj" aria-labelledby="buj-h" className="scroll-mt-6 border-t border-line bg-white">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20 lg:py-24">
         <div className="lg:sticky lg:top-8 lg:self-start">
-          <h2 id="buj-h" className="text-5xl font-semibold tracking-tight sm:text-6xl">Biežāk uzdotie jautājumi</h2>
+          <h2 id="buj-h" className="text-4xl font-semibold tracking-tight sm:text-5xl">Biežāk uzdotie jautājumi</h2>
           <p className="mt-6 text-lg leading-relaxed text-muted">
             Par eksāmenu, platformu un apmaksu. Ja neatradi atbildi, izmēģini 1. moduli — tas ir bez maksas.
           </p>
