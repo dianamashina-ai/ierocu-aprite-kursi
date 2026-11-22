@@ -2,6 +2,7 @@ import { ArrowRight, Check, LogOut, Lock, Search, TriangleAlert, X } from "lucid
 import { AuthField, ErrorText, PasswordRules } from "@/components/auth/forms";
 import { OrderStatusBadge, ExplanationBadge } from "@/components/admin/status-badge";
 import { ProgressBar } from "@/components/progress-bar";
+import { ExamAttemptsCard } from "@/components/home/progress-summary";
 import { ModuleIcon } from "@/components/module-icon";
 
 export const metadata = { title: "Dizaina sistēma" };
@@ -264,6 +265,25 @@ export default function DesignSystemPage() {
             <p className="font-semibold">Tev ir nepabeigts eksāmens</p>
             <p className="mt-1 text-sm text-muted">Izcelta kartīte (aicinājums rīkoties)</p>
           </div>
+        </div>
+        <h3 className="mt-10 font-semibold">Izmēģinājuma eksāmeni — visi stāvokļi</h3>
+        <p className="mt-1 text-sm text-muted">Pēdējie 3 mēģinājumi, vecākais pa kreisi. Sākumlapā blakus kopējam progresam.</p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {(
+            [
+              ["Vēl nav kārtots", [null, null, null]],
+              ["1 mēģinājums — nav nokārtots", [false, null, null]],
+              ["1 mēģinājums — nokārtots", [true, null, null]],
+              ["Nokārtots, nav, nokārtots", [true, false, true]],
+              ["Nav, nokārtots, nokārtots", [false, true, true]],
+              ["3 pēc kārtas nokārtoti — gatavs", [true, true, true]],
+            ] as const
+          ).map(([label, r]) => (
+            <div key={label}>
+              <p className="mb-2 text-xs text-muted">{label}</p>
+              <ExamAttemptsCard results={[...r]} />
+            </div>
+          ))}
         </div>
       </Section>
 
