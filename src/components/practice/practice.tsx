@@ -253,7 +253,7 @@ export function Practice({
     >
       {pool.length > 1 && (
         <div className="sticky top-0 z-10 mx-[calc(50%-50vw)] mb-8 border-b border-line bg-white/95 backdrop-blur">
-          <div className="mx-auto max-w-6xl px-4 pt-3 pb-3 sm:px-6">
+          <div className="px-4 pt-3 pb-3 sm:px-6 lg:px-8">
             {/* fokusa režīma galvene (vietnes izvēlne paslēpta): virsraksts un krustiņš */}
             <div className="flex items-center justify-between gap-4 pb-2">
               <span className="font-semibold">
@@ -452,7 +452,7 @@ export function Practice({
             <>
               {/* poga ekrāna apakšā (aktīva pēc atbildes) */}
               <div className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white/95 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur">
-                <div className="mx-auto flex max-w-6xl justify-end px-4 sm:px-6">
+                <div className="flex justify-end px-4 sm:px-6 lg:px-8">
                   <button
                     ref={nextRef}
                     type="button"
