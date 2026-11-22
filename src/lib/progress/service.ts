@@ -279,6 +279,8 @@ export async function getDashboard(userId: string, now = new Date()) {
         answered: sql<number>`count(*)::int`,
         mastered: sql<number>`count(*) filter (where ${questionProgress.mastered})::int`,
         wrong: sql<number>`count(*) filter (where not ${questionProgress.lastCorrect})::int`,
+        /** pareizi atbildēti, bet vēl nav 2× pēc kārtas */
+        learning: sql<number>`count(*) filter (where ${questionProgress.lastCorrect} and not ${questionProgress.mastered})::int`,
       })
       .from(questionProgress)
       .innerJoin(questions, eq(questions.id, questionProgress.questionId))
@@ -304,6 +306,7 @@ export async function getDashboard(userId: string, now = new Date()) {
     const answered = p?.answered ?? 0;
     const mastered = p?.mastered ?? 0;
     const wrong = p?.wrong ?? 0;
+    const learning = p?.learning ?? 0;
     return {
       id: t.id,
       moduleId: t.moduleId,
@@ -313,6 +316,7 @@ export async function getDashboard(userId: string, now = new Date()) {
       mastered,
       percent: total ? Math.round((mastered / total) * 100) : 0,
       wrong,
+      learning,
       accuracy: answered ? (answered - wrong) / answered : null,
     };
   });
@@ -320,7 +324,8 @@ export async function getDashboard(userId: string, now = new Date()) {
     const ts = topicStats.filter((t) => t.moduleId === m.id);
     const total = ts.reduce((s, t) => s + t.total, 0);
     const mastered = ts.reduce((s, t) => s + t.mastered, 0);
-    return { id: m.id, order: m.order, title: m.titleLv, total, mastered, percent: total ? Math.round((mastered / total) * 100) : 0, topics: ts };
+    const learning = ts.reduce((s, t) => s + t.learning, 0);
+    return { id: m.id, order: m.order, title: m.titleLv, total, mastered, learning, percent: total ? Math.round((mastered / total) * 100) : 0, topics: ts };
   });
   const totalQuestions = topicStats.reduce((s, t) => s + t.total, 0);
   const answeredQuestions = topicStats.reduce((s, t) => s + t.answered, 0);
@@ -335,6 +340,7 @@ export async function getDashboard(userId: string, now = new Date()) {
     answeredQuestions,
     unanswered: totalQuestions - answeredQuestions,
     masteredQuestions: topicStats.reduce((s, t) => s + t.mastered, 0),
+    learningQuestions: topicStats.reduce((s, t) => s + t.learning, 0),
     /** pašreizējās kļūdas: pēdējā atbilde nepareiza */
     mistakes: topicStats.reduce((s, t) => s + t.wrong, 0),
     streak: currentStreak(dayRows.map((r) => r.day), rigaDay(now)),
@@ -368,10 +374,11 @@ export async function getTopicProgress(userId: string) {
       topicId: questions.topicId,
       answered: sql<number>`count(*)::int`,
       mastered: sql<number>`count(*) filter (where ${questionProgress.mastered})::int`,
+      learning: sql<number>`count(*) filter (where ${questionProgress.lastCorrect} and not ${questionProgress.mastered})::int`,
     })
     .from(questionProgress)
     .innerJoin(questions, eq(questions.id, questionProgress.questionId))
     .where(eq(questionProgress.userId, userId))
     .groupBy(questions.topicId);
-  return new Map(rows.map((r) => [r.topicId, { answered: r.answered, mastered: r.mastered }]));
+  return new Map(rows.map((r) => [r.topicId, { answered: r.answered, mastered: r.mastered, learning: r.learning }]));
 }

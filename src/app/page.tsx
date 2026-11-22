@@ -133,6 +133,8 @@ export default async function HomePage() {
                     0,
                   )
                 : 0;
+            const learning = progress ? m.topics.reduce((s, tp) => s + (progress.get(tp.id)?.learning ?? 0), 0) : 0;
+            const answered = progress ? m.topics.reduce((s, tp) => s + (progress.get(tp.id)?.answered ?? 0), 0) : 0;
               const percent = m.questionCount
                 ? Math.round((mastered / m.questionCount) * 100)
                 : 0;
@@ -188,10 +190,13 @@ export default async function HomePage() {
                       className="mt-4 h-1 overflow-hidden rounded-full bg-line"
                       aria-hidden="true"
                     >
-                      <div
-                        className="h-full rounded-full bg-accent"
-                        style={{ width: `${percent}%` }}
-                      />
+                      <div className="flex h-full">
+                        <div className="h-full bg-accent" style={{ width: `${percent}%` }} />
+                        <div
+                          className="h-full bg-accent/30"
+                          style={{ width: `${m.questionCount ? (learning / m.questionCount) * 100 : 0}%` }}
+                        />
+                      </div>
                     </div>
                   )}
                   <p
@@ -211,7 +216,7 @@ export default async function HomePage() {
                         "Pieejams"
                       )
                     ) : percent === 0 ? (
-                      "Vēl nav sākts"
+                      answered > 0 ? `Iesākts · atbildēti ${answered} no ${m.questionCount}` : "Vēl nav sākts"
                     ) : (
                       `Apgūti ${percent} %`
                     )}

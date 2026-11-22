@@ -129,7 +129,7 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
     const wrongIdx = pool.filter((i) => !results[questions[i].id]);
     return (
       <>
-      <section aria-labelledby="summary-h" className="max-w-2xl rounded-2xl border border-line bg-white p-6 sm:p-8">
+      <section aria-labelledby="summary-h" className="mx-auto max-w-2xl rounded-2xl border border-line bg-white p-6 sm:p-8">
         <h2 id="summary-h" className="text-2xl font-semibold">
           {t("summaryHeading")}
         </h2>
@@ -178,7 +178,7 @@ export function Practice({ questions, seed, topicHref, exitHref, shuffleQuestion
           )}
         </div>
       </section>
-      {upsell && <div className="mt-6 max-w-2xl">{upsell}</div>}
+      {upsell && <div className="mx-auto mt-6 max-w-2xl">{upsell}</div>}
       </>
     );
   }

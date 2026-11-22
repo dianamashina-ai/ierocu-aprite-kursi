@@ -4,6 +4,8 @@ import { getCourseOverview } from "@/lib/content/queries";
 import { hasFullAccess, isFreeModule } from "@/lib/billing/access";
 import { getMistakesByModule } from "@/lib/training/service";
 import { TrainingBuilder, type BuilderModule } from "@/components/training/training-builder";
+import { FullCourseUpsell } from "@/components/billing/full-course-upsell";
+import { lockedTotals } from "@/lib/billing/upsell";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Trenēties" };
@@ -24,6 +26,11 @@ export default async function TrainingPage() {
     <div className={PAGE_CLASS}>
       <PageHeader title="Trenēties" lead="Izvēlies moduļus un sāc treniņu. Pēc katras atbildes redzēsi skaidrojumu ar atsauci uz likumu." />
       <TrainingBuilder modules={modules} />
+      {!access && (
+        <div className="mt-6">
+          <FullCourseUpsell title="Trenējies visos moduļos" {...(await lockedTotals())} />
+        </div>
+      )}
     </div>
   );
 }
