@@ -264,7 +264,7 @@ export default async function TopicPage({
             ) : (
               <span />
             )}
-            {next && (
+            {next && !upsell && (
               <Link className="btn-ghost" href={`/tema/${topicSlug(next.id)}`}>
                 {next.titleLv} →
               </Link>

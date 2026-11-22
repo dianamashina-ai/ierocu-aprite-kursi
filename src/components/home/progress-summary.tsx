@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight, Check, X } from "lucide-react";
 import { READY_LAST_EXAMS } from "@/lib/progress/readiness";
+import { FREE_MODULE_IDS } from "@/config/exam";
 import type { getDashboard } from "@/lib/progress/service";
 
 type Dashboard = Awaited<ReturnType<typeof getDashboard>>;
@@ -9,13 +10,28 @@ type Dashboard = Awaited<ReturnType<typeof getDashboard>>;
  * Pieslēgtiem lietotājiem: kopējais progress (apgūto jautājumu daļa, kā moduļu kartītēs)
  * un maza kartīte ar pēdējiem READY_LAST_EXAMS izmēģinājuma eksāmeniem.
  */
-export function ProgressSummary({ d }: { d: Dashboard }) {
-  const pct = d.totalQuestions
-    ? Math.round((d.masteredQuestions / d.totalQuestions) * 100)
-    : 0;
+export function ProgressSummary({
+  d,
+  freeOnly = false,
+}: {
+  d: Dashboard;
+  freeOnly?: boolean;
+}) {
+  // bez pilnas piekļuves — progress tikai bezmaksas modulī
+  const free = d.modules.filter((m) =>
+    (FREE_MODULE_IDS as readonly string[]).includes(m.id),
+  );
+  const mastered = freeOnly
+    ? free.reduce((s, m) => s + m.mastered, 0)
+    : d.masteredQuestions;
+  const total = freeOnly
+    ? free.reduce((s, m) => s + m.total, 0)
+    : d.totalQuestions;
+  const pct = total ? Math.round((mastered / total) * 100) : 0;
+  const label = freeOnly ? "1. moduļa progress" : "Tavs progress";
   // kartīte parādās, kad pirmo reizi sasniegti 70 % (EXAMS_UNLOCK_PERCENT), un paliek
-  const showExams = d.examsUnlocked;
-  const ready = d.readiness.ready;
+  const showExams = !freeOnly && d.examsUnlocked;
+  const ready = !freeOnly && d.readiness.ready;
   // pēdējie mēģinājumi: vecākais pa kreisi, jaunākais pa labi
   const last = d.exams.slice(0, READY_LAST_EXAMS).reverse();
   const slots = Array.from(
@@ -38,19 +54,19 @@ export function ProgressSummary({ d }: { d: Dashboard }) {
         <div className="flex items-end justify-between gap-4">
           <div>
             <p className="text-sm text-muted">
-              {ready ? "Gatavs eksāmenam" : "Tavs progress"}
+              {ready ? "Gatavs eksāmenam" : label}
             </p>
             <p className="mt-1 text-5xl font-bold leading-none tracking-tight tabular-nums">
               {pct}%
             </p>
           </div>
           <p className="text-sm tabular-nums text-muted">
-            {d.masteredQuestions} no {d.totalQuestions} jautājumiem apgūti
+            {mastered} no {total} jautājumiem apgūti
           </p>
         </div>
         <div
           role="progressbar"
-          aria-label="Tavs progress"
+          aria-label={label}
           aria-valuenow={pct}
           aria-valuemin={0}
           aria-valuemax={100}

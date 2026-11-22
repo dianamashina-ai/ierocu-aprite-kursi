@@ -110,7 +110,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
 
       <nav className="mt-12 flex flex-wrap justify-between gap-3 text-sm" aria-label="Moduļi">
         {prev ? <Link className="btn-ghost" href={`/modulis/${prev.id}`}>← {prev.titleLv}</Link> : <span />}
-        {next && <Link className="btn-ghost" href={`/modulis/${next.id}`}>{next.titleLv} →</Link>}
+        {next && !upsell && <Link className="btn-ghost" href={`/modulis/${next.id}`}>{next.titleLv} →</Link>}
       </nav>
     </div>
   );

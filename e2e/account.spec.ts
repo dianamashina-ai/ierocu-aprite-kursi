@@ -6,7 +6,7 @@ test("reģistrācija → mācību kurss ar progresu → iziet → pieslēgties a
   await signUp(page, email);
   await expect(page.getByRole("heading", { name: /^Sveiki/, level: 1 })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Tavs progress" })).toBeVisible();
-  await expect(page.getByText("0 no 515 jautājumiem apgūti")).toBeVisible();
+  await expect(page.getByText("0 no 66 jautājumiem apgūti")).toBeVisible();
   await signOut(page);
 
   await page.goto("/konts");
