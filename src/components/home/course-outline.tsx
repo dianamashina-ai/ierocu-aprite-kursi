@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Lock } from "lucide-react";
 import { MODULE_META } from "@/config/module-meta";
 
 interface OutlineModule {
@@ -25,9 +25,14 @@ export function CourseOutline({ modules, totals }: { modules: OutlineModule[]; t
           </p>
           <p className="mt-6 font-semibold">1. modulis ir bez maksas.</p>
           <p className="mt-1 text-muted">Moduļi 2–{totals.modules}, skaidrojumi un eksāmena simulācija ir pieejami pilnajā kursā.</p>
-          <Link href="/modulis/M1" className="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold hover:text-accent">
-            Izmēģināt 1. moduli <ArrowUpRight aria-hidden="true" className="size-4" />
-          </Link>
+          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <Link href="/modulis/M1" className="btn-secondary gap-2">
+              Izmēģināt 1. moduli <ArrowUpRight aria-hidden="true" className="size-4" />
+            </Link>
+            <Link href="/iegadaties" className="inline-flex min-h-11 items-center font-semibold hover:text-accent">
+              Iegādāties pilnu piekļuvi
+            </Link>
+          </div>
         </div>
 
         <ol className="border-t border-line">
@@ -62,9 +67,15 @@ export function CourseOutline({ modules, totals }: { modules: OutlineModule[]; t
                       </li>
                     ))}
                   </ul>
-                  <Link href={`/modulis/${m.id}`} className="mt-5 inline-flex min-h-10 items-center gap-1.5 text-sm font-semibold hover:text-accent">
-                    Atvērt moduli <ArrowUpRight aria-hidden="true" className="size-4" />
-                  </Link>
+                  {m.order === 1 ? (
+                    <Link href={`/modulis/${m.id}`} className="mt-5 inline-flex min-h-10 items-center gap-1.5 text-sm font-semibold hover:text-accent">
+                      Atvērt moduli <ArrowUpRight aria-hidden="true" className="size-4" />
+                    </Link>
+                  ) : (
+                    <p className="mt-5 inline-flex items-center gap-1.5 text-sm text-muted">
+                      <Lock aria-hidden="true" className="size-3.5" /> Pieejams pilnajā kursā
+                    </p>
+                  )}
                 </div>
               </details>
             </li>
