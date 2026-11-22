@@ -1,12 +1,13 @@
-import { READY_TOPIC_PERCENT } from "@/lib/progress/readiness";
 import type { getDashboard } from "@/lib/progress/service";
 
 type Dashboard = Awaited<ReturnType<typeof getDashboard>>;
 
-/** Kopējais progress (pieslēgtiem lietotājiem): procenti un josla pēc apgūtajām tēmām. */
-export function ProgressSummary({ d, totalTopics }: { d: Dashboard; totalTopics: number }) {
-  const topicsDone = d.modules.flatMap((m) => m.topics).filter((t) => t.percent >= READY_TOPIC_PERCENT).length;
-  const pct = totalTopics ? Math.round((topicsDone / totalTopics) * 100) : 0;
+/**
+ * Kopējais progress (pieslēgtiem lietotājiem): apgūto jautājumu daļa —
+ * tā pati formula kā moduļu kartītēs (jautājums apgūts, ja pēdējā atbilde bija pareiza).
+ */
+export function ProgressSummary({ d }: { d: Dashboard }) {
+  const pct = d.totalQuestions ? Math.round((d.masteredQuestions / d.totalQuestions) * 100) : 0;
   const ready = d.readiness.ready;
 
   return (
@@ -19,7 +20,7 @@ export function ProgressSummary({ d, totalTopics }: { d: Dashboard; totalTopics:
           <p className="mt-1 text-5xl font-bold leading-none tracking-tight tabular-nums">{pct}%</p>
         </div>
         <p className="text-sm tabular-nums text-muted">
-          {topicsDone} no {totalTopics} tēmām apgūtas
+          {d.masteredQuestions} no {d.totalQuestions} jautājumiem apgūti
         </p>
       </div>
       <div

@@ -83,7 +83,7 @@ export default async function HomePage() {
                   : `Sāc ar pirmo nodarbību — ${course.totals.topics} īsās nodarbībās un ${course.totals.questions} oficiālajos jautājumos ir viss eksāmenam vajadzīgais.`}
               </p>
             </div>
-            {dashboard && <ProgressSummary d={dashboard} totalTopics={course.totals.topics} />}
+            {dashboard && <ProgressSummary d={dashboard} />}
           </>
 
         <div
