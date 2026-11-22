@@ -11,6 +11,7 @@ import { CourseOutline } from "@/components/home/course-outline";
 import { WhoCanOwn } from "@/components/home/who-can-own";
 import { Faq } from "@/components/home/faq";
 import { HowItWorks } from "@/components/home/how-it-works";
+import { ContentDivider } from "@/components/home/divider";
 import { Pricing } from "@/components/home/pricing";
 import { courseIncluded } from "@/lib/billing/included";
 import { readLesson } from "@/lib/content/lessons";
@@ -54,6 +55,7 @@ export default async function HomePage() {
               examQuestions: examCfg.questionCount,
             }}
           />
+          <ContentDivider />
           <HowItWorks
             modules={course.totals.modules}
             questions={course.totals.questions}
@@ -61,6 +63,7 @@ export default async function HomePage() {
             examMinutes={examCfg.durationMinutes}
             sample={sample}
           />
+          <ContentDivider />
           <CourseOutline
             totals={course.totals}
             modules={course.modules.map((m) => ({
@@ -68,6 +71,7 @@ export default async function HomePage() {
               topics: m.topics.map((t) => ({ id: t.id, titleLv: t.titleLv, questionCount: t.questionCount, minutes: readLesson(t.id)?.minutes ?? null })),
             }))}
           />
+          <ContentDivider />
           <WhoCanOwn />
           <Pricing included={courseIncluded(course.totals, { questions: examCfg.questionCount, minutes: examCfg.durationMinutes })} />
           <Faq

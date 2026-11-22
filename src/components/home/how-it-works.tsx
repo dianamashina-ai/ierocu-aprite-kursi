@@ -35,12 +35,15 @@ export function HowItWorks({
     },
   ];
   return (
-    <section id="ka-notiek" aria-labelledby="ka-notiek-h" className="scroll-mt-6 border-t border-line bg-white">
+    <section id="ka-notiek" aria-labelledby="ka-notiek-h" className="scroll-mt-6 bg-white">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-20 lg:py-24">
         <div>
           <h2 id="ka-notiek-h" className="text-4xl font-semibold tracking-tight sm:text-5xl">
             Kā notiek mācības
           </h2>
+          <p className="mt-5 text-lg leading-relaxed text-muted">
+            Mācies datorā vai telefonā — pilnīgi savā tempā un ritmā. Progress saglabājas, un vari turpināt tur, kur palikāt.
+          </p>
           <ol className="mt-10 space-y-8">
             {steps.map(({ icon: Icon, title, text }, i) => (
               <li key={title} className="flex gap-5">
