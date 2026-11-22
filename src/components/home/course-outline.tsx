@@ -39,7 +39,7 @@ export function CourseOutline({ modules, totals }: { modules: OutlineModule[]; t
                   <span className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2.5 gap-y-1.5">
                     <span className="text-lg font-semibold leading-snug group-hover:text-accent">{m.titleLv}</span>
                     {m.order === 1 && (
-                      <span className="whitespace-nowrap rounded-full bg-ok-soft px-2.5 py-0.5 text-xs font-semibold text-ok">
+                      <span className="whitespace-nowrap rounded-full bg-ok px-2.5 py-0.5 text-xs font-semibold text-white">
                         Bez maksas
                       </span>
                     )}

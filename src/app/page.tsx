@@ -71,9 +71,9 @@ export default async function HomePage() {
               topics: m.topics.map((t) => ({ id: t.id, titleLv: t.titleLv, questionCount: t.questionCount, minutes: readLesson(t.id)?.minutes ?? null })),
             }))}
           />
-          <ContentDivider />
           <WhoCanOwn />
           <Pricing included={courseIncluded(course.totals, { questions: examCfg.questionCount, minutes: examCfg.durationMinutes })} />
+          <ContentDivider />
           <Faq
             totalQuestions={course.totals.questions}
             exam={{

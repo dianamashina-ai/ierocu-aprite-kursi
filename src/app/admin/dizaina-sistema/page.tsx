@@ -218,7 +218,7 @@ export default function DesignSystemPage() {
           <ExplanationBadge status="reviewed" has />
           <ExplanationBadge status="draft" has />
           <ExplanationBadge status="draft" has={false} />
-          <span className="rounded-full bg-ok-soft px-2.5 py-0.5 text-xs font-semibold text-ok">Bez maksas</span>
+          <span className="rounded-full bg-ok px-2.5 py-0.5 text-xs font-semibold text-white">Bez maksas</span>
           <span className="inline-flex items-center gap-1 text-sm text-muted">
             <Lock aria-hidden="true" className="size-3.5" /> Pilnajā piekļuvē
           </span>

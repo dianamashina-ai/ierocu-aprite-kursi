@@ -65,7 +65,7 @@ export function Faq({ exam, totalQuestions }: { exam: { questions: number; minut
         <div className="lg:sticky lg:top-8 lg:self-start">
           <h2 id="buj-h" className="text-4xl font-semibold tracking-tight sm:text-5xl">Biežāk uzdotie jautājumi</h2>
           <p className="mt-6 text-lg leading-relaxed text-muted">
-            Par eksāmenu, platformu un apmaksu. Ja neatradi atbildi, izmēģini 1. moduli — tas ir bez maksas.
+            Par eksāmenu, platformu un apmaksu.
           </p>
           <Link href="/registreties" className="btn-primary mt-8 gap-2">
             Sākt bez maksas <ArrowUpRight aria-hidden="true" className="size-4" />
