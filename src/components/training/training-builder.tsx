@@ -155,7 +155,7 @@ export function TrainingBuilder({ modules }: { modules: BuilderModule[] }) {
       </fieldset>
 
       <button type="button" disabled={total === 0} onClick={start} className="btn-primary mt-6 w-full disabled:cursor-not-allowed disabled:opacity-40">
-        {total > 0 ? `Sākt treniņu · ${total} jaut.` : "Sākt treniņu"}
+        Sākt treniņu
       </button>
     </div>
   );

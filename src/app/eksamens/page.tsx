@@ -118,7 +118,7 @@ export default async function ExamStartPage() {
       </div>
 
       {history.length > 0 && (
-        <section className="mt-10 max-w-2xl" aria-labelledby="hist-h">
+        <section className="mt-10" aria-labelledby="hist-h">
           <h2 id="hist-h" className="text-xl font-semibold">
             Iepriekšējie mēģinājumi
           </h2>

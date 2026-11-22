@@ -73,7 +73,7 @@ test("trenēties: izvēlas moduli un skaitu → treniņš ar izvēlēto jautāju
   await page.getByRole("option", { name: /01 Ierocis/ }).getByRole("button").click();
   await page.keyboard.press("Escape");
   await page.getByRole("radio", { name: "10" }).check({ force: true });
-  await page.getByRole("button", { name: "Sākt treniņu · 10 jaut." }).click();
+  await page.getByRole("button", { name: "Sākt treniņu" }).click();
   await expect(page).toHaveURL(/\/trenins\/sakt\?moduli=M1&skaits=10/);
   await expect(page.getByText("Jautājums 1 no 10")).toBeVisible();
 });
