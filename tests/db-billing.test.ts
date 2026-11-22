@@ -130,7 +130,7 @@ describe.skipIf(!url)("maksājumi (DB)", async () => {
     expect(s.revenueCents).toBe(0);
   });
 
-  it("ierīču ierobežojums: paliek 3 jaunākās sesijas; vēsture skaita ierīces", async () => {
+  it("ierīču ierobežojums: paliek 2 jaunākās sesijas; vēsture skaita ierīces", async () => {
     const devices = await import("@/lib/auth/devices");
     const future = new Date(Date.now() + 86400_000);
     for (let i = 0; i < 4; i++) {
@@ -139,7 +139,7 @@ describe.skipIf(!url)("maksājumi (DB)", async () => {
       await devices.afterSessionCreated({ userId: "u2", ipAddress: `10.0.${i}.5`, userAgent: `UA-${i}` });
     }
     const left = await devices.activeSessions("u2");
-    expect(left.map((x) => x.id).sort()).toEqual(["s1", "s2", "s3"]);
+    expect(left.map((x) => x.id).sort()).toEqual(["s2", "s3"]);
     // tā pati ierīce no cita IP tajā pašā /24 tīklā — neskaitās kā jauna
     await devices.afterSessionCreated({ userId: "u2", ipAddress: "10.0.3.99", userAgent: "UA-3" });
     expect((await devices.deviceCounts(["u2"])).get("u2")).toBe(4);

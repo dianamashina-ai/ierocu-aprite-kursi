@@ -3,7 +3,7 @@ import { and, desc, eq, gt, inArray, lt, sql } from "drizzle-orm";
 import { db, schema } from "@/db";
 
 /** Cik ierīcēs vienlaikus drīkst būt pieslēgts viens konts. */
-export const MAX_DEVICES = 3;
+export const MAX_DEVICES = 2;
 /** Pieslēgšanās vēstures glabāšanas termiņš. */
 export const LOGIN_HISTORY_DAYS = 90;
 /** Tik daudz dažādu ierīču 30 dienās — iespējama konta koplietošana. */

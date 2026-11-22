@@ -14,17 +14,29 @@ export interface NavItem {
 }
 
 const isActive = (path: string, item: NavItem) =>
-  [item.href, ...(item.match ?? [])].some((p) => (p === "/" ? path === "/" : path === p || path.startsWith(`${p}/`)));
+  [item.href, ...(item.match ?? [])].some((p) =>
+    p === "/" ? path === "/" : path === p || path.startsWith(`${p}/`),
+  );
 
 /** Galvenā navigācija: datorā — rinda centrā, telefonā — izvēlne. */
-export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signedIn: boolean; showBuy: boolean }) {
+export function SiteNav({
+  items,
+  signedIn,
+  showBuy,
+}: {
+  items: NavItem[];
+  signedIn: boolean;
+  showBuy: boolean;
+}) {
   const path = usePathname();
   const [open, setOpen] = useState(false);
   useEffect(() => setOpen(false), [path]);
 
   const itemCls = (active: boolean) =>
     `inline-flex min-h-11 items-center whitespace-nowrap rounded-lg px-3 text-[15px] transition-colors hover:bg-accent-soft ${
-      active ? "font-semibold text-ink" : "font-normal text-muted hover:text-ink"
+      active
+        ? "font-semibold text-ink"
+        : "font-normal text-muted hover:text-ink"
     }`;
   const mobileCls = (active: boolean) =>
     `-mx-2 flex min-h-12 w-[calc(100%+1rem)] items-center rounded-lg px-2 text-left text-base hover:bg-accent-soft ${active ? "font-semibold text-ink" : "font-normal text-muted"}`;
@@ -32,7 +44,10 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
 
   return (
     <>
-      <nav aria-label="Galvenā navigācija" className="hidden flex-1 justify-end xl:flex">
+      <nav
+        aria-label="Galvenā navigācija"
+        className="hidden flex-1 items-center justify-end gap-1 xl:flex"
+      >
         <ul className="flex items-center gap-1">
           {items.map((it) => {
             const active = isActive(path, it);
@@ -42,7 +57,9 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
                   href={it.href}
                   aria-current={active ? "page" : undefined}
                   className={`inline-flex min-h-11 items-center whitespace-nowrap rounded-lg px-3 text-[15px] transition-colors hover:bg-accent-soft ${
-                    active ? "font-semibold text-ink" : "font-normal text-muted hover:text-ink"
+                    active
+                      ? "font-semibold text-ink"
+                      : "font-normal text-muted hover:text-ink"
                   }`}
                 >
                   {it.label}
@@ -51,19 +68,36 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
             );
           })}
         </ul>
+        <div className="flex items-center gap-1">
+          {signedIn ? (
+            <>
+              <Link
+                href="/konts"
+                aria-current={onAccount ? "page" : undefined}
+                className={itemCls(onAccount)}
+              >
+                Profils
+              </Link>
+              <SignOutButton className={itemCls(false)} />
+              {showBuy && (
+                <Link
+                  href="/iegadaties"
+                  className="btn-primary ml-2 min-h-11 px-4 text-sm"
+                >
+                  Pilna piekļuve
+                </Link>
+              )}
+            </>
+          ) : (
+            <Link
+              href="/pieslegties"
+              className="btn-primary ml-2 min-h-11 px-4 text-sm"
+            >
+              Pieslēgties
+            </Link>
+          )}
+        </div>
       </nav>
-
-      <div className="hidden items-center gap-1 xl:flex">
-        {signedIn ? (
-          <>
-            <Link href="/konts" aria-current={onAccount ? "page" : undefined} className={itemCls(onAccount)}>Profils</Link>
-            <SignOutButton className={itemCls(false)} />
-            {showBuy && <Link href="/iegadaties" className="btn-primary ml-2 min-h-11 px-4 text-sm">Pilna piekļuve</Link>}
-          </>
-        ) : (
-          <Link href="/pieslegties" className="btn-primary ml-2 min-h-11 px-4 text-sm">Pieslēgties</Link>
-        )}
-      </div>
 
       <button
         type="button"
@@ -72,13 +106,25 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
         aria-controls="mobile-nav"
         className="inline-flex size-11 items-center justify-center rounded-xl border border-line xl:hidden"
       >
-        {open ? <X className="size-5" aria-hidden="true" /> : <Menu className="size-5" aria-hidden="true" />}
-        <span className="sr-only">{open ? "Aizvērt izvēlni" : "Atvērt izvēlni"}</span>
+        {open ? (
+          <X className="size-5" aria-hidden="true" />
+        ) : (
+          <Menu className="size-5" aria-hidden="true" />
+        )}
+        <span className="sr-only">
+          {open ? "Aizvērt izvēlni" : "Atvērt izvēlni"}
+        </span>
       </button>
 
       {open && (
-        <div id="mobile-nav" className="absolute inset-x-0 top-full z-20 border-b border-line bg-white shadow-lg xl:hidden">
-          <nav aria-label="Galvenā navigācija" className="mx-auto max-w-6xl px-4 py-3">
+        <div
+          id="mobile-nav"
+          className="absolute inset-x-0 top-full z-20 border-b border-line bg-white shadow-lg xl:hidden"
+        >
+          <nav
+            aria-label="Galvenā navigācija"
+            className="mx-auto max-w-6xl px-4 py-3"
+          >
             <ul className="divide-y divide-line">
               {items.map((it) => (
                 <li key={it.href}>
@@ -94,7 +140,13 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
               {signedIn && (
                 <>
                   <li>
-                    <Link href="/konts" aria-current={onAccount ? "page" : undefined} className={mobileCls(onAccount)}>Profils</Link>
+                    <Link
+                      href="/konts"
+                      aria-current={onAccount ? "page" : undefined}
+                      className={mobileCls(onAccount)}
+                    >
+                      Profils
+                    </Link>
                   </li>
                   <li>
                     <SignOutButton className={mobileCls(false)} />
@@ -104,8 +156,16 @@ export function SiteNav({ items, signedIn, showBuy }: { items: NavItem[]; signed
             </ul>
             {(showBuy || !signedIn) && (
               <div className="flex flex-wrap gap-2 py-3">
-                {showBuy && <Link href="/iegadaties" className="btn-primary">Pilna piekļuve</Link>}
-                {!signedIn && <Link href="/pieslegties" className="btn-primary">Pieslēgties</Link>}
+                {showBuy && (
+                  <Link href="/iegadaties" className="btn-primary">
+                    Pilna piekļuve
+                  </Link>
+                )}
+                {!signedIn && (
+                  <Link href="/pieslegties" className="btn-primary">
+                    Pieslēgties
+                  </Link>
+                )}
               </div>
             )}
           </nav>

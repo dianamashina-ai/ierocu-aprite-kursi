@@ -47,7 +47,7 @@ export default function TermsPage() {
       <List>
         <li>Konts ir personīgs. Nenododiet savus pieslēgšanās datus citām personām un neļaujiet citiem izmantot savu kontu.</li>
         <li>
-          Vienlaikus kontā var būt pieslēgts ne vairāk kā trīs ierīcēs. Pieslēdzoties ceturtajā, vecākā ierīce tiek automātiski
+          Vienlaikus kontā var būt pieslēgts ne vairāk kā divās ierīcēs. Pieslēdzoties trešajā, vecākā ierīce tiek automātiski
           izrakstīta.
         </li>
         <li>Norādiet pareizu e-pasta adresi — uz to sūtām pieslēgšanās saites un rēķinus.</li>

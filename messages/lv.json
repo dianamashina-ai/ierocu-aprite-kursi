@@ -91,7 +91,7 @@
     "label": "Jautājuma numurs vai vārdi no teksta",
     "placeholder": "Jautājuma numurs vai vārdi, piem., 243",
     "submit": "Meklēt",
-    "results": "{count, plural, zero {Nekas nav atrasts} one {Atrasts # jautājums} other {Atrasti # jautājumi}}",
+    "results": "{count, plural, =0 {Nekas nav atrasts} zero {Atrasti # jautājumi} one {Atrasts # jautājums} other {Atrasti # jautājumi}}",
     "noResults": "Pamēģini citu vārdu vai jautājuma numuru no 1 līdz 515.",
     "limited": "Rādīti pirmie {count}. Precizē meklējumu."
   },

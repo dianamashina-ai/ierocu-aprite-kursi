@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { listUsers } from "@/lib/backoffice/service";
 import { formatDate } from "@/lib/format";
-import { GrantAccessForm } from "@/components/admin/grant-access-form";
-import { MAX_DEVICES, SHARING_DEVICE_THRESHOLD } from "@/lib/auth/devices";
+import { UsersToolbar } from "@/components/admin/users-toolbar";
+import { SHARING_DEVICE_THRESHOLD } from "@/lib/auth/devices";
 
 export const metadata = { title: "Lietotāji" };
 
@@ -15,29 +15,7 @@ export default async function UsersPage({ searchParams }: { searchParams: Promis
 
   return (
     <>
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <h1 className="text-3xl font-semibold tracking-tight">Lietotāji</h1>
-        <form className="flex gap-2" role="search">
-          <label htmlFor="users-q" className="sr-only">Meklēt lietotāju</label>
-          <input
-            id="users-q"
-            name="q"
-            defaultValue={q}
-            placeholder="E-pasts vai vārds"
-            className="min-h-10 w-full rounded-lg border border-line bg-white px-3 text-sm sm:w-72"
-          />
-          <button className="btn-secondary min-h-10 px-4 text-sm">Meklēt</button>
-        </form>
-      </div>
-      <p className="mt-2 text-sm text-muted">
-        Rāda pēdējos 100{q ? " atrastos" : ""} lietotājus, jaunākie augšā. Vienlaikus konts var būt pieslēgts {MAX_DEVICES} ierīcēs.{" "}
-        <Link href={onlyShared ? "/admin/lietotaji" : "/admin/lietotaji?aizdomas=1"} className="font-semibold text-accent-strong underline underline-offset-4">
-          {onlyShared ? "Rādīt visus" : `Tikai iespējami koplietotie (vairāk par ${SHARING_DEVICE_THRESHOLD} ierīcēm 30 dienās)`}
-        </Link>
-      </p>
-      <div className="mt-6">
-        <GrantAccessForm />
-      </div>
+      <UsersToolbar q={q} onlyShared={onlyShared} threshold={SHARING_DEVICE_THRESHOLD} />
 
       {rows.length === 0 ? (
         <p className="mt-6 rounded-2xl border border-line bg-white p-6 text-muted">Nekas nav atrasts.</p>

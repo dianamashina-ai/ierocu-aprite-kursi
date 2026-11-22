@@ -56,7 +56,7 @@ test("administrācija: manuāla piekļuve jaunam lietotājam un uzaicinājums", 
   const admin = await adminCtx.newPage();
   await signInAdmin(admin);
   await admin.goto("/admin/lietotaji");
-  await admin.getByRole("button", { name: "Piešķirt piekļuvi" }).click();
+  await admin.getByRole("button", { name: "Pievienot lietotāju" }).click();
   await admin.getByLabel("E-pasts").fill(email);
   await admin.getByLabel(/Vārds, uzvārds/).fill("Skaidras Naudas Klients");
   await admin.getByLabel("Samaksāts skaidrā naudā").check();

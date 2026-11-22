@@ -9,8 +9,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   return (
     <div className="page-white">
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
-        <p className="text-sm font-semibold uppercase tracking-wide text-accent">Administrācija</p>
-        <div className="mt-3 border-b border-line pb-3">
+        <div className="border-b border-line pb-3">
           <AdminNav />
         </div>
         <div className="pt-8">{children}</div>

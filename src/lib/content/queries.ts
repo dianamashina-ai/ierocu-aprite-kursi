@@ -1,5 +1,5 @@
 import "server-only";
-import { asc, count, eq, ilike, inArray, or, type SQL } from "drizzle-orm";
+import { and, asc, count, eq, inArray, or, sql, type AnyColumn, type SQL } from "drizzle-orm";
 import { db, schema } from "@/db";
 import { DEFAULT_CONTENT_VERSION } from "@/config/exam";
 import type { PracticeQuestion } from "@/lib/quiz/types";
@@ -142,17 +142,38 @@ export async function searchQuestions(query: string, limit = 50) {
       .from(questions)
       .where(eq(questions.id, Number(q)));
   }
-  const pattern = `%${q.replace(/[\\%_]/g, (c) => `\\${c}`)}%`;
-  const matchingOptions = db
-    .selectDistinct({ id: questionOptions.questionId })
-    .from(questionOptions)
-    .where(ilike(questionOptions.text, pattern));
+  const stems = searchStems(q);
+  if (!stems.length) return [];
+  // katram vārdam jābūt jautājumā vai kādā tā atbilžu variantā (bez garumzīmēm, neatkarīgi no galotnes)
+  const conds = stems.map((st) => {
+    const pattern = `%${st}%`;
+    const inOptions = db
+      .selectDistinct({ id: questionOptions.questionId })
+      .from(questionOptions)
+      .where(sql`${fold(questionOptions.text)} like ${pattern}`);
+    return or(sql`${fold(questions.text)} like ${pattern}`, inArray(questions.id, inOptions));
+  });
   return db
     .select({ id: questions.id, text: questions.text, topicId: questions.topicId })
     .from(questions)
-    .where(or(ilike(questions.text, pattern), inArray(questions.id, matchingOptions)))
-    .orderBy(asc(questions.id))
+    .where(and(...conds))
+    // vispirms tie, kuros visa frāze ir jautājuma tekstā
+    .orderBy(sql`case when ${fold(questions.text)} like ${`%${foldLv(q.trim())}%`} then 0 else 1 end`, asc(questions.id))
     .limit(limit);
+}
+
+const LV_FROM = "āčēģīķļņšūž";
+const LV_TO = "acegiklnsuz";
+/** mazie burti bez garumzīmēm/mīkstinājumiem (SQL) */
+const fold = (col: AnyColumn) => sql`translate(lower(${col}), ${LV_FROM}, ${LV_TO})`;
+
+/** Vaicājums → vārdu saknes: mazie burti, bez diakritikas, garākiem vārdiem nogriezta galotne. */
+const foldLv = (s: string) => s.toLowerCase().replace(/[āčēģīķļņšūž]/g, (c) => LV_TO[LV_FROM.indexOf(c)]).replace(/[\\%_]/g, "");
+
+export function searchStems(q: string): string[] {
+  const folded = foldLv(q);
+  const words = folded.split(/[^a-z0-9]+/).filter((w) => w.length >= 2);
+  return [...new Set(words.map((w) => (w.length >= 6 ? w.slice(0, Math.max(4, w.length - 3)) : w.length >= 4 ? w.slice(0, w.length - 1) : w)))].slice(0, 8);
 }
 
 export async function getContentVersion(): Promise<string> {

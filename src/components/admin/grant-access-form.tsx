@@ -6,7 +6,7 @@ import { grantAccessAction } from "@/app/actions/admin";
 
 const input = "mt-1 block min-h-11 w-full rounded-lg border border-line bg-white px-3 text-sm";
 
-export function GrantAccessForm({ defaultEmail = "", defaultOpen = false }: { defaultEmail?: string; defaultOpen?: boolean }) {
+export function GrantAccessForm({ defaultEmail = "", defaultOpen = false, onClose }: { defaultEmail?: string; defaultOpen?: boolean; onClose?: () => void }) {
   const [open, setOpen] = useState(defaultOpen);
   const [email, setEmail] = useState(defaultEmail);
   const [name, setName] = useState("");
@@ -84,7 +84,7 @@ export function GrantAccessForm({ defaultEmail = "", defaultOpen = false }: { de
         <button type="submit" disabled={pending} className="btn-primary min-h-11 px-4 text-sm disabled:opacity-60">
           {pending ? "Piešķir…" : "Piešķirt piekļuvi"}
         </button>
-        <button type="button" onClick={() => setOpen(false)} className="btn-ghost min-h-11 px-4 text-sm">
+        <button type="button" onClick={() => (onClose ? onClose() : setOpen(false))} className="btn-ghost min-h-11 px-4 text-sm">
           Aizvērt
         </button>
       </div>
