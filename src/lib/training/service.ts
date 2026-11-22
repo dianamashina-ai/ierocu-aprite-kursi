@@ -74,5 +74,5 @@ export function parseTrainingParams(sp: { moduli?: string; kludas?: string; skai
     .filter((t) => /^M\d{1,2}$/.test(t))
     .slice(0, 20);
   const n = Number(sp.skaits);
-  return { moduleIds, mistakesOnly: sp.kludas === "1", limit: [10, 20, 40].includes(n) ? n : 0 };
+  return { moduleIds, mistakesOnly: sp.kludas === "1", limit: [20, 40, 60, 80].includes(n) ? n : 0 };
 }

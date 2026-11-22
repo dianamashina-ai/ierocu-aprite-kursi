@@ -16,10 +16,10 @@ export interface BuilderModule {
 }
 
 const COUNTS = [
-  { value: 10, label: "10" },
   { value: 20, label: "20" },
   { value: 40, label: "40" },
-  { value: 0, label: "Visi" },
+  { value: 60, label: "60" },
+  { value: 80, label: "80" },
 ] as const;
 
 /** Treniņa izvēle: moduļi (izkrītošs saraksts), “tikai kļūdas”, jautājumu skaits → /trenins/sakt?… */

@@ -72,10 +72,10 @@ test("trenēties: izvēlas moduli un skaitu → treniņš ar izvēlēto jautāju
   await expect(page.getByRole("button", { name: /^Sākt treniņu/ })).toBeDisabled();
   await page.getByRole("option", { name: /01 Ierocis/ }).getByRole("button").click();
   await page.keyboard.press("Escape");
-  await page.getByRole("radio", { name: "10" }).check({ force: true });
+  await page.getByRole("radio", { name: "40" }).check({ force: true });
   await page.getByRole("button", { name: "Sākt treniņu" }).click();
-  await expect(page).toHaveURL(/\/trenins\/sakt\?moduli=M1&skaits=10/);
-  await expect(page.getByText("Jautājums 1 no 10")).toBeVisible();
+  await expect(page).toHaveURL(/\/trenins\/sakt\?moduli=M1&skaits=40/);
+  await expect(page.getByText("Jautājums 1 no 40")).toBeVisible();
 });
 
 test("izmēģinājuma eksāmens: sākt, atbildēt, turpināt pēc pārlādes, pabeigt, rezultāts", async ({ page }) => {
