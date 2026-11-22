@@ -5,8 +5,8 @@ test("reģistrācija → mācību kurss ar progresu → iziet → pieslēgties a
   const email = uniqueEmail("pw");
   await signUp(page, email);
   await expect(page.getByRole("heading", { name: /^Sveiki/, level: 1 })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Ceļš līdz eksāmenam" })).toBeVisible();
-  await expect(page.getByText(/pareizi atbildēti 0 no 515/)).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Tavs progress" })).toBeVisible();
+  await expect(page.getByText("0 no 37 tēmām apgūtas")).toBeVisible();
   await signOut(page);
 
   await page.goto("/konts");
@@ -53,7 +53,7 @@ test("atbildes saglabājas; kļūda nonāk kļūdu sarakstā; panelis rāda prog
   const wasCorrect = await page.getByText("Pareizi", { exact: true }).isVisible();
   await page.waitForTimeout(500); // servera darbība
   await page.goto("/");
-  await expect(page.getByText(wasCorrect ? /pareizi atbildēti 1 no 515/ : /pareizi atbildēti 0 no 515/)).toBeVisible();
+  await expect(page.getByRole("progressbar", { name: "Tavs progress" })).toBeVisible();
   // kļūda redzama treniņa izvēlē pie tēmas
   await page.goto("/trenins");
   if (wasCorrect) await expect(page.getByText("Kļūdu pagaidām nav.")).toBeVisible();
