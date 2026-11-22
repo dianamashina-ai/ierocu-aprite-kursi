@@ -22,44 +22,50 @@ export function Hero({ stats }: { stats: Stats }) {
     [`${stats.examMinutes} min`, `eksāmena simulācija — ${stats.examQuestions} jautājumi`],
   ];
   return (
-    <section className="bg-white">
-      <div className="mx-auto grid max-w-6xl gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:py-20">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">Sagatavošanās eksāmenam</p>
-          <h1 className="mt-4 text-[2.6rem] font-semibold leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-[4.25rem]">
-            Ceļš līdz <span className="text-accent">ieroču atļaujai</span> sākas šeit
-          </h1>
-          <p className="mt-5 text-xl font-semibold text-ink">Saproti likumu, nevis iekal atbildes.</p>
-          <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-muted">
-            Īsas nodarbības latviešu valodā, visi oficiālie eksāmena jautājumi ar skaidrojumiem un atsaucēm uz likumu,
-            kā arī eksāmena simulācija — telefonā vai datorā, savā tempā.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <Link href="/registreties" className="btn-primary gap-2">
-              Sākt bez maksas <ArrowUpRight aria-hidden="true" className="size-4" />
-            </Link>
-            <Link href="/tema/1-1/trenins" className="inline-flex min-h-12 items-center gap-2 font-semibold hover:text-accent">
-              Izmēģināt jautājumus <ArrowRight aria-hidden="true" className="size-4" />
-            </Link>
-          </div>
-          <p className="mt-5 max-w-md text-sm text-muted">
-            1. modulis ir bez maksas, maksājumu karte nav vajadzīga. Pilns kurss — {formatEuro(COURSE_PRODUCT.amountCents)}, vienreizējs maksājums.
-          </p>
-        </div>
-
-        <dl aria-label="Kurss skaitļos" className="grid grid-cols-2 overflow-hidden rounded-2xl bg-accent text-white">
-          {items.map(([value, label], i) => (
-            <div key={label} className={`border-white/20 px-5 py-8 sm:px-8 sm:py-10 ${["", "border-l", "border-t", "border-l border-t"][i]}`}>
-              <dt className="sr-only">{label}</dt>
-              <dd>
-                <span className="block whitespace-nowrap text-4xl font-bold tabular-nums tracking-tight sm:text-5xl">{value}</span>
-                <span className="mt-2 block text-sm text-white/80">{label}</span>
-              </dd>
+    <>
+      <section className="bg-white">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:py-20">
+          <div className="max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">Sagatavošanās eksāmenam</p>
+            <h1 className="mt-4 text-[2.6rem] font-semibold leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-[4.25rem]">
+              Ceļš līdz <span className="text-accent">ieroču atļaujai</span> sākas šeit
+            </h1>
+            <p className="mt-5 text-xl font-semibold text-ink">Saproti likumu, nevis iekal atbildes.</p>
+            <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-muted">
+              Īsas nodarbības latviešu valodā, visi oficiālie eksāmena jautājumi ar skaidrojumiem un atsaucēm uz likumu,
+              kā arī eksāmena simulācija — telefonā vai datorā, savā tempā.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <Link href="/registreties" className="btn-primary gap-2">
+                Sākt bez maksas <ArrowUpRight aria-hidden="true" className="size-4" />
+              </Link>
+              <Link href="/tema/1-1/trenins" className="inline-flex min-h-12 items-center gap-2 font-semibold hover:text-accent">
+                Izmēģināt jautājumus <ArrowRight aria-hidden="true" className="size-4" />
+              </Link>
             </div>
-          ))}
-        </dl>
-      </div>
-    </section>
+            <p className="mt-5 max-w-md text-sm text-muted">
+              1. modulis ir bez maksas, maksājumu karte nav vajadzīga. Pilns kurss — {formatEuro(COURSE_PRODUCT.amountCents)}, vienreizējs maksājums.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-label="Kurss skaitļos" className="bg-white">
+        <div className="mx-auto max-w-6xl px-4 pb-14 sm:px-6 lg:pb-20">
+          <dl className="grid grid-cols-2 rounded-2xl bg-accent text-white lg:grid-cols-4">
+            {items.map(([value, label], i) => (
+              <div key={label} className={`border-white/20 px-5 py-8 sm:px-8 lg:py-10 ${["", "border-l", "border-t lg:border-l lg:border-t-0", "border-l border-t lg:border-t-0"][i]}`}>
+                <dt className="sr-only">{label}</dt>
+                <dd>
+                  <span className="block whitespace-nowrap text-4xl font-bold tabular-nums tracking-tight sm:text-6xl">{value}</span>
+                  <span className="mt-2 block text-sm text-white/80">{label}</span>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+    </>
   );
 }
 
@@ -67,7 +73,7 @@ export function SampleQuestion({ q }: { q: PracticeQuestion }) {
   const letters = "ABCDEF";
   return (
     <figure className="relative">
-      <div aria-hidden="true" className="absolute -inset-3 -z-0 rounded-[28px] bg-white" />
+      <div aria-hidden="true" className="absolute -inset-3 -z-0 rounded-[28px] bg-surface" />
       <div className="relative rounded-2xl border border-line bg-white p-5 shadow-[0_24px_60px_-28px_rgba(34,34,34,0.35)] sm:p-6">
         <div className="flex items-center justify-between text-xs text-muted">
           <span className="font-semibold uppercase tracking-[0.16em]">Treniņš · 1. modulis</span>

@@ -35,7 +35,7 @@ export function HowItWorks({
     },
   ];
   return (
-    <section id="ka-notiek" aria-labelledby="ka-notiek-h" className="scroll-mt-6 bg-surface">
+    <section id="ka-notiek" aria-labelledby="ka-notiek-h" className="scroll-mt-6 border-t border-line bg-white">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-20 lg:py-24">
         <div>
           <h2 id="ka-notiek-h" className="text-4xl font-semibold tracking-tight sm:text-5xl">
