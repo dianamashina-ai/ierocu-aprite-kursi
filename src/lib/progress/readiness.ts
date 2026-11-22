@@ -1,5 +1,5 @@
 export const READY_TOPIC_PERCENT = 80;
-export const READY_LAST_EXAMS = 3;
+export const READY_LAST_EXAMS = 5;
 
 export interface ReadinessInput {
   /** Pēdējie pabeigtie izmēģinājuma eksāmeni, jaunākais pirmais */
@@ -10,11 +10,11 @@ export interface ReadinessInput {
 
 export interface Readiness {
   ready: boolean;
-  examsPassed: number; // no pēdējiem 3
+  examsPassed: number; // no pēdējiem READY_LAST_EXAMS
   topicsBelow: string[];
 }
 
-/** «Gatavs eksāmenam»: pēdējie 3 izmēģinājuma eksāmeni nokārtoti un visas tēmas ≥ 80 %. */
+/** «Gatavs eksāmenam»: pēdējie READY_LAST_EXAMS (5) izmēģinājuma eksāmeni nokārtoti un visas tēmas ≥ 80 %. */
 export function readiness({ recentExams, topicPercents }: ReadinessInput): Readiness {
   const last = recentExams.slice(0, READY_LAST_EXAMS);
   const examsPassed = last.filter((e) => e.passed).length;

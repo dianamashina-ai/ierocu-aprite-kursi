@@ -267,16 +267,16 @@ export default function DesignSystemPage() {
           </div>
         </div>
         <h3 className="mt-10 font-semibold">Izmēģinājuma eksāmeni — visi stāvokļi</h3>
-        <p className="mt-1 text-sm text-muted">Pēdējie 3 mēģinājumi, vecākais pa kreisi. Sākumlapā blakus kopējam progresam.</p>
+        <p className="mt-1 text-sm text-muted">Pēdējie 5 mēģinājumi, vecākais pa kreisi. Sākumlapā blakus kopējam progresam.</p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {(
             [
-              ["Vēl nav kārtots", [null, null, null]],
-              ["1 mēģinājums — nav nokārtots", [false, null, null]],
-              ["1 mēģinājums — nokārtots", [true, null, null]],
-              ["Nokārtots, nav, nokārtots", [true, false, true]],
-              ["Nav, nokārtots, nokārtots", [false, true, true]],
-              ["3 pēc kārtas nokārtoti — gatavs", [true, true, true]],
+              ["Vēl nav kārtots", [null, null, null, null, null]],
+              ["1 mēģinājums — nav nokārtots", [false, null, null, null, null]],
+              ["1 mēģinājums — nokārtots", [true, null, null, null, null]],
+              ["Jaukti rezultāti", [true, false, true, true, null]],
+              ["Nav, tad 4 nokārtoti", [false, true, true, true, true]],
+              ["5 pēc kārtas nokārtoti — gatavs", [true, true, true, true, true]],
             ] as const
           ).map(([label, r]) => (
             <div key={label}>

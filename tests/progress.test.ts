@@ -77,15 +77,15 @@ describe("izmēģinājuma eksāmena izlase", () => {
 
 describe("gatavība eksāmenam", () => {
   const topics = [{ topicId: "1.1", percent: 85 }, { topicId: "1.2", percent: 90 }];
-  it("gatavs: 3 nokārtoti + visas tēmas ≥ 80 %", () => {
-    expect(readiness({ recentExams: [{ passed: true }, { passed: true }, { passed: true }], topicPercents: topics }).ready).toBe(true);
+  it("gatavs: 5 nokārtoti + visas tēmas ≥ 80 %", () => {
+    expect(readiness({ recentExams: [{ passed: true }, { passed: true }, { passed: true }, { passed: true }, { passed: true }], topicPercents: topics }).ready).toBe(true);
   });
-  it("nav gatavs: viens no pēdējiem 3 nav nokārtots", () => {
-    expect(readiness({ recentExams: [{ passed: true }, { passed: false }, { passed: true }, { passed: true }], topicPercents: topics }).ready).toBe(false);
+  it("nav gatavs: viens no pēdējiem 5 nav nokārtots", () => {
+    expect(readiness({ recentExams: [{ passed: true }, { passed: true }, { passed: true }, { passed: false }, { passed: true }, { passed: true }], topicPercents: topics }).ready).toBe(false);
   });
-  it("nav gatavs: mazāk par 3 eksāmeniem vai vāja tēma", () => {
-    expect(readiness({ recentExams: [{ passed: true }, { passed: true }], topicPercents: topics }).ready).toBe(false);
-    const r = readiness({ recentExams: [{ passed: true }, { passed: true }, { passed: true }], topicPercents: [...topics, { topicId: "2.1", percent: 79 }] });
+  it("nav gatavs: mazāk par 5 eksāmeniem vai vāja tēma", () => {
+    expect(readiness({ recentExams: [{ passed: true }, { passed: true }, { passed: true }, { passed: true }], topicPercents: topics }).ready).toBe(false);
+    const r = readiness({ recentExams: [{ passed: true }, { passed: true }, { passed: true }, { passed: true }, { passed: true }], topicPercents: [...topics, { topicId: "2.1", percent: 79 }] });
     expect(r.ready).toBe(false);
     expect(r.topicsBelow).toEqual(["2.1"]);
   });

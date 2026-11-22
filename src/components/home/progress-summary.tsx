@@ -7,14 +7,14 @@ type Dashboard = Awaited<ReturnType<typeof getDashboard>>;
 
 /**
  * Pieslēgtiem lietotājiem: kopējais progress (apgūto jautājumu daļa, kā moduļu kartītēs)
- * un maza kartīte ar pēdējiem 3 izmēģinājuma eksāmeniem.
+ * un maza kartīte ar pēdējiem READY_LAST_EXAMS izmēģinājuma eksāmeniem.
  */
 export function ProgressSummary({ d }: { d: Dashboard }) {
   const pct = d.totalQuestions
     ? Math.round((d.masteredQuestions / d.totalQuestions) * 100)
     : 0;
   const ready = d.readiness.ready;
-  // pēdējie 3 mēģinājumi: vecākais pa kreisi, jaunākais pa labi
+  // pēdējie mēģinājumi: vecākais pa kreisi, jaunākais pa labi
   const last = d.exams.slice(0, READY_LAST_EXAMS).reverse();
   const slots = Array.from(
     { length: READY_LAST_EXAMS },
@@ -68,7 +68,7 @@ export function ProgressSummary({ d }: { d: Dashboard }) {
   );
 }
 
-/** Pēdējie 3 izmēģinājuma eksāmeni: true — nokārtots, false — nav, null — vēl nav kārtots (vecākais pa kreisi). */
+/** Pēdējie READY_LAST_EXAMS izmēģinājuma eksāmeni: true — nokārtots, false — nav, null — vēl nav kārtots (vecākais pa kreisi). */
 export function ExamAttemptsCard({ results }: { results: (boolean | null)[] }) {
   const allPassed = results.length > 0 && results.every((r) => r === true);
   return (
@@ -89,11 +89,11 @@ export function ExamAttemptsCard({ results }: { results: (boolean | null)[] }) {
           className="size-4 shrink-0 text-muted"
         />
       </div>
-      <ol aria-label="Pēdējie 3 mēģinājumi" className="mt-3 flex gap-2">
+      <ol aria-label={`Pēdējie ${READY_LAST_EXAMS} mēģinājumi`} className="mt-3 flex gap-1.5">
         {results.map((e, i) => (
           <li
             key={i}
-            className={`flex size-9 items-center justify-center rounded-full ${e === null ? "border border-dashed border-line" : e ? "bg-ok text-white" : "bg-err text-white"}`}
+            className={`flex size-8 items-center justify-center rounded-full ${e === null ? "border border-dashed border-line" : e ? "bg-ok text-white" : "bg-accent-soft text-muted"}`}
           >
             {e === null ? (
               <span className="sr-only">Vēl nav kārtots</span>
@@ -115,8 +115,8 @@ export function ExamAttemptsCard({ results }: { results: (boolean | null)[] }) {
         className={`mt-auto pt-3 text-xs ${allPassed ? "font-semibold text-ok" : "text-muted"}`}
       >
         {allPassed
-          ? "3 pēc kārtas nokārtoti — tu esi gatavs!"
-          : "Nokārto 3 pēc kārtas — tad būsi gatavs eksāmenam."}
+          ? `${READY_LAST_EXAMS} pēc kārtas nokārtoti — tu esi gatavs!`
+          : `Nokārto ${READY_LAST_EXAMS} pēc kārtas — tad būsi gatavs eksāmenam.`}
       </p>
     </div>
   );
