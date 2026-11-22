@@ -349,3 +349,11 @@ export const loginEvents = pgTable(
   },
   (t) => [index("login_events_user_time_idx").on(t.userId, t.createdAt)],
 );
+
+/** Lietotāja pagrieziena punkti: kad pirmo reizi sasniegts 70 % progresa (no tā brīža skaita izmēģinājuma eksāmenus). */
+export const userMilestones = pgTable("user_milestones", {
+  userId: text("user_id")
+    .primaryKey()
+    .references(() => user.id, { onDelete: "cascade" }),
+  examsUnlockedAt: timestamp("exams_unlocked_at", { withTimezone: true }).notNull(),
+});

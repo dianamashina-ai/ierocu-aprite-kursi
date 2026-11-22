@@ -9,14 +9,12 @@ type Dashboard = Awaited<ReturnType<typeof getDashboard>>;
  * Pieslēgtiem lietotājiem: kopējais progress (apgūto jautājumu daļa, kā moduļu kartītēs)
  * un maza kartīte ar pēdējiem READY_LAST_EXAMS izmēģinājuma eksāmeniem.
  */
-/** No kāda kopējā progresa sākumlapā rādām izmēģinājuma eksāmenu kartīti (agrāki mēģinājumi to neieslēdz). */
-export const EXAM_CARD_FROM_PERCENT = 70;
-
 export function ProgressSummary({ d }: { d: Dashboard }) {
   const pct = d.totalQuestions
     ? Math.round((d.masteredQuestions / d.totalQuestions) * 100)
     : 0;
-  const showExams = pct >= EXAM_CARD_FROM_PERCENT;
+  // kartīte parādās, kad pirmo reizi sasniegti 70 % (EXAMS_UNLOCK_PERCENT), un paliek
+  const showExams = d.examsUnlocked;
   const ready = d.readiness.ready;
   // pēdējie mēģinājumi: vecākais pa kreisi, jaunākais pa labi
   const last = d.exams.slice(0, READY_LAST_EXAMS).reverse();

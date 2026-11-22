@@ -93,4 +93,33 @@ describe.skipIf(!url)("progress un eksāmens (DB)", async () => {
     expect(await svc.getExamAttempt("cits", id)).toBeNull();
     vi.useRealTimers();
   });
+
+  it("eksāmeni skaitās tikai pēc 70 % sasniegšanas; gatavība — 5 pēc kārtas pēc tam", async () => {
+    const V = "user-unlock";
+    await db.insert(schema.user).values({ id: V, name: "V", email: "v@example.com" });
+    const ex = (i: number, at: Date, passed: boolean) => ({
+      id: `ex-${V}-${i}`, userId: V, status: "finished" as const, questionIds: [1], seed: "s", durationMinutes: 40, passPercent: 90,
+      startedAt: at, finishedAt: at, correctCount: passed ? 40 : 0, passed,
+    });
+    // agrs “paskatīšanās” eksāmens
+    await db.insert(schema.examAttempts).values(ex(0, new Date(t0.getTime() - DAY), false));
+    let d = await svc.getDashboard(V, t0);
+    expect(d.examsUnlocked).toBe(false);
+    expect(d.exams).toHaveLength(0);
+
+    // 361 no 515 apgūti (70 %) → nākamā atbilde piefiksē brīdi
+    const ids = [...byId.keys()].filter((id) => id !== 2).slice(0, 361);
+    await db.insert(schema.questionProgress).values(
+      ids.map((questionId) => ({ userId: V, questionId, attempts: 2, correctCount: 2, lastCorrect: true, mastered: true, streak: 2, lastAnsweredAt: t0 })),
+    );
+    await svc.recordAnswer(V, 2, wrongKey(2), "practice", { now: t0 });
+    d = await svc.getDashboard(V, t0);
+    expect(d.examsUnlocked).toBe(true);
+    expect(d.exams).toHaveLength(0); // agrais eksāmens neskaitās
+
+    for (let i = 1; i <= 5; i++) await db.insert(schema.examAttempts).values(ex(i, new Date(t0.getTime() + i * 60_000), true));
+    d = await svc.getDashboard(V, new Date(t0.getTime() + DAY));
+    expect(d.exams).toHaveLength(5);
+    expect(d.readiness.examsPassed).toBe(5);
+  });
 });

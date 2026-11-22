@@ -6,10 +6,29 @@ import { DEFAULT_EXAM_CONFIG, type ExamConfig } from "@/config/exam";
 import { nextReviewState } from "./review";
 import { nextMastery } from "./mastery";
 import { currentStreak, rigaDay } from "./streak";
-import { readiness } from "./readiness";
+import { EXAMS_UNLOCK_PERCENT, readiness } from "./readiness";
 import { sampleExam } from "@/lib/exam/sample";
 
-const { answers, questionProgress, questions, questionOptions, topics, modules, examAttempts, appSettings } = schema;
+const { answers, questionProgress, questions, questionOptions, topics, modules, examAttempts, appSettings, userMilestones } = schema;
+
+let totalQuestionsCache: number | null = null;
+
+/** Ja lietotājs pirmo reizi sasniedzis EXAMS_UNLOCK_PERCENT progresa — piefiksē brīdi. */
+async function maybeUnlockExams(t: Tx, userId: string, now: Date) {
+  const [has] = await t.select({ u: userMilestones.userId }).from(userMilestones).where(eq(userMilestones.userId, userId));
+  if (has) return;
+  if (totalQuestionsCache === null) {
+    const [r] = await t.select({ n: sql<number>`count(*)::int` }).from(questions);
+    totalQuestionsCache = Number(r.n);
+  }
+  const [m] = await t
+    .select({ n: sql<number>`count(*)::int` })
+    .from(questionProgress)
+    .where(and(eq(questionProgress.userId, userId), eq(questionProgress.mastered, true)));
+  if (totalQuestionsCache > 0 && Math.round((Number(m.n) / totalQuestionsCache) * 100) >= EXAMS_UNLOCK_PERCENT) {
+    await t.insert(userMilestones).values({ userId, examsUnlockedAt: now }).onConflictDoNothing();
+  }
+}
 
 type Tx = Parameters<Parameters<typeof db.transaction>[0]>[0];
 type Mode = "practice" | "review" | "exam";
@@ -73,6 +92,7 @@ export async function recordAnswer(
         ...review,
       });
     }
+    await maybeUnlockExams(t, userId, now);
     return { isCorrect, correctKey: q.correctKey };
   };
   return tx ? run(tx) : db.transaction(run);
@@ -249,7 +269,7 @@ function lastDays(days: string[], today: string, n: number) {
 }
 
 export async function getDashboard(userId: string, now = new Date()) {
-  const [mods, tops, perTopic, progressByTopic, dayRows, due, history] = await Promise.all([
+  const [mods, tops, perTopic, progressByTopic, dayRows, due, allHistory, milestone] = await Promise.all([
     db.select().from(modules).orderBy(asc(modules.order)),
     db.select().from(topics).orderBy(asc(topics.order)),
     db.select({ topicId: questions.topicId, n: sql<number>`count(*)::int` }).from(questions).groupBy(questions.topicId),
@@ -270,7 +290,11 @@ export async function getDashboard(userId: string, now = new Date()) {
       .where(and(eq(answers.userId, userId), gt(answers.answeredAt, new Date(now.getTime() - 400 * 86_400_000)))),
     getDueReviewIds(userId, now),
     getExamHistory(userId, 10),
+    db.select({ at: userMilestones.examsUnlockedAt }).from(userMilestones).where(eq(userMilestones.userId, userId)),
   ]);
+  // Eksāmeni skaitās tikai pēc tam, kad sasniegts EXAMS_UNLOCK_PERCENT progresa (agrāki “paskatīšanās” mēģinājumi neskaitās)
+  const examsUnlockedAt = milestone[0]?.at ?? null;
+  const history = examsUnlockedAt ? allHistory.filter((e) => e.finishedAt && e.finishedAt > examsUnlockedAt) : [];
 
   const totals = new Map(perTopic.map((r) => [r.topicId, r.n]));
   const prog = new Map(progressByTopic.map((r) => [r.topicId, r]));
@@ -317,7 +341,9 @@ export async function getDashboard(userId: string, now = new Date()) {
     week: lastDays(dayRows.map((r) => r.day), rigaDay(now), 7),
     dueReviews: due.length,
     weakTopics,
+    /** izmēģinājuma eksāmeni kopš EXAMS_UNLOCK_PERCENT sasniegšanas (jaunākais pirmais) */
     exams: history,
+    examsUnlocked: examsUnlockedAt !== null,
     readiness: readiness({
       recentExams: history.map((e) => ({ passed: Boolean(e.passed) })),
       topicPercents: topicStats.map((t) => ({ topicId: t.id, percent: t.percent })),

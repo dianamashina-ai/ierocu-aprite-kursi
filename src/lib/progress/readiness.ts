@@ -1,5 +1,7 @@
 export const READY_TOPIC_PERCENT = 80;
 export const READY_LAST_EXAMS = 5;
+/** No šī kopējā progresa (apgūto jautājumu %) sākam skaitīt izmēģinājuma eksāmenus un rādām to kartīti. */
+export const EXAMS_UNLOCK_PERCENT = 70;
 
 export interface ReadinessInput {
   /** Pēdējie pabeigtie izmēģinājuma eksāmeni, jaunākais pirmais */
