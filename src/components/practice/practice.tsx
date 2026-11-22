@@ -167,7 +167,7 @@ export function Practice({
     const correct = ids.filter((id) => results[id]).length;
     const wrongIdx = pool.filter((i) => !results[questions[i].id]);
     return (
-      <div className="focus-mode pb-12">
+      <div className="focus-mode flex min-h-dvh flex-col pb-12">
         {/* rezultāti paliek fokusa režīmā: sava galvene ar krustiņu */}
         <div className="sticky top-0 z-10 mx-[calc(50%-50vw)] mb-8 border-b border-line bg-white/95 backdrop-blur">
           <div className="flex items-center justify-between gap-4 p-4">
@@ -185,7 +185,7 @@ export function Practice({
         </div>
         <section
           aria-labelledby="summary-h"
-          className="mx-auto max-w-2xl rounded-2xl border border-line bg-white p-6 sm:p-8"
+          className="mx-auto my-auto w-full max-w-2xl bg-white px-2 py-6 text-center sm:px-8"
         >
           <h2 id="summary-h" className="text-2xl font-semibold">
             {t("summaryHeading")}
@@ -215,7 +215,7 @@ export function Practice({
             </p>
           )}
           {wrongIdx.length === 0 && <p className="mt-4 text-ok">{t("allCorrect")}</p>}
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
             {wrongIdx.length > 0 && (
               <button
                 type="button"
@@ -272,9 +272,6 @@ export function Practice({
               <span className="text-sm text-muted">
                 {t("progress", { current: pos + 1, total: pool.length })}
               </span>
-              <span className="text-sm tabular-nums text-muted">
-                Nr. {q.id}
-              </span>
             </div>
             <div
               className="mt-3 h-1 overflow-hidden rounded-full bg-line"
@@ -313,9 +310,7 @@ export function Practice({
               <p className="mt-1.5 text-muted">{t("outdatedDisclaimer")}</p>
             </aside>
           )}
-          {pool.length === 1 && (
-            <p className="text-sm tabular-nums text-muted">Nr. {q.id}</p>
-          )}
+          <p className="mb-1.5 text-sm tabular-nums text-muted">Nr. {q.id}</p>
           <h2
             id={`q-${q.id}`}
             className="text-xl font-semibold leading-snug tracking-tight sm:text-2xl"

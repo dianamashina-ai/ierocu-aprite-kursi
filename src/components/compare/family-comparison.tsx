@@ -45,7 +45,7 @@ export function FamilyComparison({
 }) {
   return (
     <>
-      <blockquote className="rounded-xl border-l-4 border-accent bg-white px-5 py-4 text-lg font-semibold" lang="lv">
+      <blockquote className="text-lg font-semibold leading-snug" lang="lv">
         {sharedText}
       </blockquote>
 

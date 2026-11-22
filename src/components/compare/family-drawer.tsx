@@ -50,7 +50,7 @@ export function FamilyDrawer({ familyId, from, label }: { familyId: number; from
       {open && (
         <div className="fixed inset-0 z-50" role="dialog" aria-modal="true" aria-labelledby="family-drawer-h">
           <button type="button" aria-label="Aizvērt" onClick={() => setOpen(false)} className="absolute inset-0 bg-ink/40 motion-safe:animate-[fade-in_150ms_ease-out]" />
-          <div className="absolute inset-y-0 right-0 flex w-full max-w-2xl flex-col bg-surface shadow-[-24px_0_60px_-24px_rgba(0,0,0,0.35)] motion-safe:animate-[slide-in-right_200ms_ease-out]">
+          <div className="absolute inset-y-0 right-0 flex w-full max-w-2xl flex-col bg-white shadow-[-24px_0_60px_-24px_rgba(0,0,0,0.35)] motion-safe:animate-[slide-in-right_200ms_ease-out]">
             <div className="flex items-center justify-between gap-4 border-b border-line bg-white p-4">
               <h2 id="family-drawer-h" className="font-semibold">
                 {data?.heading ?? "Līdzīgie jautājumi"}

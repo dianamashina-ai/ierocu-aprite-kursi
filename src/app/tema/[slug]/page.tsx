@@ -48,10 +48,7 @@ export default async function TopicPage({
     (await searchParams).cilne === "jautajumi" ? "questions" : "lesson";
   if (!data) notFound();
   const { topic, questions, prev, next } = data;
-  const [t, tc] = await Promise.all([
-    getTranslations("topic"),
-    getTranslations("common"),
-  ]);
+  const t = await getTranslations("topic");
   const lesson = readLesson(topic.id);
   const userId = (await getCurrentUser())?.id;
   requireSignUpForFreeModule(userId, topic.module.id, `/tema/${topicSlug(topic.id)}`);
@@ -65,7 +62,6 @@ export default async function TopicPage({
   const lessonBody =
     lesson && !allowed ? lessonTeaser(lesson.body) : lesson?.body;
 
-  const pad = (n: number) => String(n).padStart(2, "0");
   const headings = lesson && allowed ? lessonHeadings(lesson.body) : [];
   const siblings = topic.module.topics;
 
@@ -75,7 +71,7 @@ export default async function TopicPage({
         items={[
           { href: "/#moduli", label: "Moduļi" },
           { href: `/modulis/${topic.module.id}`, label: topic.module.titleLv },
-          { label: tc("topic", { id: topic.id }) },
+          { label: topic.titleLv },
         ]}
       />
 
@@ -86,7 +82,7 @@ export default async function TopicPage({
             className="sticky top-6 border-r border-line pr-6"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-              {pad(topic.module.order)} / {topic.module.titleLv}
+              Tēmas
             </p>
             <ol className="mt-5 space-y-1">
               {siblings.map((s, i) => {
@@ -116,7 +112,6 @@ export default async function TopicPage({
 
         <article className="min-w-0 max-w-3xl">
           <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-            <span>Tēma {topic.id}</span>
             {lesson && (
               <span className="normal-case tracking-normal">~{lesson.minutes} min lasīšanai</span>
             )}
