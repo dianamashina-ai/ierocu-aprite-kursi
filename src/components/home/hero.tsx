@@ -53,13 +53,13 @@ export function Hero({ stats }: { stats: Stats }) {
 
       <section aria-label="Kurss skaitļos" className="bg-white">
         <div className="mx-auto max-w-6xl px-4 pb-14 sm:px-6 lg:pb-20">
-          <dl className="grid grid-cols-2 rounded-2xl bg-accent text-white lg:grid-cols-4">
+          <dl className="grid grid-cols-2 rounded-2xl bg-surface lg:grid-cols-4">
             {items.map(([value, label], i) => (
-              <div key={label} className={`border-white/20 px-5 py-5 sm:px-7 lg:py-6 ${["", "border-l", "border-t lg:border-l lg:border-t-0", "border-l border-t lg:border-t-0"][i]}`}>
+              <div key={label} className={`border-line px-5 py-5 sm:px-7 lg:py-6 ${["", "border-l", "border-t lg:border-l lg:border-t-0", "border-l border-t lg:border-t-0"][i]}`}>
                 <dt className="sr-only">{label}</dt>
                 <dd>
                   <span className="block whitespace-nowrap text-3xl font-bold tabular-nums tracking-tight sm:text-4xl">{value}</span>
-                  <span className="mt-1 block text-sm text-white/80">{label}</span>
+                  <span className="mt-1 block text-sm text-muted">{label}</span>
                 </dd>
               </div>
             ))}
