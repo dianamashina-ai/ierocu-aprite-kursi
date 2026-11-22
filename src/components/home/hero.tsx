@@ -22,7 +22,7 @@ export function Hero({ stats }: { stats: Stats }) {
     [`${stats.examMinutes} min`, `eksāmena simulācija — ${stats.examQuestions} jautājumi`],
   ];
   return (
-    <section className="border-b border-line bg-white">
+    <section className="bg-white">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:py-20">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">Sagatavošanās eksāmenam</p>
@@ -67,7 +67,7 @@ export function SampleQuestion({ q }: { q: PracticeQuestion }) {
   const letters = "ABCDEF";
   return (
     <figure className="relative">
-      <div aria-hidden="true" className="absolute -inset-3 -z-0 rounded-[28px] bg-surface" />
+      <div aria-hidden="true" className="absolute -inset-3 -z-0 rounded-[28px] bg-white" />
       <div className="relative rounded-2xl border border-line bg-white p-5 shadow-[0_24px_60px_-28px_rgba(34,34,34,0.35)] sm:p-6">
         <div className="flex items-center justify-between text-xs text-muted">
           <span className="font-semibold uppercase tracking-[0.16em]">Treniņš · 1. modulis</span>

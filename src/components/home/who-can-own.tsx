@@ -12,27 +12,34 @@ const ITEMS: { title: string; text: string; highlight?: boolean }[] = [
 
 export function WhoCanOwn() {
   return (
-    <section id="prasibas" aria-labelledby="who-h" className="scroll-mt-6 border-t border-line bg-white">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20 lg:py-24">
-        <div>
+    <section id="prasibas" aria-labelledby="who-h" className="scroll-mt-6 bg-surface">
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+        <div className="max-w-3xl">
           <h2 id="who-h" className="text-4xl font-semibold tracking-tight sm:text-5xl">Kas var kļūt par ieroča īpašnieku</h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">Galvenās prasības pirms pirmā šaujamieroča iegādes.</p>
         </div>
-        <div>
-          <ul className="divide-y divide-line border-y border-line">
-            {ITEMS.map(({ title, text, highlight }) => (
-              <li key={title} className="flex gap-4 py-4">
-                <Check aria-hidden="true" className={`mt-0.5 size-5 shrink-0 ${highlight ? "text-accent" : "text-ok"}`} strokeWidth={2.5} />
-                <p className={highlight ? "font-semibold text-accent-strong" : ""}>
-                  <span className="font-semibold">{title}</span> — {text}
-                </p>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-4 text-xs text-muted">
-            Avoti: Ieroču aprites likums, 14., 23., 27. un 28. pants; MK noteikumi Nr. 211, 3.1. apakšpunkts. Medību ieročiem eksāmena vietā vajadzīga mednieka apliecība.
-          </p>
-        </div>
+        <ul className="mt-10 grid gap-3 sm:grid-cols-2 sm:gap-4">
+          {ITEMS.map(({ title, text, highlight }) => (
+            <li
+              key={title}
+              className={`flex gap-4 rounded-2xl p-5 ${highlight ? "bg-accent text-white" : "bg-white"}`}
+            >
+              <span
+                aria-hidden="true"
+                className={`flex size-8 shrink-0 items-center justify-center rounded-full ${highlight ? "bg-white/15 text-white" : "bg-ok-soft text-ok"}`}
+              >
+                <Check className="size-4" strokeWidth={2.75} />
+              </span>
+              <div>
+                <p className="font-semibold">{title}</p>
+                <p className={`mt-1 text-[15px] leading-relaxed ${highlight ? "text-white/85" : "text-muted"}`}>{text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-5 text-xs text-muted">
+          Avoti: Ieroču aprites likums, 14., 23., 27. un 28. pants; MK noteikumi Nr. 211, 3.1. apakšpunkts. Medību ieročiem eksāmena vietā vajadzīga mednieka apliecība.
+        </p>
       </div>
     </section>
   );

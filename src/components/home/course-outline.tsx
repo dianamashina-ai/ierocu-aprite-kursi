@@ -15,7 +15,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
 /** Sākumlapas programma viesiem: moduļi akordeonā ar aprakstu un tēmām. */
 export function CourseOutline({ modules, totals }: { modules: OutlineModule[]; totals: { modules: number; topics: number } }) {
   return (
-    <section id="programma" aria-labelledby="programma-h" className="scroll-mt-6 border-t border-line bg-white">
+    <section id="programma" aria-labelledby="programma-h" className="scroll-mt-6 bg-white">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20 lg:py-24">
         <div className="lg:sticky lg:top-8 lg:self-start">
           <h2 id="programma-h" className="text-4xl font-semibold tracking-tight sm:text-5xl">Ko mācīsies</h2>
