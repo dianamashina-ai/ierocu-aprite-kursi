@@ -43,7 +43,7 @@ const ITEMS = [
 
 export function WhoCanOwn() {
   return (
-    <section aria-labelledby="who-h" className="bg-white">
+    <section id="prasibas" aria-labelledby="who-h" className="scroll-mt-6 bg-white">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
         <div className="max-w-3xl">
           <h2 id="who-h" className="text-4xl font-semibold tracking-tight sm:text-5xl">Kas var kļūt par ieroča īpašnieku</h2>

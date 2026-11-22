@@ -1,3 +1,4 @@
+import { courseIncluded } from "@/lib/billing/included";
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth/session";
 import { hasFullAccess } from "@/lib/billing/access";
@@ -23,12 +24,7 @@ export default async function BuyPage() {
   const price = formatEuro(COURSE_PRODUCT.amountCents);
   const { vatCents } = splitVat(COURSE_PRODUCT.amountCents, COURSE_PRODUCT.vatRate);
 
-  const included = [
-    `Visi ${course.totals.modules} moduļi un ${course.totals.topics} īsas nodarbības`,
-    `Visi ${course.totals.questions} oficiālie jautājumi ar skaidrojumiem un atsaucēm uz likumu`,
-    "Neierobežoti izmēģinājuma eksāmeni (40 jautājumi, 40 minūtes)",
-    "Treniņš ar jautājumiem, kuros kļūdies",
-  ];
+  const included = courseIncluded(course.totals, { questions: 40, minutes: 40 });
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:py-12">

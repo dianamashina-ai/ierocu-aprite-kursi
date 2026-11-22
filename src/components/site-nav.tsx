@@ -132,6 +132,7 @@ export function SiteNav({
                     href={it.href}
                     aria-current={isActive(path, it) ? "page" : undefined}
                     className={mobileCls(isActive(path, it))}
+                    onClick={() => setOpen(false)}
                   >
                     {it.label}
                   </Link>

@@ -7,13 +7,22 @@ import { SiteNav, type NavItem } from "./site-nav";
 export async function SiteHeader() {
   const user = await getCurrentUser();
   const access = await hasFullAccess(user?.id);
-  const items: NavItem[] = [
-    { href: "/", label: "Mācīties", match: ["/modulis", "/tema", "/jautajums", "/saime"] },
-    ...(user ? [{ href: "/trenins", label: "Trenēties" }] : []),
-    { href: "/eksamens", label: "Eksāmens" },
-    { href: "/meklet", label: "Meklēt" },
-    ...(isAdmin(user) ? [{ href: "/admin", label: "Admin", match: ["/labojumi"] }] : []),
-  ];
+  // Viesiem — sākumlapas sadaļas; pieslēgtiem — mācību rīki
+  const items: NavItem[] = user
+    ? [
+        { href: "/", label: "Mācīties", match: ["/modulis", "/tema", "/jautajums", "/saime"] },
+        { href: "/trenins", label: "Trenēties" },
+        { href: "/eksamens", label: "Eksāmens" },
+        { href: "/meklet", label: "Meklēt" },
+        ...(isAdmin(user) ? [{ href: "/admin", label: "Admin", match: ["/labojumi"] }] : []),
+      ]
+    : [
+        { href: "/#ka-notiek", label: "Kā notiek" },
+        { href: "/#prasibas", label: "Prasības" },
+        { href: "/#programma", label: "Programma" },
+        { href: "/#cena", label: "Cena" },
+        { href: "/#buj", label: "BUJ" },
+      ];
 
   return (
     <header className="site-header sticky top-0 z-40 border-b border-line bg-white print:hidden">

@@ -10,6 +10,9 @@ import { Hero } from "@/components/home/hero";
 import { CourseOutline } from "@/components/home/course-outline";
 import { WhoCanOwn } from "@/components/home/who-can-own";
 import { Faq } from "@/components/home/faq";
+import { HowItWorks } from "@/components/home/how-it-works";
+import { Pricing } from "@/components/home/pricing";
+import { courseIncluded } from "@/lib/billing/included";
 import { readLesson } from "@/lib/content/lessons";
 import { getPracticeQuestion } from "@/lib/content/queries";
 import { getDashboard, getExamConfig } from "@/lib/progress/service";
@@ -52,6 +55,12 @@ export default async function HomePage() {
               examQuestions: examCfg.questionCount,
             }}
           />
+          <HowItWorks
+            topics={course.totals.topics}
+            questions={course.totals.questions}
+            examQuestions={examCfg.questionCount}
+            examMinutes={examCfg.durationMinutes}
+          />
           <WhoCanOwn />
           <CourseOutline
             totals={course.totals}
@@ -60,6 +69,7 @@ export default async function HomePage() {
               topics: m.topics.map((t) => ({ id: t.id, titleLv: t.titleLv, questionCount: t.questionCount, minutes: readLesson(t.id)?.minutes ?? null })),
             }))}
           />
+          <Pricing included={courseIncluded(course.totals, { questions: examCfg.questionCount, minutes: examCfg.durationMinutes })} />
           <Faq
             totalQuestions={course.totals.questions}
             exam={{
