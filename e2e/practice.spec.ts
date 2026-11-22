@@ -7,8 +7,9 @@ test("ceļš: sākums → modulis → tēma → treniņš", async ({ page }) => 
   await expect(page.getByRole("link", { name: /Sākt bez maksas/ }).first()).toBeVisible();
   await page.locator("#programma summary", { hasText: "Ierocis: uzbūve un darbība" }).click();
   await expect(page.locator("#programma").getByText("Pamatjēdzieni un darbības princips")).toBeVisible();
-  await page.getByRole("link", { name: /Atvērt moduli/ }).first().click();
-  await expect(page).toHaveURL(/\/modulis\/M1$/);
+  await page.locator("#programma details").first().getByRole("link", { name: /Sākt bez maksas/ }).click();
+  await expect(page).toHaveURL(/\/registreties$/);
+  await page.goto("/modulis/M1");
   await page.getByRole("link", { name: /Pamatjēdzieni un darbības princips/ }).click();
   await expect(page).toHaveURL(/\/tema\/1-1$/);
   await page.getByRole("link", { name: "Trenēt tēmas jautājumus" }).click();

@@ -39,8 +39,8 @@ export function Hero({ stats }: { stats: Stats }) {
               <Link href="/registreties" className="btn-primary gap-2">
                 Sākt bez maksas <ArrowUpRight aria-hidden="true" className="size-4" />
               </Link>
-              <Link href="/tema/1-1/trenins" className="inline-flex min-h-12 items-center gap-2 font-semibold hover:text-accent">
-                Izmēģināt jautājumus <ArrowRight aria-hidden="true" className="size-4" />
+              <Link href="/iegadaties" className="inline-flex min-h-12 items-center gap-2 font-semibold hover:text-accent">
+                Iegādāties pilnu kursu <ArrowRight aria-hidden="true" className="size-4" />
               </Link>
             </div>
             <p className="mt-5 max-w-md text-sm text-muted">
