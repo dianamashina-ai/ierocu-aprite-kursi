@@ -216,7 +216,7 @@ export default async function HomePage() {
                         "Pieejams"
                       )
                     ) : percent === 0 ? (
-                      answered > 0 ? `Iesākts · atbildēti ${answered} no ${m.questionCount}` : "Vēl nav sākts"
+                      answered > 0 ? "Iesākts" : "Vēl nav sākts"
                     ) : (
                       `Apgūti ${percent} %`
                     )}

@@ -1,5 +1,6 @@
-import { Check, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { highlightParts } from "@/lib/content/highlight";
+import { uppercaseLetterRefs } from "@/lib/quiz/shuffle";
 
 export interface QuestionCardData {
   id: number;
@@ -42,17 +43,18 @@ export function QuestionCard({ q, allowed, stems, meta }: { q: QuestionCardData;
         </p>
         {meta}
         <ul className="mt-2 space-y-1.5" lang="lv">
-          {q.options.map((o) => {
+          {q.options.map((o, i) => {
             const correct = allowed && o.key === q.correctKey;
             return (
-              <li key={o.key} className={`flex gap-2 rounded-lg px-3 py-2 text-[15px] ${correct ? "bg-ok-soft text-ink" : "bg-surface text-muted"}`}>
-                {correct ? (
-                  <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-ok" strokeWidth={3} />
-                ) : (
-                  <span aria-hidden="true" className="mt-2 size-1.5 shrink-0 rounded-full bg-muted/40" />
-                )}
+              <li key={o.key} className={`flex gap-2.5 rounded-lg px-3 py-2 text-[15px] ${correct ? "bg-ok-soft text-ink" : "bg-surface text-muted"}`}>
+                <span
+                  aria-hidden="true"
+                  className={`mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold ${correct ? "bg-ok text-white" : "bg-white text-ink"}`}
+                >
+                  {"ABCDEF"[i]}
+                </span>
                 <span>
-                  <Marked text={o.text} stems={stems} />
+                  <Marked text={uppercaseLetterRefs(o.text)} stems={stems} />
                   {correct && <span className="sr-only"> (pareizā atbilde)</span>}
                 </span>
               </li>
