@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Check, ChevronDown, Lock } from "lucide-react";
 import { plural } from "@/lib/format";
+import { ACTION_CARD_CLASS } from "@/components/page-header";
 
 export interface BuilderModule {
   id: string;
@@ -69,7 +70,7 @@ export function TrainingBuilder({ modules }: { modules: BuilderModule[] }) {
   };
 
   return (
-    <div className="max-w-xl rounded-2xl border border-line bg-white p-5 sm:p-6">
+    <div className={ACTION_CARD_CLASS}>
       {/* Moduļi */}
       <div ref={boxRef} className="relative">
         <p id="moduli-l" className="sr-only">Moduļi</p>

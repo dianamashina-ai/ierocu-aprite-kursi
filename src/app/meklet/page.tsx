@@ -1,3 +1,4 @@
+import { PageHeader, PAGE_CLASS, ACTION_CARD_CLASS } from "@/components/page-header";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { getCourseOverview, getQuestionCards, searchQuestions, searchStems, topicSlug } from "@/lib/content/queries";
@@ -23,9 +24,9 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
   const stems = searchStems(query);
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 sm:py-12">
-      <h1 className="text-3xl font-semibold">{t("heading")}</h1>
-      <form action="/meklet" method="get" role="search" className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-end">
+    <div className={PAGE_CLASS}>
+      <PageHeader title={t("heading")} lead={t("lead")} />
+      <form action="/meklet" method="get" role="search" className={`${ACTION_CARD_CLASS} flex flex-col gap-3 sm:flex-row`}>
         <label className="flex-1">
           <span className="sr-only">{t("label")}</span>
           <input
@@ -34,14 +35,14 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
             defaultValue={query}
             placeholder={t("placeholder")}
             autoFocus={!query}
-            className="block min-h-12 w-full rounded-xl border border-line bg-white px-4 text-base placeholder:text-muted"
+            className="block min-h-12 w-full rounded-xl border border-line bg-surface px-4 text-base placeholder:text-muted"
           />
         </label>
         <button type="submit" className="btn-primary">{t("submit")}</button>
       </form>
 
       {results && (
-        <section className="mt-8" aria-live="polite">
+        <section className="mt-10 max-w-3xl" aria-live="polite">
           <p className="font-semibold">{t("results", { count: results.length })}</p>
           {results.length === 0 && <p className="mt-1 text-muted">{t("noResults")}</p>}
           {results.length === LIMIT && <p className="mt-1 text-sm text-muted">{t("limited", { count: LIMIT })}</p>}

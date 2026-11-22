@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { getContentVersion } from "@/lib/content/queries";
 import { SELLER } from "@/config/seller";
 import { getCurrentUser } from "@/lib/auth/session";
 
@@ -37,7 +36,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
 ];
 
 export async function SiteFooter() {
-  const [t, version, user] = await Promise.all([getTranslations("footer"), getContentVersion(), getCurrentUser()]);
+  const [t, user] = await Promise.all([getTranslations("footer"), getCurrentUser()]);
   const year = new Date().getFullYear();
 
   // Pieslēgtam lietotājam — kompakta kājene: saites, piegādātājs, satura versija
@@ -52,7 +51,7 @@ export async function SiteFooter() {
             <Link href="/kontakti" className="hover:text-ink">Kontakti</Link>
           </nav>
           <p>
-            © {year} {SELLER.name} · {t("contentVersion", { version })}
+            © {year} {SELLER.name}
           </p>
         </div>
       </footer>
@@ -102,7 +101,6 @@ export async function SiteFooter() {
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
             <Link href="/noteikumi" className="hover:text-ink">Noteikumi</Link>
             <Link href="/privatums" className="hover:text-ink">Privātums</Link>
-            <span>{t("contentVersion", { version })}</span>
           </div>
           <p className="text-sm text-muted">© {year} {SELLER.name}</p>
         </div>

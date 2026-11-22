@@ -88,6 +88,7 @@
   },
   "search": {
     "heading": "Meklēt jautājumus",
+    "lead": "Ieraksti jautājuma numuru vai vārdus no jautājuma vai atbildes — atradīsim visus jautājumus, kuros tie minēti.",
     "label": "Jautājuma numurs vai vārdi no teksta",
     "placeholder": "Jautājuma numurs vai vārdi, piem., 243",
     "submit": "Meklēt",

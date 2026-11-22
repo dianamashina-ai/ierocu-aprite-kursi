@@ -1,3 +1,4 @@
+import { PageHeader, PAGE_CLASS } from "@/components/page-header";
 import { requireUser } from "@/lib/auth/session";
 import { getCourseOverview } from "@/lib/content/queries";
 import { hasFullAccess, isFreeModule } from "@/lib/billing/access";
@@ -20,12 +21,9 @@ export default async function TrainingPage() {
   }));
 
   return (
-    <div className="page-white mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
-      <h1 className="text-4xl font-semibold tracking-tight">Trenēties</h1>
-      <p className="mt-3 max-w-2xl text-lg text-muted">Izvēlies moduļus un sāc treniņu. Pēc katras atbildes redzēsi skaidrojumu ar atsauci uz likumu.</p>
-      <div className="mt-8">
-        <TrainingBuilder modules={modules} />
-      </div>
+    <div className={PAGE_CLASS}>
+      <PageHeader title="Trenēties" lead="Izvēlies moduļus un sāc treniņu. Pēc katras atbildes redzēsi skaidrojumu ar atsauci uz likumu." />
+      <TrainingBuilder modules={modules} />
     </div>
   );
 }
