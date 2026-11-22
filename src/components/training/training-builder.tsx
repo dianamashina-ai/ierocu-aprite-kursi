@@ -49,7 +49,9 @@ export function TrainingBuilder({ modules }: { modules: BuilderModule[] }) {
   const totalMistakes = chosen.reduce((s, m) => s + m.mistakes, 0);
   const pool = chosen.reduce((s, m) => s + (mistakesOnly ? m.mistakes : m.questions), 0);
   const total = limit > 0 ? Math.min(limit, pool) : pool;
-  const allChosen = chosen.length === available.length && available.length > 0;
+  const hasLocked = available.length < modules.length;
+  // “Visi moduļi” — tikai ja visi kursa moduļi pieejami un izvēlēti
+  const allChosen = !hasLocked && chosen.length === available.length && available.length > 0;
   const summary =
     chosen.length === 0 ? "Izvēlies moduļus" : allChosen ? "Visi moduļi" : chosen.length === 1 ? `${String(chosen[0].order).padStart(2, "0")} ${chosen[0].title}` : `${chosen.length} moduļi`;
 
@@ -87,15 +89,19 @@ export function TrainingBuilder({ modules }: { modules: BuilderModule[] }) {
         </button>
         {open && (
           <div className="absolute inset-x-0 top-full z-30 mt-2 max-h-[60vh] overflow-y-auto rounded-xl border border-line bg-white p-1.5 shadow-[0_16px_40px_-12px_rgba(34,34,34,0.25)]">
-            <button
-              type="button"
-              onClick={() => setSelected(allChosen ? new Set() : new Set(available.map((m) => m.id)))}
-              className="flex min-h-11 w-full items-center gap-3 rounded-lg px-3 text-left font-semibold hover:bg-surface"
-            >
-              <Box on={allChosen} />
-              Visi moduļi
-            </button>
-            <div className="my-1 h-px bg-line" />
+            {!hasLocked && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setSelected(allChosen ? new Set() : new Set(available.map((m) => m.id)))}
+                  className="flex min-h-11 w-full items-center gap-3 rounded-lg px-3 text-left font-semibold hover:bg-surface"
+                >
+                  <Box on={allChosen} />
+                  Visi moduļi
+                </button>
+                <div className="my-1 h-px bg-line" />
+              </>
+            )}
             <ul role="listbox" aria-multiselectable="true" aria-label="Moduļi">
               {modules.map((m) => (
                 <li key={m.id} role="option" aria-selected={selected.has(m.id)} aria-disabled={m.locked}>
@@ -103,7 +109,7 @@ export function TrainingBuilder({ modules }: { modules: BuilderModule[] }) {
                     type="button"
                     disabled={m.locked}
                     onClick={() => toggle(m.id)}
-                    className="flex min-h-11 w-full items-center gap-3 rounded-lg px-3 text-left text-[15px] hover:bg-surface disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent"
+                    className="flex min-h-11 w-full items-center gap-3 rounded-lg px-3 text-left text-[15px] hover:bg-surface disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
                   >
                     <Box on={selected.has(m.id)} />
                     <span className="min-w-0 flex-1">

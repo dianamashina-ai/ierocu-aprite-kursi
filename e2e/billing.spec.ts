@@ -12,7 +12,7 @@ test("viesis: 1. modulis prasa reģistrāciju, pārējie slēgti", async ({ page
   await page.goto("/jautajums/176");
   await expect(page.getByRole("heading", { name: /Atbilde un skaidrojums pieejami/ })).toBeVisible();
   await page.goto("/eksamens");
-  await expect(page.getByRole("link", { name: "Iegūt pilnu piekļuvi" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Iegādāties pilnu kursu" })).toBeVisible();
 });
 
 test("pirkums: forma prasa piekrišanu → testa maksājums → piekļuve un rēķins", async ({ page }) => {

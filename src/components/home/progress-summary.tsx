@@ -117,12 +117,14 @@ export function ProgressSummary({
           <p className="mt-1.5 text-sm text-white/70">
             Vēl {d.modules.length - free.length} moduļi, {d.totalQuestions - total} jautājumi ar skaidrojumiem un izmēģinājuma eksāmens.
           </p>
-          <Link
-            href="/iegadaties"
-            className="mt-4 inline-flex min-h-11 items-center justify-center gap-2 self-start rounded-xl bg-white px-4 text-sm font-semibold text-ink transition-colors hover:bg-white/90 lg:mt-auto"
-          >
-            Iegādāties pilnu kursu <ArrowRight aria-hidden="true" className="size-4" />
-          </Link>
+          <div className="mt-auto pt-5">
+            <Link
+              href="/iegadaties"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-white px-4 text-sm font-semibold text-ink transition-colors hover:bg-white/90"
+            >
+              Iegādāties pilnu kursu <ArrowRight aria-hidden="true" className="size-4" />
+            </Link>
+          </div>
         </div>
       )}
 
