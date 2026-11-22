@@ -57,6 +57,8 @@ export function Practice({
   const [pool, setPool] = useState<number[]>(() =>
     shuffledIndexes(questions.length, seed, shuffleQuestions),
   );
+  /** treniņš ar vairākiem jautājumiem (arī tad, ja kļūdu atkārtojumā palicis viens) — fokusa režīms */
+  const multi = questions.length > 1;
   const [pos, setPos] = useState(0);
   const [selected, setSelected] = useState<string | null>(null); // oriģinālais burts
   const [results, setResults] = useState<Record<number, boolean>>({});
@@ -134,7 +136,7 @@ export function Practice({
       } else if (
         e.key === "Enter" &&
         answered &&
-        pool.length > 1 &&
+        multi &&
         target.tagName !== "BUTTON" &&
         target.tagName !== "A"
       ) {
@@ -144,7 +146,7 @@ export function Practice({
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [shown, answered, choose, next, phase, pool.length]);
+  }, [shown, answered, choose, next, phase, pool.length, multi]);
 
   const startRound = (indexes: number[]) => {
     const r = round + 1;
@@ -249,10 +251,10 @@ export function Practice({
   return (
     <div
       className={
-        pool.length > 1 ? "has-sticky-footer focus-mode pb-28" : undefined
+        multi ? "has-sticky-footer focus-mode pb-28" : undefined
       }
     >
-      {pool.length > 1 && (
+      {multi && (
         <div className="sticky top-0 z-10 mx-[calc(50%-50vw)] mb-8 border-b border-line bg-white/95 backdrop-blur">
           <div className="p-4">
             {/* fokusa režīma galvene (vietnes izvēlne paslēpta): virsraksts un krustiņš */}
@@ -430,7 +432,7 @@ export function Practice({
             )}
           </div>
 
-          {pool.length === 1 ? (
+          {!multi ? (
             answered && (
               <div className="mt-4">
                 <button
