@@ -166,7 +166,22 @@ export function Practice({
     const correct = ids.filter((id) => results[id]).length;
     const wrongIdx = pool.filter((i) => !results[questions[i].id]);
     return (
-      <>
+      <div className="focus-mode pb-12">
+        {/* rezultāti paliek fokusa režīmā: sava galvene ar krustiņu */}
+        <div className="sticky top-0 z-10 mx-[calc(50%-50vw)] mb-8 border-b border-line bg-white/95 backdrop-blur">
+          <div className="flex items-center justify-between gap-4 p-4">
+            <span className="font-semibold">
+              {mode === "review" ? t("titleReview") : t("titlePractice")}
+            </span>
+            <Link
+              href={exitHref ?? topicHref ?? "/"}
+              aria-label={t("exit")}
+              className="-mr-2 inline-flex size-10 items-center justify-center rounded-lg text-muted hover:bg-accent-soft hover:text-ink"
+            >
+              <X aria-hidden="true" className="size-5" />
+            </Link>
+          </div>
+        </div>
         <section
           aria-labelledby="summary-h"
           className="mx-auto max-w-2xl rounded-2xl border border-line bg-white p-6 sm:p-8"
@@ -239,7 +254,7 @@ export function Practice({
           </div>
         </section>
         {upsell && <div className="mx-auto mt-6 max-w-2xl">{upsell}</div>}
-      </>
+      </div>
     );
   }
 
