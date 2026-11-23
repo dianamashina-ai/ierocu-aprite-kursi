@@ -108,3 +108,11 @@ html {
   from { width: 0; }
   to { width: 100%; }
 }
+
+/* Horizontāls slīdnis bez redzamas ritjoslas (cenu kartītes telefonā) */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

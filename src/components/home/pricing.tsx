@@ -32,8 +32,8 @@ export function Pricing({ included }: { included: string[] }) {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-5 lg:grid-cols-3">
-          <article className="flex flex-col rounded-2xl bg-accent p-6 text-white sm:p-8">
+        <div className="no-scrollbar -mx-4 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 px-4 pb-2 sm:-mx-6 sm:scroll-px-6 sm:px-6 lg:mx-0 lg:grid lg:snap-none lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0">
+          <article className="flex w-[85%] max-w-sm shrink-0 snap-start flex-col rounded-2xl lg:w-auto lg:max-w-none bg-accent p-6 text-white sm:p-8">
             <h3 className="text-sm text-white/70">{COURSE_PRODUCT.title}</h3>
             <p className="mt-2 text-5xl font-bold tracking-tight tabular-nums">{formatEuro(COURSE_PRODUCT.amountCents)}</p>
             <p className="mt-2 text-sm text-white/70">Vienreizējs maksājums, bez abonementa un bez termiņa.</p>
@@ -48,7 +48,7 @@ export function Pricing({ included }: { included: string[] }) {
             </div>
           </article>
 
-          <article className="flex flex-col rounded-2xl bg-ink p-6 text-white sm:p-8">
+          <article className="flex w-[85%] max-w-sm shrink-0 snap-start flex-col rounded-2xl lg:w-auto lg:max-w-none bg-ink p-6 text-white sm:p-8">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h3 className="text-sm text-white/70">{BUNDLE_PRODUCT.title}</h3>
               <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">Ietaupi {formatEuro(saving)}</span>
@@ -67,7 +67,7 @@ export function Pricing({ included }: { included: string[] }) {
             </div>
           </article>
 
-          <article className="flex flex-col rounded-2xl border border-line bg-white p-6 sm:p-8">
+          <article className="flex w-[85%] max-w-sm shrink-0 snap-start flex-col rounded-2xl lg:w-auto lg:max-w-none border border-line bg-white p-6 sm:p-8">
             <h3 className="text-sm text-muted">{LESSON_PRODUCT.title}</h3>
             <p className="mt-2 text-5xl font-bold tracking-tight tabular-nums">{formatEuro(LESSON_PRODUCT.amountCents)}</p>
             <p className="mt-2 text-sm text-muted">Mūsu šautuvē ar sertificētu instruktoru.</p>
