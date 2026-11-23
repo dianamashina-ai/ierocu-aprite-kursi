@@ -94,7 +94,7 @@ export function HowItWorksShowcase({
         </ol>
       </div>
 
-      <div ref={demo} aria-live="polite" className="hidden scroll-mt-24 lg:block">
+      <div ref={demo} aria-live="polite" className="hidden scroll-mt-24 rounded-[28px] bg-surface p-3 lg:block">
         {step === 0 && <LessonStep key={`l${run}`} lesson={lesson} onNext={() => go(1)} />}
         {step === 1 && practice && <PracticeStep key={`p${run}`} q={practice} onNext={() => go(2)} />}
         {step === 2 && (
@@ -108,7 +108,7 @@ export function HowItWorksShowcase({
           />
         )}
         {step === 3 && <PracticalStep />}
-        <p className="mt-4 text-center text-sm text-muted">
+        <p className="pt-3 pb-1 text-center text-sm text-muted">
           Solis {step + 1} no {steps.length}
         </p>
       </div>
@@ -118,9 +118,8 @@ export function HowItWorksShowcase({
 
 function Frame({ label, right, children }: { label: string; right?: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className="relative">
-      <div aria-hidden="true" className="absolute -inset-3 -z-0 rounded-[28px] bg-surface" />
-      <div className="relative rounded-2xl border border-line bg-white p-5 shadow-[0_24px_60px_-28px_rgba(34,34,34,0.35)] sm:p-6">
+    <div>
+      <div className="rounded-2xl border border-line bg-white p-5 shadow-[0_24px_60px_-28px_rgba(34,34,34,0.35)] sm:p-6">
         <div className="flex items-center justify-between gap-3 text-xs text-muted">
           <span className="font-semibold uppercase tracking-[0.16em]">{label}</span>
           {right}
