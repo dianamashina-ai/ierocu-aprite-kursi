@@ -112,19 +112,21 @@ export function CourseOutline({
           </ol>
 
           {/* telefonā — pēc moduļu saraksta, datorā — kreisajā kolonnā zem apraksta */}
-          <div className="rounded-2xl bg-surface p-5 lg:col-start-1 lg:row-start-2 lg:self-start">
-            <div aria-hidden="true" className="flex gap-2">
-              <span className="flex size-12 items-center justify-center rounded-full bg-white text-accent-strong">
+          <div className="flex items-center gap-4 rounded-2xl bg-surface p-5 lg:col-start-1 lg:row-start-2 lg:self-start">
+            <span aria-hidden="true" className="flex shrink-0 -space-x-2">
+              <span className="flex size-12 items-center justify-center rounded-full bg-white text-accent-strong ring-2 ring-surface">
                 <Monitor className="size-5" />
               </span>
-              <span className="flex size-12 items-center justify-center rounded-full bg-white text-accent-strong">
+              <span className="flex size-12 items-center justify-center rounded-full bg-white text-accent-strong ring-2 ring-surface">
                 <Smartphone className="size-5" />
               </span>
+            </span>
+            <div>
+              <p className="font-semibold">Mācies, kur ērti</p>
+              <p className="mt-1 text-[15px] leading-relaxed text-muted">
+                Datorā mājās vai telefonā ceļā — kad vien ir brīvs brīdis. Nodarbības ir īsas, tāpēc vari mācīties pa daļām savā tempā.
+              </p>
             </div>
-            <p className="mt-4 font-semibold">Mācies, kur ērti</p>
-            <p className="mt-1 text-[15px] leading-relaxed text-muted">
-              Datorā mājās vai telefonā ceļā — kad vien ir brīvs brīdis. Nodarbības ir īsas, tāpēc vari mācīties pa daļām savā tempā.
-            </p>
           </div>
         </div>
 
