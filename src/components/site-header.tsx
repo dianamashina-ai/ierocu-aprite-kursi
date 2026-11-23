@@ -17,7 +17,7 @@ export async function SiteHeader() {
       ]
     : [
         { href: "/#ka-notiek", label: "Par mācībām" },
-        { href: "/#programma", label: "Programma" },
+        { href: "/#programma", label: "Moduļi" },
         { href: "/#prasibas", label: "Prasības" },
         { href: "/#cena", label: "Cenas" },
       ];

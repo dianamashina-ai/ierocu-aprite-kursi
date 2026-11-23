@@ -44,12 +44,14 @@ const input = `mt-1 ${FIELD_CLASS}`;
 /** Maksājumu zīmola zīme mazā baltā “kartītē”. */
 function PayLogo({ id }: { id: keyof typeof PAY_LOGOS }) {
   const l = PAY_LOGOS[id];
+  // visām zīmēm — vienāda izmēra kartīte, zīme centrā aptuveni vienā platumā
+  const chip = "inline-flex h-7 w-12 items-center justify-center rounded-md border border-line bg-white";
   if (id === "googlepay")
     // krāsainais G + pelēks “Pay”, kā oriģinālajā zīmē
     return (
-      <span className="inline-flex h-7 items-center gap-0.5 rounded-md border border-line bg-white px-2" title={l.title} role="img" aria-label={l.title}>
-        <GoogleIcon className="size-3.5" />
-        <span aria-hidden="true" className="text-[13px] leading-none font-medium text-[#5F6368]">
+      <span className={`${chip} gap-px`} title={l.title} role="img" aria-label={l.title}>
+        <GoogleIcon className="size-2.5" />
+        <span aria-hidden="true" className="text-[10px] leading-none font-medium text-[#5F6368]">
           Pay
         </span>
       </span>
@@ -57,8 +59,8 @@ function PayLogo({ id }: { id: keyof typeof PAY_LOGOS }) {
   if (id === "mastercard")
     // krāsainā zīme: sarkans un dzeltens aplis, pārklājums — oranžs
     return (
-      <span className="inline-flex h-7 items-center rounded-md border border-line bg-white px-2" title={l.title}>
-        <svg role="img" aria-label={l.title} viewBox="0 0 32 20" className="h-4 w-auto">
+      <span className={chip} title={l.title}>
+        <svg role="img" aria-label={l.title} viewBox="0 0 32 20" className="h-3.5 w-auto">
           <defs>
             <clipPath id="mc-left">
               <circle cx="10" cy="10" r="10" />
@@ -71,8 +73,8 @@ function PayLogo({ id }: { id: keyof typeof PAY_LOGOS }) {
       </span>
     );
   return (
-    <span className="inline-flex h-7 items-center rounded-md border border-line bg-white px-2" title={l.title}>
-      <svg role="img" aria-label={l.title} viewBox="0 0 24 24" className="h-5 w-auto" fill={l.hex}>
+    <span className={chip} title={l.title}>
+      <svg role="img" aria-label={l.title} viewBox="0 0 24 24" className={id === "visa" ? "w-7" : "w-6"} fill={l.hex}>
         <path d={l.path} />
       </svg>
     </span>
@@ -145,7 +147,7 @@ export function CheckoutForm({
           <OrDivider />
         </>
       )}
-      <form action={action} onSubmit={onSubmit} className="space-y-5 [&_input:not([type=checkbox]):not([type=radio])]:bg-white">
+      <form action={action} onSubmit={onSubmit} className="space-y-5">
         <input type="hidden" name="product" value={product} />
         <label className="block">
           <span className="text-sm font-semibold">
