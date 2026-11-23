@@ -55,7 +55,7 @@ export default async function BuyPage({ searchParams }: { searchParams: Promise<
                 key={c}
                 href={buyPath(c)}
                 aria-current={active ? "page" : undefined}
-                className={`rounded-xl border-2 px-4 py-3 ${active ? "border-accent bg-accent-soft" : "border-line bg-white hover:border-ink/30"}`}
+                className={`rounded-xl border-2 px-4 py-3 bg-surface ${active ? "border-accent" : "border-transparent hover:border-line"}`}
               >
                 <span className="block font-semibold">{p.title}</span>
                 <span className="block text-sm text-muted tabular-nums">{formatEuro(p.amountCents)}</span>
