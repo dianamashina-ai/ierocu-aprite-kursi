@@ -43,6 +43,22 @@ const input = `mt-1 ${FIELD_CLASS}`;
 /** Maksājumu zīmola zīme mazā baltā “kartītē”. */
 function PayLogo({ id }: { id: keyof typeof PAY_LOGOS }) {
   const l = PAY_LOGOS[id];
+  if (id === "mastercard")
+    // krāsainā zīme: sarkans un dzeltens aplis, pārklājums — oranžs
+    return (
+      <span className="inline-flex h-7 items-center rounded-md border border-line bg-white px-2" title={l.title}>
+        <svg role="img" aria-label={l.title} viewBox="0 0 32 20" className="h-4 w-auto">
+          <defs>
+            <clipPath id="mc-left">
+              <circle cx="10" cy="10" r="10" />
+            </clipPath>
+          </defs>
+          <circle cx="10" cy="10" r="10" fill="#EB001B" />
+          <circle cx="22" cy="10" r="10" fill="#F79E1B" />
+          <circle cx="22" cy="10" r="10" fill="#FF5F00" clipPath="url(#mc-left)" />
+        </svg>
+      </span>
+    );
   return (
     <span className="inline-flex h-7 items-center rounded-md border border-line bg-white px-2" title={l.title}>
       <svg role="img" aria-label={l.title} viewBox="0 0 24 24" className="h-5 w-auto" fill={l.hex}>
