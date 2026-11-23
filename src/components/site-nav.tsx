@@ -149,12 +149,14 @@ export function SiteNav({
               )}
             </>
           ) : (
-            <Link
-              href="/pieslegties"
-              className="btn-primary ml-2 min-h-11 px-4 text-sm"
-            >
-              Pieslēgties
-            </Link>
+            <>
+              <Link href="/pieslegties" className="btn-secondary ml-2 min-h-11 px-4 text-sm">
+                Pieslēgties
+              </Link>
+              <Link href="/registreties" className="btn-primary ml-2 min-h-11 px-4 text-sm">
+                Sākt bez maksas
+              </Link>
+            </>
           )}
         </div>
       </nav>
@@ -228,9 +230,14 @@ export function SiteNav({
                   </Link>
                 )}
                 {!signedIn && (
-                  <Link href="/pieslegties" className="btn-primary">
-                    Pieslēgties
-                  </Link>
+                  <>
+                    <Link href="/registreties" className="btn-primary">
+                      Sākt bez maksas
+                    </Link>
+                    <Link href="/pieslegties" className="btn-secondary">
+                      Pieslēgties
+                    </Link>
+                  </>
                 )}
               </div>
             )}

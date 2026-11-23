@@ -22,13 +22,14 @@ export function Pricing({ included }: { included: string[] }) {
   return (
     <section id="cena" aria-labelledby="cena-h" className="scroll-mt-6 bg-white">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
-        <div className="max-w-2xl">
+        <div className="max-w-3xl">
           <h2 id="cena-h" className="text-4xl font-semibold tracking-tight sm:text-5xl">
             Cena
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-muted">
-            Sāc ar 1. moduli bez maksas — maksājumu karte nav vajadzīga. Pilnu kursu, praktisko nodarbību šautuvē vai abus kopā
-            iegādājies ar vienu maksājumu. Cenas ar PVN.
+            Sagatavošanās eksāmenam no divām pusēm: tiešsaistes kurss teorijai — nodarbības, visi oficiālie jautājumi ar
+            skaidrojumiem un eksāmena simulācija — un praktiskā nodarbība mūsu šautuvē ar sertificētu instruktoru. Izvēlies
+            vienu vai abus kopā. 1. moduli vari izmēģināt bez maksas; cenas ar PVN, maksājums vienreizējs.
           </p>
         </div>
 
@@ -36,7 +37,7 @@ export function Pricing({ included }: { included: string[] }) {
           <article className="flex w-[85%] max-w-sm shrink-0 snap-start flex-col rounded-2xl lg:w-auto lg:max-w-none bg-ink p-6 text-white sm:p-8">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h3 className="text-sm text-white/70">{BUNDLE_PRODUCT.title}</h3>
-              <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">Ietaupi {formatEuro(saving)}</span>
+              <span className="rounded-full bg-ok px-3 py-1 text-xs font-semibold text-white">Ietaupi {formatEuro(saving)}</span>
             </div>
             <p className="mt-2 text-5xl font-bold tracking-tight tabular-nums">{formatEuro(BUNDLE_PRODUCT.amountCents)}</p>
             <p className="mt-2 text-sm text-white/70">Teorija tiešsaistē un prakse šautuvē — viss sagatavošanai.</p>

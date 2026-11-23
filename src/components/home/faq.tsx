@@ -71,9 +71,6 @@ export function Faq({ exam, totalQuestions }: { exam: { questions: number; minut
           <p className="mt-6 text-lg leading-relaxed text-muted">
             Par eksāmenu, platformu un apmaksu.
           </p>
-          <Link href="/registreties" className="btn-primary mt-8 gap-2">
-            Sākt bez maksas <ArrowUpRight aria-hidden="true" className="size-4" />
-          </Link>
         </div>
 
         <ul className="border-t border-line">

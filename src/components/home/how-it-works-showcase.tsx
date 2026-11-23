@@ -50,7 +50,7 @@ export function HowItWorksShowcase({
   }, [active, paused, steps.length]);
 
   return (
-    <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-20">
+    <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start lg:gap-20">
       <div>
         {intro}
         <ol className="mt-10 space-y-8">
