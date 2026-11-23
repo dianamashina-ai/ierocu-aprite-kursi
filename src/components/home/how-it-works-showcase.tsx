@@ -5,8 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ArrowUpRight, BookOpen, Check, ClipboardCheck, Clock, Crosshair, RotateCcw, Repeat, X } from "lucide-react";
 import { LessonBlocks } from "@/components/lesson-body";
 import type { Block } from "@/lib/content/lesson-markdown";
-import { buyPath, LESSON_INCLUDES, LESSON_PRODUCT } from "@/config/pricing";
-import { formatEuro } from "@/lib/format";
+import { buyPath, LESSON_INCLUDES } from "@/config/pricing";
 import type { PracticeQuestion } from "@/lib/quiz/types";
 import { uppercaseLetterRefs } from "@/lib/quiz/shuffle";
 
@@ -16,8 +15,6 @@ const LETTERS = "ABCDEF";
 const DEMO_SECONDS = 90;
 
 export interface ShowcaseLesson {
-  title: string;
-  minutes: number;
   /** Fragments no nodarbības (tieši tāds pats teksts) */
   blocks: Block[];
 }
@@ -66,7 +63,7 @@ export function HowItWorksShowcase({
     <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start lg:gap-20">
       <div>
         {intro}
-        <ol className="mt-10 space-y-3">
+        <ol className="mt-10 space-y-8 lg:space-y-3">
           {steps.map(({ title, text }, i) => {
             const Icon = ICONS[i];
             const current = i === step;
@@ -76,10 +73,10 @@ export function HowItWorksShowcase({
                   type="button"
                   onClick={() => go(i)}
                   aria-current={current ? "step" : undefined}
-                  className={`flex w-full gap-5 rounded-2xl p-4 text-left transition-colors ${current ? "bg-surface" : "hover:bg-surface/60"}`}
+                  className={`flex w-full gap-5 rounded-2xl text-left transition-colors max-lg:pointer-events-none lg:p-4 ${current ? "lg:bg-surface" : "lg:hover:bg-surface/60"}`}
                 >
                   <span
-                    className={`flex size-12 shrink-0 items-center justify-center rounded-full ${current ? "bg-accent text-white" : "bg-accent-soft text-accent-strong"}`}
+                    className={`flex size-12 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent-strong ${current ? "lg:bg-accent lg:text-white" : ""}`}
                   >
                     <Icon aria-hidden="true" className="size-5" />
                   </span>
@@ -97,7 +94,7 @@ export function HowItWorksShowcase({
         </ol>
       </div>
 
-      <div ref={demo} aria-live="polite" className="scroll-mt-24">
+      <div ref={demo} aria-live="polite" className="hidden scroll-mt-24 lg:block">
         {step === 0 && <LessonStep key={`l${run}`} lesson={lesson} onNext={() => go(1)} />}
         {step === 1 && practice && <PracticeStep key={`p${run}`} q={practice} onNext={() => go(2)} />}
         {step === 2 && (
@@ -112,7 +109,7 @@ export function HowItWorksShowcase({
         )}
         {step === 3 && <PracticalStep />}
         <p className="mt-4 text-center text-sm text-muted">
-          Izmēģini šeit — {step + 1}. solis no {steps.length}
+          Solis {step + 1} no {steps.length}
         </p>
       </div>
     </div>
@@ -139,16 +136,8 @@ const nextBtn = "btn-primary mt-5 w-full gap-2 sm:w-auto";
 /** 1. solis: fragments no īstās 1.1. nodarbības — tas pats teksts un noformējums, pietiek nākamajiem jautājumiem. */
 function LessonStep({ lesson, onNext }: { lesson: ShowcaseLesson; onNext: () => void }) {
   return (
-    <Frame
-      label="Nodarbība 1.1"
-      right={
-        <span className="inline-flex items-center gap-1 tabular-nums">
-          <Clock aria-hidden="true" className="size-3.5" />
-          {lesson.minutes} min
-        </span>
-      }
-    >
-      <p className="mt-4 text-lg font-semibold leading-snug">{lesson.title}</p>
+    <Frame label="Tēma">
+      <p className="mt-4 text-lg font-semibold leading-snug">Pamatjēdzieni un darbības princips</p>
       <div className="mt-3">
         <LessonBlocks blocks={lesson.blocks} compact />
       </div>
@@ -162,7 +151,7 @@ function LessonStep({ lesson, onNext }: { lesson: ShowcaseLesson; onNext: () => 
 /** 4. solis: praktiskā nodarbība šautuvē (pēc izvēles). */
 function PracticalStep() {
   return (
-    <Frame label="Pēc izvēles" right={<span className="font-semibold tabular-nums text-ink">{formatEuro(LESSON_PRODUCT.amountCents)}</span>}>
+    <Frame label="Pēc izvēles">
       <p className="mt-4 text-lg font-semibold leading-snug">Praktiskā nodarbība šautuvē</p>
       <ul className="mt-4 space-y-3">
         {LESSON_INCLUDES.map((x) => (
@@ -240,7 +229,7 @@ function PracticeStep({ q, onNext }: { q: PracticeQuestion; onNext: () => void }
   const [picked, setPicked] = useState<string | null>(null);
   const correct = picked === q.correctKey;
   return (
-    <Frame label="Treniņš · 1. modulis" right={<span className="tabular-nums">Nr. {q.id}</span>}>
+    <Frame label="Treniņš">
       <p className="mt-4 text-lg font-semibold leading-snug" lang="lv">
         {q.text}
       </p>
@@ -249,7 +238,7 @@ function PracticeStep({ q, onNext }: { q: PracticeQuestion; onNext: () => void }
         <p className="mt-4 text-sm text-muted">Izvēlies atbildi — uzreiz redzēsi, vai tā ir pareiza.</p>
       ) : (
         <>
-          <div className={`mt-4 rounded-xl p-4 text-sm ${correct ? "bg-ok-soft" : "bg-surface"}`}>
+          <div className="mt-4 rounded-xl bg-surface p-4 text-sm">
             <p className={`font-semibold ${correct ? "text-ok" : "text-err"}`}>{correct ? "Pareizi!" : "Nepareizi"}</p>
             {q.explanation && <p className="mt-1 text-muted">{q.explanation}</p>}
             {q.lawReference && <p className="mt-2 text-xs text-muted">{q.lawReference}</p>}

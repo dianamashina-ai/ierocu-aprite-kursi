@@ -67,10 +67,12 @@ export default async function HomePage() {
             practice={sample?.[0] ?? null}
             exam={(sample?.slice(1) ?? []).filter((q): q is NonNullable<typeof q> => Boolean(q))}
             lesson={{
-              title: readLesson("1.1")?.title ?? course.modules[0].topics[0].titleLv,
-              minutes: readLesson("1.1")?.minutes ?? 3,
-              // tieši tas, kas vajadzīgs nākamajiem jautājumiem (Nr. 422, 433, 435, 427)
-              blocks: lessonExcerpt(readLesson("1.1")?.body ?? "", { Šaujamierocis: 1, "Darbības princips": 1, "Pneimatiskais ierocis": 1 }),
+              // tieši tas, kas vajadzīgs nākamajiem jautājumiem (Nr. 422, 433, 435, 427); bez “Atceries” bloka
+              blocks: lessonExcerpt(readLesson("1.1")?.body ?? "", {
+                Šaujamierocis: 1,
+                "Darbības princips": 1,
+                "Pneimatiskais ierocis": 1,
+              }).filter((b) => b.kind !== "note"),
             }}
           />
           <ContentDivider />
