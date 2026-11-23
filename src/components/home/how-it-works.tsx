@@ -38,7 +38,7 @@ export function HowItWorks({
     },
     {
       title: "Praktiskā nodarbība",
-      text: "Pēc izvēles: iepazīšanās ar kaujas ieroci un 30 izmēģinājuma šāvieni ar sertificētu instruktoru mūsu šautuvē. Nav obligāta atļaujas saņemšanai.",
+      text: "Pēc izvēles: iepazīšanās ar kaujas ieroci un 30 izmēģinājuma šāvieni ar sertificētu instruktoru mūsu šautuvē.",
     },
   ];
   return (

@@ -24,12 +24,10 @@ export function Pricing({ included }: { included: string[] }) {
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
         <div className="max-w-3xl">
           <h2 id="cena-h" className="text-4xl font-semibold tracking-tight sm:text-5xl">
-            Cena
+            Cenas
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-muted">
-            Sagatavošanās eksāmenam no divām pusēm: tiešsaistes mācību kurss teorijai ar visiem oficiālajiem jautājumiem,
-            skaidrojumiem un eksāmena simulāciju, un praktiskā nodarbība mūsu šautuvē ar sertificētu instruktoru. Izvēlies vienu
-            vai abus kopā.
+            Tiešsaistes kurss teorijai, praktiskā nodarbība šautuvē vai abi kopā.
           </p>
         </div>
 
