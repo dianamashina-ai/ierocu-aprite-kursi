@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, ChevronDown, Lock } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronDown, Lock, Monitor, Smartphone } from "lucide-react";
 import { MODULE_META } from "@/config/module-meta";
 
 interface OutlineModule {
@@ -45,6 +45,18 @@ export function CourseOutline({
               ieroča uzbūves līdz atbildībai. Sāc ar pamatiem un zināšanas
               papildini pakāpeniski.
             </p>
+            <div className="mt-8 flex items-start gap-4 rounded-2xl bg-surface p-5">
+              <span aria-hidden="true" className="flex shrink-0 items-end gap-1 text-accent-strong">
+                <Monitor className="size-7" strokeWidth={1.75} />
+                <Smartphone className="size-5" strokeWidth={1.75} />
+              </span>
+              <div>
+                <p className="font-semibold">Mācies, kur ērti</p>
+                <p className="mt-1 text-[15px] leading-relaxed text-muted">
+                  Datorā mājās vai telefonā ceļā — kad vien ir brīvs brīdis. Nodarbības ir īsas, tāpēc vari mācīties pa daļām savā tempā.
+                </p>
+              </div>
+            </div>
           </div>
 
           <ol className="border-t border-line">
