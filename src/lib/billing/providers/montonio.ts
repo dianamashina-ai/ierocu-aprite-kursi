@@ -98,7 +98,13 @@ export const montonioProvider: PaymentProvider = {
     });
     if (!res.ok) {
       const json = (await res.json().catch(() => ({}))) as { message?: string };
-      throw new Error(`Montonio: ${json.message ?? res.status}`);
+      const msg = String(json.message ?? res.status);
+      if (/cannot be refunded/i.test(msg)) {
+        throw new Error(
+          "Montonio pagaidām nevar atmaksāt šo maksājumu. Bankas maksājumu var atmaksāt apmēram 1 darba dienu pēc apmaksas, kad nauda nonākusi Montonio. Pārbaudi arī, vai Montonio Partner System ieslēgtas bankas maksājumu atmaksas (Bank payment refunds).",
+        );
+      }
+      throw new Error(`Montonio: ${msg}`);
     }
   },
 };
