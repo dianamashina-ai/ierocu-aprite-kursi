@@ -12,7 +12,7 @@ import {
 import { formatEuro } from "@/lib/format";
 
 const SUBLINE: Partial<Record<ProductCode, string>> = {
-  bundle: "Teorija tiešsaistē un prakse šautuvē — viss sagatavošanai.",
+  bundle: "Teorija tiešsaistē un prakse šautuvē.",
   course: "Vienreizējs maksājums, bez abonementa un bez termiņa.",
   lesson: "Mūsu šautuvē ar sertificētu instruktoru.",
 };
@@ -57,7 +57,7 @@ export function ProductCard({
         {showVat && (
           <>
             {" "}
-            T. sk. PVN {p.vatRate} % — {formatEuro(vat)}.
+            Ieskaitot PVN {p.vatRate} % — {formatEuro(vat)}.
           </>
         )}
       </p>
