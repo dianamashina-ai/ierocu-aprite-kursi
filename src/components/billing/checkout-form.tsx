@@ -12,6 +12,7 @@ import {
   AuthField,
   FIELD_CLASS,
   GoogleButton,
+  GoogleIcon,
   lvError,
   OrDivider,
   PasswordRules,
@@ -43,6 +44,16 @@ const input = `mt-1 ${FIELD_CLASS}`;
 /** Maksājumu zīmola zīme mazā baltā “kartītē”. */
 function PayLogo({ id }: { id: keyof typeof PAY_LOGOS }) {
   const l = PAY_LOGOS[id];
+  if (id === "googlepay")
+    // krāsainais G + pelēks “Pay”, kā oriģinālajā zīmē
+    return (
+      <span className="inline-flex h-7 items-center gap-0.5 rounded-md border border-line bg-white px-2" title={l.title} role="img" aria-label={l.title}>
+        <GoogleIcon className="size-3.5" />
+        <span aria-hidden="true" className="text-[13px] leading-none font-medium text-[#5F6368]">
+          Pay
+        </span>
+      </span>
+    );
   if (id === "mastercard")
     // krāsainā zīme: sarkans un dzeltens aplis, pārklājums — oranžs
     return (
