@@ -85,4 +85,8 @@ describe("Montonio JWT", () => {
     expect(st("REFUNDED")).toBe("refunded");
     expect(st("PENDING")).toBe("pending");
   });
+  it("summa un valūta no token", () => {
+    const ev = montonioTokenToPayment(signJwt({ merchantReference: "o1", paymentStatus: "PAID", grandTotal: 120, currency: "EUR", uuid: "u1" }, secret), secret);
+    expect(ev).toMatchObject({ orderId: "o1", providerRef: "u1", status: "paid", amountCents: 12000, currency: "EUR" });
+  });
 });

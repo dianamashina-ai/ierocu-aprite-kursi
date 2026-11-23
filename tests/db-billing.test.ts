@@ -60,6 +60,18 @@ describe.skipIf(!url)("maksājumi (DB)", async () => {
     expect(await access.hasFullAccess("u1")).toBe(false);
   });
 
+  it("paziņojums ar citu summu, valūtu vai maksājuma id netiek pieņemts", async () => {
+    const o = await billing.createOrder("u1", buyer, { provider: "dev", now: t0 });
+    for (const ev of [
+      { amountCents: 100 },
+      { amountCents: 12000, currency: "PLN" },
+    ]) {
+      const r = await billing.applyPaymentEvent({ orderId: o.id, status: "paid", ...ev }, "dev", { now: t0 });
+      expect(r.changed).toBe(false);
+    }
+    expect(await access.hasFullAccess("u1")).toBe(false);
+  });
+
   it("atcelts pasūtījums nesaņem numuru; nākamais apmaksātais — secīgs numurs", async () => {
     const a = await billing.createOrder("u1", buyer, { provider: "dev", now: t0 });
     await billing.applyPaymentEvent({ orderId: a.id, status: "canceled" }, "dev");

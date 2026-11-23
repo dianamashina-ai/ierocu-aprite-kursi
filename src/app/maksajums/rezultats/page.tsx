@@ -12,16 +12,18 @@ export const metadata = { title: "Maksājuma rezultāts", robots: { index: false
 
 export default async function PaymentResultPage({ searchParams }: { searchParams: Promise<{ order?: string; "order-token"?: string }> }) {
   const sp = await searchParams;
-  const user = await requireUser(`/maksajums/rezultats?order=${sp.order ?? ""}`);
-  if (!sp.order) notFound();
-  let order = await getOrderForUser(sp.order, user.id);
+  // Montonio pievieno parakstītu order-token; ja “order” parametrs pazudis, pasūtījumu ņemam no tā
+  const tokenEv = sp["order-token"] ? montonioTokenToPayment(sp["order-token"]) : null;
+  const orderId = sp.order ?? tokenEv?.orderId;
+  const user = await requireUser(`/maksajums/rezultats?order=${orderId ?? ""}`);
+  if (!orderId) notFound();
+  let order = await getOrderForUser(orderId, user.id);
   if (!order) notFound();
 
   // Ja webhook vēl nav pienācis — pārbaudām statusu tieši (parakstīts token / Stripe API)
   if (order.status === "pending") {
-    if (order.provider === "montonio" && sp["order-token"]) {
-      const ev = montonioTokenToPayment(sp["order-token"]);
-      if (ev && ev.orderId === order.id) order = (await applyPaymentEvent(ev, "montonio")).order ?? order;
+    if (order.provider === "montonio" && tokenEv) {
+      if (tokenEv.orderId === order.id) order = (await applyPaymentEvent(tokenEv, "montonio")).order ?? order;
     } else if (order.provider === "stripe" && order.providerRef) {
       const st = await fetchStripeSessionStatus(order.providerRef);
       if (st === "paid") order = (await applyPaymentEvent({ orderId: order.id, status: "paid" }, "stripe")).order ?? order;

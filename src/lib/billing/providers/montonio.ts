@@ -65,8 +65,9 @@ export const montonioProvider: PaymentProvider = {
         method: "paymentInitiation",
         amount,
         currency: i.currency,
-        methodOptions: { preferredCountry: "LV", preferredLocale: "lv" },
+        methodOptions: { preferredCountry: "LV", preferredLocale: "lv", paymentDescription: `Ieroču atļauja — pilna piekļuve (${i.orderId.slice(0, 8)})` },
       },
+      iat: Math.floor(Date.now() / 1000),
       exp: Math.floor(Date.now() / 1000) + 600,
     };
     const res = await fetch(`${base()}/orders`, {
@@ -78,7 +79,7 @@ export const montonioProvider: PaymentProvider = {
     if (!res.ok || !json.paymentUrl) throw new Error(`Montonio: ${json.message ?? res.status}`);
     return { redirectUrl: json.paymentUrl, providerRef: json.uuid ?? "" };
   },
-  /** Montonio Stargate: POST /refunds { orderUuid, amount, idempotencyKey } (jāpārbauda smilškastē pirms palaišanas). */
+  /** Montonio Stargate: POST /refunds { data: JWT{ accessKey, orderUuid, amount, idempotencyKey, iat, exp } }. Bankas maksājumiem jāieslēdz atmaksas Partner System. */
   async refund(i) {
     const { accessKey, secret } = keys();
     if (!i.providerRef) throw new Error("Pasūtījumam nav Montonio identifikatora");
@@ -87,11 +88,12 @@ export const montonioProvider: PaymentProvider = {
       orderUuid: i.providerRef,
       amount: i.amountCents / 100,
       idempotencyKey: `refund-${i.orderId}`,
+      iat: Math.floor(Date.now() / 1000),
       exp: Math.floor(Date.now() / 1000) + 600,
     };
     const res = await fetch(`${base()}/refunds`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${signJwt(payload, secret)}` },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ data: signJwt(payload, secret) }),
     });
     if (!res.ok) {
@@ -101,7 +103,7 @@ export const montonioProvider: PaymentProvider = {
   },
 };
 
-type MontonioToken = { uuid?: string; merchantReference?: string; paymentStatus?: string; accessKey?: string };
+type MontonioToken = { uuid?: string; merchantReference?: string; paymentStatus?: string; accessKey?: string; grandTotal?: number; currency?: string };
 
 /** Montonio orderToken (paziņojumā vai return URL "order-token") → PaymentEvent. */
 export function montonioTokenToPayment(token: string, secret = process.env.MONTONIO_SECRET_KEY ?? ""): PaymentEvent | null {
@@ -116,5 +118,11 @@ export function montonioTokenToPayment(token: string, secret = process.env.MONTO
     VOIDED: "canceled",
     REFUNDED: "refunded",
   };
-  return { orderId: p.merchantReference, providerRef: p.uuid, status: map[p.paymentStatus ?? ""] ?? "pending" };
+  return {
+    orderId: p.merchantReference,
+    providerRef: p.uuid,
+    status: map[p.paymentStatus ?? ""] ?? "pending",
+    amountCents: typeof p.grandTotal === "number" ? Math.round(p.grandTotal * 100) : undefined,
+    currency: p.currency,
+  };
 }

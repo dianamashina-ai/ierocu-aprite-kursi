@@ -85,6 +85,15 @@ export async function applyPaymentEvent(ev: PaymentEvent, provider: ProviderName
   const result = await db.transaction(async (tx) => {
     const [order] = await tx.select().from(schema.orders).where(eq(schema.orders.id, ev.orderId)).for("update");
     if (!order || order.provider !== provider) return { changed: false, becamePaid: false, order: null };
+    // drošība: summa, valūta un maksājuma sistēmas pasūtījuma id jāsakrīt ar mūsu pasūtījumu
+    const mismatch =
+      (ev.amountCents !== undefined && ev.amountCents !== order.amountCents) ||
+      (ev.currency !== undefined && ev.currency !== order.currency) ||
+      (ev.providerRef && order.providerRef && ev.providerRef !== order.providerRef);
+    if (mismatch) {
+      console.error("Maksājuma paziņojums nesakrīt ar pasūtījumu", { orderId: order.id, provider });
+      return { changed: false, becamePaid: false, order };
+    }
     const set: Partial<typeof schema.orders.$inferInsert> = {};
     if (ev.status === "paid" && order.status !== "paid" && order.status !== "refunded") {
       const [{ seq }] = await tx.execute<{ seq: string }>(sql`select nextval('invoice_seq') as seq`);

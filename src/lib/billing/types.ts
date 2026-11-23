@@ -24,6 +24,9 @@ export interface PaymentEvent {
   orderId: string;
   providerRef?: string;
   status: "paid" | "failed" | "canceled" | "refunded" | "pending";
+  /** samaksātā summa centos (ja maksājumu sistēma to paziņo) — jāsakrīt ar pasūtījumu */
+  amountCents?: number;
+  currency?: string;
 }
 
 export interface RefundInput {
