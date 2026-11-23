@@ -5,6 +5,7 @@ import { applyPaymentEvent, getOrderForUser } from "@/lib/billing/service";
 import { fetchStripeSessionStatus } from "@/lib/billing/providers/stripe";
 import { montonioTokenToPayment } from "@/lib/billing/providers/montonio";
 import { formatEuro } from "@/lib/format";
+import { TEST_PRODUCT } from "@/config/pricing";
 import { AutoRefresh } from "@/components/billing/auto-refresh";
 
 export const dynamic = "force-dynamic";
@@ -30,6 +31,11 @@ export default async function PaymentResultPage({ searchParams }: { searchParams
     }
   }
 
+  // Montonio atgrieza pircēju, bet maksājums nav apmaksāts (piem., “Atcelt maksājumu”).
+  // Pasūtījumu neatceļam — ja banka tomēr apstiprinās, paziņojums atvērs piekļuvi un lapa atjaunosies.
+  const retryHref = order.product === TEST_PRODUCT.name ? "/iegadaties?produkts=test" : "/iegadaties";
+  const returnedUnpaid = order.status === "pending" && order.provider === "montonio" && tokenEv?.orderId === order.id && tokenEv.status !== "paid";
+
   return (
     <div className="mx-auto max-w-xl px-4 py-10 sm:py-16">
       {order.status === "paid" ? (
@@ -44,6 +50,16 @@ export default async function PaymentResultPage({ searchParams }: { searchParams
             <Link href={`/rekins/${order.id}`} className="btn-secondary">Skatīt rēķinu</Link>
           </div>
         </section>
+      ) : returnedUnpaid ? (
+        <section className="rounded-2xl border border-line bg-white p-6 sm:p-8" aria-live="polite">
+          <h1 className="text-2xl font-semibold">Maksājums netika pabeigts</h1>
+          <p className="mt-2 text-muted">Nauda netika iekasēta. Vari mēģināt vēlreiz — arī ar citu maksāšanas veidu.</p>
+          <p className="mt-2 text-sm text-muted">
+            Ja maksājumu tomēr apstiprināji, piekļuve atvērsies automātiski un rēķinu saņemsi e-pastā.
+          </p>
+          <Link href={retryHref} className="btn-primary mt-6">Mēģināt vēlreiz</Link>
+          <AutoRefresh seconds={6} />
+        </section>
       ) : order.status === "pending" ? (
         <section className="rounded-2xl border border-line bg-white p-6 sm:p-8" aria-live="polite">
           <h1 className="text-2xl font-semibold">Gaidām apstiprinājumu no bankas…</h1>
@@ -54,7 +70,7 @@ export default async function PaymentResultPage({ searchParams }: { searchParams
         <section className="rounded-2xl border border-line bg-white p-6 sm:p-8">
           <h1 className="text-2xl font-semibold">Maksājums netika pabeigts</h1>
           <p className="mt-2 text-muted">Nauda netika iekasēta. Vari mēģināt vēlreiz.</p>
-          <Link href="/iegadaties" className="btn-primary mt-6">Mēģināt vēlreiz</Link>
+          <Link href={retryHref} className="btn-primary mt-6">Mēģināt vēlreiz</Link>
         </section>
       )}
     </div>
