@@ -53,47 +53,21 @@ export function HowItWorksShowcase({
     <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-20">
       <div>
         {intro}
-        <ol className="mt-10 space-y-2">
+        <ol className="mt-10 space-y-8">
           {steps.map(({ title, text }, i) => {
             const Icon = ICONS[i];
-            const on = i === active;
             return (
-              <li key={title}>
-                <button
-                  type="button"
-                  onClick={() => setActive(i)}
-                  aria-current={on ? "step" : undefined}
-                  className={`flex w-full gap-4 rounded-2xl p-3 text-left sm:gap-5 lg:-mx-3 lg:w-[calc(100%+1.5rem)] transition-colors ${on ? "bg-surface" : "hover:bg-surface/60"}`}
-                >
-                  <span
-                    className={`flex size-12 shrink-0 items-center justify-center rounded-full transition-colors ${on ? "bg-accent text-white" : "bg-accent-soft text-accent-strong"}`}
-                  >
-                    <Icon aria-hidden="true" className="size-5" />
-                  </span>
-                  <span className="block">
-                    <span className="block text-xl font-semibold tracking-tight">
-                      <span className="mr-2 tabular-nums text-accent-strong">
-                        {i + 1}.
-                      </span>
-                      {title}
-                    </span>
-                    <span className="mt-1.5 block text-[15px] leading-relaxed text-muted">
-                      {text}
-                    </span>
-                    {/* laika josla aktīvajam solim */}
-                    <span
-                      aria-hidden="true"
-                      className="mt-3 block h-0.5 overflow-hidden rounded-full bg-line"
-                    >
-                      {on && (
-                        <span
-                          key={`${active}-${paused}`}
-                          className={`block h-full bg-accent ${paused ? "w-full" : "motion-safe:animate-[grow-x_5s_linear_forwards] motion-reduce:w-full"}`}
-                        />
-                      )}
-                    </span>
-                  </span>
-                </button>
+              <li key={title} className="flex gap-5">
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent-strong">
+                  <Icon aria-hidden="true" className="size-5" />
+                </span>
+                <div>
+                  <h3 className="text-xl font-semibold tracking-tight">
+                    <span className="mr-2 tabular-nums text-accent-strong">{i + 1}.</span>
+                    {title}
+                  </h3>
+                  <p className="mt-1.5 text-[15px] leading-relaxed text-muted">{text}</p>
+                </div>
               </li>
             );
           })}
