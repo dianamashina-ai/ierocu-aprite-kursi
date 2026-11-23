@@ -46,23 +46,26 @@ export function QuestionCard({ q, allowed, stems, meta }: { q: QuestionCardData;
           {q.options.map((o, i) => {
             const correct = allowed && o.key === q.correctKey;
             return (
-              <li key={o.key} className={`flex gap-2.5 rounded-lg px-3 py-2 text-[15px] ${correct ? "bg-ok-soft text-ink" : "bg-surface text-muted"}`}>
+              <li
+                key={o.key}
+                className={`flex gap-2.5 rounded-lg px-3 py-2 text-[15px] ${correct ? "bg-ok-soft text-ink group-data-[hide=true]/ans:bg-surface group-data-[hide=true]/ans:text-muted" : "bg-surface text-muted"}`}
+              >
                 <span
                   aria-hidden="true"
-                  className={`mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold ${correct ? "bg-ok text-white" : "bg-white text-ink"}`}
+                  className={`mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold ${correct ? "bg-ok text-white group-data-[hide=true]/ans:bg-white group-data-[hide=true]/ans:text-ink" : "bg-white text-ink"}`}
                 >
                   {"ABCDEF"[i]}
                 </span>
                 <span>
                   <Marked text={uppercaseLetterRefs(o.text)} stems={stems} />
-                  {correct && <span className="sr-only"> (pareizā atbilde)</span>}
+                  {correct && <span className="sr-only group-data-[hide=true]/ans:hidden"> (pareizā atbilde)</span>}
                 </span>
               </li>
             );
           })}
         </ul>
         {allowed && (
-          <details className="group/sk mt-2">
+          <details className="group/sk mt-2 group-data-[hide=true]/ans:hidden">
             <summary className="inline-flex min-h-10 cursor-pointer list-none items-center gap-1 text-sm font-semibold text-accent-strong [&::-webkit-details-marker]:hidden">
               Skaidrojums
               <ChevronDown aria-hidden="true" className="size-4 transition-transform group-open/sk:rotate-180" />

@@ -10,7 +10,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
       { href: "/", label: "Mācību kurss" },
       { href: "/registreties", label: "Sākt bez maksas" },
       { href: "/eksamens", label: "Izmēģinājuma eksāmens" },
-      { href: "/meklet", label: "Meklēt jautājumu" },
+      { href: "/jautajumi", label: "Jautājumi" },
     ],
   },
   {

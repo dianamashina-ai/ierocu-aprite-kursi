@@ -8,7 +8,7 @@ export default function NotFound() {
       <p className="mt-3 text-muted">Iespējams, saite ir novecojusi vai tajā ir kļūda.</p>
       <div className="mt-6 flex flex-wrap justify-center gap-3">
         <Link href="/" className="btn-primary">Uz sākumu</Link>
-        <Link href="/meklet" className="btn-secondary">Meklēt jautājumu</Link>
+        <Link href="/jautajumi" className="btn-secondary">Jautājumi</Link>
       </div>
     </div>
   );

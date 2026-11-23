@@ -13,7 +13,7 @@ export async function SiteHeader() {
         { href: "/", label: "Mācīties", match: ["/modulis", "/tema", "/jautajums", "/saime"] },
         { href: "/trenins", label: "Trenēties" },
         { href: "/eksamens", label: "Eksāmens" },
-        { href: "/meklet", label: "Meklēt" },
+        { href: "/jautajumi", label: "Jautājumi", match: ["/meklet"] },
       ]
     : [
         { href: "/#ka-notiek", label: "Kā notiek" },
