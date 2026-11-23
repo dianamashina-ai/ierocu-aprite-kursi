@@ -127,11 +127,11 @@ export function CourseOutline({
         <div className="mt-12 flex flex-col gap-6 rounded-2xl bg-ink p-6 text-white sm:p-8 lg:mt-16 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <p className="text-2xl font-semibold tracking-tight">
-              1. modulis ir bez maksas
+              Izmēģini, pirms pērc
             </p>
             <p className="mt-2 max-w-xl text-white/70">
-              Izveido kontu un sāc mācīties. Moduļi 2–{totals.modules},
-              skaidrojumi un eksāmena simulācija — pilnajā kursā.
+              Pirmais modulis ir pieejams bez maksas: izveido kontu un sāc mācīties jau šodien. Pārējie {totals.modules - 1}{" "}
+              moduļi un eksāmena simulācija ir pilnajā kursā.
             </p>
           </div>
           <div className="flex shrink-0 flex-wrap items-center gap-x-6 gap-y-3">
