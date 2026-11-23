@@ -241,7 +241,7 @@ export function CheckoutForm({
               return (
                 <label
                   key={m}
-                  className="flex cursor-pointer items-center gap-3 rounded-xl border-2 border-line bg-white px-4 py-3 has-[:checked]:border-accent has-[:checked]:bg-accent-soft"
+                  className="flex cursor-pointer items-center gap-3 rounded-xl border-2 border-line bg-white px-4 py-3 has-[:checked]:border-accent"
                 >
                   <input
                     type="radio"
