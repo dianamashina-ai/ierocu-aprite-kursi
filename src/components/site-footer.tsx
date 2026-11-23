@@ -3,37 +3,30 @@ import { getTranslations } from "next-intl/server";
 import { SELLER } from "@/config/seller";
 import { getCurrentUser } from "@/lib/auth/session";
 
-const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
-  {
-    title: "Kurss",
-    links: [
-      { href: "/", label: "Mācību kurss" },
-      { href: "/registreties", label: "Sākt bez maksas" },
-      { href: "/eksamens", label: "Izmēģinājuma eksāmens" },
-      { href: "/jautajumi", label: "Jautājumi" },
-    ],
-  },
-  {
-    title: "Konts",
-    links: [
-      { href: "/pieslegties", label: "Pieslēgties" },
-      { href: "/registreties", label: "Izveidot kontu" },
-      { href: "/konts", label: "Profils" },
-      { href: "/trenins", label: "Trenēties" },
-      { href: "/parole/aizmirsta", label: "Aizmirsi paroli?" },
-    ],
-  },
-  {
-    title: "Informācija",
-    links: [
-      { href: "/iegadaties", label: "Pilna piekļuve" },
-      { href: "/noteikumi", label: "Lietošanas un pirkšanas noteikumi" },
-      { href: "/privatums", label: "Privātuma politika" },
-      { href: "/sikdatnes", label: "Sīkdatnes" },
-      { href: "/kontakti", label: "Kontakti" },
-    ],
-  },
+const COURSE_LINKS = [
+  { href: "/", label: "Mācību kurss" },
+  { href: "/registreties", label: "Sākt bez maksas" },
+  { href: "/eksamens", label: "Izmēģinājuma eksāmens" },
+  { href: "/jautajumi", label: "Jautājumi" },
+  { href: "/iegadaties", label: "Iegādāties" },
 ];
+
+/** Apakšējā josla — vienāda viesiem un pieslēgtiem lietotājiem. */
+function BottomBar({ year }: { year: number }) {
+  return (
+    <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-6 text-sm text-muted sm:px-6 lg:flex-row lg:items-center lg:justify-between">
+      <nav aria-label="Informācija" className="flex flex-wrap gap-x-5 gap-y-2">
+        <Link href="/noteikumi" className="hover:text-ink">Noteikumi</Link>
+        <Link href="/privatums" className="hover:text-ink">Privātums</Link>
+        <Link href="/sikdatnes" className="hover:text-ink">Sīkdatnes</Link>
+        <Link href="/kontakti" className="hover:text-ink">Kontakti</Link>
+      </nav>
+      <p>
+        © {year} {SELLER.name}
+      </p>
+    </div>
+  );
+}
 
 export async function SiteFooter() {
   const [t, user] = await Promise.all([getTranslations("footer"), getCurrentUser()]);
@@ -43,67 +36,50 @@ export async function SiteFooter() {
   if (user)
     return (
       <footer className="border-t border-line bg-white print:hidden">
-        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-6 text-sm text-muted sm:px-6 lg:flex-row lg:items-center lg:justify-between">
-          <nav aria-label="Informācija" className="flex flex-wrap gap-x-5 gap-y-2">
-            <Link href="/noteikumi" className="hover:text-ink">Noteikumi</Link>
-            <Link href="/privatums" className="hover:text-ink">Privātums</Link>
-            <Link href="/sikdatnes" className="hover:text-ink">Sīkdatnes</Link>
-            <Link href="/kontakti" className="hover:text-ink">Kontakti</Link>
-          </nav>
-          <p>
-            © {year} {SELLER.name}
-          </p>
-        </div>
+        <BottomBar year={year} />
       </footer>
     );
 
   return (
     <footer className="border-t border-line bg-white print:hidden">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-10 py-14 lg:grid-cols-4 lg:py-16">
-          {COLUMNS.map((col) => (
-            <nav key={col.title} aria-label={col.title}>
-              <h2 className="text-base font-semibold tracking-normal">{col.title}</h2>
-              <ul className="mt-5 space-y-3">
-                {col.links.map((l) => (
-                  <li key={l.href}>
-                    <Link href={l.href} className="text-[15px] text-muted transition-colors hover:text-ink">
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          ))}
-          <div className="col-span-2 lg:col-span-1">
-            <h2 className="text-base font-semibold tracking-normal">Piegādātājs</h2>
-            <address className="mt-5 space-y-1.5 text-[15px] not-italic text-muted">
-              <p>{SELLER.name}</p>
-              <p>Reģ. Nr. {SELLER.regNo}</p>
-              <p>PVN Nr. {SELLER.vatNo}</p>
-              <p>{SELLER.address}</p>
-              <p>
-                <a href={`mailto:${SELLER.email}`} className="transition-colors hover:text-ink">{SELLER.email}</a>
-              </p>
-            </address>
-          </div>
-        </div>
-
-        <div className="border-t border-line py-6">
-          <p className="max-w-3xl text-sm text-muted">{t("disclaimer")}</p>
-        </div>
-
-        <div className="flex flex-col gap-5 border-t border-line py-8 sm:flex-row sm:items-center sm:justify-between">
-          <Link href="/" aria-label="Ieroču atļauja — uz sākumu" className="shrink-0">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:py-16">
+        <div className="col-span-2">
+          <Link href="/" aria-label="Ieroču atļauja — uz sākumu" className="inline-block">
             {/* eslint-disable-next-line @next/next/no-img-element -- vektora logotips */}
-            <img src="/logo-lpsc-2026.svg" alt="Ieroču atļauja — sadarbībā ar LPSC" width={235} height={40} className="h-9 w-auto" />
+            <img src="/logo-lpsc-2026.svg" alt="Ieroču atļauja — sadarbībā ar LPSC" width={235} height={40} className="h-10 w-auto" />
           </Link>
-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
-            <Link href="/noteikumi" className="hover:text-ink">Noteikumi</Link>
-            <Link href="/privatums" className="hover:text-ink">Privātums</Link>
-          </div>
-          <p className="text-sm text-muted">© {year} {SELLER.name}</p>
+          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-muted">{t("disclaimer")}</p>
         </div>
+
+        <nav aria-label="Kurss">
+          <h2 className="text-base font-semibold tracking-normal">Kurss</h2>
+          <ul className="mt-5 space-y-3">
+            {COURSE_LINKS.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href} className="text-[15px] text-muted transition-colors hover:text-ink">
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div>
+          <h2 className="text-base font-semibold tracking-normal">Piegādātājs</h2>
+          <address className="mt-5 space-y-1.5 text-[15px] not-italic text-muted">
+            <p>{SELLER.name}</p>
+            <p>Reģ. Nr. {SELLER.regNo}</p>
+            <p>PVN Nr. {SELLER.vatNo}</p>
+            <p>{SELLER.address}</p>
+            <p>
+              <a href={`mailto:${SELLER.email}`} className="transition-colors hover:text-ink">{SELLER.email}</a>
+            </p>
+          </address>
+        </div>
+      </div>
+
+      <div className="border-t border-line">
+        <BottomBar year={year} />
       </div>
     </footer>
   );
