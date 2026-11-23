@@ -24,15 +24,17 @@ async function requestOrigin() {
 
 export async function checkoutAction(_prev: CheckoutState, form: FormData): Promise<CheckoutState> {
   const user = await getCurrentUser();
-  if (!user) redirect("/pieslegties?next=/iegadaties");
+  if (!user) redirect(`/pieslegties?next=${encodeURIComponent(form.get("product") === "test" ? "/iegadaties?produkts=test" : "/iegadaties")}`);
   const raw = Object.fromEntries(["name", "waiver", "terms"].map((k) => [k, String(form.get(k) ?? "")]));
   const parsed = BuyerForm.safeParse(raw);
   if (!parsed.success) return { error: parsed.error.issues[0].message, fields: raw };
   const { name } = parsed.data;
+  // PAGAIDU: testa produkts (1,50 €) maksājumu pārbaudei.
+  const product = form.get("product") === "test" ? "test" : "full-course";
 
   let url: string;
   try {
-    url = await startCheckout(user.id, { name, email: user.email }, await requestOrigin());
+    url = await startCheckout(user.id, { name, email: user.email }, await requestOrigin(), product);
   } catch (e) {
     if (e instanceof BillingError) return { error: e.message, fields: raw };
     console.error(e);

@@ -6,12 +6,23 @@ import { checkoutAction, type CheckoutState } from "@/app/actions/billing";
 
 const input = "mt-1 block min-h-12 w-full rounded-xl border-2 border-line bg-white px-4 text-base";
 
-export function CheckoutForm({ email, defaultName, priceLabel }: { email: string; defaultName: string; priceLabel: string }) {
+export function CheckoutForm({
+  email,
+  defaultName,
+  priceLabel,
+  product,
+}: {
+  email: string;
+  defaultName: string;
+  priceLabel: string;
+  product?: "test";
+}) {
   const [state, action, pending] = useActionState<CheckoutState, FormData>(checkoutAction, {});
   const f = state.fields ?? {};
 
   return (
     <form action={action} className="space-y-5">
+      {product && <input type="hidden" name="product" value={product} />}
       <label className="block">
         <span className="text-sm font-semibold">Vārds, uzvārds (rēķinam)</span>
         <input name="name" required autoComplete="name" defaultValue={f.name ?? defaultName} className={input} />

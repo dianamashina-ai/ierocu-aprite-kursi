@@ -3,7 +3,7 @@ import { randomBytes, randomUUID } from "node:crypto";
 import { and, desc, eq, sql } from "drizzle-orm";
 import { db, schema } from "@/db";
 import type { OrderBuyer } from "@/db/schema";
-import { COURSE_PRODUCT, splitVat } from "@/config/pricing";
+import { COURSE_PRODUCT, productByCode, splitVat, type ProductCode } from "@/config/pricing";
 import { sendEmail } from "@/lib/email/send";
 import { formatEuro } from "@/lib/format";
 import { activeProviderName, invoiceNumber } from "./config";
@@ -28,28 +28,30 @@ const siteUrl = () =>
 
 const providers: Record<ProviderName, PaymentProvider> = { stripe: stripeProvider, montonio: montonioProvider, dev: devProvider, manual: manualProvider };
 
-export async function createOrder(userId: string, buyer: OrderBuyer, opts: { provider?: ProviderName; now?: Date } = {}) {
+export async function createOrder(userId: string, buyer: OrderBuyer, opts: { provider?: ProviderName; now?: Date; product?: ProductCode } = {}) {
+  const product = productByCode(opts.product ?? "full-course");
   const provider = opts.provider ?? activeProviderName();
   if (!provider) throw new BillingError("Maksājumi pašlaik nav pieejami. Lūdzu, mēģini vēlāk.");
   const paid = await db.query.orders.findFirst({
     columns: { id: true },
     where: and(eq(schema.orders.userId, userId), eq(schema.orders.status, "paid")),
   });
-  if (paid) throw new BillingError("Tev jau ir pilna piekļuve kursam.");
+  // Testa pirkumu administrators var veikt arī tad, ja piekļuve jau ir.
+  if (paid && product.code !== "test") throw new BillingError("Tev jau ir pilna piekļuve kursam.");
 
-  const { netCents, vatCents } = splitVat(COURSE_PRODUCT.amountCents, COURSE_PRODUCT.vatRate);
+  const { netCents, vatCents } = splitVat(product.amountCents, product.vatRate);
   const [order] = await db
     .insert(schema.orders)
     .values({
       id: randomUUID(),
       userId,
       provider,
-      product: COURSE_PRODUCT.name,
-      amountCents: COURSE_PRODUCT.amountCents,
+      product: product.name,
+      amountCents: product.amountCents,
       netCents,
       vatCents,
-      vatRate: COURSE_PRODUCT.vatRate,
-      currency: COURSE_PRODUCT.currency,
+      vatRate: product.vatRate,
+      currency: product.currency,
       buyer,
       waiverAcceptedAt: opts.now ?? new Date(),
       createdAt: opts.now ?? new Date(),
@@ -59,8 +61,8 @@ export async function createOrder(userId: string, buyer: OrderBuyer, opts: { pro
 }
 
 /** Izveido pasūtījumu un maksājumu sesiju; atgriež adresi, uz kuru novirzīt pircēju. */
-export async function startCheckout(userId: string, buyer: OrderBuyer, origin = siteUrl()) {
-  const order = await createOrder(userId, buyer);
+export async function startCheckout(userId: string, buyer: OrderBuyer, origin = siteUrl(), product: ProductCode = "full-course") {
+  const order = await createOrder(userId, buyer, { product });
   const site = origin.replace(/\/$/, "");
   const { redirectUrl, providerRef } = await providers[order.provider].createCheckout({
     orderId: order.id,

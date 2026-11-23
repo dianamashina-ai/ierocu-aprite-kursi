@@ -51,6 +51,11 @@ describe.skipIf(!url)("maksājumi (DB)", async () => {
     expect(r2.changed).toBe(false);
     expect(await access.hasFullAccess("u2")).toBe(true);
     await expect(billing.createOrder("u2", buyer, { provider: "dev" })).rejects.toThrow(/jau ir pilna piekļuve/);
+    // Testa produkts (1,50 €) — atļauts arī ar esošu piekļuvi.
+    const t = await billing.createOrder("u2", buyer, { provider: "dev", now: t0, product: "test" });
+    expect(t).toMatchObject({ status: "pending", amountCents: 150, netCents: 124, vatCents: 26, vatRate: 21 });
+    expect(t.product).toMatch(/testa pirkums/);
+    await billing.applyPaymentEvent({ orderId: t.id, status: "canceled" }, "dev", { now: t0 });
   });
 
   it("cita maksājumu sistēma nevar apstiprināt pasūtījumu", async () => {
