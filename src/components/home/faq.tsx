@@ -16,7 +16,7 @@ function items(exam: { questions: number; minutes: number; maxWrong: number }, t
     },
     {
       q: "Vai šī platforma ir saistīta ar Valsts policiju?",
-      a: "Nē. Šī ir neatkarīga mācību platforma eksāmena sagatavošanai, ko piedāvā SIA „Latvijas Praktiskās Šaušanas Centrs”. Tā nav oficiālais eksāmens.",
+      a: "Nē. Šī ir neatkarīga mācību platforma eksāmena sagatavošanai, ko piedāvā SIA „Latvijas Praktiskās Šaušanas Centrs”. Tas nav oficiālais eksāmens.",
     },
     {
       q: "Kā notiek eksāmens?",
