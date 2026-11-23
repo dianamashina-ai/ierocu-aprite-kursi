@@ -27,7 +27,10 @@ export function ProductCard({
   action,
   className = "",
   showVat = false,
+  gray = false,
 }: {
+  /** Baltās kartītes vietā — pelēks fons (pirkuma lapā) */
+  gray?: boolean;
   code: ProductCode;
   /** Kas iekļauts kursā (courseIncluded) */
   courseItems: string[];
@@ -44,7 +47,7 @@ export function ProductCard({
   const { vatCents: vat } = splitVat(p.amountCents, p.vatRate);
 
   return (
-    <article className={`flex flex-col rounded-2xl p-6 sm:p-8 ${dark ? "bg-ink text-white" : "border border-line bg-white"} ${className}`}>
+    <article className={`flex flex-col rounded-2xl p-6 sm:p-8 ${dark ? "bg-ink text-white" : gray ? "bg-surface" : "border border-line bg-white"} ${className}`}>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h3 className={`text-sm ${muted}`}>{p.title}</h3>
         {code === "bundle" && (

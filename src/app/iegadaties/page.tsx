@@ -55,7 +55,7 @@ export default async function BuyPage({ searchParams }: { searchParams: Promise<
                 key={c}
                 href={buyPath(c)}
                 aria-current={active ? "page" : undefined}
-                className={`rounded-xl border-2 px-4 py-3 bg-surface ${active ? "border-accent" : "border-transparent hover:border-line"}`}
+                className={`rounded-xl border-2 px-4 py-3 ${active ? "border-accent bg-accent-soft" : "border-line bg-white hover:border-ink/30"}`}
               >
                 <span className="block font-semibold">{p.title}</span>
                 <span className="block text-sm text-muted tabular-nums">{formatEuro(p.amountCents)}</span>
@@ -65,7 +65,7 @@ export default async function BuyPage({ searchParams }: { searchParams: Promise<
         </nav>
 
       <div className="mt-6 grid gap-6 md:grid-cols-[1fr_1.2fr]">
-        <ProductCard code={code} courseItems={courseIncluded(course.totals, { questions: 40, minutes: 40 })} showVat className="self-start" />
+        <ProductCard code={code} courseItems={courseIncluded(course.totals, { questions: 40, minutes: 40 })} showVat gray className="self-start" />
 
         <section aria-labelledby="pay-h" className="rounded-2xl border border-line bg-white p-5 sm:p-6">
           <h2 id="pay-h" className="text-xl font-semibold">
