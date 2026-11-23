@@ -16,7 +16,7 @@ export async function SiteHeader() {
         { href: "/jautajumi", label: "Jautājumi", match: ["/meklet"] },
       ]
     : [
-        { href: "/#ka-notiek", label: "Kā notiek" },
+        { href: "/#ka-notiek", label: "Par kursu" },
         { href: "/#programma", label: "Programma" },
         { href: "/#prasibas", label: "Prasības" },
         { href: "/#cena", label: "Cenas" },
