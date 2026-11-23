@@ -39,3 +39,18 @@ test("pirkums: forma prasa piekrišanu → testa maksājums → piekļuve un rē
   await page.goto("/iegadaties");
   await expect(page.getByText("Tev jau ir pilna piekļuve kursam.")).toBeVisible();
 });
+
+test("viesis: konts tiek izveidots pirkuma formā → apmaksa → piekļuve", async ({ page }) => {
+  await page.goto("/iegadaties");
+  await page.getByLabel("Vārds, uzvārds (rēķinam)").fill("Anna Ozola");
+  await page.getByLabel("E-pasts").fill(uniqueEmail("guestbuy"));
+  await page.getByLabel("Parole", { exact: true }).fill("Drosa-parole-123!");
+  await page.getByRole("checkbox", { name: /noteikumiem/ }).check();
+  await page.getByRole("checkbox", { name: /atteikuma/ }).check();
+  await page.getByRole("button", { name: /^Maksāt/ }).click();
+  await expect(page).toHaveURL(/\/maksajums\/tests/);
+  await page.getByRole("button", { name: "Apmaksāt (tests)" }).click();
+  await expect(page.getByRole("heading", { name: "Paldies! Pilna piekļuve atvērta" })).toBeVisible();
+  await page.goto("/tema/5-3/trenins");
+  await expect(page.locator("fieldset button").first()).toBeVisible();
+});
