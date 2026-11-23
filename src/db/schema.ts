@@ -269,6 +269,8 @@ export interface OrderBuyer {
   name: string;
   email: string;
   company?: string;
+  /** Tālrunis — praktiskās nodarbības laika saskaņošanai */
+  phone?: string;
   regNo?: string;
   vatNo?: string;
   address?: string;
@@ -289,14 +291,16 @@ export const orders = pgTable(
     /** Stripe Checkout Session id / Montonio order uuid */
     providerRef: text("provider_ref"),
     product: text("product").notNull(),
+    /** Produkta kods (course | lesson | bundle | test) — nosaka, vai pasūtījums atver kursu */
+    productCode: text("product_code").notNull().default("course"),
     amountCents: integer("amount_cents").notNull(),
     netCents: integer("net_cents").notNull(),
     vatCents: integer("vat_cents").notNull(),
     vatRate: integer("vat_rate").notNull(),
     currency: text("currency").notNull().default("EUR"),
     buyer: jsonb("buyer").$type<OrderBuyer>().notNull(),
-    /** Piekrišana tūlītējai piekļuvei digitālajam saturam un atteikuma tiesību zaudēšanai */
-    waiverAcceptedAt: timestamp("waiver_accepted_at", { withTimezone: true }).notNull(),
+    /** Piekrišana tūlītējai piekļuvei digitālajam saturam un atteikuma tiesību zaudēšanai (tikai, ja pirkumā ir kurss) */
+    waiverAcceptedAt: timestamp("waiver_accepted_at", { withTimezone: true }),
     invoiceNumber: text("invoice_number").unique(),
     /** Administratora piezīme (manuālai piekļuvei: veids, čeka Nr. u. tml.) */
     note: text("note"),

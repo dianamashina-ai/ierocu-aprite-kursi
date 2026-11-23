@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
-import { COURSE_PRODUCT } from "@/config/pricing";
+import { BUNDLE_PRODUCT, COURSE_PRODUCT, LESSON_PRODUCT } from "@/config/pricing";
 import { formatEuro } from "@/lib/format";
 
 /**
@@ -43,11 +43,15 @@ function items(exam: { questions: number; minutes: number; maxWrong: number }, t
     },
     {
       q: "Cik maksā pilns kurss un kā to apmaksāt?",
-      a: `${formatEuro(COURSE_PRODUCT.amountCents)} ar PVN — vienreizējs maksājums, nevis abonements. Apmaksa notiek tiešsaistē, un PVN rēķins tiek nosūtīts uz e-pastu.`,
+      a: `${formatEuro(COURSE_PRODUCT.amountCents)} ar PVN — vienreizējs maksājums, nevis abonements. Apmaksa notiek tiešsaistē ar internetbanku vai karti (arī Apple Pay un Google Pay), un PVN rēķins tiek nosūtīts uz e-pastu.`,
+    },
+    {
+      q: "Kas ir praktiskā nodarbība?",
+      a: `Nodarbība mūsu šautuvē ar sertificētu instruktoru: iepazīšanās ar kaujas ieroci un 30 izmēģinājuma šāvieni. Cena — ${formatEuro(LESSON_PRODUCT.amountCents)}, kopā ar pilnu kursu — ${formatEuro(BUNDLE_PRODUCT.amountCents)}. Datumu un laiku saskaņo pēc iegādes — administrators ar tevi sazināsies.`,
     },
     {
       q: "Vai varu atteikties no pirkuma?",
-      a: "Pilna piekļuve ir digitālais saturs, kas tiek atvērts uzreiz pēc apmaksas. Pirms apmaksas tu piekrīti tūlītējai piekļuvei, un tādēļ 14 dienu atteikuma tiesības vairs nav piemērojamas.",
+      a: "Pilna piekļuve kursam ir digitālais saturs, kas tiek atvērts uzreiz pēc apmaksas. Pirms apmaksas tu piekrīti tūlītējai piekļuvei, un tādēļ 14 dienu atteikuma tiesības vairs nav piemērojamas. No praktiskās nodarbības vari atteikties 14 dienu laikā, kamēr tā vēl nav notikusi.",
       link: { href: "/noteikumi", label: "Lietošanas un pirkšanas noteikumi" },
     },
     {

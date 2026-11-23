@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { isProductCode, PRODUCTS } from "@/config/pricing";
 import { listOrders, type OrderStatus } from "@/lib/backoffice/service";
 import { formatDateTime, formatEuro } from "@/lib/format";
 import { OrderStatusBadge } from "@/components/admin/status-badge";
@@ -65,6 +66,17 @@ export default async function OrdersPage({ searchParams }: { searchParams: Promi
               <span className="tabular-nums text-muted">{formatDateTime(o.createdAt)}</span>
               <span className="min-w-0">
                 <span className="block truncate font-semibold">{o.buyer.name}</span>
+                <span className="block truncate">
+                  {isProductCode(o.productCode) ? PRODUCTS[o.productCode].title : o.product}
+                  {o.buyer.phone && (
+                    <>
+                      {" · "}
+                      <a href={`tel:${o.buyer.phone.replace(/\s/g, "")}`} className="font-semibold underline underline-offset-2">
+                        {o.buyer.phone}
+                      </a>
+                    </>
+                  )}
+                </span>
                 <Link href={`/admin/lietotaji/${o.userId}`} className="block truncate text-muted underline-offset-2 hover:text-ink hover:underline">{email}</Link>
                 <span className="block text-xs text-muted">
                   {o.invoiceNumber ? (

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { SELLER } from "@/config/seller";
-import { COURSE_PRODUCT, splitVat } from "@/config/pricing";
+import { BUNDLE_PRODUCT, COURSE_PRODUCT, LESSON_PRODUCT, splitVat } from "@/config/pricing";
 import { formatEuro } from "@/lib/format";
 import { H2, LegalPage, List } from "@/components/legal/legal-page";
 
@@ -13,11 +13,13 @@ const a = "font-semibold text-accent-strong underline underline-offset-4";
 
 /** Pirms palaišanas ieteicams pārskatīt juristam. */
 export default function TermsPage() {
-  const { vatCents } = splitVat(COURSE_PRODUCT.amountCents, COURSE_PRODUCT.vatRate);
+  const price = (p: { amountCents: number; vatRate: number }) =>
+    `${formatEuro(p.amountCents)}, t. sk. PVN ${p.vatRate} % (${formatEuro(splitVat(p.amountCents, p.vatRate).vatCents)})`;
+  const lessonPartRefund = BUNDLE_PRODUCT.amountCents - COURSE_PRODUCT.amountCents;
   return (
     <LegalPage title="Lietošanas un pirkšanas noteikumi">
       <p>
-        Šie noteikumi attiecas uz mācību platformas {SELLER.website} lietošanu un pilnas piekļuves iegādi. Izveidojot kontu vai
+        Šie noteikumi attiecas uz mācību platformas {SELLER.website} lietošanu, pilnas piekļuves un praktiskās nodarbības iegādi. Izveidojot kontu vai
         veicot pirkumu, jūs piekrītat šiem noteikumiem.
       </p>
 
@@ -42,6 +44,11 @@ export default function TermsPage() {
         pieņem Valsts policija.
       </p>
       <p>1. modulis ir pieejams bez maksas. Pilna piekļuve atver visus moduļus, nodarbības, skaidrojumus un izmēģinājuma eksāmenu.</p>
+      <p>
+        <strong>Praktiskā nodarbība</strong> notiek pakalpojuma sniedzēja šautuvē ar sertificētu instruktoru un ietver iepazīšanos ar
+        kaujas ieroci un 30 izmēģinājuma šāvienus. Nodarbības datumu un laiku saskaņo pēc iegādes — administrators sazinās ar
+        pircēju pa tālruni vai e-pastu. Nodarbību var iegādāties atsevišķi vai komplektā ar pilnu piekļuvi kursam.
+      </p>
 
       <H2>3. Konts un lietošana</H2>
       <List>
@@ -62,13 +69,17 @@ export default function TermsPage() {
       </List>
 
       <H2>4. Cena un apmaksa</H2>
+      <List>
+        <li>Pilna piekļuve kursam — {price(COURSE_PRODUCT)}.</li>
+        <li>Praktiskā nodarbība — {price(LESSON_PRODUCT)}.</li>
+        <li>Pilna piekļuve kursam + praktiskā nodarbība — {price(BUNDLE_PRODUCT)}.</li>
+      </List>
       <p>
-        Pilnas piekļuves cena ir {formatEuro(COURSE_PRODUCT.amountCents)}, t. sk. PVN {COURSE_PRODUCT.vatRate} % (
-        {formatEuro(vatCents)}). Tas ir <strong>vienreizējs maksājums</strong>, nevis abonements — atkārtoti maksājumi netiek
-        iekasēti. Apmaksa notiek tiešsaistē caur maksājumu pakalpojuma sniedzēju.
+        Katrs pirkums ir <strong>vienreizējs maksājums</strong>, nevis abonements — atkārtoti maksājumi netiek iekasēti. Apmaksa
+        notiek tiešsaistē caur maksājumu pakalpojuma sniedzēju.
       </p>
       <p>
-        Pēc apmaksas piekļuve tiek piesaistīta jūsu kontam uzreiz, un uz konta e-pastu tiek nosūtīts elektronisks PVN rēķins.
+        Pēc apmaksas pirkums tiek piesaistīts jūsu kontam uzreiz, un uz konta e-pastu tiek nosūtīts elektronisks PVN rēķins.
         Rēķini pieejami arī sadaļā «Profils». Pakalpojums paredzēts fiziskām personām.
       </p>
 
@@ -80,8 +91,17 @@ export default function TermsPage() {
 
       <H2>6. Atteikuma tiesības</H2>
       <p>
-        Pakalpojums ir digitālais saturs, ko nodrošina uzreiz pēc apmaksas. Pirms apmaksas pircējs nepārprotami piekrīt tūlītējai
+        Pilna piekļuve kursam ir digitālais saturs, ko nodrošina uzreiz pēc apmaksas. Pirms apmaksas pircējs nepārprotami piekrīt tūlītējai
         satura piegādei un apliecina, ka zina: līdz ar to viņš zaudē 14 dienu atteikuma tiesības.
+      </p>
+      <p>
+        Praktiskās nodarbības pirkumam ir 14 dienu atteikuma tiesības no pirkuma dienas. Ja pēc jūsu lūguma nodarbība notiek
+        šajā laikā, atteikuma tiesības beidzas, kad nodarbība ir notikusi. Lai atteiktos, rakstiet uz{" "}
+        <a href={`mailto:${SELLER.email}`} className={a}>
+          {SELLER.email}
+        </a>
+        ; naudu atmaksāsim 14 dienu laikā. Komplektā atteikuma tiesības attiecas tikai uz nodarbību — atmaksājam{" "}
+        {formatEuro(lessonPartRefund)}.
       </p>
       <p>
         Ja apmaksātā piekļuve tehnisku iemeslu dēļ netika atvērta vai maksājums tika iekasēts kļūdaini, rakstiet mums — situāciju

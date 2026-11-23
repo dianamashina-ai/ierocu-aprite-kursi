@@ -6,13 +6,30 @@ import { useState } from "react";
 import { CreditCard, Landmark } from "lucide-react";
 import { checkoutAction, type CheckoutState } from "@/app/actions/billing";
 import type { PayMethod } from "@/lib/billing/types";
+import {
+  LESSON_SCHEDULING,
+  productByCode,
+  type ProductCode,
+} from "@/config/pricing";
 
-const METHOD_LABEL: Record<PayMethod, { title: string; hint: string; Icon: typeof Landmark }> = {
-  bank: { title: "Internetbanka", hint: "Swedbank, SEB, Citadele, Luminor", Icon: Landmark },
-  card: { title: "Karte, Apple Pay, Google Pay", hint: "Visa, Mastercard", Icon: CreditCard },
+const METHOD_LABEL: Record<
+  PayMethod,
+  { title: string; hint: string; Icon: typeof Landmark }
+> = {
+  bank: {
+    title: "Internetbanka",
+    hint: "Swedbank, SEB, Citadele, Luminor",
+    Icon: Landmark,
+  },
+  card: {
+    title: "Karte, Apple Pay, Google Pay",
+    hint: "Visa, Mastercard",
+    Icon: CreditCard,
+  },
 };
 
-const input = "mt-1 block min-h-12 w-full rounded-xl border-2 border-line bg-white px-4 text-base";
+const input =
+  "mt-1 block min-h-12 w-full rounded-xl border-2 border-line bg-white px-4 text-base";
 
 export function CheckoutForm({
   email,
@@ -24,42 +41,89 @@ export function CheckoutForm({
   email: string;
   defaultName: string;
   priceLabel: string;
-  product?: "test";
+  product: ProductCode;
   methods?: PayMethod[];
 }) {
   const [method, setMethod] = useState<PayMethod>(methods[0] ?? "bank");
-  const [state, action, pending] = useActionState<CheckoutState, FormData>(checkoutAction, {});
+  const [state, action, pending] = useActionState<CheckoutState, FormData>(
+    checkoutAction,
+    {},
+  );
   const f = state.fields ?? {};
+  const p = productByCode(product);
 
   return (
     <form action={action} className="space-y-5">
-      {product && <input type="hidden" name="product" value={product} />}
+      <input type="hidden" name="product" value={product} />
       <label className="block">
         <span className="text-sm font-semibold">Vārds, uzvārds (rēķinam)</span>
-        <input name="name" required autoComplete="name" defaultValue={f.name ?? defaultName} className={input} />
+        <input
+          name="name"
+          required
+          autoComplete="name"
+          defaultValue={f.name ?? defaultName}
+          className={input}
+        />
       </label>
+      {p.includesLesson && (
+        <label className="block">
+          <span className="text-sm font-semibold">Tālrunis</span>
+          <input
+            name="phone"
+            type="tel"
+            required
+            autoComplete="tel"
+            inputMode="tel"
+            placeholder="+371 20000000"
+            defaultValue={f.phone ?? ""}
+            className={input}
+          />
+          <span className="mt-1 block text-sm text-muted">
+            {LESSON_SCHEDULING}
+          </span>
+        </label>
+      )}
       <p className="text-sm text-muted">
         Rēķins tiks nosūtīts uz <strong className="text-ink">{email}</strong>.
       </p>
 
       <div className="space-y-3 border-t border-line pt-5">
         <label className="flex items-start gap-3">
-          <input type="checkbox" name="terms" required defaultChecked={f.terms === "on"} className="mt-1 size-5 shrink-0 accent-[var(--color-accent)]" />
+          <input
+            type="checkbox"
+            name="terms"
+            required
+            defaultChecked={f.terms === "on"}
+            className="mt-1 size-5 shrink-0 accent-[var(--color-accent)]"
+          />
           <span className="text-sm">
             Esmu iepazinies un piekrītu{" "}
-            <Link href="/noteikumi" target="_blank" className="font-semibold text-accent-strong underline underline-offset-2">
+            <Link
+              href="/noteikumi"
+              target="_blank"
+              className="font-semibold text-accent-strong underline underline-offset-2"
+            >
               lietošanas un pirkšanas noteikumiem
             </Link>
             .
           </span>
         </label>
-        <label className="flex items-start gap-3">
-          <input type="checkbox" name="waiver" required defaultChecked={f.waiver === "on"} className="mt-1 size-5 shrink-0 accent-[var(--color-accent)]" />
-          <span className="text-sm">
-            Piekrītu, ka piekļuve digitālajam saturam tiek nodrošināta uzreiz pēc apmaksas, un apzinos, ka tādējādi zaudēju
-            14 dienu atteikuma tiesības.
-          </span>
-        </label>
+        {p.includesCourse && (
+          <label className="flex items-start gap-3">
+            <input
+              type="checkbox"
+              name="waiver"
+              required
+              defaultChecked={f.waiver === "on"}
+              className="mt-1 size-5 shrink-0 accent-[var(--color-accent)]"
+            />
+            <span className="text-sm">
+              Piekrītu, ka piekļuve digitālajam saturam tiek nodrošināta uzreiz
+              pēc apmaksas, un apzinos, ka tādējādi zaudēju 14 dienu atteikuma
+              tiesības{p.includesLesson ? " uz tiešsaistes kursu" : ""}.
+            </span>
+          </label>
+        )}
       </div>
 
       {methods.length > 1 ? (
@@ -80,7 +144,10 @@ export function CheckoutForm({
                   onChange={() => setMethod(m)}
                   className="size-5 shrink-0 accent-[var(--color-accent)]"
                 />
-                <Icon aria-hidden="true" className="size-5 shrink-0 text-muted" />
+                <Icon
+                  aria-hidden="true"
+                  className="size-5 shrink-0 text-muted"
+                />
                 <span className="min-w-0">
                   <span className="block font-semibold">{title}</span>
                   <span className="block text-sm text-muted">{hint}</span>
@@ -94,11 +161,18 @@ export function CheckoutForm({
       )}
 
       {state.error && (
-        <p role="alert" className="rounded-lg bg-err-soft px-3 py-2 text-sm text-err">
+        <p
+          role="alert"
+          className="rounded-lg bg-err-soft px-3 py-2 text-sm text-err"
+        >
           {state.error}
         </p>
       )}
-      <button type="submit" disabled={pending} className="btn-primary w-full sm:w-auto">
+      <button
+        type="submit"
+        disabled={pending}
+        className="btn-primary w-full sm:w-auto"
+      >
         {pending ? "Notiek pāradresācija…" : `Maksāt ${priceLabel}`}
       </button>
     </form>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { isProductCode, PRODUCTS } from "@/config/pricing";
 import { notFound } from "next/navigation";
 import { getUserDetail } from "@/lib/backoffice/service";
 import { describeDevice } from "@/lib/backoffice/user-agent";
@@ -54,6 +55,11 @@ export default async function UserPage({ params }: { params: Promise<{ id: strin
                   ) : (
                     (o.note ?? "bez rēķina")
                   )}
+                  <span className="text-muted">
+                    {" · "}
+                    {isProductCode(o.productCode) ? PRODUCTS[o.productCode].title : o.product}
+                    {o.buyer.phone ? ` · ${o.buyer.phone}` : ""}
+                  </span>
                 </span>
                 <span className="tabular-nums">{formatEuro(o.amountCents)}</span>
                 <OrderStatusBadge status={o.status} provider={o.provider} />

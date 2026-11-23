@@ -3,7 +3,8 @@ import { randomBytes, randomUUID } from "node:crypto";
 import { and, desc, eq, sql } from "drizzle-orm";
 import { db, schema } from "@/db";
 import type { OrderBuyer } from "@/db/schema";
-import { COURSE_PRODUCT, productByCode, splitVat, type ProductCode } from "@/config/pricing";
+import { COURSE_PRODUCT, LESSON_SCHEDULING, productByCode, splitVat, type ProductCode } from "@/config/pricing";
+import { courseAccessWhere } from "./access";
 import { sendEmail } from "@/lib/email/send";
 import { formatEuro } from "@/lib/format";
 import { activeProviderName, invoiceNumber } from "./config";
@@ -29,15 +30,20 @@ const siteUrl = () =>
 const providers: Record<ProviderName, PaymentProvider> = { stripe: stripeProvider, montonio: montonioProvider, dev: devProvider, manual: manualProvider };
 
 export async function createOrder(userId: string, buyer: OrderBuyer, opts: { provider?: ProviderName; now?: Date; product?: ProductCode } = {}) {
-  const product = productByCode(opts.product ?? "full-course");
+  const product = productByCode(opts.product ?? "course");
   const provider = opts.provider ?? activeProviderName();
   if (!provider) throw new BillingError("Maksājumi pašlaik nav pieejami. Lūdzu, mēģini vēlāk.");
-  const paid = await db.query.orders.findFirst({
-    columns: { id: true },
-    where: and(eq(schema.orders.userId, userId), eq(schema.orders.status, "paid")),
-  });
-  // Testa pirkumu administrators var veikt arī tad, ja piekļuve jau ir.
-  if (paid && product.code !== "test") throw new BillingError("Tev jau ir pilna piekļuve kursam.");
+  if (product.includesLesson && !buyer.phone) throw new BillingError("Norādi tālruni — administrators sazināsies, lai saskaņotu nodarbības laiku.");
+  // Kursu otrreiz nepārdodam; praktisko nodarbību (un testa pirkumu) var pirkt arī ar esošu piekļuvi.
+  if (product.code === "course" || product.code === "bundle") {
+    const paid = await db.query.orders.findFirst({ columns: { id: true }, where: courseAccessWhere(userId) });
+    if (paid)
+      throw new BillingError(
+        product.code === "bundle"
+          ? "Tev jau ir pilna piekļuve kursam — praktisko nodarbību vari iegādāties atsevišķi."
+          : "Tev jau ir pilna piekļuve kursam.",
+      );
+  }
 
   const { netCents, vatCents } = splitVat(product.amountCents, product.vatRate);
   const [order] = await db
@@ -47,13 +53,14 @@ export async function createOrder(userId: string, buyer: OrderBuyer, opts: { pro
       userId,
       provider,
       product: product.name,
+      productCode: product.code,
       amountCents: product.amountCents,
       netCents,
       vatCents,
       vatRate: product.vatRate,
       currency: product.currency,
       buyer,
-      waiverAcceptedAt: opts.now ?? new Date(),
+      waiverAcceptedAt: product.includesCourse ? (opts.now ?? new Date()) : null,
       createdAt: opts.now ?? new Date(),
     })
     .returning();
@@ -65,7 +72,7 @@ export async function startCheckout(
   userId: string,
   buyer: OrderBuyer,
   origin = siteUrl(),
-  product: ProductCode = "full-course",
+  product: ProductCode = "course",
   method: PayMethod = "bank",
 ) {
   const order = await createOrder(userId, buyer, { product });
@@ -85,10 +92,6 @@ export async function startCheckout(
   return redirectUrl;
 }
 
-/**
- * Piemēro maksājumu sistēmas paziņojumu (idempotenti — paziņojumi var atkārtoties).
- * Rēķina numuru piešķir tikai pirmajā pārejā uz "paid".
- */
 /** Maksāšanas veidi, ko rādīt pirkuma lapā. */
 export async function availablePayMethods(): Promise<PayMethod[]> {
   const p = activeProviderName();
@@ -97,6 +100,10 @@ export async function availablePayMethods(): Promise<PayMethod[]> {
   return ["bank"];
 }
 
+/**
+ * Piemēro maksājumu sistēmas paziņojumu (idempotenti — paziņojumi var atkārtoties).
+ * Rēķina numuru piešķir tikai pirmajā pārejā uz "paid".
+ */
 export async function applyPaymentEvent(ev: PaymentEvent, provider: ProviderName, opts: { now?: Date } = {}) {
   const now = opts.now ?? new Date();
   const result = await db.transaction(async (tx) => {
@@ -130,16 +137,41 @@ export async function applyPaymentEvent(ev: PaymentEvent, provider: ProviderName
 }
 
 async function sendReceipt(order: typeof schema.orders.$inferSelect) {
+  const product = productByCode((order.productCode as ProductCode) ?? "course");
   const link = `${siteUrl()}/rekins/${order.id}`;
+  const lines = [
+    `Sveiki, ${order.buyer.name}!`,
+    "",
+    `Maksājums ${formatEuro(order.amountCents)} saņemts: ${product.title}.`,
+    product.includesCourse ? "Tagad tev ir pieejami visi kursa moduļi, nodarbības un izmēģinājuma eksāmens." : "",
+    product.includesLesson ? `${LESSON_SCHEDULING} Tālrunis: ${order.buyer.phone ?? "—"}.` : "",
+    "",
+    `Rēķins ${order.invoiceNumber}: ${link}`,
+    product.includesCourse ? `Sākt mācīties: ${siteUrl()}/` : "",
+  ].filter((l, i, arr) => l !== "" || (i > 0 && arr[i - 1] !== ""));
   await sendEmail({
     to: order.buyer.email,
-    subject: `Paldies! Pilna piekļuve kursam atvērta — rēķins ${order.invoiceNumber}`,
-    text:
-      `Sveiki, ${order.buyer.name}!\n\n` +
-      `Maksājums ${formatEuro(order.amountCents)} saņemts — tagad tev ir pieejami visi kursa moduļi, nodarbības un izmēģinājuma eksāmens.\n\n` +
-      `Rēķins ${order.invoiceNumber}: ${link}\n` +
-      `Sākt mācīties: ${siteUrl()}/\n`,
+    subject: `Paldies par pirkumu — ${product.title}, rēķins ${order.invoiceNumber}`,
+    text: lines.join("\n") + "\n",
   });
+  if (product.includesLesson) await notifyAdminsLesson(order, product.title).catch((e) => console.error("Admin e-pasts:", e));
+}
+
+/** Administratoriem: jauns praktiskās nodarbības pirkums — jāsazinās ar pircēju. */
+async function notifyAdminsLesson(order: typeof schema.orders.$inferSelect, title: string) {
+  const to = (process.env.ADMIN_EMAILS ?? "")
+    .split(/[,;\s]+/)
+    .map((e) => e.trim().replace(/^["'<]+|["'>]+$/g, ""))
+    .filter(Boolean);
+  for (const addr of to)
+    await sendEmail({
+      to: addr,
+    subject: `Jauns pieteikums praktiskajai nodarbībai — ${order.buyer.name}`,
+    text:
+      `${title}, ${formatEuro(order.amountCents)} (rēķins ${order.invoiceNumber}).\n\n` +
+      `Vārds: ${order.buyer.name}\nE-pasts: ${order.buyer.email}\nTālrunis: ${order.buyer.phone ?? "—"}\n\n` +
+      `Sazinies, lai saskaņotu nodarbības datumu un laiku.\n${siteUrl()}/admin/pasutijumi\n`,
+    });
 }
 
 export async function getOrderForUser(orderId: string, userId: string) {
@@ -173,7 +205,9 @@ export async function refundOrder(orderId: string, opts: { now?: Date } = {}) {
       text:
         `Sveiki, ${result.order.buyer.name}!\n\n` +
         `Esam atmaksājuši ${formatEuro(result.order.amountCents)} par rēķinu ${result.order.invoiceNumber}. ` +
-        `Nauda atgriezīsies tajā pašā maksāšanas veidā dažu darba dienu laikā. Pilna piekļuve kursam ir slēgta, 1. modulis paliek pieejams.\n`,
+        `Nauda atgriezīsies tajā pašā maksāšanas veidā dažu darba dienu laikā.` +
+        (productByCode(result.order.productCode as ProductCode)?.includesCourse ? " Pilna piekļuve kursam ir slēgta, 1. modulis paliek pieejams." : "") +
+        "\n",
     }).catch((e) => console.error("Atmaksas e-pasts:", e));
   }
   return result;
@@ -218,10 +252,7 @@ export async function grantManualAccess(
       .returning();
     created = true;
   }
-  const paid = await db.query.orders.findFirst({
-    columns: { id: true },
-    where: and(eq(schema.orders.userId, account.id), eq(schema.orders.status, "paid")),
-  });
+  const paid = await db.query.orders.findFirst({ columns: { id: true }, where: courseAccessWhere(account.id) });
   if (paid) throw new BillingError("Šim lietotājam jau ir pilna piekļuve");
 
   const amount = input.method === "cash" ? COURSE_PRODUCT.amountCents : 0;
@@ -235,6 +266,7 @@ export async function grantManualAccess(
       provider: "manual",
       status: "paid",
       product: COURSE_PRODUCT.name,
+      productCode: COURSE_PRODUCT.code,
       amountCents: amount,
       netCents,
       vatCents,

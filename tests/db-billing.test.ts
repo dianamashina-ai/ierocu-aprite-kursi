@@ -56,6 +56,11 @@ describe.skipIf(!url)("maksājumi (DB)", async () => {
     expect(t).toMatchObject({ status: "pending", amountCents: 150, netCents: 124, vatCents: 26, vatRate: 21 });
     expect(t.product).toMatch(/testa pirkums/);
     await billing.applyPaymentEvent({ orderId: t.id, status: "canceled" }, "dev", { now: t0 });
+    // Komplektu ar esošu piekļuvi nepārdodam; nodarbību — var.
+    await expect(billing.createOrder("u2", { ...buyer, phone: "+371 20000000" }, { provider: "dev", product: "bundle" })).rejects.toThrow(/atsevišķi/);
+    const l = await billing.createOrder("u2", { ...buyer, phone: "+371 20000000" }, { provider: "dev", now: t0, product: "lesson" });
+    expect(l).toMatchObject({ productCode: "lesson", amountCents: 7000, waiverAcceptedAt: null });
+    await billing.applyPaymentEvent({ orderId: l.id, status: "canceled" }, "dev", { now: t0 });
   });
 
   it("cita maksājumu sistēma nevar apstiprināt pasūtījumu", async () => {
@@ -225,4 +230,16 @@ describe.skipIf(!url)("maksājumi (DB)", async () => {
     });
     expect(training.parseTrainingParams({ skaits: "999" })).toEqual({ moduleIds: [], mistakesOnly: false, limit: 0 });
   });
+  it("praktiskā nodarbība: vajag tālruni; apmaksāta neatver kursu; komplekts atver", async () => {
+    await db.insert(schema.user).values({ id: "u5", name: "Pēteris", email: "peteris@example.com" });
+    await expect(billing.createOrder("u5", buyer, { provider: "dev", product: "lesson" })).rejects.toThrow(/tālruni/);
+    const l = await billing.createOrder("u5", { ...buyer, phone: "+371 20000000" }, { provider: "dev", now: t0, product: "lesson" });
+    await billing.applyPaymentEvent({ orderId: l.id, status: "paid" }, "dev", { now: t0 });
+    expect(await access.hasFullAccess("u5")).toBe(false);
+    const b = await billing.createOrder("u5", { ...buyer, phone: "+371 20000000" }, { provider: "dev", now: t0, product: "bundle" });
+    expect(b).toMatchObject({ productCode: "bundle", amountCents: 18000, netCents: 14876, vatCents: 3124 });
+    await billing.applyPaymentEvent({ orderId: b.id, status: "paid" }, "dev", { now: t0 });
+    expect(await access.hasFullAccess("u5")).toBe(true);
+  });
+
 });

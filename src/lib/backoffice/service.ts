@@ -1,4 +1,5 @@
 import "server-only";
+import { COURSE_ACCESS_CODES, type ProductCode } from "@/config/pricing";
 import { and, asc, count, desc, eq, gte, ilike, inArray, ne, or, sql, sum } from "drizzle-orm";
 import { db, schema } from "@/db";
 import { activeSessions, deviceCounts, recentLogins, SHARING_DEVICE_THRESHOLD } from "@/lib/auth/devices";
@@ -63,7 +64,10 @@ export async function listUsers({ q, limit = 100 }: { q?: string; limit?: number
   if (!rows.length) return [];
   const ids = rows.map((r) => r.id);
   const [paid, answered, devices] = await Promise.all([
-    db.selectDistinct({ userId: orders.userId }).from(orders).where(and(inArray(orders.userId, ids), eq(orders.status, "paid"))),
+    db
+      .selectDistinct({ userId: orders.userId })
+      .from(orders)
+      .where(and(inArray(orders.userId, ids), eq(orders.status, "paid"), inArray(orders.productCode, COURSE_ACCESS_CODES))),
     db
       .select({ userId: answers.userId, n: count(), last: sql<Date>`max(${answers.answeredAt})` })
       .from(answers)
@@ -98,7 +102,7 @@ export async function getUserDetail(id: string) {
   return {
     user: u,
     orders: userOrders,
-    access: userOrders.some((o) => o.status === "paid"),
+    access: userOrders.some((o) => o.status === "paid" && COURSE_ACCESS_CODES.includes(o.productCode as ProductCode)),
     sessions,
     logins,
     answers: Number(ans.n),

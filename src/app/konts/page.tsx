@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { COURSE_ACCESS_CODES, type ProductCode } from "@/config/pricing";
 import { CheckCircle2 } from "lucide-react";
 import { requireUser } from "@/lib/auth/session";
 import { hasFullAccess } from "@/lib/billing/access";
@@ -27,7 +28,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
   const user = await requireUser("/konts");
   const [{ epasts }, access, orders] = await Promise.all([searchParams, hasFullAccess(user.id), getOrdersForUser(user.id)]);
   const paid = orders.filter((o) => o.invoiceNumber);
-  const activeSince = orders.find((o) => o.status === "paid")?.paidAt;
+  const activeSince = orders.find((o) => o.status === "paid" && COURSE_ACCESS_CODES.includes(o.productCode as ProductCode))?.paidAt;
 
   return (
     <div className="page-white">

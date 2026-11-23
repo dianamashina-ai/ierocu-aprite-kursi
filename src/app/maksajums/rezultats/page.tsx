@@ -5,7 +5,7 @@ import { applyPaymentEvent, getOrderForUser } from "@/lib/billing/service";
 import { fetchStripeSessionStatus } from "@/lib/billing/providers/stripe";
 import { montonioTokenToPayment } from "@/lib/billing/providers/montonio";
 import { formatEuro } from "@/lib/format";
-import { TEST_PRODUCT } from "@/config/pricing";
+import { buyPath, isProductCode, LESSON_SCHEDULING, productByCode } from "@/config/pricing";
 import { AutoRefresh } from "@/components/billing/auto-refresh";
 
 export const dynamic = "force-dynamic";
@@ -33,7 +33,9 @@ export default async function PaymentResultPage({ searchParams }: { searchParams
 
   // Montonio atgrieza pircēju, bet maksājums nav apmaksāts (piem., “Atcelt maksājumu”).
   // Pasūtījumu neatceļam — ja banka tomēr apstiprinās, paziņojums atvērs piekļuvi un lapa atjaunosies.
-  const retryHref = order.product === TEST_PRODUCT.name ? "/iegadaties?produkts=test" : "/iegadaties";
+  const code = isProductCode(order.productCode) ? order.productCode : "course";
+  const product = productByCode(code);
+  const retryHref = buyPath(code);
   const returnedUnpaid = order.status === "pending" && order.provider === "montonio" && tokenEv?.orderId === order.id && tokenEv.status !== "paid";
 
   return (
@@ -41,12 +43,19 @@ export default async function PaymentResultPage({ searchParams }: { searchParams
       {order.status === "paid" ? (
         <section className="rounded-2xl border border-line bg-white p-6 sm:p-8">
           <p className="text-4xl" aria-hidden="true">🎯</p>
-          <h1 className="mt-2 text-2xl font-semibold">Paldies! Pilna piekļuve atvērta</h1>
+          <h1 className="mt-2 text-2xl font-semibold">
+            {product.includesCourse ? "Paldies! Pilna piekļuve atvērta" : "Paldies! Praktiskā nodarbība iegādāta"}
+          </h1>
           <p className="mt-2 text-muted">
             Maksājums {formatEuro(order.amountCents)} saņemts. Rēķins {order.invoiceNumber} nosūtīts uz {order.buyer.email}.
           </p>
+          {product.includesLesson && (
+            <p className="mt-3 rounded-lg bg-accent-soft px-3 py-2">
+              {LESSON_SCHEDULING} {order.buyer.phone && <>Tālrunis: <strong>{order.buyer.phone}</strong>.</>}
+            </p>
+          )}
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/" className="btn-primary">Sākt mācīties</Link>
+            <Link href="/" className="btn-primary">{product.includesCourse ? "Sākt mācīties" : "Uz sākumu"}</Link>
             <Link href={`/rekins/${order.id}`} className="btn-secondary">Skatīt rēķinu</Link>
           </div>
         </section>

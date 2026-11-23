@@ -68,7 +68,7 @@ export const montonioProvider: PaymentProvider = {
               method: "paymentInitiation",
               amount,
               currency: i.currency,
-              methodOptions: { preferredCountry: "LV", preferredLocale: "lv", paymentDescription: `Ieroču atļauja — pilna piekļuve (${i.orderId.slice(0, 8)})` },
+              methodOptions: { preferredCountry: "LV", preferredLocale: "lv", paymentDescription: `Ieroču atļauja — pasūtījums ${i.orderId.slice(0, 8)}` },
             },
       iat: Math.floor(Date.now() / 1000),
       exp: Math.floor(Date.now() / 1000) + 600,

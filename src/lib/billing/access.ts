@@ -1,9 +1,14 @@
 import "server-only";
 import { cache } from "react";
 import { redirect } from "next/navigation";
-import { and, eq } from "drizzle-orm";
+import { and, eq, inArray } from "drizzle-orm";
 import { db, schema } from "@/db";
 import { FREE_MODULE_IDS } from "@/config/exam";
+import { COURSE_ACCESS_CODES } from "@/config/pricing";
+
+/** Apmaksāts pasūtījums, kas atver kursu (kurss, komplekts vai testa pirkums; ne tikai praktiskā nodarbība). */
+export const courseAccessWhere = (userId: string) =>
+  and(eq(schema.orders.userId, userId), eq(schema.orders.status, "paid"), inArray(schema.orders.productCode, COURSE_ACCESS_CODES));
 
 export const isFreeModule = (moduleId: string) => (FREE_MODULE_IDS as readonly string[]).includes(moduleId);
 export const moduleOfTopic = (topicId: string) => `M${topicId.split(".")[0]}`;
@@ -13,7 +18,7 @@ export const hasFullAccess = cache(async (userId: string | null | undefined): Pr
   if (!userId) return false;
   const row = await db.query.orders.findFirst({
     columns: { id: true },
-    where: and(eq(schema.orders.userId, userId), eq(schema.orders.status, "paid")),
+    where: courseAccessWhere(userId),
   });
   return Boolean(row);
 });
