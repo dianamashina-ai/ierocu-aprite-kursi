@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ArrowUpRight, BookOpen, Check, ClipboardCheck, Clock, Crosshair, RotateCcw, Repeat, X } from "lucide-react";
 import { LessonBlocks } from "@/components/lesson-body";
 import type { Block } from "@/lib/content/lesson-markdown";
-import { buyPath, LESSON_INCLUDES } from "@/config/pricing";
+import { LESSON_INCLUDES } from "@/config/pricing";
 import type { PracticeQuestion } from "@/lib/quiz/types";
 import { uppercaseLetterRefs } from "@/lib/quiz/shuffle";
 
@@ -163,9 +163,9 @@ function PracticalStep() {
       <p className="mt-4 rounded-xl bg-surface px-4 py-3 text-sm text-muted">
         Nodarbība nav obligāta ieroču atļaujas saņemšanai. Tā palīdz justies drošāk, pirmo reizi turot ieroci rokās.
       </p>
-      <Link href={buyPath("lesson")} className="btn-secondary mt-5 w-full sm:w-auto">
-        Iegādāties nodarbību
-      </Link>
+      <a href="#cena" className="btn-secondary mt-5 w-full sm:w-auto">
+        Cenas un piedāvājumi
+      </a>
     </Frame>
   );
 }
