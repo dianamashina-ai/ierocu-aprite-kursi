@@ -55,7 +55,7 @@ export function FamilyDrawer({ familyId, from, label }: { familyId: number; from
               <h2 id="family-drawer-h" className="font-semibold">
                 {data?.heading ?? "Līdzīgie jautājumi"}
               </h2>
-              <button ref={closeRef} type="button" onClick={() => setOpen(false)} aria-label="Aizvērt" className="-mr-2 inline-flex size-10 items-center justify-center rounded-lg text-muted hover:bg-accent-soft hover:text-ink">
+              <button ref={closeRef} type="button" onClick={() => setOpen(false)} aria-label="Aizvērt" className="-mr-2 inline-flex size-10 items-center justify-center rounded-lg text-muted transition-colors hover:bg-line hover:text-ink active:bg-line">
                 <X aria-hidden="true" className="size-5" />
               </button>
             </div>

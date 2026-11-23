@@ -21,11 +21,14 @@ export function ModulePicker({
   selected,
   onChange,
   id = "moduli",
+  tone = "surface",
 }: {
   modules: PickerModule[];
   selected: Set<string>;
   onChange: (next: Set<string>) => void;
   id?: string;
+  /** lauka fons */
+  tone?: "surface" | "white";
 }) {
   const [open, setOpen] = useState(false);
   const boxRef = useRef<HTMLDivElement>(null);
@@ -72,7 +75,7 @@ export function ModulePicker({
         aria-expanded={open}
         aria-labelledby={`${id}-l ${id}-v`}
         onClick={() => setOpen((o) => !o)}
-        className="flex min-h-12 w-full items-center justify-between gap-3 rounded-xl border border-line bg-surface px-4 text-left text-base"
+        className={`flex min-h-12 w-full items-center justify-between gap-3 rounded-xl border border-line px-4 text-left text-base ${tone === "white" ? "bg-white" : "bg-surface"}`}
       >
         <span id={`${id}-v`} className="truncate">{summary}</span>
         <ChevronDown aria-hidden="true" className={`size-5 shrink-0 text-muted transition-transform ${open ? "rotate-180" : ""}`} />

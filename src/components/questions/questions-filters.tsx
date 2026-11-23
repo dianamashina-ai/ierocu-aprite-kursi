@@ -36,6 +36,7 @@ export function QuestionsFilters({
       <div className="sm:w-96">
         <ModulePicker
           id="jq-moduli"
+          tone="white"
           modules={modules}
           selected={selected}
           onChange={(next) => {

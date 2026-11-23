@@ -179,7 +179,7 @@ export function Practice({
             <Link
               href={exitHref ?? topicHref ?? "/"}
               aria-label={t("exit")}
-              className="-mr-2 inline-flex size-10 items-center justify-center rounded-lg text-muted hover:bg-accent-soft hover:text-ink"
+              className="-mr-2 inline-flex size-10 items-center justify-center rounded-lg text-muted transition-colors hover:bg-line hover:text-ink active:bg-line"
             >
               <X aria-hidden="true" className="size-5" />
             </Link>
@@ -265,7 +265,7 @@ export function Practice({
               <Link
                 href={exitHref ?? topicHref ?? "/"}
                 aria-label={t("exit")}
-                className="-mr-2 inline-flex size-10 items-center justify-center rounded-lg text-muted hover:bg-accent-soft hover:text-ink"
+                className="-mr-2 inline-flex size-10 items-center justify-center rounded-lg text-muted transition-colors hover:bg-line hover:text-ink active:bg-line"
               >
                 <X aria-hidden="true" className="size-5" />
               </Link>

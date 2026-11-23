@@ -31,10 +31,10 @@ export default async function QuestionsPage({
   const user = await getCurrentUser();
   const [course, full, t] = await Promise.all([getCourseOverview(), hasFullAccess(user?.id), getTranslations("search")]);
   const moduleIds = course.modules.map((m) => m.id);
-  // moduļi: URL (“visi”, “nav” vai saraksts) → tie; ar meklēšanu bez moduļiem → visi; citādi → 1. modulis
+  // moduļi: URL (“nav” vai saraksts) → tie; citādi (arī “visi”) → visi moduļi
   const fromUrl = (sp.moduli ?? "").split(",").filter((m) => moduleIds.includes(m));
   const selectedModules =
-    sp.moduli === "visi" ? moduleIds : sp.moduli === "nav" ? [] : fromUrl.length ? fromUrl : query ? moduleIds : [moduleIds[0]];
+    sp.moduli === "nav" ? [] : fromUrl.length ? fromUrl : moduleIds;
   const inSelected = (topicId: string) => selectedModules.includes(moduleOfTopic(topicId));
   const onlyWrong = Boolean(user) && sp.kludas === "1";
   const mistakesByModule = user ? await getMistakesByModule(user.id) : new Map<string, number>();
