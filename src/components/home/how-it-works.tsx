@@ -2,7 +2,7 @@ import { READY_LAST_EXAMS } from "@/lib/progress/readiness";
 import type { PracticeQuestion } from "@/lib/quiz/types";
 import {
   HowItWorksShowcase,
-  type ShowcaseTopic,
+  type ShowcaseLesson,
 } from "@/components/home/how-it-works-showcase";
 
 /** Sākumlapa viesiem: trīs soļi (pa kreisi) un īsts treniņa jautājuma paraugs (pa labi). */
@@ -12,16 +12,14 @@ export function HowItWorks({
   examQuestions,
   examMinutes,
   sample,
-  moduleTitle,
-  topics,
+  lesson,
 }: {
   modules: number;
   questions: number;
   examQuestions: number;
   examMinutes: number;
   sample: PracticeQuestion | null;
-  moduleTitle: string;
-  topics: ShowcaseTopic[];
+  lesson: ShowcaseLesson;
 }) {
   const steps = [
     {
@@ -61,8 +59,7 @@ export function HowItWorks({
           }
           steps={steps}
           sample={sample}
-          moduleTitle={moduleTitle}
-          topics={topics}
+          lesson={lesson}
           examQuestions={examQuestions}
           examMinutes={examMinutes}
         />

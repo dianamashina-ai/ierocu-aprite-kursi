@@ -116,3 +116,18 @@ html {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* “Kā notiek mācības” karuseļa punkts: josla aizpildās līdz nākamajam slaidam */
+@keyframes showcase-progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+.showcase-progress {
+  width: 0%;
+  animation-name: showcase-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .showcase-progress { animation: none; width: 100%; }
+}

@@ -63,8 +63,7 @@ export default async function HomePage() {
             examQuestions={examCfg.questionCount}
             examMinutes={examCfg.durationMinutes}
             sample={sample}
-            moduleTitle={course.modules[0].titleLv}
-            topics={course.modules[0].topics.map((t) => ({ id: t.id, title: t.titleLv, minutes: readLesson(t.id)?.minutes ?? null }))}
+            lesson={{ title: readLesson("1.1")?.title ?? course.modules[0].topics[0].titleLv, minutes: readLesson("1.1")?.minutes ?? 3 }}
           />
           <ContentDivider />
           <CourseOutline

@@ -6,29 +6,26 @@ import type { PracticeQuestion } from "@/lib/quiz/types";
 import { SampleQuestion } from "@/components/home/hero";
 
 const ICONS = [BookOpen, Repeat, ClipboardCheck];
-const INTERVAL = 5000;
+const INTERVAL = 4000;
 
-export interface ShowcaseTopic {
-  id: string;
+export interface ShowcaseLesson {
   title: string;
-  minutes: number | null;
+  minutes: number;
 }
 
-/** “Kā notiek mācības”: soļi pa kreisi un mainīgs priekšskatījums pa labi (ik pēc 5 s). */
+/** “Kā notiek mācības”: soļi pa kreisi un mainīgs priekšskatījums pa labi (ik pēc 4 s; punktos redzams progress). */
 export function HowItWorksShowcase({
   intro,
   steps,
   sample,
-  moduleTitle,
-  topics,
+  lesson,
   examQuestions,
   examMinutes,
 }: {
   intro: React.ReactNode;
   steps: { title: string; text: string }[];
   sample: PracticeQuestion | null;
-  moduleTitle: string;
-  topics: ShowcaseTopic[];
+  lesson: ShowcaseLesson;
   examQuestions: number;
   examMinutes: number;
 }) {
@@ -92,7 +89,7 @@ export function HowItWorksShowcase({
               className={`col-start-1 row-start-1 self-center transition-opacity duration-500 motion-reduce:transition-none ${i === active ? "opacity-100" : "pointer-events-none opacity-0 max-lg:hidden"}`}
             >
               {i === 0 && (
-                <LessonSlide moduleTitle={moduleTitle} topics={topics} />
+                <LessonSlide lesson={lesson} />
               )}
               {i === 1 && sample && <SampleQuestion q={sample} />}
               {i === 2 && (
@@ -109,8 +106,17 @@ export function HowItWorksShowcase({
               onClick={() => setActive(i)}
               aria-label={`Rādīt: ${s.title}`}
               aria-current={i === active}
-              className={`h-2 rounded-full transition-all ${i === active ? "w-6 bg-accent" : "w-2 bg-line hover:bg-muted/40"}`}
-            />
+              className={`relative h-2 overflow-hidden rounded-full transition-all ${i === active ? "w-10 bg-line" : "w-2 bg-line hover:bg-muted/40"}`}
+            >
+              {i === active && (
+                <span
+                  key={active}
+                  aria-hidden="true"
+                  className="showcase-progress absolute inset-y-0 left-0 rounded-full bg-accent"
+                  style={{ animationDuration: `${INTERVAL}ms`, animationPlayState: paused ? "paused" : "running" }}
+                />
+              )}
+            </button>
           ))}
         </div>
       </div>
@@ -151,58 +157,44 @@ function Frame({
   );
 }
 
-function LessonSlide({
-  moduleTitle,
-  topics,
-}: {
-  moduleTitle: string;
-  topics: ShowcaseTopic[];
-}) {
+/**
+ * Nodarbības konspekta paraugs. Teksts — fragments no content/lessons/1-1.md
+ * (definīcija no Ieroču aprites likuma 1. panta 42. punkta); mainot nodarbību, atjaunot arī šeit.
+ */
+function LessonSlide({ lesson }: { lesson: ShowcaseLesson }) {
   return (
     <Frame
-      label="Modulis 01"
-      caption="Tā izskatās mācības: moduļi un īsas nodarbības pēc likuma teksta."
+      label="Nodarbība 1.1"
+      right={
+        <span className="inline-flex items-center gap-1 tabular-nums">
+          <Clock aria-hidden="true" className="size-3.5" />
+          {lesson.minutes} min
+        </span>
+      }
+      caption="Tā izskatās nodarbība: īss konspekts ar atsaucēm uz likumu."
     >
-      <p className="mt-4 text-lg font-semibold leading-snug">{moduleTitle}</p>
+      <p className="mt-4 text-lg font-semibold leading-snug">{lesson.title}</p>
       <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-line">
-        <div className="h-full w-2/5 rounded-full bg-ok" />
+        <div className="h-full w-1/3 rounded-full bg-accent" />
       </div>
-      <ol className="mt-4 space-y-2">
-        {topics.map((t, i) => {
-          const done = i < 2;
-          const current = i === 2;
-          return (
-            <li
-              key={t.id}
-              className={`flex items-center gap-3 rounded-xl border-2 px-3.5 py-2.5 text-[15px] ${current ? "border-accent bg-accent-soft" : "border-line"}`}
-            >
-              <span
-                className={`flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${done ? "bg-ok text-white" : current ? "bg-accent text-white" : "bg-accent-soft text-ink"}`}
-              >
-                {done ? (
-                  <Check
-                    aria-hidden="true"
-                    className="size-3.5"
-                    strokeWidth={3}
-                  />
-                ) : (
-                  i + 1
-                )}
-              </span>
-              <span
-                className={`min-w-0 flex-1 truncate ${done || current ? "text-ink" : "text-muted"}`}
-              >
-                {t.title}
-              </span>
-              {t.minutes && (
-                <span className="shrink-0 text-xs tabular-nums text-muted">
-                  {t.minutes} min
-                </span>
-              )}
-            </li>
-          );
-        })}
-      </ol>
+      <h4 className="mt-5 font-semibold">Šaujamierocis</h4>
+      <p className="mt-1.5 text-[15px] leading-relaxed text-muted">
+        <strong className="text-ink">Šaujamierocis</strong> — jebkurš <strong className="text-ink">pārnēsājams</strong> ierocis{" "}
+        <strong className="text-ink">ar stobru</strong>, kas <strong className="text-ink">šaujampulvera vai cita propelenta</strong>{" "}
+        iedarbības rezultātā raida šāviņu…
+      </p>
+      <p className="mt-2 inline-flex items-center gap-1.5 rounded-lg bg-accent-soft px-2 py-1 text-xs font-semibold text-ink">
+        <BookOpen aria-hidden="true" className="size-3.5" />
+        Ieroču aprites likums, 1. panta 42. punkts
+      </p>
+      <div className="mt-4 rounded-xl border-l-4 border-accent bg-surface px-4 py-3">
+        <p className="text-sm font-semibold">Atceries</p>
+        <ul className="mt-1.5 space-y-1 text-sm text-muted">
+          <li>Šaujamierocis: stobrs + šaujampulveris/propelents.</li>
+          <li>Pneimatiskais: saspiesta gāze.</li>
+          <li>Lielas enerģijas: &gt; 12 J; mazas: ≤ 12 J.</li>
+        </ul>
+      </div>
     </Frame>
   );
 }
