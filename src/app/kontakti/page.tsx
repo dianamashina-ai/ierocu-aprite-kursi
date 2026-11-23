@@ -20,10 +20,12 @@ export default function ContactsPage() {
         </a>
         <div className="rounded-2xl border border-line bg-white p-6">
           <Building2 aria-hidden="true" className="size-5 text-accent" />
-          <p className="mt-4 text-sm text-muted">Pakalpojuma sniedzējs</p>
+          <p className="mt-4 text-sm text-muted">Piegādātājs</p>
           <p className="mt-1 font-semibold">{SELLER.name}</p>
           <p className="mt-1 text-sm text-muted">
-            Reģ. Nr. {SELLER.regNo} · PVN Nr. {SELLER.vatNo}
+            Reģ. Nr. {SELLER.regNo}
+            <br />
+            PVN Nr. {SELLER.vatNo}
           </p>
           <p className="mt-2 flex items-start gap-1.5 text-sm text-muted">
             <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0" />

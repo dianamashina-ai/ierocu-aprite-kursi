@@ -49,7 +49,7 @@ export function TrainingBuilder({ modules }: { modules: BuilderModule[] }) {
   return (
     <div className={ACTION_CARD_CLASS}>
       {/* Moduļi */}
-      <ModulePicker modules={modules} selected={selected} onChange={setSelected} />
+      <ModulePicker modules={modules} selected={selected} onChange={setSelected} tone="white" />
 
       {/* Tikai kļūdas */}
       <label className={`mt-5 flex items-start gap-3 ${totalMistakes > 0 || mistakesOnly ? "cursor-pointer" : "cursor-not-allowed opacity-60"}`}>

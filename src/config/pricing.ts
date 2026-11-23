@@ -79,7 +79,7 @@ export const LESSON_CODES = (Object.keys(PRODUCTS) as ProductCode[]).filter((c) 
 
 export const isProductCode = (v: unknown): v is ProductCode => typeof v === "string" && v in PRODUCTS;
 /** Produkti, ko var nopirkt (secībā, kādā tos rāda). */
-export const PURCHASABLE: ProductCode[] = ["course", "bundle", "lesson"];
+export const PURCHASABLE: ProductCode[] = ["bundle", "course", "lesson"];
 export const isPurchasable = (v: unknown): v is ProductCode => PURCHASABLE.includes(v as ProductCode);
 export const productByCode = (code: ProductCode) => PRODUCTS[code];
 /** Pirkuma lapas adrese konkrētam produktam. */
