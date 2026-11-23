@@ -5,6 +5,7 @@ import { startTransition, useActionState, useState } from "react";
 import { CreditCard, Landmark } from "lucide-react";
 import { checkoutAction, type CheckoutState } from "@/app/actions/billing";
 import type { PayMethod } from "@/lib/billing/types";
+import { PAY_LOGOS } from "@/components/billing/pay-logo-paths";
 import { authClient } from "@/lib/auth/client";
 import { isStrongPassword } from "@/lib/auth/password-rules";
 import {
@@ -32,12 +33,24 @@ const METHOD_LABEL: Record<
   },
   card: {
     title: "Karte, Apple Pay, Google Pay",
-    hint: "Visa, Mastercard",
+    hint: "Visa, Mastercard, Apple Pay, Google Pay",
     Icon: CreditCard,
   },
 };
 
 const input = `mt-1 ${FIELD_CLASS}`;
+
+/** Maksājumu zīmola zīme mazā baltā “kartītē”. */
+function PayLogo({ id }: { id: keyof typeof PAY_LOGOS }) {
+  const l = PAY_LOGOS[id];
+  return (
+    <span className="inline-flex h-7 items-center rounded-md border border-line bg-white px-2" title={l.title}>
+      <svg role="img" aria-label={l.title} viewBox="0 0 24 24" className="h-5 w-auto" fill={l.hex}>
+        <path d={l.path} />
+      </svg>
+    </span>
+  );
+}
 
 export function CheckoutForm({
   email,
@@ -222,7 +235,7 @@ export function CheckoutForm({
 
         {methods.length > 1 ? (
           <fieldset className="space-y-2 border-t border-line pt-5">
-            <legend className="text-sm font-semibold">Maksāšanas veids</legend>
+            <legend className="float-left mb-3 w-full text-sm font-semibold">Maksāšanas veids</legend>
             {methods.map((m) => {
               const { title, hint, Icon } = METHOD_LABEL[m];
               return (
@@ -244,7 +257,16 @@ export function CheckoutForm({
                   />
                   <span className="min-w-0">
                     <span className="block font-semibold">{title}</span>
-                    <span className="block text-sm text-muted">{hint}</span>
+                    {m === "card" ? (
+                      <span className="mt-1.5 flex flex-wrap gap-1.5">
+                        <PayLogo id="visa" />
+                        <PayLogo id="mastercard" />
+                        <PayLogo id="applepay" />
+                        <PayLogo id="googlepay" />
+                      </span>
+                    ) : (
+                      <span className="block text-sm text-muted">{hint}</span>
+                    )}
                   </span>
                 </label>
               );
