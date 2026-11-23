@@ -129,14 +129,16 @@ export function SiteNav({
               >
                 Profils
               </Link>
-              <SignOutButton className={itemCls(false)} />
-              {showBuy && (
-                <Link
-                  href="/iegadaties"
-                  className="btn-primary ml-2 min-h-11 px-4 text-sm"
-                >
-                  Pilna piekļuve
-                </Link>
+              {showBuy ? (
+                <>
+                  {/* tikai 1. modulis: galvenā darbība — pilna piekļuve, iziet — sekundāra poga */}
+                  <Link href="/iegadaties" className="btn-primary ml-2 min-h-11 px-4 text-sm">
+                    Pilna piekļuve
+                  </Link>
+                  <SignOutButton className="btn-secondary ml-2 min-h-11 px-4 text-sm" />
+                </>
+              ) : (
+                <SignOutButton className={itemCls(false)} />
               )}
               {admin && (
                 <Link
