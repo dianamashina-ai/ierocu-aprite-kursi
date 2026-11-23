@@ -4,10 +4,8 @@ import { SELLER } from "@/config/seller";
 import { getCurrentUser } from "@/lib/auth/session";
 
 const COURSE_LINKS = [
-  { href: "/", label: "Mācību kurss" },
+  { href: "/#programma", label: "Mācību kurss" },
   { href: "/registreties", label: "Sākt bez maksas" },
-  { href: "/eksamens", label: "Izmēģinājuma eksāmens" },
-  { href: "/jautajumi", label: "Jautājumi" },
   { href: "/iegadaties", label: "Iegādāties" },
 ];
 
@@ -42,8 +40,8 @@ export async function SiteFooter() {
 
   return (
     <footer className="border-t border-line bg-white print:hidden">
-      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:py-16">
-        <div className="col-span-2">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-x-10 gap-y-10 px-4 py-14 sm:px-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,3fr)_minmax(0,4fr)] lg:py-16">
+        <div>
           <Link href="/" aria-label="Ieroču atļauja — uz sākumu" className="inline-block">
             {/* eslint-disable-next-line @next/next/no-img-element -- vektora logotips */}
             <img src="/logo-lpsc-2026.svg" alt="Ieroču atļauja — sadarbībā ar LPSC" width={235} height={40} className="h-10 w-auto" />
