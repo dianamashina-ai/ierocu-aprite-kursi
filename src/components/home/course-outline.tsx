@@ -45,10 +45,14 @@ export function CourseOutline({
               ieroča uzbūves līdz atbildībai. Sāc ar pamatiem un zināšanas
               papildini pakāpeniski.
             </p>
-            <div className="mt-8 flex items-start gap-4 rounded-2xl bg-surface p-5">
-              <span aria-hidden="true" className="flex shrink-0 items-end gap-1 text-accent-strong">
-                <Monitor className="size-7" strokeWidth={1.75} />
-                <Smartphone className="size-5" strokeWidth={1.75} />
+            <div className="mt-8 flex items-center gap-4 rounded-2xl bg-surface p-5">
+              <span aria-hidden="true" className="flex shrink-0 -space-x-3">
+                <span className="flex size-12 items-center justify-center rounded-full bg-white text-accent-strong ring-4 ring-surface">
+                  <Monitor className="size-5" />
+                </span>
+                <span className="flex size-12 items-center justify-center rounded-full bg-white text-accent-strong ring-4 ring-surface">
+                  <Smartphone className="size-5" />
+                </span>
               </span>
               <div>
                 <p className="font-semibold">Mācies, kur ērti</p>
