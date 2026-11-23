@@ -32,8 +32,8 @@ export function CourseOutline({
       className="scroll-mt-6 bg-white"
     >
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
-          <div className="lg:sticky lg:top-8 lg:self-start">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:grid-rows-[auto_1fr] lg:gap-x-20 lg:gap-y-8">
+          <div className="lg:col-start-1 lg:row-start-1">
             <h2
               id="programma-h"
               className="text-4xl font-semibold tracking-tight sm:text-5xl"
@@ -45,25 +45,9 @@ export function CourseOutline({
               ieroča uzbūves līdz atbildībai. Sāc ar pamatiem un zināšanas
               papildini pakāpeniski.
             </p>
-            <div className="mt-8 flex items-center gap-4 rounded-2xl bg-surface p-5">
-              <span aria-hidden="true" className="flex shrink-0 -space-x-3">
-                <span className="flex size-12 items-center justify-center rounded-full bg-white text-accent-strong ring-4 ring-surface">
-                  <Monitor className="size-5" />
-                </span>
-                <span className="flex size-12 items-center justify-center rounded-full bg-white text-accent-strong ring-4 ring-surface">
-                  <Smartphone className="size-5" />
-                </span>
-              </span>
-              <div>
-                <p className="font-semibold">Mācies, kur ērti</p>
-                <p className="mt-1 text-[15px] leading-relaxed text-muted">
-                  Datorā mājās vai telefonā ceļā — kad vien ir brīvs brīdis. Nodarbības ir īsas, tāpēc vari mācīties pa daļām savā tempā.
-                </p>
-              </div>
-            </div>
           </div>
 
-          <ol className="border-t border-line">
+          <ol className="border-t border-line lg:col-start-2 lg:row-span-2 lg:row-start-1">
             {modules.map((m) => (
               <li key={m.id} className="border-b border-line">
                 <details className="group">
@@ -126,6 +110,22 @@ export function CourseOutline({
               </li>
             ))}
           </ol>
+
+          {/* telefonā — pēc moduļu saraksta, datorā — kreisajā kolonnā zem apraksta */}
+          <div className="rounded-2xl bg-surface p-5 lg:col-start-1 lg:row-start-2 lg:self-start">
+            <div aria-hidden="true" className="flex gap-2">
+              <span className="flex size-12 items-center justify-center rounded-full bg-white text-accent-strong">
+                <Monitor className="size-5" />
+              </span>
+              <span className="flex size-12 items-center justify-center rounded-full bg-white text-accent-strong">
+                <Smartphone className="size-5" />
+              </span>
+            </div>
+            <p className="mt-4 font-semibold">Mācies, kur ērti</p>
+            <p className="mt-1 text-[15px] leading-relaxed text-muted">
+              Datorā mājās vai telefonā ceļā — kad vien ir brīvs brīdis. Nodarbības ir īsas, tāpēc vari mācīties pa daļām savā tempā.
+            </p>
+          </div>
         </div>
 
         <div className="mt-12 flex flex-col gap-6 rounded-2xl bg-ink p-6 text-white sm:p-8 lg:mt-16 lg:flex-row lg:items-center lg:justify-between">
