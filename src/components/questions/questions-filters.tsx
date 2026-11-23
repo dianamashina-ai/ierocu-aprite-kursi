@@ -25,7 +25,7 @@ export function QuestionsFilters({
   const go = (sel: Set<string>, w: boolean) => {
     const p = new URLSearchParams();
     if (query) p.set("q", query);
-    const all = sel.size === modules.length;
+    const all = sel.size === modules.length && modules.every((m) => !m.locked);
     p.set("moduli", all ? "visi" : sel.size ? modules.filter((m) => sel.has(m.id)).map((m) => m.id).join(",") : "nav");
     if (w) p.set("kludas", "1");
     router.replace(`/jautajumi?${p}`, { scroll: false });

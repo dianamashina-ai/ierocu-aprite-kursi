@@ -30,7 +30,8 @@ export default async function QuestionsPage({
   const query = (sp.q ?? "").slice(0, 200).trim();
   const user = await getCurrentUser();
   const [course, full, t] = await Promise.all([getCourseOverview(), hasFullAccess(user?.id), getTranslations("search")]);
-  const moduleIds = course.modules.map((m) => m.id);
+  // bez pilnas piekļuves — tikai bezmaksas moduļa jautājumi
+  const moduleIds = course.modules.map((m) => m.id).filter((id) => full || isFreeModule(id));
   // moduļi: URL (“nav” vai saraksts) → tie; citādi (arī “visi”) → visi moduļi
   const fromUrl = (sp.moduli ?? "").split(",").filter((m) => moduleIds.includes(m));
   const selectedModules =
@@ -63,13 +64,17 @@ export default async function QuestionsPage({
   const topicTitle = new Map(course.modules.flatMap((m) => m.topics.map((tp) => [tp.id, tp.titleLv] as const)));
   const stems = query ? searchStems(query) : [];
   const allowedFor = (topicId: string) => full || (Boolean(user) && isFreeModule(moduleOfTopic(topicId)));
-  const hasLocked = cards.some((c) => !allowedFor(c.topicId));
+  const hasLocked = !full;
 
   return (
     <div className="page-white mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12">
       <PageHeader
         title="Jautājumi"
-        lead={`Visi ${course.totals.questions} oficiālie eksāmena jautājumi pēc numuriem — ar pareizajām atbildēm un skaidrojumiem.`}
+        lead={
+          full
+            ? `Visi ${course.totals.questions} oficiālie eksāmena jautājumi pēc numuriem — ar pareizajām atbildēm un skaidrojumiem.`
+            : "1. moduļa oficiālie eksāmena jautājumi pēc numuriem — ar pareizajām atbildēm un skaidrojumiem. Pārējie — pilnajā kursā."
+        }
       />
 
       {/* meklēšana — vienmēr visos moduļos */}
@@ -93,7 +98,13 @@ export default async function QuestionsPage({
       {/* filtri */}
       <QuestionsFilters
         key={query}
-        modules={course.modules.map((m) => ({ id: m.id, order: m.order, title: m.titleLv, mistakes: mistakesByModule.get(m.id) ?? 0 }))}
+        modules={course.modules.map((m) => ({
+          id: m.id,
+          order: m.order,
+          title: m.titleLv,
+          locked: !moduleIds.includes(m.id),
+          mistakes: mistakesByModule.get(m.id) ?? 0,
+        }))}
         initial={selectedModules}
         onlyWrong={onlyWrong}
         query={query}

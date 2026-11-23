@@ -77,7 +77,18 @@ test("salīdzināt līdzīgos: izbīdāms panelis, lapa paliek tā pati", async 
   await expect(page.locator("article")).toHaveCount(4);
 });
 
+test("bez pilnas piekļuves «Jautājumi» rāda tikai 1. moduli", async ({ page }) => {
+  await signUp(page, uniqueEmail("jqfree"));
+  await page.goto("/jautajumi");
+  await expect(page.getByText(/^Atrasti 66 jautājumi$/)).toBeVisible();
+  await page.getByRole("searchbox").fill("243");
+  await page.getByRole("button", { name: "Meklēt" }).click();
+  await expect(page.getByText("Nekas nav atrasts")).toBeVisible();
+  await expect(page.getByRole("link", { name: /Iegādāties pilnu kursu/ })).toBeVisible();
+});
+
 test("meklēšana pēc numura un teksta", async ({ page }) => {
+  await paidUser(page, "srch");
   await page.goto("/meklet");
   await page.getByRole("searchbox").fill("243");
   await page.getByRole("button", { name: "Meklēt" }).click();
