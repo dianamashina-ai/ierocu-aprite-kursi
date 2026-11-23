@@ -5,20 +5,22 @@ import {
   type ShowcaseLesson,
 } from "@/components/home/how-it-works-showcase";
 
-/** Sākumlapa viesiem: trīs soļi (pa kreisi) un īsts treniņa jautājuma paraugs (pa labi). */
+/** Sākumlapa viesiem: trīs soļi (pa kreisi) un interaktīvs mini ceļš — nodarbība, treniņš, eksāmens (pa labi). */
 export function HowItWorks({
   modules,
   questions,
   examQuestions,
   examMinutes,
-  sample,
+  practice,
+  exam,
   lesson,
 }: {
   modules: number;
   questions: number;
   examQuestions: number;
   examMinutes: number;
-  sample: PracticeQuestion | null;
+  practice: PracticeQuestion | null;
+  exam: PracticeQuestion[];
   lesson: ShowcaseLesson;
 }) {
   const steps = [
@@ -58,7 +60,8 @@ export function HowItWorks({
             </>
           }
           steps={steps}
-          sample={sample}
+          practice={practice}
+          exam={exam}
           lesson={lesson}
           examQuestions={examQuestions}
           examMinutes={examMinutes}

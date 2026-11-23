@@ -40,7 +40,8 @@ export default async function HomePage() {
   const [access, progress, sample, examCfg, dashboard] = await Promise.all([
     hasFullAccess(user?.id),
     user ? getTopicProgress(user.id) : Promise.resolve(null),
-    user ? Promise.resolve(null) : getPracticeQuestion(435), // paraugs sākumlapai: lielas enerģijas pneimatiskais ierocis
+    // sākumlapas interaktīvais paraugs (1.1. tēma): treniņa jautājums + mini eksāmens
+    user ? Promise.resolve(null) : Promise.all([422, 433, 435, 427].map((id) => getPracticeQuestion(id))),
     getExamConfig(),
     user ? getDashboard(user.id) : Promise.resolve(null),
   ]);
@@ -62,7 +63,8 @@ export default async function HomePage() {
             questions={course.totals.questions}
             examQuestions={examCfg.questionCount}
             examMinutes={examCfg.durationMinutes}
-            sample={sample}
+            practice={sample?.[0] ?? null}
+            exam={(sample?.slice(1) ?? []).filter((q): q is NonNullable<typeof q> => Boolean(q))}
             lesson={{ title: readLesson("1.1")?.title ?? course.modules[0].topics[0].titleLv, minutes: readLesson("1.1")?.minutes ?? 3 }}
           />
           <ContentDivider />
