@@ -145,7 +145,7 @@ export function CheckoutForm({
           <OrDivider />
         </>
       )}
-      <form action={action} onSubmit={onSubmit} className="space-y-5">
+      <form action={action} onSubmit={onSubmit} className="space-y-5 [&_input:not([type=checkbox]):not([type=radio])]:bg-white">
         <input type="hidden" name="product" value={product} />
         <label className="block">
           <span className="text-sm font-semibold">
