@@ -16,7 +16,7 @@ function Items({ items, dark = false }: { items: readonly string[]; dark?: boole
   );
 }
 
-/** Sākumlapa viesiem: trīs produkti — kurss, praktiskā nodarbība, abi kopā. */
+/** Sākumlapa viesiem: trīs produkti — kurss (bordo), komplekts (melns), praktiskā nodarbība (balts). */
 export function Pricing({ included }: { included: string[] }) {
   const saving = COURSE_PRODUCT.amountCents + LESSON_PRODUCT.amountCents - BUNDLE_PRODUCT.amountCents;
   return (
@@ -33,6 +33,21 @@ export function Pricing({ included }: { included: string[] }) {
         </div>
 
         <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          <article className="flex flex-col rounded-2xl bg-accent p-6 text-white sm:p-8">
+            <h3 className="text-sm text-white/70">{COURSE_PRODUCT.title}</h3>
+            <p className="mt-2 text-5xl font-bold tracking-tight tabular-nums">{formatEuro(COURSE_PRODUCT.amountCents)}</p>
+            <p className="mt-2 text-sm text-white/70">Vienreizējs maksājums, bez abonementa un bez termiņa.</p>
+            <Items items={included} dark />
+            <div className="mt-auto pt-8">
+              <Link
+                href={buyPath("course")}
+                className="inline-flex min-h-12 items-center rounded-xl bg-white px-5 font-semibold text-accent-strong transition-colors hover:bg-white/90"
+              >
+                Iegādāties pilnu kursu
+              </Link>
+            </div>
+          </article>
+
           <article className="flex flex-col rounded-2xl bg-ink p-6 text-white sm:p-8">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h3 className="text-sm text-white/70">{BUNDLE_PRODUCT.title}</h3>
@@ -48,18 +63,6 @@ export function Pricing({ included }: { included: string[] }) {
                 className="inline-flex min-h-12 items-center rounded-xl bg-white px-5 font-semibold text-ink transition-colors hover:bg-white/90"
               >
                 Iegādāties komplektu
-              </Link>
-            </div>
-          </article>
-
-          <article className="flex flex-col rounded-2xl border border-line bg-white p-6 sm:p-8">
-            <h3 className="text-sm text-muted">{COURSE_PRODUCT.title}</h3>
-            <p className="mt-2 text-5xl font-bold tracking-tight tabular-nums">{formatEuro(COURSE_PRODUCT.amountCents)}</p>
-            <p className="mt-2 text-sm text-muted">Vienreizējs maksājums, bez abonementa un bez termiņa.</p>
-            <Items items={included} />
-            <div className="mt-auto pt-8">
-              <Link href={buyPath("course")} className="btn-primary">
-                Iegādāties pilnu kursu
               </Link>
             </div>
           </article>
