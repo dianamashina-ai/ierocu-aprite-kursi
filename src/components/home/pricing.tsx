@@ -27,9 +27,9 @@ export function Pricing({ included }: { included: string[] }) {
             Cena
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-muted">
-            Sagatavošanās eksāmenam no divām pusēm: tiešsaistes kurss teorijai — nodarbības, visi oficiālie jautājumi ar
-            skaidrojumiem un eksāmena simulācija — un praktiskā nodarbība mūsu šautuvē ar sertificētu instruktoru. Izvēlies
-            vienu vai abus kopā. 1. moduli vari izmēģināt bez maksas; cenas ar PVN, maksājums vienreizējs.
+            Sagatavošanās eksāmenam no divām pusēm: tiešsaistes mācību kurss teorijai ar visiem oficiālajiem jautājumiem,
+            skaidrojumiem un eksāmena simulāciju, un praktiskā nodarbība mūsu šautuvē ar sertificētu instruktoru. Izvēlies vienu
+            vai abus kopā.
           </p>
         </div>
 
