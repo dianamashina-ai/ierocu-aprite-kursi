@@ -1,14 +1,17 @@
 import Link from "next/link";
 import { isProductCode, PRODUCTS } from "@/config/pricing";
 import { listOrders, type OrderStatus } from "@/lib/backoffice/service";
-import { formatDateTime, formatEuro } from "@/lib/format";
+import { dateToRigaLocal, formatDateTime, formatEuro, formatLessonAt } from "@/lib/format";
+import { LessonControl } from "@/components/admin/lesson-control";
 import { OrderStatusBadge } from "@/components/admin/status-badge";
 import { RefundButton } from "@/components/admin/refund-button";
 
 export const metadata = { title: "Pasūtījumi" };
 
-const TABS: { status?: OrderStatus; label: string }[] = [
+type Tab = OrderStatus | "nodarbibas";
+const TABS: { status?: Tab; label: string }[] = [
   { label: "Visi" },
+  { status: "nodarbibas", label: "Praktiskās nodarbības" },
   { status: "paid", label: "Apmaksāti" },
   { status: "refunded", label: "Atmaksāti" },
   { status: "pending", label: "Gaida apmaksu" },
@@ -19,8 +22,8 @@ export default async function OrdersPage({ searchParams }: { searchParams: Promi
   const sp = await searchParams;
   const status = TABS.find((t) => t.status === sp.status)?.status;
   const q = sp.q?.slice(0, 100) ?? "";
-  const rows = await listOrders({ status, q });
-  const href = (s?: OrderStatus) => {
+  const rows = await listOrders({ status: status === "nodarbibas" ? undefined : status, lessons: status === "nodarbibas", q });
+  const href = (s?: Tab) => {
     const p = new URLSearchParams();
     if (s) p.set("status", s);
     if (q) p.set("q", q);
@@ -90,6 +93,16 @@ export default async function OrdersPage({ searchParams }: { searchParams: Promi
               <span className="tabular-nums">{formatEuro(o.amountCents)}</span>
               <span><OrderStatusBadge status={o.status} provider={o.provider} /></span>
               <span>{o.status === "paid" && <RefundButton orderId={o.id} label={formatEuro(o.amountCents)} revoke={o.provider === "manual"} />}</span>
+              {o.status === "paid" && isProductCode(o.productCode) && PRODUCTS[o.productCode].includesLesson && (
+                <div className="lg:col-span-5">
+                  <LessonControl
+                    orderId={o.id}
+                    status={o.lessonStatus ?? null}
+                    local={o.lessonAt ? dateToRigaLocal(o.lessonAt) : null}
+                    label={o.lessonAt ? formatLessonAt(o.lessonAt) : null}
+                  />
+                </div>
+              )}
             </li>
           ))}
         </ul>

@@ -302,6 +302,9 @@ export const orders = pgTable(
     /** Piekrišana tūlītējai piekļuvei digitālajam saturam un atteikuma tiesību zaudēšanai (tikai, ja pirkumā ir kurss) */
     waiverAcceptedAt: timestamp("waiver_accepted_at", { withTimezone: true }),
     invoiceNumber: text("invoice_number").unique(),
+    /** Praktiskā nodarbība: null — jāsazinās; scheduled — saskaņota (lessonAt); done — notikusi */
+    lessonStatus: text("lesson_status").$type<"scheduled" | "done">(),
+    lessonAt: timestamp("lesson_at", { withTimezone: true }),
     /** Administratora piezīme (manuālai piekļuvei: veids, čeka Nr. u. tml.) */
     note: text("note"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),

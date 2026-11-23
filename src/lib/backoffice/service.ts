@@ -1,5 +1,5 @@
 import "server-only";
-import { COURSE_ACCESS_CODES, type ProductCode } from "@/config/pricing";
+import { COURSE_ACCESS_CODES, LESSON_CODES, type ProductCode } from "@/config/pricing";
 import { and, asc, count, desc, eq, gte, ilike, inArray, ne, or, sql, sum } from "drizzle-orm";
 import { db, schema } from "@/db";
 import { activeSessions, deviceCounts, recentLogins, SHARING_DEVICE_THRESHOLD } from "@/lib/auth/devices";
@@ -36,9 +36,11 @@ export async function getStats(now = new Date()) {
 }
 
 /** Pasūtījumi ar pircēja e-pastu; filtrs pēc statusa un meklēšana (e-pasts, vārds, rēķina Nr.). */
-export async function listOrders({ status, q, limit = 100 }: { status?: OrderStatus; q?: string; limit?: number } = {}) {
+export async function listOrders({ status, q, lessons = false, limit = 100 }: { status?: OrderStatus; q?: string; lessons?: boolean; limit?: number } = {}) {
   const where = [] as ReturnType<typeof eq>[];
   if (status) where.push(eq(orders.status, status));
+  // Praktiskās nodarbības: apmaksātas; vispirms jāsazinās, tad saskaņotās pēc laika, notikušās beigās
+  if (lessons) where.push(and(eq(orders.status, "paid"), inArray(orders.productCode, LESSON_CODES))!);
   if (q?.trim()) {
     const like = `%${q.trim()}%`;
     where.push(or(ilike(user.email, like), ilike(orders.invoiceNumber, like), sql`${orders.buyer}->>'name' ilike ${like}`)!);
@@ -48,7 +50,11 @@ export async function listOrders({ status, q, limit = 100 }: { status?: OrderSta
     .from(orders)
     .innerJoin(user, eq(user.id, orders.userId))
     .where(where.length ? and(...where) : undefined)
-    .orderBy(desc(orders.createdAt))
+    .orderBy(
+      ...(lessons
+        ? [sql`case ${orders.lessonStatus} when 'done' then 2 when 'scheduled' then 1 else 0 end`, asc(orders.lessonAt), desc(orders.createdAt)]
+        : [desc(orders.createdAt)]),
+    )
     .limit(limit);
 }
 

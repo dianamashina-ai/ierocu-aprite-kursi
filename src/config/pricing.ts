@@ -52,10 +52,7 @@ export const BUNDLE_PRODUCT = {
   includesLesson: true,
 } as const satisfies Product;
 
-/**
- * PAGAIDU: testa produkts maksājumu pārbaudei ar īstu naudu.
- * Dod tādu pašu pilnu piekļuvi kā kurss — lai var pārbaudīt visu ceļu: apmaksa → piekļuve → rēķins → atmaksa.
- */
+/** Bijušais testa pirkums (1,50 €) — vairs netiek pārdots; atstāts vēsturiskajiem pasūtījumiem (atver kursu). */
 export const TEST_PRODUCT = {
   code: "test",
   name: "Ieroču aprites kvalifikācijas pārbaudījuma sagatavošanas kurss — testa pirkums",
@@ -77,7 +74,13 @@ export const PRODUCTS: Record<ProductCode, Product> = {
 /** Produkti, kas atver tiešsaistes kursu (piekļuves pārbaudei). */
 export const COURSE_ACCESS_CODES = (Object.keys(PRODUCTS) as ProductCode[]).filter((c) => PRODUCTS[c].includesCourse);
 
+/** Produkti ar praktisko nodarbību. */
+export const LESSON_CODES = (Object.keys(PRODUCTS) as ProductCode[]).filter((c) => PRODUCTS[c].includesLesson);
+
 export const isProductCode = (v: unknown): v is ProductCode => typeof v === "string" && v in PRODUCTS;
+/** Produkti, ko var nopirkt (secībā, kādā tos rāda). */
+export const PURCHASABLE: ProductCode[] = ["bundle", "course", "lesson"];
+export const isPurchasable = (v: unknown): v is ProductCode => PURCHASABLE.includes(v as ProductCode);
 export const productByCode = (code: ProductCode) => PRODUCTS[code];
 /** Pirkuma lapas adrese konkrētam produktam. */
 export const buyPath = (code: ProductCode) => (code === "course" ? "/iegadaties" : `/iegadaties?produkts=${code}`);

@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { COURSE_ACCESS_CODES, type ProductCode } from "@/config/pricing";
+import { COURSE_ACCESS_CODES, LESSON_CODES, LESSON_SCHEDULING, type ProductCode } from "@/config/pricing";
 import { CheckCircle2 } from "lucide-react";
 import { requireUser } from "@/lib/auth/session";
 import { hasFullAccess } from "@/lib/billing/access";
 import { getOrdersForUser } from "@/lib/billing/service";
-import { formatDate, formatEuro } from "@/lib/format";
+import { formatDate, formatEuro, formatLessonAt } from "@/lib/format";
 import { Paywall } from "@/components/billing/paywall";
 import { SignOutButton } from "@/components/sign-out-button";
 import { EmailForm, NameForm, PasswordForm } from "@/components/account/account-forms";
@@ -28,6 +28,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
   const user = await requireUser("/konts");
   const [{ epasts }, access, orders] = await Promise.all([searchParams, hasFullAccess(user.id), getOrdersForUser(user.id)]);
   const paid = orders.filter((o) => o.invoiceNumber);
+  const lessons = orders.filter((o) => o.status === "paid" && LESSON_CODES.includes(o.productCode as ProductCode));
   const activeSince = orders.find((o) => o.status === "paid" && COURSE_ACCESS_CODES.includes(o.productCode as ProductCode))?.paidAt;
 
   return (
@@ -83,6 +84,32 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
               </>
             )}
           </Section>
+
+          {lessons.length > 0 && (
+            <Section id="lesson-h" title="Praktiskā nodarbība">
+              <ul className="space-y-3">
+                {lessons.map((o) => (
+                  <li key={o.id} className="flex items-start gap-2">
+                    <CheckCircle2 aria-hidden="true" className={`mt-0.5 size-5 shrink-0 ${o.lessonStatus === "done" ? "text-ok" : "text-muted"}`} />
+                    <span>
+                      {o.lessonStatus === "done" ? (
+                        <span className="font-semibold">Notikusi{o.lessonAt ? ` — ${formatLessonAt(o.lessonAt)}` : ""}</span>
+                      ) : o.lessonStatus === "scheduled" && o.lessonAt ? (
+                        <span className="font-semibold">Saskaņota: {formatLessonAt(o.lessonAt)}</span>
+                      ) : (
+                        <span className="font-semibold">Iegādāta — laiks vēl jāsaskaņo</span>
+                      )}
+                      {o.lessonStatus !== "done" && (
+                        <span className="block text-sm text-muted">
+                          {o.lessonStatus === "scheduled" ? "Ja laiks jāmaina, atbildi uz apstiprinājuma e-pastu." : LESSON_SCHEDULING}
+                        </span>
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </Section>
+          )}
 
           <Section id="out-h" title="Iziet">
             <SignOutButton className="btn-secondary" />

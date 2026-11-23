@@ -4,7 +4,8 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { getCurrentUser } from "@/lib/auth/session";
 import { isAdmin } from "@/lib/admin";
-import { BillingError, grantManualAccess, refundOrder } from "@/lib/billing/service";
+import { BillingError, grantManualAccess, refundOrder, scheduleLesson, setLessonDone } from "@/lib/billing/service";
+import { rigaLocalToDate } from "@/lib/format";
 import { signOutEverywhere } from "@/lib/auth/devices";
 import { saveExplanation } from "@/lib/backoffice/service";
 
@@ -79,4 +80,29 @@ export async function signOutEverywhereAction(userId: string): Promise<ActionRes
   await signOutEverywhere(z.string().min(1).parse(userId));
   revalidatePath("/admin", "layout");
   return { ok: true, message: "Lietotājs izrakstīts no visām ierīcēm." };
+}
+
+/** Praktiskā nodarbība: saglabā laiku (Rīgas laikā, "YYYY-MM-DDTHH:mm"). */
+export async function scheduleLessonAction(orderId: string, local: string): Promise<ActionResult> {
+  await requireAdmin();
+  const at = rigaLocalToDate(String(local));
+  if (!at) return { ok: false, message: "Norādi datumu un laiku" };
+  try {
+    await scheduleLesson(z.string().min(1).parse(orderId), at);
+    revalidatePath("/admin", "layout");
+    return { ok: true, message: "Saglabāts. Pircējam nosūtīts e-pasts." };
+  } catch (e) {
+    return { ok: false, message: e instanceof Error ? e.message : "Neizdevās" };
+  }
+}
+
+export async function setLessonDoneAction(orderId: string, done: boolean): Promise<ActionResult> {
+  await requireAdmin();
+  try {
+    await setLessonDone(z.string().min(1).parse(orderId), Boolean(done));
+    revalidatePath("/admin", "layout");
+    return { ok: true, message: done ? "Atzīmēts: notikusi." : "Atzīmēts: saskaņota." };
+  } catch (e) {
+    return { ok: false, message: e instanceof Error ? e.message : "Neizdevās" };
+  }
 }

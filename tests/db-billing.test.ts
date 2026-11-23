@@ -242,4 +242,19 @@ describe.skipIf(!url)("maksājumi (DB)", async () => {
     expect(await access.hasFullAccess("u5")).toBe(true);
   });
 
+  it("praktiskās nodarbības laiks: saskaņo, pārceļ, atzīmē kā notikušu; kursam bez nodarbības — atsaka", async () => {
+    const l = await billing.createOrder("u5", { ...buyer, phone: "+371 20000000" }, { provider: "dev", now: t0, product: "lesson" });
+    await expect(billing.scheduleLesson(l.id, new Date("2026-12-12T08:00:00Z"))).rejects.toThrow(/Apmaksāts/);
+    await billing.applyPaymentEvent({ orderId: l.id, status: "paid" }, "dev", { now: t0 });
+    await expect(billing.setLessonDone(l.id, true)).rejects.toThrow(/laiku/);
+    const a = await billing.scheduleLesson(l.id, new Date("2026-12-12T08:00:00Z"));
+    expect(a).toMatchObject({ lessonStatus: "scheduled" });
+    const b = await billing.scheduleLesson(l.id, new Date("2026-12-13T08:00:00Z"));
+    expect(b.lessonAt?.toISOString()).toBe("2026-12-13T08:00:00.000Z");
+    expect((await billing.setLessonDone(l.id, true)).lessonStatus).toBe("done");
+    expect((await billing.setLessonDone(l.id, false)).lessonStatus).toBe("scheduled");
+    const c = await billing.createOrder("u1", buyer, { provider: "dev", now: t0, product: "test" });
+    await billing.applyPaymentEvent({ orderId: c.id, status: "paid" }, "dev", { now: t0 });
+    await expect(billing.scheduleLesson(c.id, new Date())).rejects.toThrow(/nav praktiskās/);
+  });
 });

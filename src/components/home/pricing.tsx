@@ -1,14 +1,6 @@
 import Link from "next/link";
-import { ArrowUpRight, Check } from "lucide-react";
-import {
-  BUNDLE_PRODUCT,
-  buyPath,
-  COURSE_PRODUCT,
-  LESSON_INCLUDES,
-  LESSON_PRODUCT,
-  LESSON_SCHEDULING,
-  TEST_PRODUCT,
-} from "@/config/pricing";
+import { Check } from "lucide-react";
+import { BUNDLE_PRODUCT, buyPath, COURSE_PRODUCT, LESSON_INCLUDES, LESSON_PRODUCT, LESSON_SCHEDULING } from "@/config/pricing";
 import { formatEuro } from "@/lib/format";
 
 function Items({ items, dark = false }: { items: readonly string[]; dark?: boolean }) {
@@ -35,23 +27,39 @@ export function Pricing({ included }: { included: string[] }) {
             Cena
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-muted">
-            Sāc ar 1. moduli bez maksas — maksājumu karte nav vajadzīga. Pilnu kursu, praktisko nodarbību šautuvē vai abus
-            kopā iegādājies ar vienu maksājumu. Cenas ar PVN.
+            Sāc ar 1. moduli bez maksas — maksājumu karte nav vajadzīga. Pilnu kursu, praktisko nodarbību šautuvē vai abus kopā
+            iegādājies ar vienu maksājumu. Cenas ar PVN.
           </p>
         </div>
 
         <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          <article className="flex flex-col rounded-2xl bg-ink p-6 text-white sm:p-8">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h3 className="text-sm text-white/70">{BUNDLE_PRODUCT.title}</h3>
+              <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">Ietaupi {formatEuro(saving)}</span>
+            </div>
+            <p className="mt-2 text-5xl font-bold tracking-tight tabular-nums">{formatEuro(BUNDLE_PRODUCT.amountCents)}</p>
+            <p className="mt-2 text-sm text-white/70">Teorija tiešsaistē un prakse šautuvē — viss sagatavošanai.</p>
+            <Items items={["Viss, kas iekļauts mācību kursā", ...LESSON_INCLUDES]} dark />
+            <p className="mt-6 text-sm text-white/70">{LESSON_SCHEDULING}</p>
+            <div className="mt-auto pt-8">
+              <Link
+                href={buyPath("bundle")}
+                className="inline-flex min-h-12 items-center rounded-xl bg-white px-5 font-semibold text-ink transition-colors hover:bg-white/90"
+              >
+                Iegādāties komplektu
+              </Link>
+            </div>
+          </article>
+
           <article className="flex flex-col rounded-2xl border border-line bg-white p-6 sm:p-8">
             <h3 className="text-sm text-muted">{COURSE_PRODUCT.title}</h3>
             <p className="mt-2 text-5xl font-bold tracking-tight tabular-nums">{formatEuro(COURSE_PRODUCT.amountCents)}</p>
             <p className="mt-2 text-sm text-muted">Vienreizējs maksājums, bez abonementa un bez termiņa.</p>
             <Items items={included} />
-            <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-8">
-              <Link href="/registreties" className="btn-primary gap-2">
-                Sākt bez maksas <ArrowUpRight aria-hidden="true" className="size-4" />
-              </Link>
-              <Link href={buyPath("course")} className="inline-flex min-h-12 items-center font-semibold hover:text-accent">
-                Iegādāties
+            <div className="mt-auto pt-8">
+              <Link href={buyPath("course")} className="btn-primary">
+                Iegādāties pilnu kursu
               </Link>
             </div>
           </article>
@@ -68,33 +76,6 @@ export function Pricing({ included }: { included: string[] }) {
               </Link>
             </div>
           </article>
-
-          <article className="flex flex-col rounded-2xl bg-ink p-6 text-white sm:p-8">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <h3 className="text-sm text-white/70">{BUNDLE_PRODUCT.title}</h3>
-              <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">Ietaupi {formatEuro(saving)}</span>
-            </div>
-            <p className="mt-2 text-5xl font-bold tracking-tight tabular-nums">{formatEuro(BUNDLE_PRODUCT.amountCents)}</p>
-            <p className="mt-2 text-sm text-white/70">Teorija tiešsaistē un prakse šautuvē — viss sagatavošanai.</p>
-            <Items items={["Viss, kas iekļauts mācību kursā", ...LESSON_INCLUDES]} dark />
-            <p className="mt-6 text-sm text-white/70">{LESSON_SCHEDULING}</p>
-            <div className="mt-auto pt-8">
-              <Link href={buyPath("bundle")} className="inline-flex min-h-12 items-center rounded-xl bg-white px-5 font-semibold text-ink transition-colors hover:bg-white/90">
-                Iegādāties komplektu
-              </Link>
-            </div>
-          </article>
-        </div>
-
-        {/* PAGAIDU: testa pirkums maksājumu pārbaudei — noņemt pēc pārbaudes. */}
-        <div className="mt-5 flex flex-wrap items-center justify-between gap-4 rounded-2xl border-2 border-dashed border-line bg-surface p-6">
-          <div>
-            <p className="text-sm text-muted">Testa pirkums (pagaidu) · {formatEuro(TEST_PRODUCT.amountCents)}</p>
-            <p className="mt-1 text-sm text-muted">Īsts maksājums maksājumu pārbaudei — dod pilnu piekļuvi kursam un rēķinu.</p>
-          </div>
-          <Link href={buyPath("test")} className="btn-secondary">
-            Iegādāties testa pirkumu
-          </Link>
         </div>
       </div>
     </section>

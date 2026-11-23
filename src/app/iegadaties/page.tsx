@@ -6,10 +6,11 @@ import { hasFullAccess } from "@/lib/billing/access";
 import { activeProviderName, availablePayMethods } from "@/lib/billing/service";
 import {
   buyPath,
-  isProductCode,
+  isPurchasable,
   LESSON_INCLUDES,
   LESSON_SCHEDULING,
   PRODUCTS,
+  PURCHASABLE,
   productByCode,
   splitVat,
   type ProductCode,
@@ -30,17 +31,14 @@ const PROVIDER_NOTE: Record<string, string> = {
   dev: "Testa režīms: īsta nauda netiek iekasēta.",
 };
 
-/** Produkti, starp kuriem var izvēlēties pirkuma lapā (testa pirkums — tikai ar tiešu saiti). */
-const CHOICES: ProductCode[] = ["course", "lesson", "bundle"];
-
 export default async function BuyPage({ searchParams }: { searchParams: Promise<{ produkts?: string }> }) {
   const sp = await searchParams;
-  const code: ProductCode = isProductCode(sp.produkts) ? sp.produkts : "course";
+  const code: ProductCode = isPurchasable(sp.produkts) ? sp.produkts : "course";
   const product = productByCode(code);
   const self = buyPath(code);
   const [user, course] = await Promise.all([getCurrentUser(), getCourseOverview()]);
   const hasCourse = await hasFullAccess(user?.id);
-  // Kursu otrreiz nepērk; nodarbību un testa pirkumu — var.
+  // Kursu otrreiz nepērk; nodarbību — var.
   const blocked = hasCourse && (code === "course" || code === "bundle");
   const provider = activeProviderName();
   const methods = provider && user && !blocked ? await availablePayMethods() : [];
@@ -56,9 +54,8 @@ export default async function BuyPage({ searchParams }: { searchParams: Promise<
     <div className="mx-auto max-w-3xl px-4 py-8 sm:py-12">
       <h1 className="text-3xl font-semibold">Iegādāties</h1>
 
-      {code !== "test" && (
-        <nav aria-label="Produkts" className="mt-6 grid gap-2 sm:grid-cols-3">
-          {CHOICES.map((c) => {
+      <nav aria-label="Produkts" className="mt-6 grid gap-2 sm:grid-cols-3">
+          {PURCHASABLE.map((c) => {
             const p = PRODUCTS[c];
             const active = c === code;
             return (
@@ -74,7 +71,6 @@ export default async function BuyPage({ searchParams }: { searchParams: Promise<
             );
           })}
         </nav>
-      )}
 
       <div className="mt-6 grid gap-6 md:grid-cols-[1fr_1.2fr]">
         <section aria-labelledby="offer-h" className="rounded-2xl border border-line bg-white p-5 sm:p-6">

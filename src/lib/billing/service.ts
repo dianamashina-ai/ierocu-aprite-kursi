@@ -6,7 +6,7 @@ import type { OrderBuyer } from "@/db/schema";
 import { COURSE_PRODUCT, LESSON_SCHEDULING, productByCode, splitVat, type ProductCode } from "@/config/pricing";
 import { courseAccessWhere } from "./access";
 import { sendEmail } from "@/lib/email/send";
-import { formatEuro } from "@/lib/format";
+import { formatEuro, formatLessonAt } from "@/lib/format";
 import { activeProviderName, invoiceNumber } from "./config";
 
 export { activeProviderName, invoiceNumber };
@@ -211,6 +211,48 @@ export async function refundOrder(orderId: string, opts: { now?: Date } = {}) {
     }).catch((e) => console.error("Atmaksas e-pasts:", e));
   }
   return result;
+}
+
+/** Apmaksāts pasūtījums ar praktisko nodarbību (administratora darbībām). */
+async function paidLessonOrder(orderId: string) {
+  const order = await db.query.orders.findFirst({ where: eq(schema.orders.id, orderId) });
+  if (!order || order.status !== "paid") throw new BillingError("Apmaksāts pasūtījums nav atrasts");
+  if (!productByCode(order.productCode as ProductCode)?.includesLesson) throw new BillingError("Šajā pasūtījumā nav praktiskās nodarbības");
+  return order;
+}
+
+/** Administrators saskaņo (vai pārceļ) nodarbības laiku; pircējam nosūta apstiprinājumu. */
+export async function scheduleLesson(orderId: string, at: Date) {
+  const order = await paidLessonOrder(orderId);
+  const moved = order.lessonStatus === "scheduled" && order.lessonAt && order.lessonAt.getTime() !== at.getTime();
+  const [updated] = await db
+    .update(schema.orders)
+    .set({ lessonStatus: "scheduled", lessonAt: at })
+    .where(eq(schema.orders.id, orderId))
+    .returning();
+  if (order.lessonAt?.getTime() !== at.getTime() || order.lessonStatus !== "scheduled") {
+    await sendEmail({
+      to: order.buyer.email,
+      subject: moved ? `Praktiskā nodarbība pārcelta — ${formatLessonAt(at)}` : `Praktiskā nodarbība saskaņota — ${formatLessonAt(at)}`,
+      text:
+        `Sveiki, ${order.buyer.name}!\n\n` +
+        `${moved ? "Tava praktiskā nodarbība pārcelta uz" : "Tava praktiskā nodarbība ieplānota"}: ${formatLessonAt(at)}.\n\n` +
+        `Nodarbība notiek mūsu šautuvē ar sertificētu instruktoru. Ja laiks jāmaina, atbildi uz šo e-pastu.\n`,
+    }).catch((e) => console.error("Nodarbības e-pasts:", e));
+  }
+  return updated;
+}
+
+/** Atzīmē nodarbību kā notikušu (done) vai atgriež saskaņotu (scheduled). */
+export async function setLessonDone(orderId: string, done: boolean) {
+  const order = await paidLessonOrder(orderId);
+  if (done && !order.lessonAt) throw new BillingError("Vispirms norādi nodarbības laiku");
+  const [updated] = await db
+    .update(schema.orders)
+    .set({ lessonStatus: done ? "done" : order.lessonAt ? "scheduled" : null })
+    .where(eq(schema.orders.id, orderId))
+    .returning();
+  return updated;
 }
 
 export const INVITE_TOKEN_DAYS = 3;

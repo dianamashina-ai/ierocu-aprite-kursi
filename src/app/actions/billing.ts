@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { getCurrentUser } from "@/lib/auth/session";
-import { buyPath, isProductCode, productByCode, type ProductCode } from "@/config/pricing";
+import { buyPath, isPurchasable, productByCode, type ProductCode } from "@/config/pricing";
 import { activeProviderName, applyPaymentEvent, BillingError, getOrderForUser, startCheckout } from "@/lib/billing/service";
 
 export type CheckoutState = { error?: string; fields?: Record<string, string> };
@@ -30,7 +30,7 @@ async function requestOrigin() {
 }
 
 export async function checkoutAction(_prev: CheckoutState, form: FormData): Promise<CheckoutState> {
-  const code: ProductCode = isProductCode(form.get("product")) ? (form.get("product") as ProductCode) : "course";
+  const code: ProductCode = isPurchasable(form.get("product")) ? (form.get("product") as ProductCode) : "course";
   const product = productByCode(code);
   const user = await getCurrentUser();
   if (!user) redirect(`/pieslegties?next=${encodeURIComponent(buyPath(code))}`);
