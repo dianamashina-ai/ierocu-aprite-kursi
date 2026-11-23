@@ -98,7 +98,7 @@ export default async function BuyPage({ searchParams }: { searchParams: Promise<
                   product={code}
                   methods={methods}
                 />
-                <p className="mt-4 text-xs text-muted">{PROVIDER_NOTE[provider]}</p>
+                <p className="mt-4 text-center text-xs text-muted">{PROVIDER_NOTE[provider]}</p>
               </>
             )}
           </div>

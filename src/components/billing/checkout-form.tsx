@@ -324,7 +324,7 @@ export function CheckoutForm({
         <button
           type="submit"
           disabled={pending || busy}
-          className="btn-primary w-full sm:w-auto"
+          className="btn-primary w-full"
         >
           {busy
             ? "Izveido kontu…"
