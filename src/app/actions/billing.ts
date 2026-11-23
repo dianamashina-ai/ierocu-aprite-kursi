@@ -31,10 +31,11 @@ export async function checkoutAction(_prev: CheckoutState, form: FormData): Prom
   const { name } = parsed.data;
   // PAGAIDU: testa produkts (1,50 €) maksājumu pārbaudei.
   const product = form.get("product") === "test" ? "test" : "full-course";
+  const method = form.get("method") === "card" ? "card" : "bank";
 
   let url: string;
   try {
-    url = await startCheckout(user.id, { name, email: user.email }, await requestOrigin(), product);
+    url = await startCheckout(user.id, { name, email: user.email }, await requestOrigin(), product, method);
   } catch (e) {
     if (e instanceof BillingError) return { error: e.message, fields: raw };
     console.error(e);

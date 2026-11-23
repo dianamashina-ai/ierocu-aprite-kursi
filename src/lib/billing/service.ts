@@ -9,9 +9,9 @@ import { formatEuro } from "@/lib/format";
 import { activeProviderName, invoiceNumber } from "./config";
 
 export { activeProviderName, invoiceNumber };
-import type { PaymentEvent, PaymentProvider, ProviderName } from "./types";
+import type { PaymentEvent, PaymentProvider, PayMethod, ProviderName } from "./types";
 import { stripeProvider } from "./providers/stripe";
-import { montonioProvider } from "./providers/montonio";
+import { montonioPaymentMethods, montonioProvider } from "./providers/montonio";
 import { devProvider } from "./providers/dev";
 import { manualProvider } from "./providers/manual";
 
@@ -61,11 +61,18 @@ export async function createOrder(userId: string, buyer: OrderBuyer, opts: { pro
 }
 
 /** Izveido pasūtījumu un maksājumu sesiju; atgriež adresi, uz kuru novirzīt pircēju. */
-export async function startCheckout(userId: string, buyer: OrderBuyer, origin = siteUrl(), product: ProductCode = "full-course") {
+export async function startCheckout(
+  userId: string,
+  buyer: OrderBuyer,
+  origin = siteUrl(),
+  product: ProductCode = "full-course",
+  method: PayMethod = "bank",
+) {
   const order = await createOrder(userId, buyer, { product });
   const site = origin.replace(/\/$/, "");
   const { redirectUrl, providerRef } = await providers[order.provider].createCheckout({
     orderId: order.id,
+    method,
     product: order.product,
     amountCents: order.amountCents,
     currency: order.currency,
@@ -82,6 +89,14 @@ export async function startCheckout(userId: string, buyer: OrderBuyer, origin = 
  * Piemēro maksājumu sistēmas paziņojumu (idempotenti — paziņojumi var atkārtoties).
  * Rēķina numuru piešķir tikai pirmajā pārejā uz "paid".
  */
+/** Maksāšanas veidi, ko rādīt pirkuma lapā. */
+export async function availablePayMethods(): Promise<PayMethod[]> {
+  const p = activeProviderName();
+  if (p === "montonio") return montonioPaymentMethods();
+  if (p === "dev") return ["bank", "card"]; // testa režīmā — lai var pārbaudīt izvēli
+  return ["bank"];
+}
+
 export async function applyPaymentEvent(ev: PaymentEvent, provider: ProviderName, opts: { now?: Date } = {}) {
   const now = opts.now ?? new Date();
   const result = await db.transaction(async (tx) => {

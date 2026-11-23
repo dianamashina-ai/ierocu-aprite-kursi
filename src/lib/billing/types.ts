@@ -2,7 +2,12 @@ import type { OrderBuyer } from "@/db/schema";
 
 export type ProviderName = "stripe" | "montonio" | "dev" | "manual";
 
+/** Maksāšanas veids, ko pircējs izvēlas mūsu lapā: internetbanka vai karte (t. sk. Apple Pay / Google Pay). */
+export type PayMethod = "bank" | "card";
+export const PAY_METHODS: readonly PayMethod[] = ["bank", "card"];
+
 export interface CheckoutInput {
+  method?: PayMethod;
   orderId: string;
   product: string;
   amountCents: number;

@@ -2,7 +2,7 @@ import { courseIncluded } from "@/lib/billing/included";
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth/session";
 import { hasFullAccess } from "@/lib/billing/access";
-import { activeProviderName } from "@/lib/billing/service";
+import { activeProviderName, availablePayMethods } from "@/lib/billing/service";
 import { COURSE_PRODUCT, TEST_PRODUCT, splitVat } from "@/config/pricing";
 import { formatEuro } from "@/lib/format";
 import { CheckoutForm } from "@/components/billing/checkout-form";
@@ -17,7 +17,7 @@ export const metadata = {
 
 const PROVIDER_NOTE: Record<string, string> = {
   stripe: "Maksājums ar karti caur Stripe.",
-  montonio: "Maksājums caur internetbanku (Montonio).",
+  montonio: "Maksājumus apstrādā Montonio.",
   dev: "Testa režīms: īsta nauda netiek iekasēta.",
 };
 
@@ -36,6 +36,7 @@ export default async function BuyPage({
   ]);
   const access = !isTest && (await hasFullAccess(user?.id));
   const provider = activeProviderName();
+  const methods = provider && user && !access ? await availablePayMethods() : [];
   const price = formatEuro(product.amountCents);
   const { vatCents } = splitVat(product.amountCents, product.vatRate);
 
@@ -126,6 +127,7 @@ export default async function BuyPage({
                   defaultName={user.name}
                   priceLabel={price}
                   product={isTest ? "test" : undefined}
+                  methods={methods}
                 />
                 <p className="mt-4 text-xs text-muted">
                   {PROVIDER_NOTE[provider]}

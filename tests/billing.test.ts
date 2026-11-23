@@ -2,7 +2,7 @@ import { createHmac } from "node:crypto";
 import { describe, expect, it } from "vitest";
 import { splitVat, COURSE_PRODUCT } from "@/config/pricing";
 import { stripeEventToPayment, verifyStripeSignature } from "@/lib/billing/providers/stripe";
-import { montonioTokenToPayment, signJwt, verifyJwt } from "@/lib/billing/providers/montonio";
+import { enabledFromResponse, montonioProvider, montonioTokenToPayment, signJwt, verifyJwt } from "@/lib/billing/providers/montonio";
 import { activeProviderName, invoiceNumber } from "@/lib/billing/config";
 
 describe("cena un PVN", () => {
@@ -88,5 +88,32 @@ describe("Montonio JWT", () => {
   it("summa un valūta no token", () => {
     const ev = montonioTokenToPayment(signJwt({ merchantReference: "o1", paymentStatus: "PAID", grandTotal: 120, currency: "EUR", uuid: "u1" }, secret), secret);
     expect(ev).toMatchObject({ orderId: "o1", providerRef: "u1", status: "paid", amountCents: 12000, currency: "EUR" });
+  });
+  it("ieslēgtie maksāšanas veidi no GET /stores/payment-methods", () => {
+    expect(enabledFromResponse({ paymentInitiation: {}, cardPayments: {}, blik: {} })).toEqual(["bank", "card"]);
+    expect(enabledFromResponse({ paymentInitiation: {} })).toEqual(["bank"]);
+    expect(enabledFromResponse([{ code: "cardPayments" }])).toEqual(["card"]);
+    expect(enabledFromResponse(null)).toEqual([]);
+  });
+  it("pasūtījumā — izvēlētais veids (cardPayments / paymentInitiation)", async () => {
+    process.env.MONTONIO_ACCESS_KEY = "ak";
+    process.env.MONTONIO_SECRET_KEY = secret;
+    const sent: Record<string, { method: string }>[] = [];
+    const orig = globalThis.fetch;
+    globalThis.fetch = (async (_u: string, init: { body: string }) => {
+      sent.push(verifyJwt(JSON.parse(init.body).data, secret) as never);
+      return new Response(JSON.stringify({ paymentUrl: "https://gw/x", uuid: "u" }));
+    }) as never;
+    try {
+      const base = { orderId: "o1", product: "P", amountCents: 150, currency: "EUR", buyer: { name: "A B", email: "a@example.com" }, returnUrl: "r", cancelUrl: "c", notificationUrl: "n" };
+      await montonioProvider.createCheckout({ ...base, method: "card" });
+      await montonioProvider.createCheckout(base);
+    } finally {
+      globalThis.fetch = orig;
+      delete process.env.MONTONIO_ACCESS_KEY;
+      delete process.env.MONTONIO_SECRET_KEY;
+    }
+    expect(sent[0].payment.method).toBe("cardPayments");
+    expect(sent[1].payment.method).toBe("paymentInitiation");
   });
 });

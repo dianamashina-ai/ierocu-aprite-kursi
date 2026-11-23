@@ -1,9 +1,9 @@
 import "server-only";
 import { createHmac, timingSafeEqual } from "node:crypto";
-import type { CheckoutInput, CheckoutResult, PaymentEvent, PaymentProvider } from "../types";
+import type { CheckoutInput, CheckoutResult, PaymentEvent, PaymentProvider, PayMethod } from "../types";
 
 /**
- * Montonio (Stargate API v2) — bankas maksājumi (paymentInitiation).
+ * Montonio (Stargate API v2) — bankas maksājumi (paymentInitiation) un kartes (cardPayments; tajā arī Apple Pay / Google Pay).
  * Vides mainīgie: MONTONIO_ACCESS_KEY, MONTONIO_SECRET_KEY, MONTONIO_SANDBOX=1 (testa vide).
  * Pieprasījumi un paziņojumi ir JWT (HS256), parakstīti ar slepeno atslēgu.
  * Pirms produkcijas pārbaudīt Montonio sandbox vidē (lauku nosaukumi pēc API v2 dokumentācijas).
@@ -61,12 +61,15 @@ export const montonioProvider: PaymentProvider = {
       locale: "lv",
       billingAddress: { firstName, lastName: rest.join(" ") || firstName, email: i.buyer.email },
       lineItems: [{ name: i.product, quantity: 1, finalPrice: amount }],
-      payment: {
-        method: "paymentInitiation",
-        amount,
-        currency: i.currency,
-        methodOptions: { preferredCountry: "LV", preferredLocale: "lv", paymentDescription: `Ieroču atļauja — pilna piekļuve (${i.orderId.slice(0, 8)})` },
-      },
+      payment:
+        i.method === "card"
+          ? { method: "cardPayments", amount, currency: i.currency }
+          : {
+              method: "paymentInitiation",
+              amount,
+              currency: i.currency,
+              methodOptions: { preferredCountry: "LV", preferredLocale: "lv", paymentDescription: `Ieroču atļauja — pilna piekļuve (${i.orderId.slice(0, 8)})` },
+            },
       iat: Math.floor(Date.now() / 1000),
       exp: Math.floor(Date.now() / 1000) + 600,
     };
@@ -108,6 +111,42 @@ export const montonioProvider: PaymentProvider = {
     }
   },
 };
+
+const METHOD_KEYS: Record<PayMethod, string> = { bank: "paymentInitiation", card: "cardPayments" };
+let methodsCache: { at: number; methods: PayMethod[] } | null = null;
+
+/** Montonio atbilde (GET /stores/payment-methods) → mūsu maksāšanas veidi, kas veikalam ieslēgti. */
+export function enabledFromResponse(paymentMethods: unknown): PayMethod[] {
+  const names = new Set<string>();
+  if (Array.isArray(paymentMethods)) {
+    for (const m of paymentMethods) if (m && typeof m === "object") names.add(String((m as { code?: string; name?: string }).code ?? (m as { name?: string }).name));
+  } else if (paymentMethods && typeof paymentMethods === "object") {
+    for (const k of Object.keys(paymentMethods)) names.add(k);
+  }
+  return (Object.keys(METHOD_KEYS) as PayMethod[]).filter((m) => names.has(METHOD_KEYS[m]));
+}
+
+/** Veikalam ieslēgtie maksāšanas veidi (kešots 10 min). Ja Montonio neatbild — abi, lai pirkšana nebūtu bloķēta. */
+export async function montonioPaymentMethods(): Promise<PayMethod[]> {
+  if (methodsCache && Date.now() - methodsCache.at < 10 * 60_000) return methodsCache.methods;
+  try {
+    const { accessKey, secret } = keys();
+    const now = Math.floor(Date.now() / 1000);
+    const res = await fetch(`${base()}/stores/payment-methods`, {
+      headers: { Authorization: `Bearer ${signJwt({ accessKey, iat: now, exp: now + 600 }, secret)}` },
+      cache: "no-store",
+    });
+    if (!res.ok) throw new Error(`Montonio payment-methods: ${res.status}`);
+    const json = (await res.json()) as { paymentMethods?: unknown };
+    const methods = enabledFromResponse(json.paymentMethods);
+    if (!methods.length) throw new Error("Montonio payment-methods: tukšs saraksts");
+    methodsCache = { at: Date.now(), methods };
+    return methods;
+  } catch (e) {
+    console.error(e);
+    return ["bank", "card"];
+  }
+}
 
 type MontonioToken = { uuid?: string; merchantReference?: string; paymentStatus?: string; accessKey?: string; grandTotal?: number; currency?: string };
 
