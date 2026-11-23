@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check, ChevronDown, Lock } from "lucide-react";
 import { plural } from "@/lib/format";
 import { ACTION_CARD_CLASS } from "@/components/page-header";
+import { ModulePicker } from "@/components/training/module-picker";
 
 export interface BuilderModule {
   id: string;
@@ -27,23 +27,8 @@ export function TrainingBuilder({ modules }: { modules: BuilderModule[] }) {
   const router = useRouter();
   const available = modules.filter((m) => !m.locked);
   const [selected, setSelected] = useState<Set<string>>(() => new Set(available.map((m) => m.id)));
-  const [open, setOpen] = useState(false);
   const [mistakesOnly, setMistakesOnly] = useState(false);
   const [limit, setLimit] = useState<number>(20);
-  const boxRef = useRef<HTMLDivElement>(null);
-
-  // aizver sarakstu, noklikšķinot ārpusē vai ar Esc
-  useEffect(() => {
-    if (!open) return;
-    const onDown = (e: MouseEvent) => !boxRef.current?.contains(e.target as Node) && setOpen(false);
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    document.addEventListener("mousedown", onDown);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("mousedown", onDown);
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [open]);
 
   const chosen = available.filter((m) => selected.has(m.id));
   const totalMistakes = chosen.reduce((s, m) => s + m.mistakes, 0);
@@ -52,16 +37,6 @@ export function TrainingBuilder({ modules }: { modules: BuilderModule[] }) {
   const hasLocked = available.length < modules.length;
   // “Visi moduļi” — tikai ja visi kursa moduļi pieejami un izvēlēti
   const allChosen = !hasLocked && chosen.length === available.length && available.length > 0;
-  const summary =
-    chosen.length === 0 ? "Izvēlies moduļus" : allChosen ? "Visi moduļi" : chosen.length === 1 ? `${String(chosen[0].order).padStart(2, "0")} ${chosen[0].title}` : `${chosen.length} moduļi`;
-
-  const toggle = (id: string) =>
-    setSelected((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
 
   const start = () => {
     const p = new URLSearchParams();
@@ -74,59 +49,7 @@ export function TrainingBuilder({ modules }: { modules: BuilderModule[] }) {
   return (
     <div className={ACTION_CARD_CLASS}>
       {/* Moduļi */}
-      <div ref={boxRef} className="relative">
-        <p id="moduli-l" className="sr-only">Moduļi</p>
-        <button
-          type="button"
-          aria-haspopup="listbox"
-          aria-expanded={open}
-          aria-labelledby="moduli-l moduli-v"
-          onClick={() => setOpen((o) => !o)}
-          className="flex min-h-12 w-full items-center justify-between gap-3 rounded-xl border border-line bg-surface px-4 text-left text-base"
-        >
-          <span id="moduli-v" className="truncate">{summary}</span>
-          <ChevronDown aria-hidden="true" className={`size-5 shrink-0 text-muted transition-transform ${open ? "rotate-180" : ""}`} />
-        </button>
-        {open && (
-          <div className="absolute inset-x-0 top-full z-30 mt-2 max-h-[60vh] overflow-y-auto rounded-xl border border-line bg-white p-1.5 shadow-[0_16px_40px_-12px_rgba(34,34,34,0.25)]">
-            {!hasLocked && (
-              <>
-                <button
-                  type="button"
-                  onClick={() => setSelected(allChosen ? new Set() : new Set(available.map((m) => m.id)))}
-                  className="flex min-h-11 w-full items-center gap-3 rounded-lg px-3 text-left font-semibold hover:bg-surface"
-                >
-                  <Box on={allChosen} />
-                  Visi moduļi
-                </button>
-                <div className="my-1 h-px bg-line" />
-              </>
-            )}
-            <ul role="listbox" aria-multiselectable="true" aria-label="Moduļi">
-              {modules.map((m) => (
-                <li key={m.id} role="option" aria-selected={selected.has(m.id)} aria-disabled={m.locked}>
-                  <button
-                    type="button"
-                    disabled={m.locked}
-                    onClick={() => toggle(m.id)}
-                    className="flex min-h-11 w-full items-center gap-3 rounded-lg px-3 text-left text-[15px] hover:bg-surface disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
-                  >
-                    <Box on={selected.has(m.id)} />
-                    <span className="min-w-0 flex-1">
-                      <span className="tabular-nums text-muted">{String(m.order).padStart(2, "0")}</span> {m.title}
-                    </span>
-                    {m.locked ? (
-                      <Lock aria-label="Pilnajā piekļuvē" className="size-4 shrink-0 text-muted" />
-                    ) : (
-                      m.mistakes > 0 && <span className="shrink-0 text-xs font-semibold text-err">{plural(m.mistakes, "kļūda", "kļūdas")}</span>
-                    )}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
+      <ModulePicker modules={modules} selected={selected} onChange={setSelected} />
 
       {/* Tikai kļūdas */}
       <label className={`mt-5 flex items-start gap-3 ${totalMistakes > 0 || mistakesOnly ? "cursor-pointer" : "cursor-not-allowed opacity-60"}`}>
@@ -164,13 +87,5 @@ export function TrainingBuilder({ modules }: { modules: BuilderModule[] }) {
         Sākt treniņu
       </button>
     </div>
-  );
-}
-
-function Box({ on }: { on: boolean }) {
-  return (
-    <span aria-hidden="true" className={`flex size-5 shrink-0 items-center justify-center rounded-md border ${on ? "border-accent bg-accent text-white" : "border-line bg-white"}`}>
-      {on && <Check className="size-3.5" strokeWidth={3} />}
-    </span>
   );
 }

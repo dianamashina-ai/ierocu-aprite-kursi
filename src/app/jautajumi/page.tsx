@@ -9,7 +9,8 @@ import { hasFullAccess, isFreeModule, moduleOfTopic } from "@/lib/billing/access
 import { getWrongIds } from "@/lib/progress/service";
 import { QuestionCard } from "@/components/questions/question-card";
 import { AnswersToggle } from "@/components/questions/answers-toggle";
-import { AutoSubmit } from "@/components/questions/auto-submit";
+import { QuestionsFilters } from "@/components/questions/questions-filters";
+import { getMistakesByModule } from "@/lib/training/service";
 import { FullCourseUpsell } from "@/components/billing/full-course-upsell";
 import { Paywall } from "@/components/billing/paywall";
 import { lockedTotals } from "@/lib/billing/upsell";
@@ -23,30 +24,34 @@ const SEARCH_LIMIT = 50;
 export default async function QuestionsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string; modulis?: string; kludas?: string }>;
+  searchParams: Promise<{ q?: string; moduli?: string; kludas?: string }>;
 }) {
   const sp = await searchParams;
   const query = (sp.q ?? "").slice(0, 200).trim();
   const user = await getCurrentUser();
   const [course, full, t] = await Promise.all([getCourseOverview(), hasFullAccess(user?.id), getTranslations("search")]);
   const moduleIds = course.modules.map((m) => m.id);
-  // modulis: URL → tas; ar meklēšanu bez moduļa → visi; citādi → 1. modulis
-  const modulis = sp.modulis === "visi" ? "" : sp.modulis && moduleIds.includes(sp.modulis) ? sp.modulis : query ? "" : moduleIds[0];
+  // moduļi: URL (“visi”, “nav” vai saraksts) → tie; ar meklēšanu bez moduļiem → visi; citādi → 1. modulis
+  const fromUrl = (sp.moduli ?? "").split(",").filter((m) => moduleIds.includes(m));
+  const selectedModules =
+    sp.moduli === "visi" ? moduleIds : sp.moduli === "nav" ? [] : fromUrl.length ? fromUrl : query ? moduleIds : [moduleIds[0]];
+  const inSelected = (topicId: string) => selectedModules.includes(moduleOfTopic(topicId));
   const onlyWrong = Boolean(user) && sp.kludas === "1";
+  const mistakesByModule = user ? await getMistakesByModule(user.id) : new Map<string, number>();
 
   // jautājumu id saraksts
   let ids: number[];
   let limited = false;
   if (query) {
     const found = await searchQuestions(query, SEARCH_LIMIT);
-    ids = found.filter((r) => !modulis || moduleOfTopic(r.topicId) === modulis).map((r) => r.id);
+    ids = found.filter((r) => inSelected(r.topicId)).map((r) => r.id);
     limited = found.length === SEARCH_LIMIT;
   } else {
-    const topicIds = course.modules.filter((m) => !modulis || m.id === modulis).flatMap((m) => m.topics.map((tp) => tp.id));
+    const topicIds = course.modules.filter((m) => selectedModules.includes(m.id)).flatMap((m) => m.topics.map((tp) => tp.id));
     const rows = await db
       .select({ id: schema.questions.id })
       .from(schema.questions)
-      .where(inArray(schema.questions.topicId, topicIds))
+      .where(inArray(schema.questions.topicId, topicIds.length ? topicIds : ["-"]))
       .orderBy(asc(schema.questions.id));
     ids = rows.map((r) => r.id);
   }
@@ -86,34 +91,14 @@ export default async function QuestionsPage({
       </form>
 
       {/* filtri */}
-      <form action="/jautajumi" method="get" className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center">
-        {query && <input type="hidden" name="q" value={query} />}
-        <label className="sm:w-80">
-          <span className="sr-only">Modulis</span>
-          <select
-            name="modulis"
-            defaultValue={modulis || "visi"}
-            className="block min-h-11 w-full rounded-xl border border-line bg-surface px-3 text-[15px]"
-          >
-            <option value="visi">Visi moduļi</option>
-            {course.modules.map((m) => (
-              <option key={m.id} value={m.id}>
-                {String(m.order).padStart(2, "0")} {m.titleLv}
-              </option>
-            ))}
-          </select>
-        </label>
-        {user && (
-          <label className="flex cursor-pointer items-center gap-2.5 text-sm">
-            <input type="checkbox" name="kludas" value="1" defaultChecked={onlyWrong} className="size-4 accent-accent" />
-            Tikai manas kļūdas
-          </label>
-        )}
-        <noscript>
-          <button type="submit" className="btn-secondary min-h-11">Rādīt</button>
-        </noscript>
-        <AutoSubmit />
-      </form>
+      <QuestionsFilters
+        key={query}
+        modules={course.modules.map((m) => ({ id: m.id, order: m.order, title: m.titleLv, mistakes: mistakesByModule.get(m.id) ?? 0 }))}
+        initial={selectedModules}
+        onlyWrong={onlyWrong}
+        query={query}
+        signedIn={Boolean(user)}
+      />
 
       <section className="mt-8" aria-live="polite">
         <p className="font-semibold">{t("results", { count: cards.length })}</p>
