@@ -36,6 +36,10 @@ export function HowItWorks({
       title: "Pārbaudi sevi",
       text: `Izmēģinājuma eksāmens kā īstajā: ${examQuestions} jautājumi, ${examMinutes} minūtes. Nokārto ${READY_LAST_EXAMS} pēc kārtas — un esi gatavs.`,
     },
+    {
+      title: "Praktiskā nodarbība",
+      text: "Pēc izvēles: iepazīšanās ar kaujas ieroci un 30 izmēģinājuma šāvieni ar sertificētu instruktoru mūsu šautuvē. Nav obligāta atļaujas saņemšanai.",
+    },
   ];
   return (
     <section

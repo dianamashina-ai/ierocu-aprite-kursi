@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { headingId, parseBlocks } from "@/lib/content/lesson-markdown";
+import { headingId, parseBlocks, type Block } from "@/lib/content/lesson-markdown";
 
 /** **treknraksts** → <strong> (bez HTML ievietošanas) */
 function inline(text: string): ReactNode[] {
@@ -9,12 +9,21 @@ function inline(text: string): ReactNode[] {
 }
 
 export function LessonBody({ markdown }: { markdown: string }) {
+  return <LessonBlocks blocks={parseBlocks(markdown)} />;
+}
+
+/** Nodarbības bloki; compact — mazāks teksts (piem., sākumlapas paraugam), tāds pats noformējums. */
+export function LessonBlocks({ blocks, compact = false }: { blocks: Block[]; compact?: boolean }) {
   return (
-    <div className="space-y-5 text-[17px] leading-[1.75]" lang="lv">
-      {parseBlocks(markdown).map((b, i) => {
+    <div className={compact ? "space-y-3 text-[15px] leading-relaxed" : "space-y-5 text-[17px] leading-[1.75]"} lang="lv">
+      {blocks.map((b, i) => {
         switch (b.kind) {
           case "h":
-            return <h2 key={i} id={headingId(b.text)} className="scroll-mt-6 pt-4 text-2xl font-semibold tracking-tight">{b.text}</h2>;
+            return compact ? (
+              <h3 key={i} className="pt-1 text-base font-semibold tracking-tight">{b.text}</h3>
+            ) : (
+              <h2 key={i} id={headingId(b.text)} className="scroll-mt-6 pt-4 text-2xl font-semibold tracking-tight">{b.text}</h2>
+            );
           case "p":
             return <p key={i}>{inline(b.text)}</p>;
           case "ul":

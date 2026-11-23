@@ -37,3 +37,28 @@ export function headingId(text: string) {
 export function lessonHeadings(md: string) {
   return parseBlocks(md).flatMap((b) => (b.kind === "h" ? [{ id: headingId(b.text), text: b.text }] : []));
 }
+
+/**
+ * Nodarbības fragments: izvēlētās sadaļas (pēc virsraksta) ar pirmajiem N blokiem, plus "Atceries" bloks.
+ * Teksts paliek tieši tāds pats kā nodarbībā.
+ */
+export function lessonExcerpt(md: string, sections: Record<string, number>): Block[] {
+  const out: Block[] = [];
+  let take = 0;
+  for (const b of parseBlocks(md)) {
+    if (b.kind === "h") {
+      take = sections[b.text] ?? 0;
+      if (take) out.push(b);
+      continue;
+    }
+    if (b.kind === "note") {
+      out.push(b);
+      continue;
+    }
+    if (take > 0) {
+      out.push(b);
+      take--;
+    }
+  }
+  return out;
+}

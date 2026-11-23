@@ -2,11 +2,15 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, ArrowUpRight, BookOpen, Check, ClipboardCheck, Clock, RotateCcw, Repeat, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BookOpen, Check, ClipboardCheck, Clock, Crosshair, RotateCcw, Repeat, X } from "lucide-react";
+import { LessonBlocks } from "@/components/lesson-body";
+import type { Block } from "@/lib/content/lesson-markdown";
+import { buyPath, LESSON_INCLUDES, LESSON_PRODUCT } from "@/config/pricing";
+import { formatEuro } from "@/lib/format";
 import type { PracticeQuestion } from "@/lib/quiz/types";
 import { uppercaseLetterRefs } from "@/lib/quiz/shuffle";
 
-const ICONS = [BookOpen, Repeat, ClipboardCheck];
+const ICONS = [BookOpen, Repeat, ClipboardCheck, Crosshair];
 const LETTERS = "ABCDEF";
 /** Mini eksāmena laiks sekundēs (demonstrācijai) */
 const DEMO_SECONDS = 90;
@@ -14,6 +18,8 @@ const DEMO_SECONDS = 90;
 export interface ShowcaseLesson {
   title: string;
   minutes: number;
+  /** Fragments no nodarbības (tieši tāds pats teksts) */
+  blocks: Block[];
 }
 
 /**
@@ -95,8 +101,16 @@ export function HowItWorksShowcase({
         {step === 0 && <LessonStep key={`l${run}`} lesson={lesson} onNext={() => go(1)} />}
         {step === 1 && practice && <PracticeStep key={`p${run}`} q={practice} onNext={() => go(2)} />}
         {step === 2 && (
-          <ExamStep key={`e${run}`} qs={exam} realQuestions={examQuestions} realMinutes={examMinutes} onRestart={() => go(2)} />
+          <ExamStep
+            key={`e${run}`}
+            qs={exam}
+            realQuestions={examQuestions}
+            realMinutes={examMinutes}
+            onRestart={() => go(2)}
+            onNext={() => go(3)}
+          />
         )}
+        {step === 3 && <PracticalStep />}
         <p className="mt-4 text-center text-sm text-muted">
           Izmēģini šeit — {step + 1}. solis no {steps.length}
         </p>
@@ -122,10 +136,7 @@ function Frame({ label, right, children }: { label: string; right?: React.ReactN
 
 const nextBtn = "btn-primary mt-5 w-full gap-2 sm:w-auto";
 
-/**
- * 1. solis: nodarbības konspekta fragments. Teksts — no content/lessons/1-1.md
- * (definīcija no Ieroču aprites likuma 1. panta 42. punkta); mainot nodarbību, atjaunot arī šeit.
- */
+/** 1. solis: fragments no īstās 1.1. nodarbības — tas pats teksts un noformējums, pietiek nākamajiem jautājumiem. */
 function LessonStep({ lesson, onNext }: { lesson: ShowcaseLesson; onNext: () => void }) {
   return (
     <Frame
@@ -138,28 +149,35 @@ function LessonStep({ lesson, onNext }: { lesson: ShowcaseLesson; onNext: () => 
       }
     >
       <p className="mt-4 text-lg font-semibold leading-snug">{lesson.title}</p>
-      <h4 className="mt-4 font-semibold">Šaujamierocis</h4>
-      <p className="mt-1.5 text-[15px] leading-relaxed text-muted">
-        <strong className="text-ink">Šaujamierocis</strong> — jebkurš <strong className="text-ink">pārnēsājams</strong> ierocis{" "}
-        <strong className="text-ink">ar stobru</strong>, kas <strong className="text-ink">šaujampulvera vai cita propelenta</strong>{" "}
-        iedarbības rezultātā raida šāviņu, ir paredzēts vai <strong className="text-ink">var tikt pārveidots</strong>, lai raidītu
-        šāviņu.
-      </p>
-      <p className="mt-2 inline-flex items-center gap-1.5 rounded-lg bg-accent-soft px-2 py-1 text-xs font-semibold text-ink">
-        <BookOpen aria-hidden="true" className="size-3.5" />
-        Ieroču aprites likums, 1. panta 42. punkts
-      </p>
-      <div className="mt-4 rounded-xl border-l-4 border-accent bg-surface px-4 py-3">
-        <p className="text-sm font-semibold">Atceries</p>
-        <ul className="mt-1.5 space-y-1 text-sm text-muted">
-          <li>Šaujamierocis: stobrs + šaujampulveris/propelents.</li>
-          <li>Pneimatiskais: saspiesta gāze.</li>
-          <li>Lielas enerģijas: &gt; 12 J; mazas: ≤ 12 J.</li>
-        </ul>
+      <div className="mt-3">
+        <LessonBlocks blocks={lesson.blocks} compact />
       </div>
       <button type="button" onClick={onNext} className={nextBtn}>
         Pārbaudi sevi treniņā <ArrowRight aria-hidden="true" className="size-4" />
       </button>
+    </Frame>
+  );
+}
+
+/** 4. solis: praktiskā nodarbība šautuvē (pēc izvēles). */
+function PracticalStep() {
+  return (
+    <Frame label="Pēc izvēles" right={<span className="font-semibold tabular-nums text-ink">{formatEuro(LESSON_PRODUCT.amountCents)}</span>}>
+      <p className="mt-4 text-lg font-semibold leading-snug">Praktiskā nodarbība šautuvē</p>
+      <ul className="mt-4 space-y-3">
+        {LESSON_INCLUDES.map((x) => (
+          <li key={x} className="flex gap-3 text-[15px]">
+            <Check aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-ok" strokeWidth={2.5} />
+            <span>{x}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-4 rounded-xl bg-surface px-4 py-3 text-sm text-muted">
+        Nodarbība nav obligāta ieroču atļaujas saņemšanai. Tā palīdz justies drošāk, pirmo reizi turot ieroci rokās.
+      </p>
+      <Link href={buyPath("lesson")} className="btn-secondary mt-5 w-full sm:w-auto">
+        Iegādāties nodarbību
+      </Link>
     </Frame>
   );
 }
@@ -260,11 +278,13 @@ function ExamStep({
   realQuestions,
   realMinutes,
   onRestart,
+  onNext,
 }: {
   qs: PracticeQuestion[];
   realQuestions: number;
   realMinutes: number;
   onRestart: () => void;
+  onNext: () => void;
 }) {
   const [i, setI] = useState(0);
   const [answers, setAnswers] = useState<(string | null)[]>(() => qs.map(() => null));
@@ -319,6 +339,9 @@ function ExamStep({
             <RotateCcw aria-hidden="true" className="size-4" /> Mēģināt vēlreiz
           </button>
         </div>
+        <button type="button" onClick={onNext} className="btn-ghost mt-3 inline-flex items-center gap-1.5 px-0">
+          Pēc izvēles: praktiskā nodarbība šautuvē <ArrowRight aria-hidden="true" className="size-4" />
+        </button>
       </Frame>
     );
   }

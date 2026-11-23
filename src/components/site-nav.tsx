@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { SignOutButton } from "./sign-out-button";
 
 export interface NavItem {
@@ -153,8 +153,8 @@ export function SiteNav({
               <Link href="/pieslegties" className="btn-secondary ml-2 min-h-11 px-4 text-sm">
                 Pieslēgties
               </Link>
-              <Link href="/registreties" className="btn-primary ml-2 min-h-11 px-4 text-sm">
-                Sākt bez maksas
+              <Link href="/registreties" className="btn-primary ml-2 min-h-11 gap-2 px-4 text-sm">
+                Sākt bez maksas <ArrowUpRight aria-hidden="true" className="size-4" />
               </Link>
             </>
           )}
@@ -231,8 +231,8 @@ export function SiteNav({
                 )}
                 {!signedIn && (
                   <>
-                    <Link href="/registreties" className="btn-primary">
-                      Sākt bez maksas
+                    <Link href="/registreties" className="btn-primary gap-2">
+                      Sākt bez maksas <ArrowUpRight aria-hidden="true" className="size-4" />
                     </Link>
                     <Link href="/pieslegties" className="btn-secondary">
                       Pieslēgties
