@@ -13,10 +13,54 @@ export interface NavItem {
   match?: string[];
 }
 
-const isActive = (path: string, item: NavItem) =>
-  [item.href, ...(item.match ?? [])].some((p) =>
+const sectionOf = (href: string) => (href.startsWith("/#") ? href.slice(2) : null);
+
+const isActive = (path: string, item: NavItem, section: string | null = null) => {
+  const id = sectionOf(item.href);
+  if (id) return path === "/" && section === id;
+  return [item.href, ...(item.match ?? [])].some((p) =>
     p === "/" ? path === "/" : path === p || path.startsWith(`${p}/`),
   );
+};
+
+/**
+ * Sākumlapas sadaļa, kas pašlaik redzama zem galvenes (enkura saitēm “/#…”).
+ * Aktīva ir pēdējā sadaļa, kuras augša jau pārsniegusi līniju ~⅓ ekrāna augstumā.
+ */
+function useActiveSection(ids: string[], enabled: boolean) {
+  const [active, setActive] = useState<string | null>(null);
+  const key = ids.join(",");
+  useEffect(() => {
+    if (!enabled || !ids.length) return setActive(null);
+    const update = () => {
+      const line = window.innerHeight / 3;
+      let current: string | null = null;
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const r = el.getBoundingClientRect();
+        if (r.top <= line && r.bottom > 0) current = id;
+      }
+      // lapas apakšā — pēdējā sadaļa, ja tā redzama
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+        const last = document.getElementById(ids[ids.length - 1]);
+        if (last && last.getBoundingClientRect().top < window.innerHeight) current = ids[ids.length - 1];
+      }
+      setActive(current);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    window.addEventListener("hashchange", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+      window.removeEventListener("hashchange", update);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- ids salīdzinām pēc key
+  }, [key, enabled]);
+  return active;
+}
 
 /** Galvenā navigācija: datorā — rinda centrā, telefonā — izvēlne. */
 export function SiteNav({
@@ -33,6 +77,10 @@ export function SiteNav({
   const path = usePathname();
   const [open, setOpen] = useState(false);
   useEffect(() => setOpen(false), [path]);
+  const section = useActiveSection(
+    items.map((it) => sectionOf(it.href)).filter((x): x is string => Boolean(x)),
+    path === "/",
+  );
 
   const itemCls = (active: boolean) =>
     `inline-flex min-h-11 items-center whitespace-nowrap rounded-lg px-3 text-[15px] transition-colors hover:bg-accent-soft ${
@@ -53,12 +101,12 @@ export function SiteNav({
       >
         <ul className="flex items-center gap-1">
           {items.map((it) => {
-            const active = isActive(path, it);
+            const active = isActive(path, it, section);
             return (
               <li key={it.href}>
                 <Link
                   href={it.href}
-                  aria-current={active ? "page" : undefined}
+                  aria-current={active ? (sectionOf(it.href) ? "location" : "page") : undefined}
                   className={`inline-flex min-h-11 items-center whitespace-nowrap rounded-lg px-3 text-[15px] transition-colors hover:bg-accent-soft ${
                     active
                       ? "font-semibold text-ink"
@@ -142,8 +190,8 @@ export function SiteNav({
                 <li key={it.href}>
                   <Link
                     href={it.href}
-                    aria-current={isActive(path, it) ? "page" : undefined}
-                    className={mobileCls(isActive(path, it))}
+                    aria-current={isActive(path, it, section) ? (sectionOf(it.href) ? "location" : "page") : undefined}
+                    className={mobileCls(isActive(path, it, section))}
                     onClick={() => setOpen(false)}
                   >
                     {it.label}

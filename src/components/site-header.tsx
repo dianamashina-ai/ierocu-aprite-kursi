@@ -20,7 +20,6 @@ export async function SiteHeader() {
         { href: "/#programma", label: "Programma" },
         { href: "/#prasibas", label: "Prasības" },
         { href: "/#cena", label: "Cena" },
-        { href: "/#buj", label: "BUJ" },
       ];
 
   return (
