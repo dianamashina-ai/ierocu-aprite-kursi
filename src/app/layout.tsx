@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { hasFullAccess } from "@/lib/billing/access";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { SiteHeader } from "@/components/site-header";
@@ -21,7 +22,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const admin = isAdmin(await getCurrentUser());
+  const user = await getCurrentUser();
+  const admin = isAdmin(user);
+  const viewFull = admin && user ? await hasFullAccess(user.id) : false;
   return (
     <html lang="lv">
       <body className="relative flex min-h-dvh flex-col antialiased">
@@ -34,7 +37,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             {children}
           </main>
           <SiteFooter />
-          {admin && <NotesOverlay />}
+          {admin && <NotesOverlay viewFull={viewFull} />}
         </NextIntlClientProvider>
       </body>
     </html>

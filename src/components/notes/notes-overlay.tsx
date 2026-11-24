@@ -1,9 +1,10 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import { Check, MessageSquarePlus, Pencil, X } from "lucide-react";
 import { addNoteAction, notesForPathAction, setNoteStatusAction } from "@/app/actions/notes";
+import { setAdminViewAction } from "@/app/actions/admin";
 
 type Note = { id: string; selector: string; comment: string; reply: string | null };
 type Box = { top: number; left: number; width: number; height: number };
@@ -37,7 +38,7 @@ const docBox = (el: Element): Box => {
 const isUi = (el: Element | null) => Boolean(el?.closest(`[${UI}]`));
 
 /** Administratora režīms: noklikšķini uz elementa un atstāj piezīmi par dizainu. */
-export function NotesOverlay() {
+export function NotesOverlay({ viewFull = false }: { viewFull?: boolean }) {
   const path = usePathname();
   const [active, setActive] = useState(false);
   const [hover, setHover] = useState<Box | null>(null);
@@ -203,6 +204,7 @@ export function NotesOverlay() {
       ))}
 
       <div className="notes-fab fixed bottom-4 right-4 z-[80] flex flex-col items-end gap-2 print:hidden">
+        <AccessViewToggle full={viewFull} />
         {active && (
           <div className="rounded-xl bg-ink px-3 py-2 text-xs text-white shadow-lg">
             Noklikšķini uz elementa · Esc — iziet{missing > 0 ? ` · ${missing} piezīmes šeit nav redzamas` : ""}
@@ -224,6 +226,33 @@ export function NotesOverlay() {
           {active ? "Beigt labot" : "Labot"}
         </button>
       </div>
+    </div>
+  );
+}
+
+/** Administratoram: pārslēgt, kā redzēt vietni — ar pilnu piekļuvi vai tikai ar bezmaksas moduli. */
+function AccessViewToggle({ full }: { full: boolean }) {
+  const router = useRouter();
+  const [pending, start] = useTransition();
+  const set = (view: "pilna" | "bezmaksas") =>
+    start(async () => {
+      await setAdminViewAction(view);
+      router.refresh();
+    });
+  const btn = (on: boolean) =>
+    `min-h-9 rounded-full px-3 text-xs font-semibold transition-colors ${on ? "bg-ink text-white" : "text-muted hover:text-ink"}`;
+  return (
+    <div
+      role="group"
+      aria-label="Skats kā lietotājam"
+      className={`inline-flex items-center gap-1 rounded-full border border-line bg-white p-1 shadow-lg ${pending ? "opacity-60" : ""}`}
+    >
+      <button type="button" aria-pressed={full} disabled={pending} onClick={() => set("pilna")} className={btn(full)}>
+        Pilna piekļuve
+      </button>
+      <button type="button" aria-pressed={!full} disabled={pending} onClick={() => set("bezmaksas")} className={btn(!full)}>
+        Bez maksas
+      </button>
     </div>
   );
 }

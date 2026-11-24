@@ -1,6 +1,8 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
+import { ADMIN_VIEW_COOKIE } from "@/lib/billing/access";
 import { z } from "zod";
 import { getCurrentUser } from "@/lib/auth/session";
 import { isAdmin } from "@/lib/admin";
@@ -105,4 +107,17 @@ export async function setLessonDoneAction(orderId: string, done: boolean): Promi
   } catch (e) {
     return { ok: false, message: e instanceof Error ? e.message : "Neizdevās" };
   }
+}
+
+/** Administratora skats: kā redz lietotājs ar pilnu piekļuvi vai tikai ar bezmaksas moduli. */
+export async function setAdminViewAction(view: "pilna" | "bezmaksas"): Promise<void> {
+  await requireAdmin();
+  (await cookies()).set(ADMIN_VIEW_COOKIE, view === "pilna" ? "pilna" : "bezmaksas", {
+    path: "/",
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    maxAge: 60 * 60 * 24 * 30,
+  });
+  revalidatePath("/", "layout");
 }

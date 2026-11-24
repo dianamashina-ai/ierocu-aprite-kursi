@@ -5,6 +5,24 @@ import { and, eq, inArray } from "drizzle-orm";
 import { db, schema } from "@/db";
 import { FREE_MODULE_IDS } from "@/config/exam";
 import { COURSE_ACCESS_CODES } from "@/config/pricing";
+import { cookies } from "next/headers";
+import { getCurrentUser } from "@/lib/auth/session";
+import { isAdmin } from "@/lib/admin";
+
+/** Administratora skata pārslēgs (sīkdatne): “pilna” vai “bezmaksas” piekļuve — tikai savam kontam. */
+export const ADMIN_VIEW_COOKIE = "admin_skats";
+
+async function adminPreview(userId: string): Promise<boolean | null> {
+  try {
+    const v = (await cookies()).get(ADMIN_VIEW_COOKIE)?.value;
+    if (v !== "pilna" && v !== "bezmaksas") return null;
+    const u = await getCurrentUser();
+    if (!u || u.id !== userId || !isAdmin(u)) return null;
+    return v === "pilna";
+  } catch {
+    return null; // ārpus pieprasījuma (piem., testos) — bez pārslēga
+  }
+}
 
 /** Apmaksāts pasūtījums, kas atver kursu (kurss, komplekts vai testa pirkums; ne tikai praktiskā nodarbība). */
 export const courseAccessWhere = (userId: string) =>
@@ -16,6 +34,8 @@ export const moduleOfTopic = (topicId: string) => `M${topicId.split(".")[0]}`;
 /** Vai lietotājam ir apmaksāta pilna piekļuve (kešots viena pieprasījuma ietvaros). */
 export const hasFullAccess = cache(async (userId: string | null | undefined): Promise<boolean> => {
   if (!userId) return false;
+  const preview = await adminPreview(userId);
+  if (preview !== null) return preview;
   const row = await db.query.orders.findFirst({
     columns: { id: true },
     where: courseAccessWhere(userId),
