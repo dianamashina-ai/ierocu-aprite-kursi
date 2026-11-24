@@ -257,4 +257,22 @@ describe.skipIf(!url)("maksājumi (DB)", async () => {
     await billing.applyPaymentEvent({ orderId: c.id, status: "paid" }, "dev", { now: t0 });
     await expect(billing.scheduleLesson(c.id, new Date())).rejects.toThrow(/nav praktiskās/);
   });
+  it("testa konti: dzēš @example.com bez rēķiniem; kontus ar rēķinu un citus nedzēš", async () => {
+    const bo = await import("@/lib/backoffice/service");
+    await db.insert(schema.user).values([
+      { id: "t-del", name: "Tests", email: "dzest-mani@example.com" },
+      { id: "t-real", name: "Īsts", email: "ists@epasts.lv" },
+    ]);
+    const o = await billing.createOrder("t-del", buyer, { provider: "dev", now: t0 });
+    expect(o.status).toBe("pending");
+    const before = await bo.listTestAccounts();
+    expect(before.find((r) => r.id === "t-del")).toMatchObject({ orders: 1, invoiced: 0 });
+    // u2 (anna@example.com) ir apmaksāts pasūtījums ar rēķinu — paliek
+    expect(before.find((r) => r.email === "anna@example.com")?.invoiced).toBeGreaterThan(0);
+    await bo.deleteTestAccounts();
+    const ids = (await db.select({ id: schema.user.id }).from(schema.user)).map((r) => r.id);
+    expect(ids).not.toContain("t-del");
+    expect(ids).toContain("t-real");
+    expect(ids).toContain("u2");
+  });
 });

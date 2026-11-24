@@ -9,7 +9,7 @@ import { isAdmin } from "@/lib/admin";
 import { BillingError, grantManualAccess, refundOrder, scheduleLesson, setLessonDone } from "@/lib/billing/service";
 import { rigaLocalToDate } from "@/lib/format";
 import { signOutEverywhere } from "@/lib/auth/devices";
-import { saveExplanation } from "@/lib/backoffice/service";
+import { deleteTestAccounts, saveExplanation } from "@/lib/backoffice/service";
 
 async function requireAdmin() {
   const user = await getCurrentUser();
@@ -120,4 +120,12 @@ export async function setAdminViewAction(view: "pilna" | "bezmaksas"): Promise<v
     maxAge: 60 * 60 * 24 * 30,
   });
   revalidatePath("/", "layout");
+}
+
+/** Dzēš testa kontus (@example.com, bez rēķiniem). */
+export async function deleteTestAccountsAction(): Promise<ActionResult> {
+  await requireAdmin();
+  const n = await deleteTestAccounts();
+  revalidatePath("/admin", "layout");
+  return { ok: true, message: n ? `Dzēsti ${n} testa konti.` : "Testa kontu nav." };
 }
