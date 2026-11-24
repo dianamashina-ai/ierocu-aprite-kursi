@@ -83,3 +83,22 @@ test("administrācija: manuāla piekļuve jaunam lietotājam un uzaicinājums", 
   await expect(page.locator("#saturs").getByText("Pilna piekļuve", { exact: true })).toBeVisible();
   await ctx.close();
 });
+
+test("administrācija: administratora e-pasts bez apstiprinājuma nedod tiesības", async ({ page }) => {
+  // adrese ir ADMIN_EMAILS (playwright.config.ts), bet konts reģistrēts ar paroli — e-pasts nav apstiprināts
+  const email = "neapst-admins-e2e@example.com";
+  await page.goto("/registreties");
+  await page.getByLabel("Vārds un uzvārds").fill("Neapstiprināts Admins");
+  await page.getByLabel("E-pasts").fill(email);
+  await page.getByLabel(/Parole/).fill("Drosa-Parole-123!");
+  await page.getByRole("button", { name: "Izveidot kontu" }).click();
+  if (!(await page.waitForURL(/^https?:\/\/[^/]+\/$/, { timeout: 4000 }).then(() => true, () => false))) {
+    await page.goto("/pieslegties");
+    await page.getByLabel("E-pasts").fill(email);
+    await page.getByLabel("Parole").fill("Drosa-Parole-123!");
+    await page.getByRole("button", { name: "Pieslēgties" }).click();
+    await expect(page).toHaveURL(/^https?:\/\/[^/]+\/$/);
+  }
+  const res = await page.goto("/admin");
+  expect(res?.status()).toBe(404);
+});

@@ -24,7 +24,7 @@ export default defineConfig({
       AUTH_RATE_LIMIT: "off",
       PAYMENT_PROVIDER: "dev",
       ALLOW_TEST_PAYMENTS: "1",
-      ADMIN_EMAILS: "labotajs-e2e@example.com",
+      ADMIN_EMAILS: "labotajs-e2e@example.com,neapst-admins-e2e@example.com",
     },
     url: "http://localhost:3100",
     reuseExistingServer: false,
