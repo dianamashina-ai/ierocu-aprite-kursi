@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { listTestAccounts, listUsers } from "@/lib/backoffice/service";
-import { TestAccountsCleanup } from "@/components/admin/test-accounts-cleanup";
+import { listUsers } from "@/lib/backoffice/service";
 import { formatDate } from "@/lib/format";
 import { UsersToolbar } from "@/components/admin/users-toolbar";
 import { SHARING_DEVICE_THRESHOLD } from "@/lib/auth/devices";
@@ -10,7 +9,7 @@ export const metadata = { title: "Lietotāji" };
 export default async function UsersPage({ searchParams }: { searchParams: Promise<{ q?: string; aizdomas?: string }> }) {
   const sp = await searchParams;
   const q = sp.q?.slice(0, 100) ?? "";
-  const [all, tests] = await Promise.all([listUsers({ q }), listTestAccounts()]);
+  const all = await listUsers({ q });
   const onlyShared = sp.aizdomas === "1";
   const rows = onlyShared ? all.filter((u) => u.possiblyShared) : all;
 
@@ -63,9 +62,6 @@ export default async function UsersPage({ searchParams }: { searchParams: Promis
           </table>
         </div>
       )}
-      <TestAccountsCleanup
-        rows={tests.map((t) => ({ id: t.id, email: t.email, created: formatDate(t.createdAt), orders: t.orders, invoiced: t.invoiced }))}
-      />
     </>
   );
 }

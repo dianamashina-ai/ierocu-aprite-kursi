@@ -172,40 +172,6 @@ export async function listModules() {
   return db.select({ id: schema.modules.id, order: schema.modules.order, title: schema.modules.titleLv }).from(schema.modules).orderBy(asc(schema.modules.order));
 }
 
-/** Testa konti: e-pasti @example.com (izveidoti pārbaudēm). */
-const TEST_EMAIL = "%@example.com";
-
-/** Testa konti ar pasūtījumu skaitu; kontus ar rēķinu (grāmatvedības dokuments) nedzēš. */
-export async function listTestAccounts() {
-  const { user, orders } = schema;
-  const rows = await db
-    .select({
-      id: user.id,
-      email: user.email,
-      createdAt: user.createdAt,
-      orders: sql<number>`count(${orders.id})::int`,
-      invoiced: sql<number>`count(${orders.invoiceNumber})::int`,
-    })
-    .from(user)
-    .leftJoin(orders, eq(orders.userId, user.id))
-    .where(ilike(user.email, TEST_EMAIL))
-    .groupBy(user.id)
-    .orderBy(asc(user.createdAt));
-  return rows;
-}
-
-/** Dzēš testa kontus (tikai @example.com, bez rēķiniem) un to pasūtījumus; pārējie dati dzēšas kaskādē. */
-export async function deleteTestAccounts() {
-  const { user, orders } = schema;
-  const candidates = (await listTestAccounts()).filter((r) => r.invoiced === 0).map((r) => r.id);
-  if (!candidates.length) return 0;
-  await db.transaction(async (tx) => {
-    await tx.delete(orders).where(inArray(orders.userId, candidates));
-    await tx.delete(user).where(and(inArray(user.id, candidates), ilike(user.email, TEST_EMAIL)));
-  });
-  return candidates.length;
-}
-
 /**
  * Dzēš vienu kontu (administrators izvēlas pats). Ja kontam ir rēķini, vajag skaidru apstiprinājumu
  * (`withInvoices`) — tas paredzēts tikai testa maksājumiem pirms palaišanas.
