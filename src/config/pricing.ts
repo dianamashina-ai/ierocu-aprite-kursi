@@ -64,10 +64,7 @@ export const TEST_PRODUCT = {
   includesLesson: false,
 } as const satisfies Product;
 
-/**
- * PAGAIDU: praktiskās nodarbības testa pirkums (2 €) — tikai administratoriem ar tiešu saiti
- * /iegadaties?produkts=lessontest. Lai pārbaudītu visu nodarbības ceļu ar īstu naudu. Noņemt pēc pārbaudes.
- */
+/** Bijušais nodarbības testa pirkums (2 €) — vairs netiek pārdots; atstāts vēsturiskajiem pasūtījumiem. */
 export const LESSON_TEST_PRODUCT = {
   code: "lessontest",
   name: "Praktiskā nodarbība šautuvē — testa pirkums",

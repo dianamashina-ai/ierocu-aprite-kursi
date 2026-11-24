@@ -2,7 +2,6 @@ import Link from "next/link";
 import { courseIncluded } from "@/lib/billing/included";
 import { getCurrentUser } from "@/lib/auth/session";
 import { isGoogleEnabled } from "@/lib/auth";
-import { isAdmin } from "@/lib/admin";
 import { hasFullAccess } from "@/lib/billing/access";
 import { activeProviderName, availablePayMethods } from "@/lib/billing/service";
 import {
@@ -33,9 +32,7 @@ const PROVIDER_NOTE: Record<string, string> = {
 export default async function BuyPage({ searchParams }: { searchParams: Promise<{ produkts?: string }> }) {
   const sp = await searchParams;
   const [user, course] = await Promise.all([getCurrentUser(), getCourseOverview()]);
-  // PAGAIDU: ?produkts=lessontest — nodarbības testa pirkums (2 €), tikai administratoriem
-  const code: ProductCode =
-    isPurchasable(sp.produkts) || (sp.produkts === "lessontest" && isAdmin(user)) ? (sp.produkts as ProductCode) : "course";
+  const code: ProductCode = isPurchasable(sp.produkts) ? sp.produkts : "course";
   const product = productByCode(code);
   const self = buyPath(code);
   const hasCourse = await hasFullAccess(user?.id);
