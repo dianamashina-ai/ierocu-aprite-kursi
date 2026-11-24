@@ -2,7 +2,7 @@
 
 > Ģenerēts ar `python3 -I scripts/explanations-report.py` — nerediģēt ar roku.
 
-Pārbaudīti pret likuma tekstu (`"reviewed": true`): **405** no 515; pārējie ir **melnraksti** (`draft`). Skaidrojumi rakstīti **tikai** pēc `content/law/` tekstiem:
+Pārbaudīti pret likuma tekstu (`"reviewed": true`): **406** no 515; pārējie ir **melnraksti** (`draft`). Skaidrojumi rakstīti **tikai** pēc `content/law/` tekstiem:
 Ieroču aprites likums, Krimināllikuma izvilkums un MK noteikumi Nr. 191, 202, 210, 211, 494 (redakciju datumi — failu sākumā).
 Katra atsauce tiek automātiski pārbaudīta — pantam vai punktam jābūt tekstā (`tests/explanations.test.ts`).
 
@@ -20,8 +20,8 @@ Sēklošana (`npm run db:seed`) ieraksta skaidrojumus datubāzē tikai jautājum
 | M6 | 68 | 66 | 2 | 0 |
 | M7 | 17 | 17 | 0 | 0 |
 | M8 | 97 | 70 | 27 | 0 |
-| M9 | 58 | 51 | 7 | 0 |
-| **Kopā** | **515** | **476** | **38** | **1** |
+| M9 | 58 | 52 | 6 | 0 |
+| **Kopā** | **515** | **477** | **37** | **1** |
 
 ## Iespējams novecojis (atbilde no PDF nav mainīta)
 
@@ -41,4 +41,4 @@ Sēklošana (`npm run db:seed`) ieraksta skaidrojumus datubāzē tikai jautājum
 
 - **Procedūra, kas nav atrasta ne likumā, ne MK noteikumos** (1): 117
 
-**Daļēji** (38): skaidrojums balstīts tiesību aktā, bet kāda atbildes detaļa tajā nav atrodama (piezīme laukā `todo`, skolēnam netiek rādīta). Jautājumi: 463, 3, 201, 247, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 324, 325, 303, 304, 305, 333, 334, 335, 336, 342, 345, 379, 380, 397, 415, 418, 420, 421
+**Daļēji** (37): skaidrojums balstīts tiesību aktā, bet kāda atbildes detaļa tajā nav atrodama (piezīme laukā `todo`, skolēnam netiek rādīta). Jautājumi: 463, 3, 201, 247, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 324, 325, 303, 304, 305, 333, 334, 335, 336, 342, 345, 379, 380, 415, 418, 420, 421

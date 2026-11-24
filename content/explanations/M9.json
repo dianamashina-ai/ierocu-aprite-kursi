@@ -199,9 +199,9 @@
  },
  {
   "id": 397,
-  "law_reference": "Krimināllikums, 233. panta 3. daļa",
-  "explanation": "Ja šīs darbības bez atļaujas izdarījusi organizēta grupa, sods ir brīvības atņemšana līdz desmit gadiem, konfiscējot mantu vai bez konfiskācijas, un probācijas uzraudzība līdz trim gadiem.",
-  "todo": "jautājuma beigas PDF tekstā jāpārbauda — svarīga pazīme ir «organizēta grupa»."
+  "law_reference": "Krimināllikums, 233. panta 3. daļa; Ieroču aprites likums, 98. panta 3. daļa",
+  "explanation": "Ja šīs darbības bez atļaujas izdarījusi organizēta grupa, iestājas kriminālatbildība: brīvības atņemšana līdz desmit gadiem, konfiscējot mantu vai bez konfiskācijas, un probācijas uzraudzība līdz trim gadiem. Administratīvā atbildība par aprites noteikumu pārkāpšanu attiecas uz personām, kurām ir attiecīgā ieroču atļauja, — darbībām bez atļaujas tā nav paredzēta.",
+  "reviewed": true
  },
  {
   "id": 398,
