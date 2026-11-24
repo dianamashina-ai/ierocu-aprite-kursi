@@ -49,8 +49,8 @@ export const stripeProvider: PaymentProvider = {
     if (!sRes.ok || !session.payment_intent) throw new Error(`Stripe: ${session.error?.message ?? "maksājums nav atrasts"}`);
     const res = await fetch(`${API}/refunds`, {
       method: "POST",
-      headers: { ...auth, "Content-Type": "application/x-www-form-urlencoded", "Idempotency-Key": `refund-${i.orderId}` },
-      body: new URLSearchParams({ payment_intent: session.payment_intent, "metadata[order_id]": i.orderId }),
+      headers: { ...auth, "Content-Type": "application/x-www-form-urlencoded", "Idempotency-Key": i.idempotencyKey ?? `refund-${i.orderId}` },
+      body: new URLSearchParams({ payment_intent: session.payment_intent, amount: String(i.amountCents), "metadata[order_id]": i.orderId }),
     });
     const json = (await res.json()) as { status?: string; error?: { message: string } };
     if (!res.ok || json.status === "failed" || json.status === "canceled") throw new Error(`Stripe: ${json.error?.message ?? json.status ?? res.status}`);

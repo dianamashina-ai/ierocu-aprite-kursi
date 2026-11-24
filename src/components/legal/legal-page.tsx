@@ -1,5 +1,5 @@
 /** Kopīgs izkārtojums juridiskajām lapām (noteikumi, privātums, sīkdatnes, kontakti). */
-export const LEGAL_UPDATED = "2026. gada 20. novembrī";
+export const LEGAL_UPDATED = "2026. gada 24. novembrī";
 
 export function LegalPage({ title, children, updated = true }: { title: string; children: React.ReactNode; updated?: boolean }) {
   return (

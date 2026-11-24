@@ -120,7 +120,7 @@ export function ExamRunner({
         <div className="p-4">
           {/* fokusa režīma galvene (vietnes izvēlne paslēpta): virsraksts un krustiņš */}
           <div className="flex items-center justify-between gap-4 pb-2">
-            <span className="font-semibold">Izmēģinājuma eksāmens</span>
+            <h1 className="text-base font-semibold">Izmēģinājuma eksāmens</h1>
             <Link
               href="/eksamens"
               aria-label="Iziet (atbildes saglabātas, vari turpināt vēlāk)"

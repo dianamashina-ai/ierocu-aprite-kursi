@@ -154,13 +154,13 @@ export default async function HomePage() {
                   key={m.id}
                   className={`group relative flex flex-col rounded-2xl border border-line p-6 ${
                     locked
-                      ? "bg-surface opacity-55"
+                      ? "bg-surface"
                       : "bg-white transition-shadow hover:shadow-[0_8px_30px_-12px_rgba(39,23,38,0.25)]"
                   }`}
                 >
                   <div className="flex items-start justify-between">
                     <span
-                      className={`text-2xl font-bold tabular-nums ${locked ? "text-muted/60" : "text-accent-strong"}`}
+                      className={`text-2xl font-bold tabular-nums ${locked ? "text-muted" : "text-accent-strong"}`}
                     >
                       {pad(m.order)}
                     </span>
@@ -179,12 +179,12 @@ export default async function HomePage() {
                     </Link>
                   </h3>
                   <p
-                    className={`mt-2 flex-1 text-[15px] leading-relaxed ${locked ? "text-muted/70" : "text-muted"}`}
+                    className={`mt-2 flex-1 text-[15px] leading-relaxed text-muted`}
                   >
                     {MODULE_META[m.id]?.description}
                   </p>
                   <div
-                    className={`mt-6 flex items-center justify-between gap-3 text-sm ${locked ? "text-muted/70" : ""}`}
+                    className={`mt-6 flex items-center justify-between gap-3 text-sm ${locked ? "text-muted" : ""}`}
                   >
                     <span>
                       {m.topics.length} tēmas • {m.questionCount} jautājumi

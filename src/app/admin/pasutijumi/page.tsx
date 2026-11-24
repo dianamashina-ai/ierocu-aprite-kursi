@@ -3,6 +3,8 @@ import { isProductCode, PRODUCTS } from "@/config/pricing";
 import { listOrders, type OrderStatus } from "@/lib/backoffice/service";
 import { dateToRigaLocal, formatDateTime, formatEuro, formatLessonAt } from "@/lib/format";
 import { LessonControl } from "@/components/admin/lesson-control";
+import { RefundLessonButton } from "@/components/admin/refund-lesson-button";
+import { lessonPartCents } from "@/lib/billing/service";
 import { OrderStatusBadge } from "@/components/admin/status-badge";
 import { RefundButton } from "@/components/admin/refund-button";
 
@@ -90,9 +92,21 @@ export default async function OrdersPage({ searchParams }: { searchParams: Promi
                   · {o.provider === "manual" ? (o.note ?? "Manuāli") : (PROVIDER[o.provider] ?? o.provider)}
                 </span>
               </span>
-              <span className="tabular-nums">{formatEuro(o.amountCents)}</span>
+              <span className="tabular-nums">
+                {formatEuro(o.amountCents)}
+                {o.status === "paid" && o.refundedCents > 0 && (
+                  <span className="block text-xs text-err">atmaksāti {formatEuro(o.refundedCents)}</span>
+                )}
+              </span>
               <span><OrderStatusBadge status={o.status} provider={o.provider} /></span>
-              <span>{o.status === "paid" && <RefundButton orderId={o.id} label={formatEuro(o.amountCents)} revoke={o.provider === "manual"} />}</span>
+              <span className="space-y-1">
+                {o.status === "paid" && (
+                  <RefundButton orderId={o.id} label={formatEuro(o.amountCents - o.refundedCents)} revoke={o.provider === "manual"} />
+                )}
+                {o.status === "paid" && o.productCode === "bundle" && o.lessonStatus !== "refunded" && o.lessonStatus !== "done" && (
+                  <RefundLessonButton orderId={o.id} label={formatEuro(lessonPartCents())} />
+                )}
+              </span>
               {o.status === "paid" && isProductCode(o.productCode) && PRODUCTS[o.productCode].includesLesson && (
                 <div className="lg:col-span-5">
                   <LessonControl

@@ -266,4 +266,25 @@ describe.skipIf(!url)("maksājumi (DB)", async () => {
     expect(await bo.deleteAccount("t-inv", { withInvoices: true })).toMatchObject({ ok: true });
     expect(await bo.getUserEmail("t-inv")).toBeNull();
   });
+  it("komplekts: daļēja atmaksa par nodarbību — kurss paliek; pēc tam pilna atmaksa — atlikums", async () => {
+    await db.insert(schema.user).values({ id: "t-bun", name: "Komplekts", email: "komplekts@epasts.lv" });
+    const o = await billing.createOrder("t-bun", { ...buyer, phone: "+371 20000000" }, { provider: "dev", now: t0, product: "bundle" });
+    await billing.applyPaymentEvent({ orderId: o.id, status: "paid" }, "dev", { now: t0 });
+    // atsevišķai nodarbībai daļēja atmaksa nav paredzēta
+    const l = await billing.createOrder("t-bun", { ...buyer, phone: "+371 20000000" }, { provider: "dev", now: t0, product: "lesson" });
+    await billing.applyPaymentEvent({ orderId: l.id, status: "paid" }, "dev", { now: t0 });
+    await expect(billing.refundLesson(l.id)).rejects.toThrow(/tikai komplektam/);
+
+    const r = await billing.refundLesson(o.id);
+    expect(r).toMatchObject({ status: "paid", lessonStatus: "refunded", refundedCents: 6000 });
+    expect(await access.hasFullAccess("t-bun")).toBe(true);
+    await expect(billing.refundLesson(o.id)).rejects.toThrow(/jau atmaksāta/);
+    await expect(billing.scheduleLesson(o.id, new Date())).rejects.toThrow(/atmaksāta/);
+    // maksājumu sistēmas paziņojums “refunded” pēc daļējas atmaksas kursu neslēdz
+    await billing.applyPaymentEvent({ orderId: o.id, status: "refunded" }, "dev", { now: t0 });
+    expect(await access.hasFullAccess("t-bun")).toBe(true);
+    // pilna atmaksa — atlikums, kurss slēgts
+    const full = await billing.refundOrder(o.id);
+    expect(full.order).toMatchObject({ status: "refunded", refundedCents: 18000 });
+  });
 });

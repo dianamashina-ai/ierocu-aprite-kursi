@@ -28,7 +28,10 @@ export function ProductCard({
   className = "",
   showVat = false,
   gray = false,
+  headingLevel = 3,
 }: {
+  /** Virsraksta līmenis (pirkuma lapā — 2, sākumlapā — 3) */
+  headingLevel?: 2 | 3;
   /** Baltās kartītes vietā — pelēks fons (pirkuma lapā) */
   gray?: boolean;
   code: ProductCode;
@@ -49,7 +52,7 @@ export function ProductCard({
   return (
     <article className={`flex flex-col rounded-2xl p-6 sm:p-8 ${dark ? "bg-ink text-white" : gray ? "bg-surface" : "border border-line bg-white"} ${className}`}>
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h3 className={`text-sm ${muted}`}>{p.title}</h3>
+        {headingLevel === 2 ? <h2 className={`text-sm ${muted}`}>{p.title}</h2> : <h3 className={`text-sm ${muted}`}>{p.title}</h3>}
         {code === "bundle" && (
           <span className="rounded-full bg-ok px-3 py-1 text-xs font-semibold text-white">Ietaupi {formatEuro(saving)}</span>
         )}

@@ -6,7 +6,7 @@ import { ADMIN_VIEW_COOKIE } from "@/lib/billing/access";
 import { z } from "zod";
 import { getCurrentUser } from "@/lib/auth/session";
 import { isAdmin } from "@/lib/admin";
-import { BillingError, grantManualAccess, refundOrder, scheduleLesson, setLessonDone } from "@/lib/billing/service";
+import { BillingError, grantManualAccess, refundLesson, refundOrder, scheduleLesson, setLessonDone } from "@/lib/billing/service";
 import { rigaLocalToDate } from "@/lib/format";
 import { signOutEverywhere } from "@/lib/auth/devices";
 import { deleteAccount, getUserEmail, saveExplanation } from "@/lib/backoffice/service";
@@ -133,4 +133,17 @@ export async function deleteAccountAction(userId: string, withInvoices = false):
   if (!r.ok) return { ok: false, message: r.reason, invoiced: r.invoiced };
   revalidatePath("/admin", "layout");
   return { ok: true, message: "Konts dzēsts." };
+}
+
+/** Komplekts: atmaksāt praktiskās nodarbības daļu. */
+export async function refundLessonAction(orderId: string): Promise<ActionResult> {
+  await requireAdmin();
+  try {
+    await refundLesson(z.string().min(1).parse(orderId));
+    revalidatePath("/admin", "layout");
+    return { ok: true, message: "Nodarbība atmaksāta. Kurss paliek pieejams, pircējam nosūtīts e-pasts." };
+  } catch (e) {
+    const msg = e instanceof BillingError ? e.message : e instanceof Error ? e.message : "Neizdevās";
+    return { ok: false, message: `Atmaksa neizdevās: ${msg}` };
+  }
 }

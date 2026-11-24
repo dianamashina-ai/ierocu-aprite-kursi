@@ -11,7 +11,7 @@ export default function CookiesPage() {
     <LegalPage title="Sīkdatņu politika">
       <p>
         Sīkdatne ir neliels teksta fails, ko vietne saglabā jūsu pārlūkprogrammā. Vietne {SELLER.website} izmanto{" "}
-        <strong>tikai vienu sīkdatni</strong>, kas nepieciešama, lai jūs paliktu pieslēgts savam kontam.
+        <strong>tikai vietnes darbībai nepieciešamās sīkdatnes</strong> — lai jūs paliktu pieslēgts savam kontam.
       </p>
 
       <H2>Izmantotās sīkdatnes</H2>
@@ -30,9 +30,25 @@ export default function CookiesPage() {
               <td className="px-4 py-3">Pieslēgšanās sesija: ļauj palikt pieslēgtam, saglabāt progresu un atvērt apmaksāto saturu. Tiek iestatīta tikai pēc pieslēgšanās.</td>
               <td className="px-4 py-3">60 dienas vai līdz iziešanai</td>
             </tr>
+            <tr className="border-t border-line align-top">
+              <td className="px-4 py-3 font-mono text-[13px]">__Secure-better-auth.*</td>
+              <td className="px-4 py-3">Īslaicīgas sīkdatnes pieslēgšanās ar Google drošībai (pārbauda, ka pieslēgšanos sāka tieši jūs). Tiek iestatītas tikai, izvēloties «Turpināt ar Google».</td>
+              <td className="px-4 py-3">Dažas minūtes</td>
+            </tr>
+            <tr className="border-t border-line align-top">
+              <td className="px-4 py-3 font-mono text-[13px]">admin_skats</td>
+              <td className="px-4 py-3">Tikai platformas administratoriem: atceras izvēlēto skatu («Pilna piekļuve» vai «Bez maksas»).</td>
+              <td className="px-4 py-3">30 dienas</td>
+            </tr>
           </tbody>
         </table>
       </div>
+
+      <H2>Pārlūkprogrammas krātuve</H2>
+      <p>
+        Jautājumu sarakstā vietne pārlūkprogrammas krātuvē (localStorage) atceras, vai esat izvēlējies paslēpt pareizās atbildes.
+        Šī informācija paliek tikai jūsu ierīcē, un mēs to nesaņemam.
+      </p>
 
       <H2>Analītika un reklāma</H2>
       <p>

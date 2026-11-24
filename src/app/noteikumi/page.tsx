@@ -57,7 +57,7 @@ export default function TermsPage() {
           Vienlaikus kontā var būt pieslēgts ne vairāk kā divās ierīcēs. Pieslēdzoties trešajā, vecākā ierīce tiek automātiski
           izrakstīta.
         </li>
-        <li>Norādiet pareizu e-pasta adresi — uz to sūtām pieslēgšanās saites un rēķinus.</li>
+        <li>Norādiet pareizu e-pasta adresi — uz to sūtām paroles atjaunošanas saites un rēķinus.</li>
         <li>
           Nodarbību un skaidrojumu teksti ir pakalpojuma sniedzēja autordarbs. Tos nedrīkst kopēt, pārpublicēt vai izplatīt bez
           rakstiskas atļaujas.

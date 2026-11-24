@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { scheduleLessonAction, setLessonDoneAction } from "@/app/actions/admin";
 
-type Props = { orderId: string; status: "scheduled" | "done" | null; local: string | null; label: string | null };
+type Props = { orderId: string; status: "scheduled" | "done" | "refunded" | null; local: string | null; label: string | null };
 
 const badge = "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold";
 
@@ -20,6 +20,14 @@ export function LessonControl({ orderId, status, local, label }: Props) {
       if (r.ok) setEditing(false);
     });
 
+  if (status === "refunded")
+    return (
+      <div className="flex items-center gap-2 rounded-xl bg-surface px-3 py-2 text-sm">
+        <span className="font-semibold">Nodarbība:</span>
+        <span className={`${badge} bg-err-soft text-err`}>Atmaksāta</span>
+        <span className="text-muted">pircējs atteicās; kurss paliek pieejams</span>
+      </div>
+    );
   return (
     <div className="space-y-2 rounded-xl bg-surface px-3 py-2">
       <div className="flex flex-wrap items-center gap-2 text-sm">

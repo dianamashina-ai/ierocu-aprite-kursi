@@ -11,6 +11,8 @@ import { RefundButton } from "@/components/admin/refund-button";
 import { GrantAccessForm } from "@/components/admin/grant-access-form";
 import { SignOutAllButton } from "@/components/admin/sign-out-all-button";
 import { DeleteAccountButton } from "@/components/admin/delete-account-button";
+import { RefundLessonButton } from "@/components/admin/refund-lesson-button";
+import { lessonPartCents } from "@/lib/billing/service";
 
 export const metadata = { title: "Lietotājs" };
 
@@ -75,9 +77,17 @@ export default async function UserPage({ params }: { params: Promise<{ id: strin
                     {o.buyer.phone ? ` · ${o.buyer.phone}` : ""}
                   </span>
                 </span>
-                <span className="tabular-nums">{formatEuro(o.amountCents)}</span>
+                <span className="tabular-nums">
+                  {formatEuro(o.amountCents)}
+                  {o.status === "paid" && o.refundedCents > 0 && <span className="ml-1 text-xs text-err">(atmaksāti {formatEuro(o.refundedCents)})</span>}
+                </span>
                 <OrderStatusBadge status={o.status} provider={o.provider} />
-                {o.status === "paid" && <RefundButton orderId={o.id} label={formatEuro(o.amountCents)} revoke={o.provider === "manual"} />}
+                {o.status === "paid" && (
+                  <RefundButton orderId={o.id} label={formatEuro(o.amountCents - o.refundedCents)} revoke={o.provider === "manual"} />
+                )}
+                {o.status === "paid" && o.productCode === "bundle" && o.lessonStatus !== "refunded" && o.lessonStatus !== "done" && (
+                  <RefundLessonButton orderId={o.id} label={formatEuro(lessonPartCents())} />
+                )}
               </li>
             ))}
           </ul>

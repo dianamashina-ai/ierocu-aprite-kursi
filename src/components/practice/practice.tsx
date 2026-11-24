@@ -189,9 +189,9 @@ export function Practice({
           aria-labelledby="summary-h"
           className="mx-auto my-auto w-full max-w-2xl bg-white px-2 py-6 text-center sm:px-8"
         >
-          <h2 id="summary-h" className="text-2xl font-semibold">
+          <h1 id="summary-h" className="text-2xl font-semibold">
             {t("summaryHeading")}
-          </h2>
+          </h1>
           <p className="mt-2 text-lg">
             {t("summaryScore", { correct, total: ids.length })}
           </p>
@@ -254,6 +254,7 @@ export function Practice({
         multi ? "has-sticky-footer focus-mode pb-28" : undefined
       }
     >
+      <h1 className="sr-only">{multi ? "Treniņš" : `Jautājums Nr. ${q.id}`}</h1>
       {multi && (
         <div className="sticky top-0 z-10 mx-[calc(50%-50vw)] mb-8 border-b border-line bg-white/95 backdrop-blur">
           <div className="p-4">

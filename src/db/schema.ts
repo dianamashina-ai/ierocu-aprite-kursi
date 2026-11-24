@@ -303,7 +303,9 @@ export const orders = pgTable(
     waiverAcceptedAt: timestamp("waiver_accepted_at", { withTimezone: true }),
     invoiceNumber: text("invoice_number").unique(),
     /** Praktiskā nodarbība: null — jāsazinās; scheduled — saskaņota (lessonAt); done — notikusi */
-    lessonStatus: text("lesson_status").$type<"scheduled" | "done">(),
+    lessonStatus: text("lesson_status").$type<"scheduled" | "done" | "refunded">(),
+    /** Jau atmaksātā summa centos (daļēja atmaksa — komplekta nodarbības daļa) */
+    refundedCents: integer("refunded_cents").notNull().default(0),
     lessonAt: timestamp("lesson_at", { withTimezone: true }),
     /** Administratora piezīme (manuālai piekļuvei: veids, čeka Nr. u. tml.) */
     note: text("note"),

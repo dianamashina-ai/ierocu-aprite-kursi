@@ -90,7 +90,7 @@ export const montonioProvider: PaymentProvider = {
       accessKey,
       orderUuid: i.providerRef,
       amount: i.amountCents / 100,
-      idempotencyKey: `refund-${i.orderId}`,
+      idempotencyKey: i.idempotencyKey ?? `refund-${i.orderId}`,
       iat: Math.floor(Date.now() / 1000),
       exp: Math.floor(Date.now() / 1000) + 600,
     };

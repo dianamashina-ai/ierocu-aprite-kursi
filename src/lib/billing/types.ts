@@ -38,6 +38,8 @@ export interface RefundInput {
   orderId: string;
   providerRef: string | null;
   amountCents: number;
+  /** Atkārtotas atmaksas aizsardzībai; noklusējumā — viena pilna atmaksa pasūtījumam */
+  idempotencyKey?: string;
 }
 
 export interface PaymentProvider {

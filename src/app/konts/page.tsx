@@ -46,7 +46,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
             <NameForm name={user.name} />
           </Section>
 
-          <Section id="email-h" title="E-pasts" lead="Uz šo adresi sūtām pieslēgšanās saites un rēķinus.">
+          <Section id="email-h" title="E-pasts" lead="Uz šo adresi sūtām paroles atjaunošanas saites un rēķinus.">
             <EmailForm email={user.email} />
           </Section>
 
@@ -92,14 +92,16 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
                   <li key={o.id} className="flex items-start gap-2">
                     <CheckCircle2 aria-hidden="true" className={`mt-0.5 size-5 shrink-0 ${o.lessonStatus === "done" ? "text-ok" : "text-muted"}`} />
                     <span>
-                      {o.lessonStatus === "done" ? (
+                      {o.lessonStatus === "refunded" ? (
+                        <span className="font-semibold">Atcelta — nauda atmaksāta</span>
+                      ) : o.lessonStatus === "done" ? (
                         <span className="font-semibold">Notikusi{o.lessonAt ? ` — ${formatLessonAt(o.lessonAt)}` : ""}</span>
                       ) : o.lessonStatus === "scheduled" && o.lessonAt ? (
                         <span className="font-semibold">Saskaņota: {formatLessonAt(o.lessonAt)}</span>
                       ) : (
                         <span className="font-semibold">Iegādāta — laiks vēl jāsaskaņo</span>
                       )}
-                      {o.lessonStatus !== "done" && (
+                      {o.lessonStatus !== "done" && o.lessonStatus !== "refunded" && (
                         <span className="block text-sm text-muted">
                           {o.lessonStatus === "scheduled" ? "Ja laiks jāmaina, atbildi uz apstiprinājuma e-pastu." : LESSON_SCHEDULING}
                         </span>

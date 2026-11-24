@@ -4,7 +4,6 @@ import { APIError, createAuthMiddleware } from "better-auth/api";
 import { isStrongPassword, WEAK_PASSWORD_MESSAGE } from "./password-rules";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
-import { magicLink } from "better-auth/plugins/magic-link";
 import { db, schema } from "@/db";
 import { sendEmail } from "@/lib/email/send";
 import { afterGoogleLinked, afterSessionCreated, markEmailVerified } from "./devices";
@@ -98,16 +97,6 @@ export const auth = betterAuth({
     },
   },
   plugins: [
-    magicLink({
-      expiresIn: 60 * 15,
-      sendMagicLink: async ({ email, url }) => {
-        await sendEmail({
-          to: email,
-          subject: "Pieslēgšanās saite",
-          text: `Lai pieslēgtos, atver saiti (derīga 15 minūtes):\n${url}\n\nJa pieslēgšanos nepieprasīji, šo vēstuli vari ignorēt.`,
-        });
-      },
-    }),
     nextCookies(), // jābūt pēdējam
   ],
 });

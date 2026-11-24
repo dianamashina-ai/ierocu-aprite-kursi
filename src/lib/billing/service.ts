@@ -3,7 +3,7 @@ import { randomBytes, randomUUID } from "node:crypto";
 import { and, desc, eq, sql } from "drizzle-orm";
 import { db, schema } from "@/db";
 import type { OrderBuyer } from "@/db/schema";
-import { COURSE_PRODUCT, LESSON_SCHEDULING, productByCode, splitVat, type ProductCode } from "@/config/pricing";
+import { BUNDLE_PRODUCT, COURSE_PRODUCT, LESSON_SCHEDULING, productByCode, splitVat, type ProductCode } from "@/config/pricing";
 import { courseAccessWhere } from "./access";
 import { sendEmail } from "@/lib/email/send";
 import { formatEuro, formatLessonAt } from "@/lib/format";
@@ -104,7 +104,7 @@ export async function availablePayMethods(): Promise<PayMethod[]> {
  * Piemēro maksājumu sistēmas paziņojumu (idempotenti — paziņojumi var atkārtoties).
  * Rēķina numuru piešķir tikai pirmajā pārejā uz "paid".
  */
-export async function applyPaymentEvent(ev: PaymentEvent, provider: ProviderName, opts: { now?: Date } = {}) {
+export async function applyPaymentEvent(ev: PaymentEvent, provider: ProviderName, opts: { now?: Date; internal?: boolean } = {}) {
   const now = opts.now ?? new Date();
   const result = await db.transaction(async (tx) => {
     const [order] = await tx.select().from(schema.orders).where(eq(schema.orders.id, ev.orderId)).for("update");
@@ -122,6 +122,9 @@ export async function applyPaymentEvent(ev: PaymentEvent, provider: ProviderName
     if (ev.status === "paid" && order.status !== "paid" && order.status !== "refunded") {
       const [{ seq }] = await tx.execute<{ seq: string }>(sql`select nextval('invoice_seq') as seq`);
       Object.assign(set, { status: "paid", paidAt: now, invoiceNumber: invoiceNumber(Number(seq), now) });
+    } else if (ev.status === "refunded" && order.status === "paid" && order.refundedCents > 0 && !opts.internal) {
+      // pēc daļējas atmaksas maksājumu sistēmas paziņojums par atmaksu nedrīkst slēgt kursu — pilnu atmaksu veic tikai administrators
+      console.warn("Atmaksas paziņojums pēc daļējas atmaksas ignorēts", { orderId: order.id });
     } else if (ev.status === "refunded" && order.status === "paid") {
       Object.assign(set, { status: "refunded", refundedAt: now });
     } else if ((ev.status === "failed" || ev.status === "canceled") && order.status === "pending") {
@@ -196,15 +199,25 @@ export async function refundOrder(orderId: string, opts: { now?: Date } = {}) {
   const order = await db.query.orders.findFirst({ where: eq(schema.orders.id, orderId) });
   if (!order) throw new BillingError("Pasūtījums nav atrasts");
   if (order.status !== "paid") throw new BillingError("Atmaksāt var tikai apmaksātu pasūtījumu");
-  await providers[order.provider].refund({ orderId: order.id, providerRef: order.providerRef, amountCents: order.amountCents });
-  const result = await applyPaymentEvent({ orderId: order.id, status: "refunded" }, order.provider, opts);
+  const remaining = order.amountCents - order.refundedCents;
+  await providers[order.provider].refund({
+    orderId: order.id,
+    providerRef: order.providerRef,
+    amountCents: remaining,
+    idempotencyKey: order.refundedCents ? `refund-${order.id}-rest` : undefined,
+  });
+  const result = await applyPaymentEvent({ orderId: order.id, status: "refunded" }, order.provider, { ...opts, internal: true });
+  if (result.changed && result.order) {
+    await db.update(schema.orders).set({ refundedCents: result.order.amountCents }).where(eq(schema.orders.id, order.id));
+    result.order = { ...result.order, refundedCents: result.order.amountCents };
+  }
   if (result.changed && result.order && result.order.provider !== "manual") {
     await sendEmail({
       to: result.order.buyer.email,
       subject: `Atmaksa veikta — rēķins ${result.order.invoiceNumber}`,
       text:
         `Sveiki, ${result.order.buyer.name}!\n\n` +
-        `Esam atmaksājuši ${formatEuro(result.order.amountCents)} par rēķinu ${result.order.invoiceNumber}. ` +
+        `Esam atmaksājuši ${formatEuro(remaining)} par rēķinu ${result.order.invoiceNumber}. ` +
         `Nauda atgriezīsies tajā pašā maksāšanas veidā dažu darba dienu laikā.` +
         (productByCode(result.order.productCode as ProductCode)?.includesCourse ? " Pilna piekļuve kursam ir slēgta, 1. modulis paliek pieejams." : "") +
         "\n",
@@ -217,6 +230,7 @@ export async function refundOrder(orderId: string, opts: { now?: Date } = {}) {
 async function paidLessonOrder(orderId: string) {
   const order = await db.query.orders.findFirst({ where: eq(schema.orders.id, orderId) });
   if (!order || order.status !== "paid") throw new BillingError("Apmaksāts pasūtījums nav atrasts");
+  if (order.lessonStatus === "refunded") throw new BillingError("Nodarbība ir atmaksāta");
   if (!productByCode(order.productCode as ProductCode)?.includesLesson) throw new BillingError("Šajā pasūtījumā nav praktiskās nodarbības");
   return order;
 }
@@ -252,6 +266,42 @@ export async function setLessonDone(orderId: string, done: boolean) {
     .set({ lessonStatus: done ? "done" : order.lessonAt ? "scheduled" : null })
     .where(eq(schema.orders.id, orderId))
     .returning();
+  return updated;
+}
+
+/** Komplekta nodarbības daļas cena (komplekts mīnus kurss) — to atmaksā, atsakoties no nodarbības. */
+export const lessonPartCents = () => BUNDLE_PRODUCT.amountCents - COURSE_PRODUCT.amountCents;
+
+/**
+ * Daļēja atmaksa: komplekta pircējs atsakās no praktiskās nodarbības. Atmaksā nodarbības daļu,
+ * pilna piekļuve kursam saglabājas. Notikušai nodarbībai atmaksa nav paredzēta.
+ */
+export async function refundLesson(orderId: string) {
+  const order = await db.query.orders.findFirst({ where: eq(schema.orders.id, orderId) });
+  if (!order || order.status !== "paid") throw new BillingError("Apmaksāts pasūtījums nav atrasts");
+  if (order.productCode !== "bundle") throw new BillingError("Daļēja atmaksa ir tikai komplektam — atsevišķai nodarbībai izmanto pilnu atmaksu");
+  if (order.lessonStatus === "refunded") throw new BillingError("Nodarbība jau atmaksāta");
+  if (order.lessonStatus === "done") throw new BillingError("Nodarbība jau notikusi — atmaksa nav paredzēta");
+  const amount = lessonPartCents();
+  await providers[order.provider].refund({
+    orderId: order.id,
+    providerRef: order.providerRef,
+    amountCents: amount,
+    idempotencyKey: `refund-${order.id}-lesson`,
+  });
+  const [updated] = await db
+    .update(schema.orders)
+    .set({ lessonStatus: "refunded", refundedCents: order.refundedCents + amount })
+    .where(eq(schema.orders.id, order.id))
+    .returning();
+  await sendEmail({
+    to: order.buyer.email,
+    subject: `Atmaksa par praktisko nodarbību — rēķins ${order.invoiceNumber}`,
+    text:
+      `Sveiki, ${order.buyer.name}!\n\n` +
+      `Esam atmaksājuši ${formatEuro(amount)} par praktisko nodarbību (rēķins ${order.invoiceNumber}). ` +
+      `Nauda atgriezīsies tajā pašā maksāšanas veidā dažu darba dienu laikā. Pilna piekļuve tiešsaistes kursam saglabājas.\n`,
+  }).catch((e) => console.error("Atmaksas e-pasts:", e));
   return updated;
 }
 

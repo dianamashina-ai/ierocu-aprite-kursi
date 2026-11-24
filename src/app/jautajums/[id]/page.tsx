@@ -45,6 +45,7 @@ export default async function QuestionPage({ params }: { params: Promise<{ id: s
           <Practice signedIn={Boolean(user)} questions={[q]} seed={randomUUID()} topicHref={topicHref} shuffleQuestions={false} />
         ) : (
           <div className="space-y-5">
+            <h1 className="sr-only">{tc("question", { id: q.id })}</h1>
             <p className="rounded-2xl border border-line bg-white p-5 text-lg font-semibold leading-snug" lang="lv">{q.text}</p>
             <Paywall title="Atbilde un skaidrojums pieejami ar pilnu piekļuvi" />
           </div>

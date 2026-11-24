@@ -65,7 +65,7 @@ export default async function BuyPage({ searchParams }: { searchParams: Promise<
         </nav>
 
       <div className="mt-6 grid gap-6 md:grid-cols-[1fr_1.2fr]">
-        <ProductCard code={code} courseItems={courseIncluded(course.totals, { questions: 40, minutes: 40 })} showVat gray className="self-start" />
+        <ProductCard code={code} courseItems={courseIncluded(course.totals, { questions: 40, minutes: 40 })} showVat gray headingLevel={2} className="self-start" />
 
         <section aria-labelledby="pay-h" className="rounded-2xl border border-line bg-white p-5 sm:p-6">
           <h2 id="pay-h" className="text-xl font-semibold">

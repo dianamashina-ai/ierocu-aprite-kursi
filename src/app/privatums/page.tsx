@@ -36,8 +36,12 @@ export default function PrivacyPage() {
         </li>
         <li>
           <strong>Pirkuma dati:</strong> rēķinā norādītais vārds un uzvārds, summa, apmaksas datums, rēķina numurs un apliecinājums
-          par atteikuma tiesību zaudēšanu. Bankas kartes vai internetbankas datus apstrādā maksājumu pakalpojuma sniedzējs —
+          par atteikuma tiesību zaudēšanu. Bankas kartes vai internetbankas datus apstrādā maksājumu pakalpojuma sniedzējs Montonio —
           mēs tos nesaņemam un neglabājam.
+        </li>
+        <li>
+          <strong>Praktiskās nodarbības dati:</strong> ja iegādājaties praktisko nodarbību šautuvē — tālruņa numurs un saskaņotais
+          nodarbības datums un laiks. Tālruni izmantojam tikai, lai sazinātos par nodarbības laiku.
         </li>
         <li>
           <strong>Tehniskie dati:</strong> pieslēgšanās brīdī — IP adrese un pārlūkprogrammas veids. Tos izmantojam, lai aizsargātu
@@ -52,7 +56,7 @@ export default function PrivacyPage() {
       <List>
         <li>
           <strong>Līguma izpilde</strong> — lai izveidotu kontu, nodrošinātu kursu, saglabātu progresu, pieņemtu maksājumu un
-          nosūtītu pieslēgšanās saites un rēķinus.
+          nosūtītu paroles atjaunošanas saites, rēķinus un ziņas par praktiskās nodarbības laiku.
         </li>
         <li>
           <strong>Juridisks pienākums</strong> — rēķinu un grāmatvedības dokumentu glabāšana.
@@ -81,7 +85,7 @@ export default function PrivacyPage() {
           kontu;
         </li>
         <li>
-          <strong>maksājumu pakalpojuma sniedzējs</strong> — maksājuma apstrāde.
+          <strong>Montonio</strong> — maksājumu apstrāde (internetbanka, karte, Apple Pay, Google Pay).
         </li>
       </List>
       <p>
@@ -93,7 +97,7 @@ export default function PrivacyPage() {
       <H2>5. Cik ilgi glabājam</H2>
       <List>
         <li>Konta un mācību datus — kamēr jums ir konts. Pēc konta dzēšanas tie tiek izdzēsti.</li>
-        <li>Rēķinus un pirkuma datus — Grāmatvedības likumā noteikto termiņu, arī pēc konta dzēšanas.</li>
+        <li>Rēķinus un pirkuma datus (arī praktiskās nodarbības tālruni un laiku) — Grāmatvedības likumā noteikto termiņu, arī pēc konta dzēšanas.</li>
         <li>Pieslēgšanās vēsturi (laiks, IP adrese, pārlūks) — 90 dienas.</li>
         <li>E-pasta saraksti — kamēr tā vajadzīga jūsu jautājuma atrisināšanai.</li>
       </List>

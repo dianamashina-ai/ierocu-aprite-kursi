@@ -52,7 +52,7 @@ export async function listOrders({ status, q, lessons = false, limit = 100 }: { 
     .where(where.length ? and(...where) : undefined)
     .orderBy(
       ...(lessons
-        ? [sql`case ${orders.lessonStatus} when 'done' then 2 when 'scheduled' then 1 else 0 end`, asc(orders.lessonAt), desc(orders.createdAt)]
+        ? [sql`case ${orders.lessonStatus} when 'refunded' then 3 when 'done' then 2 when 'scheduled' then 1 else 0 end`, asc(orders.lessonAt), desc(orders.createdAt)]
         : [desc(orders.createdAt)]),
     )
     .limit(limit);
