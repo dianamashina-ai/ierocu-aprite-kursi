@@ -140,7 +140,7 @@ export default async function TopicPage({
               {
                 key: "lesson",
                 href: `/tema/${topicSlug(topic.id)}`,
-                label: "Nodarbība",
+                label: "Teorija",
               },
               {
                 key: "questions",
@@ -171,7 +171,7 @@ export default async function TopicPage({
                     id="toc-h"
                     className="text-xs font-semibold uppercase tracking-[0.16em] text-muted"
                   >
-                    Šajā nodarbībā
+                    Šajā tēmā
                   </p>
                   <ol className="mt-3 space-y-2 text-[15px]">
                     {headings.map((h, i) => (
@@ -188,13 +188,13 @@ export default async function TopicPage({
                 </nav>
               )}
 
-              <section className="mt-8" aria-label="Nodarbība">
+              <section className="mt-8" aria-label="Teorija">
                 {lesson ? (
                   <>
                     <LessonBody markdown={lessonBody ?? ""} />
                     {!allowed && (
                       <div className="mt-8">
-                        <Paywall title="Visa nodarbība pieejama ar pilnu piekļuvi" />
+                        <Paywall title="Visa tēma pieejama ar pilnu piekļuvi" />
                       </div>
                     )}
                     <p className="mt-10 border-t border-line pt-4 text-sm text-muted">

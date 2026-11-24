@@ -36,14 +36,14 @@ export default function TermsPage() {
       <H2>2. Pakalpojums</H2>
       <p>
         Tiešsaistes mācību platforma sagatavošanās kvalifikācijas pārbaudījumam par ieroču un munīcijas aprites kārtību un
-        prasmēm rīkoties ar ieroci. Platforma ietver nodarbības, oficiālos pārbaudījuma jautājumus ar skaidrojumiem, treniņus un
+        prasmēm rīkoties ar ieroci. Platforma ietver tēmas, oficiālos pārbaudījuma jautājumus ar skaidrojumiem, treniņus un
         izmēģinājuma eksāmenu.
       </p>
       <p>
         Tas <strong>nav oficiālais pārbaudījums</strong>, un platforma nav saistīta ar Valsts policiju. Kvalifikācijas pārbaudījumu
         pieņem Valsts policija.
       </p>
-      <p>1. modulis ir pieejams bez maksas. Pilna piekļuve atver visus moduļus, nodarbības, skaidrojumus un izmēģinājuma eksāmenu.</p>
+      <p>1. modulis ir pieejams bez maksas. Pilna piekļuve atver visus moduļus, tēmas, skaidrojumus un izmēģinājuma eksāmenu.</p>
       <p>
         <strong>Praktiskā nodarbība</strong> notiek pakalpojuma sniedzēja šautuvē ar sertificētu instruktoru un ietver iepazīšanos ar
         kaujas ieroci un 30 izmēģinājuma šāvienus. Nodarbības datumu un laiku saskaņo pēc iegādes — administrators sazinās ar
@@ -59,7 +59,7 @@ export default function TermsPage() {
         </li>
         <li>Norādiet pareizu e-pasta adresi — uz to sūtām paroles atjaunošanas saites un rēķinus.</li>
         <li>
-          Nodarbību un skaidrojumu teksti ir pakalpojuma sniedzēja autordarbs. Tos nedrīkst kopēt, pārpublicēt vai izplatīt bez
+          Tēmu un skaidrojumu teksti ir pakalpojuma sniedzēja autordarbs. Tos nedrīkst kopēt, pārpublicēt vai izplatīt bez
           rakstiskas atļaujas.
         </li>
         <li>
@@ -112,7 +112,7 @@ export default function TermsPage() {
       <H2>7. Satura precizitāte un atbildība</H2>
       <List>
         <li>
-          Skaidrojumi un nodarbības ir mācību materiāls, kas sagatavots pēc spēkā esošajiem tiesību aktiem. Noteicošais vienmēr ir
+          Skaidrojumi un tēmas ir mācību materiāls, kas sagatavots pēc spēkā esošajiem tiesību aktiem. Noteicošais vienmēr ir
           tiesību aktu teksts.
         </li>
         <li>

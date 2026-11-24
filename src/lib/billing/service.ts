@@ -146,7 +146,7 @@ async function sendReceipt(order: typeof schema.orders.$inferSelect) {
     `Sveiki, ${order.buyer.name}!`,
     "",
     `Maksājums ${formatEuro(order.amountCents)} saņemts: ${product.title}.`,
-    product.includesCourse ? "Tagad tev ir pieejami visi kursa moduļi, nodarbības un izmēģinājuma eksāmens." : "",
+    product.includesCourse ? "Tagad tev ir pieejami visi kursa moduļi, tēmas un izmēģinājuma eksāmens." : "",
     product.includesLesson ? LESSON_SCHEDULING : "",
     "",
     `Rēķins ${order.invoiceNumber}: ${link}`,
@@ -380,7 +380,7 @@ export async function grantManualAccess(
     subject: "Tev atvērta pilna piekļuve kursam “Ieroču atļauja”",
     text:
       `Sveiki!\n\nTev ir atvērta pilna piekļuve mācību kursam sagatavošanās ieroču atļaujas kvalifikācijas pārbaudījumam: ` +
-      `visi moduļi, nodarbības, skaidrojumi un izmēģinājuma eksāmens.\n\n` +
+      `visi moduļi, tēmas, skaidrojumi un izmēģinājuma eksāmens.\n\n` +
       (setPassword
         ? `Konts jau ir izveidots ar šo e-pasta adresi. Iestati paroli un sāc mācīties (saite derīga ${INVITE_TOKEN_DAYS} dienas):\n${setPassword}\n\n` +
           `Ja tev ir Google konts ar šo pašu e-pastu, vari arī vienkārši pieslēgties ar «Turpināt ar Google»: ${login}\n`

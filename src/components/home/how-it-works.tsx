@@ -5,7 +5,7 @@ import {
   type ShowcaseLesson,
 } from "@/components/home/how-it-works-showcase";
 
-/** Sākumlapa viesiem: trīs soļi (pa kreisi) un interaktīvs mini ceļš — nodarbība, treniņš, eksāmens (pa labi). */
+/** Sākumlapa viesiem: trīs soļi (pa kreisi) un interaktīvs mini ceļš — tēma, treniņš, eksāmens (pa labi). */
 export function HowItWorks({
   modules,
   questions,
@@ -26,7 +26,7 @@ export function HowItWorks({
   const steps = [
     {
       title: "Mācies",
-      text: `${modules} moduļi — no ieroča uzbūves līdz atbildībai. Īsas nodarbības latviešu valodā pēc likuma teksta.`,
+      text: `${modules} moduļi — no ieroča uzbūves līdz atbildībai. Īsas tēmas latviešu valodā pēc likuma teksta.`,
     },
     {
       title: "Trenējies",

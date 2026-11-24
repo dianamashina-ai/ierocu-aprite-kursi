@@ -124,7 +124,7 @@ export function CourseOutline({
             <div>
               <p className="font-semibold">Mācies, kur ērti</p>
               <p className="mt-1 text-[15px] leading-relaxed text-muted">
-                Datorā mājās vai telefonā ceļā — kad vien ir brīvs brīdis. Nodarbības ir īsas, tāpēc vari mācīties pa daļām savā tempā.
+                Datorā mājās vai telefonā ceļā — kad vien ir brīvs brīdis. Tēmas ir īsas, tāpēc vari mācīties pa daļām savā tempā.
               </p>
             </div>
           </div>

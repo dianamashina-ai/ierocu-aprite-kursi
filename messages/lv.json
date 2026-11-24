@@ -25,7 +25,7 @@
   },
   "home": {
     "heading": "Sagatavojies ieroču aprites eksāmenam mierīgi un pa tēmām",
-    "lead": "{topics} īsas nodarbības, visi {questions} oficiālie jautājumi ar skaidrojumiem un izmēģinājuma eksāmens. 1. modulis — bez maksas.",
+    "lead": "{topics} īsas tēmas, visi {questions} oficiālie jautājumi ar skaidrojumiem un izmēģinājuma eksāmens. 1. modulis — bez maksas.",
     "modulesHeading": "Kursa moduļi",
     "start": "Sākt ar 1. moduli"
   },
@@ -34,11 +34,11 @@
   },
   "topic": {
     "practice": "Trenēt tēmas jautājumus",
-    "lessonHeading": "Nodarbība",
-    "lessonSoon": "Īsa nodarbība par šo tēmu tiks pievienota drīzumā. Pagaidām vari trenēties ar jautājumiem.",
+    "lessonHeading": "Teorija",
+    "lessonSoon": "Teorija par šo tēmu tiks pievienota drīzumā. Pagaidām vari trenēties ar jautājumiem.",
     "lessonMinutes": "~{minutes} min lasīšanai",
     "lessonSources": "Avoti",
-    "lessonDraft": "Nodarbība sagatavota pēc tiesību aktu tekstiem un vēl tiek pārbaudīta. Noteicošais vienmēr ir spēkā esošais tiesību akta teksts.",
+    "lessonDraft": "Teorija sagatavota pēc tiesību aktu tekstiem un vēl tiek pārbaudīta. Noteicošais vienmēr ir spēkā esošais tiesību akta teksts.",
     "practiceAfterLesson": "Sākt treniņu",
     "questionsHeading": "Jautājumi",
     "similarBadge": "Ir ļoti līdzīgs jautājums — lasi uzmanīgi"

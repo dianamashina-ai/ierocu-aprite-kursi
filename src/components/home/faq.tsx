@@ -25,7 +25,7 @@ function items(exam: { questions: number; minutes: number; maxWrong: number }, t
     },
     {
       q: "Kam šis eksāmens jākārto?",
-      a: "Pirms pirmā šaujamieroča vai lielas enerģijas pneimatiskā ieroča iegādes. Medībām klasificētiem ieročiem kvalifikācijas pārbaudījums nav jākārto — tiem vajadzīga mednieka apliecība.",
+      a: "Pirms pirmā šaujamieroča vai lielas enerģijas pneimatiskā ieroča iegādes. Medībām klasificētiem ieročiem kvalifikācijas pārbaudījums nav jākārto.",
       src: "Ieroču aprites likums, 28. pants",
     },
     {
@@ -39,7 +39,7 @@ function items(exam: { questions: number; minutes: number; maxWrong: number }, t
     },
     {
       q: "Kas ir pieejams bez maksas?",
-      a: "Pēc reģistrācijas 1. modulis ir pieejams bez maksas — nodarbības, jautājumi un skaidrojumi. Maksājumu karte nav vajadzīga.",
+      a: "Pēc reģistrācijas 1. modulis ir pieejams bez maksas — tēmas, jautājumi un skaidrojumi. Maksājumu karte nav vajadzīga.",
     },
     {
       q: "Cik maksā pilns kurss un kā to apmaksāt?",
@@ -56,7 +56,7 @@ function items(exam: { questions: number; minutes: number; maxWrong: number }, t
     },
     {
       q: "Kas notiek, ja likums mainās?",
-      a: "Skaidrojumi un nodarbības ir rakstīti pēc spēkā esošās likuma redakcijas. Ja oficiālā atbilde var neatbilst jaunākajiem grozījumiem, pie jautājuma ir atzīme «Likuma izmaiņas» ar paskaidrojumu un oficiālo atbildi no Valsts policijas saraksta.",
+      a: "Skaidrojumi un tēmas ir rakstīti pēc spēkā esošās likuma redakcijas. Ja oficiālā atbilde var neatbilst jaunākajiem grozījumiem, pie jautājuma ir atzīme «Likuma izmaiņas» ar paskaidrojumu un oficiālo atbildi no Valsts policijas saraksta.",
     },
   ];
 }

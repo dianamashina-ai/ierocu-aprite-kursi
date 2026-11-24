@@ -101,7 +101,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
               </Link>
             </div>
           ) : (
-            <Paywall>Nodarbību sākumu un jautājumu tekstus vari apskatīt, bet treniņš, skaidrojumi un eksāmens — ar pilnu piekļuvi.</Paywall>
+            <Paywall>Tēmu sākumu un jautājumu tekstus vari apskatīt, bet treniņš, skaidrojumi un eksāmens — ar pilnu piekļuvi.</Paywall>
           )}
         </aside>
       </div>

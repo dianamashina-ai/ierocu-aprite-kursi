@@ -15,7 +15,7 @@ interface Stats {
 export function Hero({ stats }: { stats: Stats }) {
   const items: [string, string][] = [
     [String(stats.modules), "moduļi no ieroča uzbūves līdz atbildībai"],
-    [String(stats.topics), "īsas nodarbības pēc likuma teksta"],
+    [String(stats.topics), "īsas tēmas pēc likuma teksta"],
     [String(stats.questions), "oficiālie jautājumi ar skaidrojumiem"],
     [`${stats.examMinutes} min`, `eksāmena simulācija — ${stats.examQuestions} jautājumi`],
   ];
@@ -30,7 +30,7 @@ export function Hero({ stats }: { stats: Stats }) {
             </h1>
             <p className="mt-5 text-xl font-semibold text-ink">Saproti likumu, nevis iekal atbildes.</p>
             <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-muted">
-              Īsas nodarbības latviešu valodā, visi oficiālie eksāmena jautājumi ar skaidrojumiem un atsaucēm uz likumu,
+              Īsas tēmas latviešu valodā, visi oficiālie eksāmena jautājumi ar skaidrojumiem un atsaucēm uz likumu,
               kā arī eksāmena simulācija — telefonā vai datorā, savā tempā.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">

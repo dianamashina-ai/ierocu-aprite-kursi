@@ -64,7 +64,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
                 </span>
               </p>
             ) : (
-              <Paywall title="Tev pieejams 1. modulis">Atver pārējos 8 moduļus, visas nodarbības, skaidrojumus un izmēģinājuma eksāmenu.</Paywall>
+              <Paywall title="Tev pieejams 1. modulis">Atver pārējos 8 moduļus, visas tēmas, skaidrojumus un izmēģinājuma eksāmenu.</Paywall>
             )}
             {paid.length > 0 && (
               <>

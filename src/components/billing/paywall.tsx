@@ -14,7 +14,7 @@ export function Paywall({ title = "Šī daļa pieejama ar pilnu piekļuvi", chil
         {title}
       </h2>
       <p className="mt-2 text-white/70">
-        {children ?? "Visi moduļi, nodarbības, skaidrojumi un izmēģinājuma eksāmens."} Vienreizējs maksājums{" "}
+        {children ?? "Visi moduļi, tēmas, skaidrojumi un izmēģinājuma eksāmens."} Vienreizējs maksājums{" "}
         {formatEuro(COURSE_PRODUCT.amountCents)} (ar PVN).
       </p>
       <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">

@@ -121,10 +121,10 @@ export default async function HomePage() {
                 {!access
                   ? dashboard && dashboard.answeredQuestions > 0
                     ? `Turpini 1. moduli. Pilnajā kursā — vēl ${course.modules.length - 1} moduļi un izmēģinājuma eksāmens.`
-                    : `Sāc ar 1. moduli — tas ir bez maksas: ${course.modules[0].topics.length} nodarbības un ${course.modules[0].questionCount} jautājumi ar skaidrojumiem.`
+                    : `Sāc ar 1. moduli — tas ir bez maksas: ${course.modules[0].topics.length} tēmas un ${course.modules[0].questionCount} jautājumi ar skaidrojumiem.`
                   : dashboard && dashboard.answeredQuestions > 0
                     ? "Turpini tur, kur palikāt — vai pārbaudi sevi izmēģinājuma eksāmenā."
-                    : `Sāc ar pirmo nodarbību — ${course.totals.topics} īsās nodarbībās un ${course.totals.questions} oficiālajos jautājumos ir viss eksāmenam vajadzīgais.`}
+                    : `Sāc ar pirmo tēmu — ${course.totals.topics} īsās tēmās un ${course.totals.questions} oficiālajos jautājumos ir viss eksāmenam vajadzīgais.`}
               </p>
             </div>
             {dashboard && <ProgressSummary d={dashboard} freeOnly={!access} />}

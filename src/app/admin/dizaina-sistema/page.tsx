@@ -106,7 +106,7 @@ export default function DesignSystemPage() {
           <p className="text-xl font-semibold">Ceļš līdz gatavībai</p>
         </Spec>
         <Spec name="Ievadteksts · 18 px · 400 · muted">
-          <p className="text-lg leading-relaxed text-muted">Sāc ar pirmo nodarbību — tajā ir viss eksāmenam vajadzīgais.</p>
+          <p className="text-lg leading-relaxed text-muted">Sāc ar pirmo tēmu — tajā ir viss eksāmenam vajadzīgais.</p>
         </Spec>
         <Spec name="Pamatteksts · 16 px · 400">
           <p className="leading-relaxed">Pielādējot, sagatavojot šaušanai un izlādējot, stobram jābūt pavērstam drošā virzienā.</p>
