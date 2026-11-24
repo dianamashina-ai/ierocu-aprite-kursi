@@ -40,7 +40,7 @@ export default function TermsPage() {
         izmēģinājuma eksāmenu.
       </p>
       <p>
-        Platforma <strong>nav oficiālais pārbaudījums</strong> un nav saistīta ar Valsts policiju. Kvalifikācijas pārbaudījumu
+        Tas <strong>nav oficiālais pārbaudījums</strong>, un platforma nav saistīta ar Valsts policiju. Kvalifikācijas pārbaudījumu
         pieņem Valsts policija.
       </p>
       <p>1. modulis ir pieejams bez maksas. Pilna piekļuve atver visus moduļus, nodarbības, skaidrojumus un izmēģinājuma eksāmenu.</p>
