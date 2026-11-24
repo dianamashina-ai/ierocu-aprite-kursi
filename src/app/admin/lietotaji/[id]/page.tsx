@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { isProductCode, PRODUCTS } from "@/config/pricing";
 import { notFound } from "next/navigation";
+import { adminStatus } from "@/lib/admin";
 import { getUserDetail } from "@/lib/backoffice/service";
 import { describeDevice } from "@/lib/backoffice/user-agent";
 import { formatDate, formatDateTime, formatEuro } from "@/lib/format";
@@ -18,6 +19,7 @@ export default async function UserPage({ params }: { params: Promise<{ id: strin
   const d = await getUserDetail((await params).id);
   if (!d) notFound();
   const { user: u } = d;
+  const adminInfo = adminStatus({ email: u.email, emailVerified: Boolean(u.emailVerified) });
 
   return (
     <>
@@ -25,7 +27,18 @@ export default async function UserPage({ params }: { params: Promise<{ id: strin
       <h1 className="mt-4 break-all text-3xl font-semibold tracking-tight">{u.email}</h1>
       <p className="mt-2 text-sm text-muted">
         {u.name} · reģistrējies {formatDate(u.createdAt)} · atbildes: {d.answers} ·{" "}
-        {d.access ? <span className="font-semibold text-ok">pilna piekļuve</span> : "tikai 1. modulis"}
+        {d.access ? <span className="font-semibold text-ok">pilna piekļuve</span> : "tikai 1. modulis"} · e-pasts{" "}
+        {u.emailVerified ? <span className="font-semibold text-ok">apstiprināts</span> : <span className="font-semibold text-warn">nav apstiprināts</span>}
+        {adminInfo !== "not-listed" && (
+          <>
+            {" "}· administrators:{" "}
+            {adminInfo === "admin" ? (
+              <span className="font-semibold text-ok">jā</span>
+            ) : (
+              <span className="font-semibold text-warn">nē — e-pasts nav apstiprināts</span>
+            )}
+          </>
+        )}
       </p>
 
       {d.possiblyShared && (

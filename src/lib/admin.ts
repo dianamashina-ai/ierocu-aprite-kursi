@@ -7,10 +7,17 @@ import type { CurrentUser } from "@/lib/auth/session";
  * izveidot kontu ar administratora adresi.
  */
 export function isAdmin(user: Pick<CurrentUser, "email" | "emailVerified"> | null | undefined) {
-  if (!user?.email || !user.emailVerified) return false;
-  const list = (process.env.ADMIN_EMAILS ?? "")
+  return adminStatus(user) === "admin";
+}
+
+const adminList = () =>
+  (process.env.ADMIN_EMAILS ?? "")
     .split(/[,;\s]+/)
     .map((e) => e.trim().replace(/^["'<]+|["'>]+$/g, "").toLowerCase())
     .filter(Boolean);
-  return list.includes(user.email.toLowerCase());
+
+/** Kāpēc lietotājs ir / nav administrators (diagnostikai administrācijā). */
+export function adminStatus(user: Pick<CurrentUser, "email" | "emailVerified"> | null | undefined): "admin" | "not-listed" | "unverified" {
+  if (!user?.email || !adminList().includes(user.email.toLowerCase())) return "not-listed";
+  return user.emailVerified ? "admin" : "unverified";
 }
