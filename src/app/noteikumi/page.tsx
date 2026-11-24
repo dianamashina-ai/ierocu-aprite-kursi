@@ -100,7 +100,8 @@ export default function TermsPage() {
         <a href={`mailto:${SELLER.email}`} className={a}>
           {SELLER.email}
         </a>
-        ; naudu atmaksāsim 14 dienu laikā. Komplektā atteikuma tiesības attiecas tikai uz nodarbību — atmaksājam{" "}
+        ; naudu atmaksāsim 14 dienu laikā. Ja iegādāta tikai praktiskā nodarbība, atmaksājam visu summu —{" "}
+        {formatEuro(LESSON_PRODUCT.amountCents)}. Komplektā atteikuma tiesības attiecas tikai uz nodarbību — atmaksājam{" "}
         {formatEuro(lessonPartRefund)}.
       </p>
       <p>
