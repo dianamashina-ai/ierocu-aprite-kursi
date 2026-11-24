@@ -205,3 +205,28 @@ export async function deleteTestAccounts() {
   });
   return candidates.length;
 }
+
+/**
+ * Dzēš vienu kontu (administrators izvēlas pats). Ja kontam ir rēķini, vajag skaidru apstiprinājumu
+ * (`withInvoices`) — tas paredzēts tikai testa maksājumiem pirms palaišanas.
+ */
+export async function deleteAccount(id: string, opts: { withInvoices?: boolean } = {}) {
+  const { user, orders } = schema;
+  const [u] = await db.select({ id: user.id }).from(user).where(eq(user.id, id));
+  if (!u) return { ok: false as const, reason: "Konts nav atrasts" };
+  const [{ invoiced }] = await db
+    .select({ invoiced: sql<number>`count(${orders.invoiceNumber})::int` })
+    .from(orders)
+    .where(eq(orders.userId, id));
+  if (invoiced > 0 && !opts.withInvoices) return { ok: false as const, reason: `Kontam ir ${invoiced} rēķini`, invoiced };
+  await db.transaction(async (tx) => {
+    await tx.delete(orders).where(eq(orders.userId, id));
+    await tx.delete(user).where(eq(user.id, id));
+  });
+  return { ok: true as const };
+}
+
+export async function getUserEmail(id: string) {
+  const [u] = await db.select({ email: schema.user.email }).from(schema.user).where(eq(schema.user.id, id));
+  return u ?? null;
+}

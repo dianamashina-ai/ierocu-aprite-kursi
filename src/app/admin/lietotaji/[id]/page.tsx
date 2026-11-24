@@ -10,6 +10,7 @@ import { OrderStatusBadge } from "@/components/admin/status-badge";
 import { RefundButton } from "@/components/admin/refund-button";
 import { GrantAccessForm } from "@/components/admin/grant-access-form";
 import { SignOutAllButton } from "@/components/admin/sign-out-all-button";
+import { DeleteAccountButton } from "@/components/admin/delete-account-button";
 
 export const metadata = { title: "Lietotājs" };
 
@@ -119,6 +120,17 @@ export default async function UserPage({ params }: { params: Promise<{ id: strin
           </ul>
         )}
         <p className="mt-3 text-xs text-muted">Vēsture tiek glabāta 90 dienas.</p>
+      </section>
+      <section className="mt-12 border-t border-line pt-6" aria-labelledby="del-h">
+        <h2 id="del-h" className="text-xl font-semibold">Dzēst kontu</h2>
+        <p className="mt-1 text-sm text-muted">Testa kontiem pirms palaišanas. Dzēš kontu, progresu, ierīces un pasūtījumus.</p>
+        <div className="mt-4">
+          {adminInfo === "admin" ? (
+            <p className="text-sm text-muted">Administratora kontu dzēst nevar.</p>
+          ) : (
+            <DeleteAccountButton userId={u.id} email={u.email} />
+          )}
+        </div>
       </section>
     </>
   );

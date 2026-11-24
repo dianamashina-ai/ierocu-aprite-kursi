@@ -9,7 +9,7 @@ import { isAdmin } from "@/lib/admin";
 import { BillingError, grantManualAccess, refundOrder, scheduleLesson, setLessonDone } from "@/lib/billing/service";
 import { rigaLocalToDate } from "@/lib/format";
 import { signOutEverywhere } from "@/lib/auth/devices";
-import { deleteTestAccounts, saveExplanation } from "@/lib/backoffice/service";
+import { deleteAccount, deleteTestAccounts, getUserEmail, saveExplanation } from "@/lib/backoffice/service";
 
 async function requireAdmin() {
   const user = await getCurrentUser();
@@ -128,4 +128,17 @@ export async function deleteTestAccountsAction(): Promise<ActionResult> {
   const n = await deleteTestAccounts();
   revalidatePath("/admin", "layout");
   return { ok: true, message: n ? `Dzēsti ${n} testa konti.` : "Testa kontu nav." };
+}
+
+/** Dzēš vienu kontu. Savu kontu un citu administratoru kontus dzēst nevar. */
+export async function deleteAccountAction(userId: string, withInvoices = false): Promise<ActionResult & { invoiced?: number }> {
+  const me = await requireAdmin();
+  const id = z.string().min(1).parse(userId);
+  if (id === me.id) return { ok: false, message: "Savu kontu dzēst nevar." };
+  const target = await getUserEmail(id);
+  if (target && isAdmin({ email: target.email, emailVerified: true })) return { ok: false, message: "Administratora kontu dzēst nevar." };
+  const r = await deleteAccount(id, { withInvoices: Boolean(withInvoices) });
+  if (!r.ok) return { ok: false, message: r.reason, invoiced: r.invoiced };
+  revalidatePath("/admin", "layout");
+  return { ok: true, message: "Konts dzēsts." };
 }

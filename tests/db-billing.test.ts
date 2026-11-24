@@ -275,4 +275,13 @@ describe.skipIf(!url)("maksājumi (DB)", async () => {
     expect(ids).toContain("t-real");
     expect(ids).toContain("u2");
   });
+  it("konta dzēšana: ar rēķiniem — tikai ar skaidru apstiprinājumu", async () => {
+    const bo = await import("@/lib/backoffice/service");
+    await db.insert(schema.user).values({ id: "t-inv", name: "Tests", email: "tests@yandex.com" });
+    const o = await billing.createOrder("t-inv", buyer, { provider: "dev", now: t0 });
+    await billing.applyPaymentEvent({ orderId: o.id, status: "paid" }, "dev", { now: t0 });
+    expect(await bo.deleteAccount("t-inv")).toMatchObject({ ok: false, invoiced: 1 });
+    expect(await bo.deleteAccount("t-inv", { withInvoices: true })).toMatchObject({ ok: true });
+    expect(await bo.getUserEmail("t-inv")).toBeNull();
+  });
 });
