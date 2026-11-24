@@ -14,7 +14,7 @@ const a = "font-semibold text-accent-strong underline underline-offset-4";
 /** Pirms palaišanas ieteicams pārskatīt juristam. */
 export default function TermsPage() {
   const price = (p: { amountCents: number; vatRate: number }) =>
-    `${formatEuro(p.amountCents)}, t. sk. PVN ${p.vatRate} % (${formatEuro(splitVat(p.amountCents, p.vatRate).vatCents)})`;
+    `${formatEuro(p.amountCents)} ar PVN ${p.vatRate} % (${formatEuro(splitVat(p.amountCents, p.vatRate).vatCents)})`;
   const lessonPartRefund = BUNDLE_PRODUCT.amountCents - COURSE_PRODUCT.amountCents;
   return (
     <LegalPage title="Lietošanas un pirkšanas noteikumi">
