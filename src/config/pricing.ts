@@ -17,7 +17,7 @@ type Product = {
   includesLesson: boolean;
 };
 
-export type ProductCode = "course" | "lesson" | "bundle" | "test";
+export type ProductCode = "course" | "lesson" | "bundle" | "test" | "lessontest";
 
 export const COURSE_PRODUCT = {
   code: "course",
@@ -64,11 +64,27 @@ export const TEST_PRODUCT = {
   includesLesson: false,
 } as const satisfies Product;
 
+/**
+ * PAGAIDU: praktiskās nodarbības testa pirkums (2 €) — tikai administratoriem ar tiešu saiti
+ * /iegadaties?produkts=lessontest. Lai pārbaudītu visu nodarbības ceļu ar īstu naudu. Noņemt pēc pārbaudes.
+ */
+export const LESSON_TEST_PRODUCT = {
+  code: "lessontest",
+  name: "Praktiskā nodarbība šautuvē — testa pirkums",
+  title: "Praktiskā nodarbība (tests)",
+  amountCents: 200,
+  vatRate: 21,
+  currency: "EUR",
+  includesCourse: false,
+  includesLesson: true,
+} as const satisfies Product;
+
 export const PRODUCTS: Record<ProductCode, Product> = {
   course: COURSE_PRODUCT,
   lesson: LESSON_PRODUCT,
   bundle: BUNDLE_PRODUCT,
   test: TEST_PRODUCT,
+  lessontest: LESSON_TEST_PRODUCT,
 };
 
 /** Produkti, kas atver tiešsaistes kursu (piekļuves pārbaudei). */

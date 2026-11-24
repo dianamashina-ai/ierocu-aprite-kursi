@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { getCurrentUser } from "@/lib/auth/session";
+import { isAdmin } from "@/lib/admin";
 import { buyPath, isPurchasable, productByCode, type ProductCode } from "@/config/pricing";
 import { activeProviderName, applyPaymentEvent, BillingError, getOrderForUser, startCheckout } from "@/lib/billing/service";
 
@@ -30,9 +31,11 @@ async function requestOrigin() {
 }
 
 export async function checkoutAction(_prev: CheckoutState, form: FormData): Promise<CheckoutState> {
-  const code: ProductCode = isPurchasable(form.get("product")) ? (form.get("product") as ProductCode) : "course";
-  const product = productByCode(code);
   const user = await getCurrentUser();
+  // PAGAIDU: nodarbības testa pirkums (2 €) — tikai administratoriem
+  const wanted = form.get("product");
+  const code: ProductCode = isPurchasable(wanted) || (wanted === "lessontest" && isAdmin(user)) ? (wanted as ProductCode) : "course";
+  const product = productByCode(code);
   if (!user) redirect(`/pieslegties?next=${encodeURIComponent(buyPath(code))}`);
   const raw = Object.fromEntries(["name", "phone", "waiver", "terms"].map((k) => [k, String(form.get(k) ?? "")]));
   const parsed = BuyerForm.safeParse(raw);
