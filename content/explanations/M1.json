@@ -256,17 +256,17 @@
  {
   "id": 466,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Šaujamieroča galvenās sastāvdaļas ir stobrs (ar graudu un tēmekli vai bez tā), rāmis un mehānismu kārba, kā arī aizslēgs ar belzni un čaulītes izvilcēju. Visi minētie ir galvenās sastāvdaļas."
+  "explanation": "Šaujamieroča galvenās sastāvdaļas ir stobrs, rāmis un mehānismu kārba, kā arī aizslēgs ar belzni un čaulītes izvilcēju. Vārdi «ar graudu un tēmekli vai bez tā» nozīmē, ka galvenā sastāvdaļa ir pats stobrs, bet tēmēšanas ierīces pie galvenajām sastāvdaļām nepieder (sk. arī Nr. 467). Visi minētie ir galvenās sastāvdaļas."
  },
  {
   "id": 467,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Galvenās sastāvdaļas ir stobrs (arī ieliekamie stobri un adapteri kalibra maiņai) un stobra apvalks, kas pilda rāmja funkciju. Tēmekļi (mehāniskais, optiskais, kolimators) nav pieskaitīti galvenajām sastāvdaļām, tāpēc «visi varianti» nav pareizi."
+  "explanation": "Galvenās sastāvdaļas ir stobrs (arī ieliekamie stobri un adapteri kalibra maiņai) un stobra apvalks, kas pilda rāmja funkciju. Tēmekļi (mehāniskais, optiskais, kolimators) nav pieskaitīti galvenajām sastāvdaļām — tāpēc arī Nr. 464 un 466 stobrs minēts «ar graudu un tēmekli vai bez tā». Līdz ar to «visi varianti» nav pareizi."
  },
  {
   "id": 468,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Oficiālajā sarakstā šī jautājuma atbildes ir sapludinātas vienā tekstā. Pareizā atbilde ietver apgalvojumus, ka galvenās daļas var sastāvēt no vairākām sastāvdaļām un saturēt mehānismus, ka mehānismiem bieži ir kopīgas daļas ar vairākām funkcijām (piem., aizslēgs un stobra kārba) un ka «visas atbildes ir pareizas»."
+  "explanation": "Visi trīs apgalvojumi ir pareizi: ieroča uzbūve ir atkarīga no tā veida un sistēmas; galvenās daļas var sastāvēt no vairākām sastāvdaļām un saturēt mehānismus; mehānismiem bieži ir kopīgas daļas, kas pilda vairākas funkcijas (piem., aizslēgs un stobra kārba). Tāpēc pareizā atbilde ir «visas atbildes ir pareizas»."
  },
  {
   "id": 469,
@@ -291,7 +291,7 @@
  {
   "id": 473,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Oficiālajā atbildē šī daļa notur patronas čaulu un izvelk to no patrontelpas, aizslēgam ejot atpakaļ. Tā nav paredzēta tikai čaulītes izmešanai, patronu ievadīšanai vai aizslēga atbīdīšanai — to dara citas daļas."
+  "explanation": "Oficiālajā atbildē ar «izmetēju» saprasta čaulītes izvilkšanas un izmešanas sistēma kopumā: izvilcējs notur čaulīti un izvelk to no patrontelpas, aizslēgam ejot atpakaļ, bet izmetējs (izsviedējs) to izmet caur aizslēga logu (sk. Nr. 430). Atbilde «tikai patronas čaulītes izmešanai» nav pareiza vārda «tikai» dēļ. Patronas patrontelpā ievada aizslēgs, bet aizslēgu priekšējā stāvoklī atbīda atgriezējatspere."
  },
  {
   "id": 474,
@@ -326,12 +326,12 @@
  {
   "id": 480,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Patronu padošanas mehānisms ir magazīna vai revolvera patronu cilindrs (ap savu asi pagriežama magazīna ar patrontelpām). Aptvere oficiālajā atbildē nav minēta kā padošanas mehānisms."
+  "explanation": "Patronu padošanas mehānisms ir magazīna vai revolvera patronu cilindrs (ap savu asi pagriežama magazīna ar patrontelpām). Aptvere ir tikai palīglīdzeklis patronu ielādēšanai magazīnā — pati patronas patrontelpā nepadod, tāpēc tā nav patronu padošanas mehānisms."
  },
  {
   "id": 481,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 481–487 (oficiālās atbildes)",
-  "explanation": "Pēc oficiālās atbildes ieroča mehānismi var nedarboties nolietojuma dēļ un tad, ja ieroci netīra un neeļļo. Laika apstākļi (aukstums, lietus) šajā atbildē nav minēti kā mehānismu kļūmju vai bojājumu cēlonis."
+  "explanation": "Šajā jautājumā oficiāli kā cēloņi norādīti tikai ieroča nolietojums un tas, ka ieroci netīra un neeļļo. Nelabvēlīgi laika apstākļi praksē var ietekmēt šaušanu, taču kā mehānismu kļūmju vai bojājumu cēlonis šajā atbildē tie nav minēti, tāpēc atbilde par aukstu laiku un lietu nav jāatzīmē."
  },
  {
   "id": 482,

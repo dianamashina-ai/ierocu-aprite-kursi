@@ -97,6 +97,9 @@ describe.skipIf(!process.env.TEST_DATABASE_URL)("skaidrojumu sēklošana", () =>
     expect(q2?.explanationStatus).toBe("reviewed");
     const q488 = await db.query.questions.findFirst({ where: eq(schema.questions.id, 488) });
     expect(q488?.explanationStatus).toBe("draft");
+    // labojumi (corrections.json) — variantu teksts atjaunots arī bez --reset
+    const o501 = await db.query.questionOptions.findFirst({ where: (t, { and, eq: e }) => and(e(t.questionId, 501), e(t.key, "b")) });
+    expect(o501?.text).toMatch(/aizsargskavu/);
     await client.end();
   });
 });

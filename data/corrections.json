@@ -3,27 +3,79 @@
   "questions": {
     "87": {
       "reason": "PDF 18. lpp. variantiem iespiesti burti a, b, c, a (oriģināla drukas kļūda). Pareizā atbilde (sarkana) ir 2. variants.",
-      "printed_labels": ["a", "b", "c", "a"],
+      "printed_labels": [
+        "a",
+        "b",
+        "c",
+        "a"
+      ],
       "correct_position": 2
     },
     "243": {
       "reason": "PDF 52. lpp. variantiem iespiesti burti a, b, c, a. Pareizā atbilde (sarkana) ir 4. variants 'visas atbildes ir pareizas', nevis 1. variants, kā varētu nolasīt no questions.json (correct = 'a').",
-      "printed_labels": ["a", "b", "c", "a"],
+      "printed_labels": [
+        "a",
+        "b",
+        "c",
+        "a"
+      ],
       "correct_position": 4
     },
     "313": {
       "reason": "PDF 66. lpp. variantiem iespiesti burti a, b, c, a. Pareizā atbilde (sarkana) ir 1. variants.",
-      "printed_labels": ["a", "b", "c", "a"],
+      "printed_labels": [
+        "a",
+        "b",
+        "c",
+        "a"
+      ],
       "correct_position": 1
     },
     "468": {
       "reason": "PDF 102. lpp. variantiem iespiesti burti e, f, g, h (oriģināla drukas kļūda). questions.json automātiskā nolasīšana apvienoja f, g un h vienā variantā. Pareizā atbilde (sarkana) ir 4. variants 'visas atbildes ir pareizas'.",
-      "printed_labels": ["e", "f", "g", "h"],
+      "printed_labels": [
+        "e",
+        "f",
+        "g",
+        "h"
+      ],
       "options": [
         "ieroču uzbūve ir atkarīga no ieroča veida, konstrukcijas un sistēmas (šaujamierocis vai pneimatiskais ierocis, garstobra vai īstobra, viena šāviena, atkārtotas darbības, pusautomātiskais vai automātiskais u.c.)",
         "atsevišķas ieroča daļas tiek pieskaitītas pie galvenajām jeb pamatdaļām. Tās var būt kā atsevišķas daļas vai sastāvēt no vairākām sastāvdaļām, kā arī tās var saturēt atsevišķus mehānismus",
         "ieroča mehānismiem parasti ir izveidotas kopīgas daļas, kas izpilda vairākas funkcijas, piemēram, aizslēgs un stobra kārba vai aizslēga rāmis",
         "visas atbildes ir pareizas"
+      ],
+      "correct_position": 4
+    },
+    "501": {
+      "reason": "PDF 107. lpp.: drukas kļūda «aizsagskavu» → «aizsargskavu» (labots pēc pārbaudes). Pareizā atbilde nemainās.",
+      "printed_labels": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "options": [
+        "uzmauc stobram atgriezējatsperi",
+        "pievieno aizslēgu rāmim un iebīda aizsargskavu",
+        "ieslēdz drošinātāju un ievieto magazīnu pistoles rokturī",
+        "visi varianti"
+      ],
+      "correct_position": 4
+    },
+    "508": {
+      "reason": "PDF 109. lpp.: automātiskās nolasīšanas kļūda («aušanai … magazīnas š izņemšanas») → «šaušanai … magazīnas izņemšanas». Pareizā atbilde nemainās.",
+      "printed_labels": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "options": [
+        "ņemot vērā, ka šaušanai sagatavota šaujamieroča patrontelpā ir patrona, pirms magazīnas izņemšanas ir jāieslēdz drošinātājs (ja tāds ir). No ieroča ir jāizņem (jāatvieno) magazīna un tikai tad jāatvelk aizslēgs, lai no patrontelpas tiktu izsviesta patrona",
+        "pēc magazīnas izņemšanas (atvienošanas) un patrontelpas pārbaudes (patronas izmešanas) ir jāatlaiž aizslēgs (atlaižot vai atbrīvojot no aizslēga aiztures) un jāieslēdz drošinātājs, lai nolaižamā belzējierīce nepaliek uzvilktā stāvoklī (belzējierīci nenolaiž, pieturot ar pirkstu (īkšķi) gaili, kā arī neizdara sprūda mēlītes kontrolnospiedienu, bet izmanto drošinātāju (izņemot ja nav drošinātāja, kā arī šautuvē pret mērķi, ja to noteicis šaušanas instruktors, treneris, šaušanas sacensību tiesnesis))",
+        "visu darbību laikā šaujamieroci jātur tā, lai stobrs netiktu vērsts pret cilvēkiem un ārpus nosacīti drošā virziena, kā arī pirksts nedrīkst atrasties uz sprūda mēlītes",
+        "ir jāievēro visos variantos norādītās prasības"
       ],
       "correct_position": 4
     }

@@ -99,6 +99,14 @@ export async function seedDatabase(
         await tx.delete(questionOptions).where(sql`${questionOptions.questionId} = ${q.id}`);
         await tx.insert(questionOptions).values(opts);
         updated++;
+      } else if (q.correctionNote) {
+        // Labotiem jautājumiem (data/corrections.json) variantu teksti un piezīme tiek atjaunoti arī bez --reset
+        await tx.update(questions).set({ correctionNote: q.correctionNote }).where(sql`${questions.id} = ${q.id}`);
+        for (const o of opts)
+          await tx
+            .update(questionOptions)
+            .set({ text: o.text })
+            .where(sql`${questionOptions.questionId} = ${q.id} and ${questionOptions.key} = ${o.key} and ${questionOptions.text} <> ${o.text}`);
       }
     }
 

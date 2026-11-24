@@ -37,7 +37,7 @@
  {
   "id": 495,
   "law_reference": "MK noteikumi Nr. 494, 35. punkts; Kvalifikācijas pārbaudījuma jautājumi Nr. 488–496 (oficiālās atbildes)",
-  "explanation": "Pirms izjaukšanas un salikšanas jāpārbauda, vai patronas nav patrontelpā. Kontrolšāvienu ar sprūda mēlīti neizdara, un tīrīšana un eļļošana nav obligāta katrā izjaukšanas reizē."
+  "explanation": "Pirms izjaukšanas un salikšanas jāpārbauda, vai patronas nav patrontelpā. Atbilde ar «kontrolšāvienu» ir bīstama: ja sprūda mēlīti nospiež «vispirms», nepārbaudot patrontelpu, un tajā ir patrona, notiek šāviens. Tīrīšana un eļļošana nav obligāta katrā izjaukšanas reizē."
  },
  {
   "id": 496,
@@ -52,7 +52,7 @@
  {
   "id": 498,
   "law_reference": "MK noteikumi Nr. 494, 35. punkts; Kvalifikācijas pārbaudījuma jautājumi Nr. 497–502, 507, 512 (oficiālās atbildes)",
-  "explanation": "Pēc oficiālās atbildes nepilnajā izjaukšanā izņem magazīnu un izslēdz drošinātāju, lai varētu atvilkt aizslēgu un pārbaudīt patrontelpu. Sprūda mēlīti «kontrolei» nespiež — tas ir nepareizs paņēmiens."
+  "explanation": "Pēc oficiālās atbildes nepilnajā izjaukšanā izņem magazīnu un izslēdz drošinātāju, lai varētu atvilkt aizslēgu un pārbaudīt patrontelpu. Atbilde «vispirms jāatvelk aizslēgs un jānospiež sprūda mēlīte» nav pareiza: ja aizslēgu atvelk, kamēr magazīna vēl ir ierocī, patrontelpā tiek ievadīta patrona, un, nospiežot sprūda mēlīti, notiek šāviens."
  },
  {
   "id": 499,
@@ -92,7 +92,7 @@
  {
   "id": 506,
   "law_reference": "MK noteikumi Nr. 494, 35. punkts; MK noteikumi Nr. 210, 42. punkts; Kvalifikācijas pārbaudījuma jautājumi Nr. 503–515 (oficiālās atbildes)",
-  "explanation": "Izlādējot ieslēdz drošinātāju, izņem magazīnu, tad izslēdz drošinātāju un atvelk aizslēgu, lai patrona tiktu izvilkta (jāpārliecinās, ka tā izmesta), atlaiž aizslēgu un ieslēdz drošinātāju, un izlādē magazīnu. Nedrīkst atvilkt aizslēgu, ja magazīna vēl ir ierocī, un nedrīkst spiest sprūda mēlīti «kontrolei»."
+  "explanation": "Izlādējot ieslēdz drošinātāju, izņem magazīnu, tad izslēdz drošinātāju un atvelk aizslēgu, lai patrona tiktu izvilkta (jāpārliecinās, ka tā izmesta), atlaiž aizslēgu un ieslēdz drošinātāju, un izlādē magazīnu. Ja magazīnu neizņem, atlaižot aizslēgu, patrontelpā tiek ievadīta nākamā patrona. Bīstami ir arī pēc magazīnas izņemšanas uzreiz spiest sprūda mēlīti: patrona joprojām ir patrontelpā, un notiek šāviens."
  },
  {
   "id": 507,
@@ -107,17 +107,17 @@
  {
   "id": 509,
   "law_reference": "MK noteikumi Nr. 494, 35. punkts; MK noteikumi Nr. 210, 42. punkts; Kvalifikācijas pārbaudījuma jautājumi Nr. 503–515 (oficiālās atbildes)",
-  "explanation": "Vispirms pārliecinās, ka ierocī nav magazīnas (ja ir — izņem), tad atvelk aizslēgu un pārbauda patrontelpu, atbrīvo aizslēgu, ieslēdz drošinātāju un tikai tad pievieno pielādētu magazīnu. Ja drošinātāja nav, sprūda mēlīti nospiež, obligāti turot stobru drošā virzienā. Pārbaudīt patrontelpu, kamēr magazīna ir ierocī, nav droši."
+  "explanation": "Vispirms pārliecinās, ka ierocī nav magazīnas (ja ir — izņem), tad atvelk aizslēgu un pārbauda patrontelpu, atbrīvo aizslēgu, ieslēdz drošinātāju un tikai tad pievieno pielādētu magazīnu. Ja drošinātāja nav, sprūda mēlīti nospiež tikai pēc patrontelpas pārbaudes, obligāti turot stobru drošā virzienā. Nepareizi ir pārbaudīt patrontelpu, kamēr magazīna vēl ir ierocī — atbrīvojot aizslēgu, patrontelpā tiek ievadīta patrona."
  },
  {
   "id": 510,
   "law_reference": "MK noteikumi Nr. 494, 35. punkts; MK noteikumi Nr. 210, 42. punkts; Kvalifikācijas pārbaudījuma jautājumi Nr. 503–515 (oficiālās atbildes)",
-  "explanation": "Izlādēšanu sāk ar magazīnas izņemšanu, tad atvelk aizslēgu, pārliecinās, ka patrontelpa tukša, atbrīvo aizslēgu un ieslēdz drošinātāju. Ja aizslēgu atvelk, kamēr magazīna ir ierocī, patrontelpā tiek ievadīta jauna patrona; savukārt bez patrontelpas pārbaudes ierocis var palikt pielādēts."
+  "explanation": "Izlādēšanu sāk ar magazīnas izņemšanu, tad atvelk aizslēgu, pārliecinās, ka patrontelpa tukša, atbrīvo aizslēgu un ieslēdz drošinātāju. Ja aizslēgu atvelk, kamēr magazīna ir ierocī, atbrīvojot aizslēgu, patrontelpā tiek ievadīta jauna patrona. Atbilde, kurā patrontelpa vispār netiek pārbaudīta, arī nav pareiza — ierocis var palikt ar patronu patrontelpā."
  },
  {
   "id": 511,
   "law_reference": "MK noteikumi Nr. 494, 35. punkts; MK noteikumi Nr. 210, 42. punkts; Kvalifikācijas pārbaudījuma jautājumi Nr. 503–515 (oficiālās atbildes)",
-  "explanation": "Pareizajā secībā vispirms izņem magazīnu, pārbauda patrontelpu un tikai tad ievieto pielādētu magazīnu un pārvelk aizslēgu. Kontrolšāvienu ar sprūda mēlīti neizdara, tāpēc secība ar kontrolšāvienu nav pareiza."
+  "explanation": "Pareizajā secībā vispirms izņem magazīnu, pārbauda patrontelpu un tikai tad ievieto pielādētu magazīnu un pārvelk aizslēgu. Secība ar «kontrolšāvienu» ir bīstama: patrontelpu pārbauda, kamēr magazīna vēl ir ierocī, tāpēc, atlaižot aizslēgu, patrontelpā tiek ievadīta patrona, un «kontrolšāviens» kļūst par īstu šāvienu."
  },
  {
   "id": 512,
@@ -127,7 +127,7 @@
  {
   "id": 513,
   "law_reference": "MK noteikumi Nr. 494, 35. punkts; MK noteikumi Nr. 210, 42. punkts; Kvalifikācijas pārbaudījuma jautājumi Nr. 503–515 (oficiālās atbildes)",
-  "explanation": "Vispirms pārliecinās, ka ierocī nav magazīnas, atvelk aizslēgu un pārbauda patrontelpu, atbrīvo aizslēgu, ieslēdz drošinātāju un tad pievieno pielādētu magazīnu. Sprūda mēlīti nospiež tikai tad, ja drošinātāja nav, turot stobru drošā virzienā — nevis kā «kontrolnospiedienu» ierocim ar drošinātāju."
+  "explanation": "Vispirms pārliecinās, ka ierocī nav magazīnas, atvelk aizslēgu un pārbauda patrontelpu, atbrīvo aizslēgu, ieslēdz drošinātāju un tad pievieno pielādētu magazīnu. Sprūda mēlīti nospiež tikai tad, ja drošinātāja nav, un tikai pēc patrontelpas pārbaudes, turot stobru drošā virzienā. Bīstami ir nospiest sprūda mēlīti, neatvelkot aizslēgu un nepārbaudot patrontelpu: ja tajā ir patrona, notiek šāviens."
  },
  {
   "id": 514,
@@ -137,6 +137,6 @@
  {
   "id": 515,
   "law_reference": "MK noteikumi Nr. 494, 35. punkts; MK noteikumi Nr. 210, 42. punkts; Kvalifikācijas pārbaudījuma jautājumi Nr. 503–515 (oficiālās atbildes)",
-  "explanation": "Pareizi: turot stobru drošā virzienā, izņem magazīnu, tad atvelk aizslēgu un pārliecinās, ka patrontelpa tukša, atlaiž aizslēgu un ieslēdz drošinātāju. Nedrīkst atvilkt aizslēgu ar magazīnu ierocī un nedrīkst spiest sprūda mēlīti, lai nolaistu belzējierīci."
+  "explanation": "Pareizi: turot stobru drošā virzienā, izņem magazīnu, tad atvelk aizslēgu un pārliecinās, ka patrontelpa tukša, atlaiž aizslēgu un ieslēdz drošinātāju. Ja magazīnu neizņem, atlaižot aizslēgu, patrontelpā tiek ievadīta nākamā patrona. Bīstami ir arī spiest sprūda mēlīti, neatvelkot aizslēgu un nepārbaudot patrontelpu: ja tajā ir patrona, notiek šāviens."
  }
 ]
