@@ -2,152 +2,182 @@
  {
   "id": 33,
   "law_reference": "Ieroču aprites likums, 16. panta 1. daļa; 14. panta 3. daļas 1. un 2. punkts",
-  "explanation": "Valsts policijas atļaujas izsniedz šaujamieročiem, to būtiskajām sastāvdaļām un munīcijai (un D kategorijas lielas enerģijas pneimatiskajiem ieročiem). E kategorijas gāzes ieročus un signālieročus, kā arī F kategorijas mazas enerģijas pneimatiskos ieročus pieaugušais var iegādāties un glabāt bez atļaujas, tāpēc «visu kategoriju» gāzes ieroči un «pneimatiskie ieroči» kopumā ir nepareizi."
+  "explanation": "Valsts policijas atļaujas izsniedz šaujamieročiem, to būtiskajām sastāvdaļām un munīcijai (un D kategorijas lielas enerģijas pneimatiskajiem ieročiem). E kategorijas gāzes ieročus un signālieročus, kā arī F kategorijas mazas enerģijas pneimatiskos ieročus pieaugušais var iegādāties un glabāt bez atļaujas, tāpēc «visu kategoriju» gāzes ieroči un «pneimatiskie ieroči» kopumā ir nepareizi.",
+  "reviewed": true
  },
  {
   "id": 34,
   "law_reference": "Ieroču aprites likums, 16. panta 1. daļa; 5. panta 7.^1 daļa; 14. panta 3. daļa",
-  "explanation": "Atļauja vajadzīga šaujamieročiem, to būtiskajām sastāvdaļām un patronām, kā arī lielas enerģijas pneimatiskajiem ieročiem. Gāzes ieroči un signālieroči, kurus var pārveidot šaušanai ar lodi un kuri tāpēc nav E kategorijā, uzskatāmi par šaujamieročiem. «Visu kategoriju» ieročiem atļauja nav vajadzīga — piemēram, E un F kategorijai tā nav nepieciešama."
+  "explanation": "Atļauja vajadzīga šaujamieročiem, to būtiskajām sastāvdaļām un patronām, kā arī lielas enerģijas pneimatiskajiem ieročiem. Gāzes ieroči un signālieroči, kurus var pārveidot šaušanai ar lodi un kuri tāpēc nav E kategorijā, uzskatāmi par šaujamieročiem. «Visu kategoriju» ieročiem atļauja nav vajadzīga — piemēram, E un F kategorijai tā nav nepieciešama.",
+  "reviewed": true
  },
  {
   "id": 35,
   "law_reference": "Ieroču aprites likums, 16. panta 1. daļa; 14. panta 3. daļas 1. un 2. punkts",
-  "explanation": "Valsts policijas atļaujas izsniedz šaujamieročiem, to būtiskajām sastāvdaļām un munīcijai, kā arī lielas enerģijas pneimatiskajiem ieročiem. E kategorijas gāzes ieročus un signālieročus pieaugušais var iegādāties un glabāt bez atļaujas. Straikbola un peintbola ieroči nav to ieroču sarakstā, kuriem Valsts policija izsniedz atļaujas."
+  "explanation": "Valsts policijas atļaujas izsniedz šaujamieročiem, to būtiskajām sastāvdaļām un munīcijai, kā arī lielas enerģijas pneimatiskajiem ieročiem. E kategorijas gāzes ieročus un signālieročus pieaugušais var iegādāties un glabāt bez atļaujas. Straikbola un peintbola ieroči nav to ieroču sarakstā, kuriem Valsts policija izsniedz atļaujas.",
+  "reviewed": true
  },
  {
   "id": 36,
   "law_reference": "Ieroču aprites likums, 16. panta 1. daļa; 5. panta 7.^1 daļa; 14. panta 3. daļa",
-  "explanation": "Valsts policija izsniedz atļaujas A, B un C kategorijas šaujamieročiem un D kategorijas lielas enerģijas pneimatiskajiem ieročiem. Gāzes ieroči un signālieroči, kurus var pārveidot šaušanai ar lodi, tiek klasificēti kā šaujamieroči (A, B vai C kategorijā). E un F kategorijas ieročiem, elektrošoka ierīcēm un aukstajiem ieročiem atļauja nav vajadzīga. Atļaujas izsniedz arī A kategorijai (sportam), tāpēc «tikai B un C» ir nepareizi."
+  "explanation": "Valsts policija izsniedz atļaujas A, B un C kategorijas šaujamieročiem un D kategorijas lielas enerģijas pneimatiskajiem ieročiem. Gāzes ieroči un signālieroči, kurus var pārveidot šaušanai ar lodi, tiek klasificēti kā šaujamieroči (A, B vai C kategorijā). E un F kategorijas ieročiem, elektrošoka ierīcēm un aukstajiem ieročiem atļauja nav vajadzīga. Atļaujas izsniedz arī A kategorijai (sportam), tāpēc «tikai B un C» ir nepareizi.",
+  "reviewed": true
  },
  {
   "id": 37,
   "law_reference": "Ieroču aprites likums, 16. panta 1. daļas 1., 3. un 5. punkts",
-  "explanation": "Atļaujas izsniedz sportam klasificētiem A, B un C kategorijas šaujamieročiem un sportam un medībām klasificētiem D kategorijas lielas enerģijas pneimatiskajiem ieročiem. Pašaizsardzībai atļaujas izsniedz tikai B un C kategorijas šaujamieročiem — A kategorijas pašaizsardzības ieroču nav."
+  "explanation": "Atļaujas izsniedz sportam klasificētiem A, B un C kategorijas šaujamieročiem un sportam un medībām klasificētiem D kategorijas lielas enerģijas pneimatiskajiem ieročiem. Pašaizsardzībai atļaujas izsniedz tikai B un C kategorijas šaujamieročiem — A kategorijas pašaizsardzības ieroču nav.",
+  "reviewed": true
  },
  {
   "id": 38,
   "law_reference": "Ieroču aprites likums, 16. panta 1. daļas 2., 3. un 5. punkts",
-  "explanation": "Medībām atļaujas izsniedz B un C kategorijas šaujamieročiem un D kategorijas lielas enerģijas pneimatiskajiem ieročiem. A kategorijas medību šaujamieroču nav, un pašaizsardzībai atļaujas izsniedz tikai B un C kategorijas (nevis A) šaujamieročiem."
+  "explanation": "Medībām atļaujas izsniedz B un C kategorijas šaujamieročiem un D kategorijas lielas enerģijas pneimatiskajiem ieročiem. A kategorijas medību šaujamieroču nav, un pašaizsardzībai atļaujas izsniedz tikai B un C kategorijas (nevis A) šaujamieročiem.",
+  "reviewed": true
  },
  {
   "id": 39,
   "law_reference": "Ieroču aprites likums, 14. panta 1. daļa un 3. daļas 1.–4. punkts; 62. panta 1. daļa",
-  "explanation": "Bez Valsts policijas ieroča atļaujas pieaugušais var iegādāties un glabāt E kategorijas gāzes ieročus un signālieročus (tos pēc iegādes pārreģistrē Valsts policijā vai elektroniski), F kategorijas mazas enerģijas pneimatiskos ieročus, straikbola ieročus līdz 1,5 J, peintbola ieročus līdz 12 J, lāzertaga ierīces, gāzes baloniņus, elektrošoka ierīces un aukstos ieročus. Pareizi ir visi varianti."
+  "explanation": "Bez Valsts policijas ieroča atļaujas pieaugušais var iegādāties un glabāt E kategorijas gāzes ieročus un signālieročus (tos pēc iegādes pārreģistrē Valsts policijā vai elektroniski), F kategorijas mazas enerģijas pneimatiskos ieročus, straikbola ieročus līdz 1,5 J, peintbola ieročus līdz 12 J, lāzertaga ierīces, gāzes baloniņus, elektrošoka ierīces un aukstos ieročus. Pareizi ir visi varianti.",
+  "reviewed": true
  },
  {
   "id": 40,
   "law_reference": "Ieroču aprites likums, 14. panta 3. daļas 5. punkts",
-  "explanation": "Dezaktivētus šaujamieročus, kas atbilst regulas 2015/2403 prasībām, var iegādāties, glabāt, nēsāt un pārvadāt, bet citus dezaktivētus šaujamieročus — pēc Valsts policijas izziņas saņemšanas. Ieroča iegādāšanās vai glabāšanas atļauja dezaktivētiem ieročiem nav vajadzīga."
+  "explanation": "Dezaktivētus šaujamieročus, kas atbilst regulas 2015/2403 prasībām, var iegādāties, glabāt, nēsāt un pārvadāt, bet citus dezaktivētus šaujamieročus — pēc Valsts policijas izziņas saņemšanas. Ieroča iegādāšanās vai glabāšanas atļauja dezaktivētiem ieročiem nav vajadzīga.",
+  "reviewed": true
  },
  {
   "id": 41,
   "law_reference": "Ieroču aprites likums, 16. panta 1. daļas 1., 2. un 5. punkts; 18. panta 1. daļas 1. un 6. punkts",
-  "explanation": "Glabāšanas atļauju izsniedz medību, sporta un pašaizsardzības šaujamieročiem, un tā dod tiesības ieroci izmantot atbilstoši atļaujā norādītajam lietojuma veidam. «Tikai medību un sporta» ir nepilnīgi — atļaujas izsniedz arī pašaizsardzībai klasificētiem B un C kategorijas šaujamieročiem."
+  "explanation": "Glabāšanas atļauju izsniedz medību, sporta un pašaizsardzības šaujamieročiem, un tā dod tiesības ieroci izmantot atbilstoši atļaujā norādītajam lietojuma veidam. «Tikai medību un sporta» ir nepilnīgi — atļaujas izsniedz arī pašaizsardzībai klasificētiem B un C kategorijas šaujamieročiem.",
+  "reviewed": true
  },
  {
   "id": 42,
   "law_reference": "Ieroču aprites likums, 16. panta 1. daļas 1., 2., 3. un 5. punkts; 18. panta 1. daļa",
-  "explanation": "Glabāšanas atļauju izsniedz medību un sporta garstobra šaujamieročiem, pašaizsardzībai klasificētiem B kategorijas īsstobra šaujamieročiem un D kategorijas lielas enerģijas pneimatiskajiem ieročiem (medībām un sportam). Visi trīs varianti atbilst likumam."
+  "explanation": "Glabāšanas atļauju izsniedz medību un sporta garstobra šaujamieročiem, pašaizsardzībai klasificētiem B kategorijas īsstobra šaujamieročiem un D kategorijas lielas enerģijas pneimatiskajiem ieročiem (medībām un sportam). Visi trīs varianti atbilst likumam.",
+  "reviewed": true
  },
  {
   "id": 43,
   "law_reference": "Ieroču aprites likums, 16. panta 1. daļas 2., 3. un 5. punkts; 7. panta 1. daļa; 8. pants",
-  "explanation": "Pašaizsardzībai klasificēti ir gan B kategorijas īsstobra, gan B un C kategorijas garstobra—gludstobra šaujamieroči, un tiem izsniedz atļaujas. Medībām īsstobra šaujamieroči nav paredzēti, bet D kategorijas pneimatiskos ieročus izmanto medībās un sportā, nevis pašaizsardzībai."
+  "explanation": "Pašaizsardzībai klasificēti ir gan B kategorijas īsstobra, gan B un C kategorijas garstobra—gludstobra šaujamieroči, un tiem izsniedz atļaujas. Medībām īsstobra šaujamieroči nav paredzēti, bet D kategorijas pneimatiskos ieročus izmanto medībās un sportā, nevis pašaizsardzībai.",
+  "reviewed": true
  },
  {
   "id": 44,
   "law_reference": "Ieroču aprites likums, 18. panta 1. daļas 1. punkts; 14. panta 6., 7. un 9. daļa",
-  "explanation": "Glabāšanas atļauja dod tiesības glabāt arī reģistrētā šaujamieroča maināmās būtiskās sastāvdaļas, un medību un sporta šaujamieroču maināmo būtisko sastāvdaļu lietošana ir tieši paredzēta. Medību īsstobra šaujamieroču nav, un D kategorijas pneimatiskie ieroči nav paredzēti pašaizsardzībai."
+  "explanation": "Glabāšanas atļauja dod tiesības glabāt arī reģistrētā šaujamieroča maināmās būtiskās sastāvdaļas, un medību un sporta šaujamieroču maināmo būtisko sastāvdaļu lietošana ir tieši paredzēta. Medību īsstobra šaujamieroču nav, un D kategorijas pneimatiskie ieroči nav paredzēti pašaizsardzībai.",
+  "reviewed": true
  },
  {
   "id": 45,
   "law_reference": "Ieroču aprites likums, 19. panta 1. un 2. daļa",
-  "explanation": "Nēsāšanas atļauju izsniedz fiziskajām personām B kategorijas īsstobra pašaizsardzības šaujamieroču (pistoļu un revolveru) nēsāšanai; tā dod arī tiesības tos glabāt. Garstobra—gludstobra pašaizsardzības šaujamieročiem nēsāšanas atļauju neizsniedz, un nēsāšanas atļauja nav paredzēta sporta lietojumam."
+  "explanation": "Nēsāšanas atļauju izsniedz fiziskajām personām B kategorijas īsstobra pašaizsardzības šaujamieroču (pistoļu un revolveru) nēsāšanai; tā dod arī tiesības tos glabāt. Garstobra—gludstobra pašaizsardzības šaujamieročiem nēsāšanas atļauju neizsniedz, un nēsāšanas atļauja nav paredzēta sporta lietojumam.",
+  "reviewed": true
  },
  {
   "id": 46,
   "law_reference": "Ieroču aprites likums, 14. panta 1., 2. un 3. daļa",
-  "explanation": "No 16 gadu vecuma var iegādāties, glabāt, nēsāt un pārvadāt pašaizsardzībai paredzētus gāzes baloniņus un pielietot tos pašaizsardzībai. E kategorijas gāzes ieročus un F kategorijas pneimatiskos ieročus var iegādāties tikai no 18 gadiem. No 16 gadiem jaunietis ar mednieka apliecību var medībās tikai izmantot medību ieroci (izņemot vītņstobra) ieroča īpašnieka klātbūtnē, nevis to iegādāties vai glabāt."
+  "explanation": "No 16 gadu vecuma var iegādāties, glabāt, nēsāt un pārvadāt pašaizsardzībai paredzētus gāzes baloniņus un pielietot tos pašaizsardzībai. E kategorijas gāzes ieročus un F kategorijas pneimatiskos ieročus var iegādāties tikai no 18 gadiem. No 16 gadiem jaunietis ar mednieka apliecību var medībās tikai izmantot medību ieroci (izņemot vītņstobra) ieroča īpašnieka klātbūtnē, nevis to iegādāties vai glabāt.",
+  "reviewed": true
  },
  {
   "id": 47,
   "law_reference": "Ieroču aprites likums, 14. panta 3. daļas 1. punkts; 62. panta 1. daļa",
-  "explanation": "Pašaizsardzībai klasificētus E kategorijas gāzes ieročus un signālieročus var iegādāties, glabāt, nēsāt un pielietot no 18 gadu vecuma. Valsts policijas ieroča atļauja tiem nav vajadzīga: pēc iegādes ierocis piecu darbdienu laikā jāpārreģistrē Valsts policijā vai elektroniski."
+  "explanation": "Pašaizsardzībai klasificētus E kategorijas gāzes ieročus un signālieročus var iegādāties, glabāt, nēsāt un pielietot no 18 gadu vecuma. Valsts policijas ieroča atļauja tiem nav vajadzīga: pēc iegādes ierocis piecu darbdienu laikā jāpārreģistrē Valsts policijā vai elektroniski.",
+  "reviewed": true
  },
  {
   "id": 48,
   "law_reference": "Ieroču aprites likums, 14. panta 6. daļas 1. punkts un 9. daļa",
-  "explanation": "No 18 gadiem (ar mednieka apliecību) ar Valsts policijas atļauju var iegādāties, glabāt un izmantot medībām klasificētus B un C kategorijas garstobra—gludstobra šaujamieročus. Garstobra—vītņstobra medību šaujamieročus atļauts iegādāties tikai no 21 gada, tāpēc varianti, kuros minēti vītņstobra ieroči vai to maināmās sastāvdaļas, neder."
+  "explanation": "No 18 gadiem (ar mednieka apliecību) ar Valsts policijas atļauju var iegādāties, glabāt un izmantot medībām klasificētus B un C kategorijas garstobra—gludstobra šaujamieročus. Garstobra—vītņstobra medību šaujamieročus atļauts iegādāties tikai no 21 gada, tāpēc varianti, kuros minēti vītņstobra ieroči vai to maināmās sastāvdaļas, neder.",
+  "reviewed": true
  },
  {
   "id": 49,
   "law_reference": "Ieroču aprites likums, 14. panta 6. daļas 1. un 2. punkts un 9. daļa",
-  "explanation": "No 18 gadiem medībām var iegādāties B un C kategorijas garstobra—gludstobra šaujamieročus un D kategorijas lielas enerģijas pneimatiskos ieročus. Garstobra—vītņstobra medību šaujamieroči pieejami no 21 gada, bet īsstobra šaujamieroči (pistoles un revolveri) medībām nav paredzēti."
+  "explanation": "No 18 gadiem medībām var iegādāties B un C kategorijas garstobra—gludstobra šaujamieročus un D kategorijas lielas enerģijas pneimatiskos ieročus. Garstobra—vītņstobra medību šaujamieroči pieejami no 21 gada, bet īsstobra šaujamieroči (pistoles un revolveri) medībām nav paredzēti.",
+  "reviewed": true
  },
  {
   "id": 50,
   "law_reference": "Ieroču aprites likums, 14. panta 6. daļas 1.–3. punkts",
-  "explanation": "No 18 gadiem ar mednieka apliecību un Valsts policijas atļauju var iegādāties medībām klasificētus B un C kategorijas garstobra—gludstobra šaujamieročus un to munīciju, D kategorijas lielas enerģijas pneimatiskos ieročus, kā arī šaujamieroču maināmās būtiskās sastāvdaļas. Visi varianti ir pareizi."
+  "explanation": "No 18 gadiem ar mednieka apliecību un Valsts policijas atļauju var iegādāties medībām klasificētus B un C kategorijas garstobra—gludstobra šaujamieročus un to munīciju, D kategorijas lielas enerģijas pneimatiskos ieročus, kā arī šaujamieroču maināmās būtiskās sastāvdaļas. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 51,
   "law_reference": "Ieroču aprites likums, 14. panta 7. daļas 1.–3. punkts un 11. daļa",
-  "explanation": "No 18 gadiem (sporta organizācijas biedram ar vismaz otro sporta klasi) var iegādāties sportam klasificētus B un C kategorijas garstobra—gludstobra un garstobra—vītņstobra šaujamieročus. Sporta pistolēm un revolveriem šajā vecumā kalibra robeža ir 5,6 mm, nevis 9 mm, bet A kategorijas sporta šaujamieroči pieejami tikai no 21 gada."
+  "explanation": "No 18 gadiem (sporta organizācijas biedram ar vismaz otro sporta klasi) var iegādāties sportam klasificētus B un C kategorijas garstobra—gludstobra un garstobra—vītņstobra šaujamieročus. Sporta pistolēm un revolveriem šajā vecumā kalibra robeža ir 5,6 mm, nevis 9 mm, bet A kategorijas sporta šaujamieroči pieejami tikai no 21 gada.",
+  "reviewed": true
  },
  {
   "id": 52,
   "law_reference": "Ieroču aprites likums, 14. panta 7. daļas 1.–4. punkts",
-  "explanation": "No 18 gadiem sporta organizācijas biedrs ar vismaz otro sporta klasi var iegādāties sportam klasificētus B un C kategorijas garstobra—gludstobra un garstobra—vītņstobra šaujamieročus, B kategorijas īsstobra šaujamieročus ar kalibru līdz 5,6 mm un D kategorijas lielas enerģijas pneimatiskos ieročus. Visi varianti ir pareizi."
+  "explanation": "No 18 gadiem sporta organizācijas biedrs ar vismaz otro sporta klasi var iegādāties sportam klasificētus B un C kategorijas garstobra—gludstobra un garstobra—vītņstobra šaujamieročus, B kategorijas īsstobra šaujamieročus ar kalibru līdz 5,6 mm un D kategorijas lielas enerģijas pneimatiskos ieročus. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 53,
   "law_reference": "Ieroču aprites likums, 14. panta 7. daļas 1., 2. un 5. punkts un 11. daļa",
-  "explanation": "No 18 gadiem sportam var iegādāties B un C kategorijas garstobra—gludstobra un garstobra—vītņstobra šaujamieročus, to munīciju un maināmās būtiskās sastāvdaļas. A kategorijas sporta šaujamieroči (garstobra un īsstobra) un magazīnas virs 10 patronām pieejami tikai no 21 gada, ar vismaz 12 mēnešu dalību sporta organizācijā un vismaz otro sporta klasi."
+  "explanation": "No 18 gadiem sportam var iegādāties B un C kategorijas garstobra—gludstobra un garstobra—vītņstobra šaujamieročus, to munīciju un maināmās būtiskās sastāvdaļas. A kategorijas sporta šaujamieroči (garstobra un īsstobra) un magazīnas virs 10 patronām pieejami tikai no 21 gada, ar vismaz 12 mēnešu dalību sporta organizācijā un vismaz otro sporta klasi.",
+  "reviewed": true
  },
  {
   "id": 54,
   "law_reference": "Ieroču aprites likums, 14. panta 8. un 10. daļa",
-  "explanation": "No 18 gadiem pašaizsardzībai var iegādāties B un C kategorijas garstobra—gludstobra šaujamieročus. Pašaizsardzības pistoles un revolverus var iegādāties tikai no 21 gada, un to kalibra robeža ir 11,43 mm (nevis 9 vai 5,6 mm)."
+  "explanation": "No 18 gadiem pašaizsardzībai var iegādāties B un C kategorijas garstobra—gludstobra šaujamieročus. Pašaizsardzības pistoles un revolverus var iegādāties tikai no 21 gada, un to kalibra robeža ir 11,43 mm (nevis 9 vai 5,6 mm).",
+  "reviewed": true
  },
  {
   "id": 55,
   "law_reference": "Ieroču aprites likums, 14. panta 8. un 10. daļa",
-  "explanation": "No 18 gadiem pašaizsardzībai var iegādāties B un C kategorijas garstobra—gludstobra šaujamieročus un to munīciju. Pistoles un revolverus pašaizsardzībai var iegādāties tikai no 21 gada. Maināmās būtiskās sastāvdaļas pašaizsardzības šaujamieročiem 14. panta 8. daļā nav minētas — tās paredzētas medību un sporta šaujamieročiem."
+  "explanation": "No 18 gadiem pašaizsardzībai var iegādāties B un C kategorijas garstobra—gludstobra šaujamieročus un to munīciju. Pistoles un revolverus pašaizsardzībai var iegādāties tikai no 21 gada. Maināmās būtiskās sastāvdaļas pašaizsardzības šaujamieročiem 14. panta 8. daļā nav minētas — tās paredzētas medību un sporta šaujamieročiem.",
+  "reviewed": true
  },
  {
   "id": 56,
   "law_reference": "Ieroču aprites likums, 14. panta 8. daļa; 7. panta 1. daļa",
-  "explanation": "No 18 gadiem pašaizsardzībai var iegādāties B un C kategorijas garstobra—gludstobra šaujamieročus un to munīciju. Garstobra—vītņstobra šaujamieroči un D kategorijas pneimatiskie ieroči nav pašaizsardzības ieroči."
+  "explanation": "No 18 gadiem pašaizsardzībai var iegādāties B un C kategorijas garstobra—gludstobra šaujamieročus un to munīciju. Garstobra—vītņstobra šaujamieroči un D kategorijas pneimatiskie ieroči nav pašaizsardzības ieroči.",
+  "reviewed": true
  },
  {
   "id": 57,
   "law_reference": "Ieroču aprites likums, 14. panta 9., 10. un 11. daļa",
-  "explanation": "No 21 gada var iegādāties medībām klasificētus B un C kategorijas garstobra—vītņstobra šaujamieročus (ar mednieka apliecību), pašaizsardzībai klasificētas pistoles un revolverus ar kalibru līdz 11,43 mm un sportam klasificētus A kategorijas īsstobra šaujamieročus ar magazīnām virs 20 patronām. Pēdējam gadījumam papildus vajag vismaz 12 mēnešu dalību sporta organizācijā un vismaz otro sporta klasi."
+  "explanation": "No 21 gada var iegādāties medībām klasificētus B un C kategorijas garstobra—vītņstobra šaujamieročus (ar mednieka apliecību), pašaizsardzībai klasificētas pistoles un revolverus ar kalibru līdz 11,43 mm un sportam klasificētus A kategorijas īsstobra šaujamieročus ar magazīnām virs 20 patronām. Pēdējam gadījumam papildus vajag vismaz 12 mēnešu dalību sporta organizācijā un vismaz otro sporta klasi.",
+  "reviewed": true
  },
  {
   "id": 58,
   "law_reference": "Ieroču aprites likums, 14. panta 10. un 11. daļa",
-  "explanation": "No 21 gada pašaizsardzībai var iegādāties B kategorijas pusautomātiskās, atkārtotas darbības un viena šāviena pistoles un revolverus ar kalibru līdz 11,43 mm un to munīciju. Kalibra ierobežojums ir obligāts, bet magazīnas, kas pārsniedz 20 patronu ietilpību, paredzētas tikai sportam klasificētiem A kategorijas īsstobra šaujamieročiem."
+  "explanation": "No 21 gada pašaizsardzībai var iegādāties B kategorijas pusautomātiskās, atkārtotas darbības un viena šāviena pistoles un revolverus ar kalibru līdz 11,43 mm un to munīciju. Kalibra ierobežojums ir obligāts, bet magazīnas, kas pārsniedz 20 patronu ietilpību, paredzētas tikai sportam klasificētiem A kategorijas īsstobra šaujamieročiem.",
+  "reviewed": true
  },
  {
   "id": 59,
   "law_reference": "Ieroču aprites likums, 14. panta 10. daļa; 7. panta 1. daļa",
-  "explanation": "No 21 gada pašaizsardzībai var iegādāties B kategorijas pistoles un revolverus ar kalibru līdz 11,43 mm un to munīciju. D kategorijas pneimatiskie ieroči nav pašaizsardzības ieroči, un pašaizsardzības šaujamieroču maināmās būtiskās sastāvdaļas likumā nav paredzētas."
+  "explanation": "No 21 gada pašaizsardzībai var iegādāties B kategorijas pistoles un revolverus ar kalibru līdz 11,43 mm un to munīciju. D kategorijas pneimatiskie ieroči nav pašaizsardzības ieroči, un pašaizsardzības šaujamieroču maināmās būtiskās sastāvdaļas likumā nav paredzētas.",
+  "reviewed": true
  },
  {
   "id": 60,
   "law_reference": "Ieroču aprites likums, 14. panta 8. un 10. daļa; 18. panta 1. daļas 3. punkts; 19. panta 2. daļas 3. punkts",
-  "explanation": "21 gadu veca persona ar Valsts policijas atļauju pašaizsardzībai var iegādāties pistoles un revolverus ar kalibru līdz 11,43 mm, B un C kategorijas garstobra—gludstobra šaujamieročus (tie pieejami jau no 18 gadiem), kā arī iegādājamā vai jau reģistrētā šaujamieroča munīciju. Visi varianti ir pareizi."
+  "explanation": "21 gadu veca persona ar Valsts policijas atļauju pašaizsardzībai var iegādāties pistoles un revolverus ar kalibru līdz 11,43 mm, B un C kategorijas garstobra—gludstobra šaujamieročus (tie pieejami jau no 18 gadiem), kā arī iegādājamā vai jau reģistrētā šaujamieroča munīciju. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 61,
   "law_reference": "Ieroču aprites likums, 27. panta 1. un 2. daļa; 28. panta 2. daļas 1. punkts; 14. panta 6. un 9. daļa",
-  "explanation": "Ieroča atļaujas saņemšanai fiziskajai personai jāiziet veselības pārbaude. Pirms šaujamieroča pirmreizējas iegādes jākārto kvalifikācijas pārbaudījums, izņemot medībām klasificētus ieročus. Medību ieročiem kvalifikācijas pārbaudījuma vietā vajadzīga Valsts meža dienesta izsniegta mednieka apliecība. Visi apgalvojumi ir pareizi."
+  "explanation": "Ieroča atļaujas saņemšanai fiziskajai personai jāiziet veselības pārbaude. Pirms šaujamieroča pirmreizējas iegādes jākārto kvalifikācijas pārbaudījums, izņemot medībām klasificētus ieročus. Medību ieročiem kvalifikācijas pārbaudījuma vietā vajadzīga Valsts meža dienesta izsniegta mednieka apliecība. Visi apgalvojumi ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 62,
   "law_reference": "Ieroču aprites likums, 16. panta 2. daļa",
-  "explanation": "Medību un sporta lietojumam ieroča atļaujas izsniedz uz nenoteiktu laiku, bet Valsts policija tās pārskata ne retāk kā reizi piecos gados."
+  "explanation": "Medību un sporta lietojumam ieroča atļaujas izsniedz uz nenoteiktu laiku, bet Valsts policija tās pārskata ne retāk kā reizi piecos gados.",
+  "reviewed": true
  },
  {
   "id": 63,
@@ -173,236 +203,283 @@
  {
   "id": 66,
   "law_reference": "Ieroču aprites likums, 16. panta 2. daļa",
-  "explanation": "Eiropas šaujamieroču apliecību izsniedz uz pieciem gadiem. Tas paliek spēkā arī pēc 01.12.2026., kad citas ieroču atļaujas sāks izsniegt uz nenoteiktu laiku."
+  "explanation": "Eiropas šaujamieroču apliecību izsniedz uz pieciem gadiem. Tas paliek spēkā arī pēc 01.12.2026., kad citas ieroču atļaujas sāks izsniegt uz nenoteiktu laiku.",
+  "reviewed": true
  },
  {
   "id": 67,
   "law_reference": "Ieroču aprites likums, 17. panta 1. daļa",
-  "explanation": "Ieroča iegādāšanās atļauja ir derīga trīs mēnešus no dienas, kad Valsts policija pieņēmusi lēmumu par tās izsniegšanu."
+  "explanation": "Ieroča iegādāšanās atļauja ir derīga trīs mēnešus no dienas, kad Valsts policija pieņēmusi lēmumu par tās izsniegšanu.",
+  "reviewed": true
  },
  {
   "id": 68,
   "law_reference": "Ieroču aprites likums, 17. panta 1. daļa",
-  "explanation": "Iegādāšanās atļauja ir derīga trīs mēnešus, un termiņu skaita no dienas, kad Valsts policija pieņēmusi lēmumu par tās izsniegšanu, nevis no dienas, kad persona atļauju saņēmusi. Šī ir bieža kļūda."
+  "explanation": "Iegādāšanās atļauja ir derīga trīs mēnešus, un termiņu skaita no dienas, kad Valsts policija pieņēmusi lēmumu par tās izsniegšanu, nevis no dienas, kad persona atļauju saņēmusi. Šī ir bieža kļūda.",
+  "reviewed": true
  },
  {
   "id": 69,
   "law_reference": "Ieroču aprites likums, 17. panta 1. daļas 1. punkts",
-  "explanation": "Iegādāšanās atļauja dod tiesības iegādāties tieši atļaujā norādīto šaujamieroci, tā munīciju, maināmās būtiskās sastāvdaļas un lielas enerģijas pneimatisko ieroci. Ar to nevar pirkt jebkurus ieročus, ko tirgo komersants, un munīcija un maināmās sastāvdaļas ir iekļautas."
+  "explanation": "Iegādāšanās atļauja dod tiesības iegādāties tieši atļaujā norādīto šaujamieroci, tā munīciju, maināmās būtiskās sastāvdaļas un lielas enerģijas pneimatisko ieroci. Ar to nevar pirkt jebkurus ieročus, ko tirgo komersants, un munīcija un maināmās sastāvdaļas ir iekļautas.",
+  "reviewed": true
  },
  {
   "id": 70,
   "law_reference": "Ieroču aprites likums, 17. panta 1. daļas 1. un 2. punkts",
-  "explanation": "Iegādāšanās atļauja dod tiesības iegādāties atļaujā norādītos ieročus kopā ar munīciju un maināmajām būtiskajām sastāvdaļām, kā arī tos glabāt un pārvadāt līdz reģistrācijai Valsts policijā. Glabāšana līdz reģistrācijai ir atļauta, un tā nav atkarīga no tā, vai munīcija ir iegādāta."
+  "explanation": "Iegādāšanās atļauja dod tiesības iegādāties atļaujā norādītos ieročus kopā ar munīciju un maināmajām būtiskajām sastāvdaļām, kā arī tos glabāt un pārvadāt līdz reģistrācijai Valsts policijā. Glabāšana līdz reģistrācijai ir atļauta, un tā nav atkarīga no tā, vai munīcija ir iegādāta.",
+  "reviewed": true
  },
  {
   "id": 71,
   "law_reference": "Ieroču aprites likums, 17. panta 1. daļas 1. un 2. punkts",
-  "explanation": "Atļauja dod divas tiesības: iegādāties atļaujā norādīto šaujamieroci, tā munīciju, maināmās būtiskās sastāvdaļas un lielas enerģijas pneimatisko ieroci no ieroču komersanta vai citām personām, kā arī tos glabāt un pārvadāt līdz reģistrācijai Valsts policijā. Ierobežojums «bez munīcijas un sastāvdaļām» likumā nav paredzēts."
+  "explanation": "Atļauja dod divas tiesības: iegādāties atļaujā norādīto šaujamieroci, tā munīciju, maināmās būtiskās sastāvdaļas un lielas enerģijas pneimatisko ieroci no ieroču komersanta vai citām personām, kā arī tos glabāt un pārvadāt līdz reģistrācijai Valsts policijā. Ierobežojums «bez munīcijas un sastāvdaļām» likumā nav paredzēts.",
+  "reviewed": true
  },
  {
   "id": 72,
   "law_reference": "Ieroču aprites likums, 17. panta 1. daļas 1. punkts; 52. un 53. pants",
-  "explanation": "Ar iegādāšanās atļauju šaujamieroci iegādājas Latvijā — no ieroču komersanta vai citas personas, kurai ir tiesības to realizēt. Ieroču iegādei citā ES vai EEZ valstī vai trešajā valstī un ievešanai Latvijā ir atsevišķi nosacījumi un dokumenti (X nodaļa). Pirkt no jebkuras personas, kurai reģistrēts ierocis, arī nevar — vajadzīgas tiesības to realizēt."
+  "explanation": "Ar iegādāšanās atļauju šaujamieroci iegādājas Latvijā — no ieroču komersanta vai citas personas, kurai ir tiesības to realizēt. Ieroču iegādei citā ES vai EEZ valstī vai trešajā valstī un ievešanai Latvijā ir atsevišķi nosacījumi un dokumenti (X nodaļa). Pirkt no jebkuras personas, kurai reģistrēts ierocis, arī nevar — vajadzīgas tiesības to realizēt.",
+  "reviewed": true
  },
  {
   "id": 73,
   "law_reference": "Ieroču aprites likums, 18. panta 1. daļas 1. punkts; 19. panta 2. daļas 1. punkts",
-  "explanation": "Fiziskās personas ieroča glabāšanas adrese atļaujā var būt deklarētā dzīvesvieta, deklarācijā norādītā papildu adrese vai nekustamais īpašums, kā arī kopīpašums (dzīvoklis, dzīvojamā māja). Visi varianti ir pareizi."
+  "explanation": "Fiziskās personas ieroča glabāšanas adrese atļaujā var būt deklarētā dzīvesvieta, deklarācijā norādītā papildu adrese vai nekustamais īpašums, kā arī kopīpašums (dzīvoklis, dzīvojamā māja). Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 74,
   "law_reference": "Ieroču aprites likums, 18. panta 1. daļas 1. punkts; 19. panta 2. daļas 1. punkts",
-  "explanation": "Šaujamieroci drīkst glabāt tikai tajā adresē, kas norādīta glabāšanas vai nēsāšanas atļaujā. Deklarētā dzīvesvieta vai savs nekustamais īpašums der tikai tad, ja šī adrese ir ierakstīta atļaujā."
+  "explanation": "Šaujamieroci drīkst glabāt tikai tajā adresē, kas norādīta glabāšanas vai nēsāšanas atļaujā. Deklarētā dzīvesvieta vai savs nekustamais īpašums der tikai tad, ja šī adrese ir ierakstīta atļaujā.",
+  "reviewed": true
  },
  {
   "id": 75,
   "law_reference": "Ieroču aprites likums, 18. panta 1. daļas 1. punkts; 19. panta 2. daļas 1. punkts",
-  "explanation": "Glabāt drīkst tikai atļaujā norādītajā adresē. Faktiskā dzīvesvieta, jebkurš dzīvoklis vai adrese, kur ir seifs, neder, ja tā nav ierakstīta atļaujā."
+  "explanation": "Glabāt drīkst tikai atļaujā norādītajā adresē. Faktiskā dzīvesvieta, jebkurš dzīvoklis vai adrese, kur ir seifs, neder, ja tā nav ierakstīta atļaujā.",
+  "reviewed": true
  },
  {
   "id": 76,
   "law_reference": "Ieroču aprites likums, 18. panta 1. daļas 1. punkts; 19. panta 2. daļas 1. punkts",
-  "explanation": "Fiziskā persona ieroci glabā atļaujā norādītajā adresē, kas var būt deklarētā dzīvesvieta, deklarācijā norādītā papildu adrese vai nekustamais īpašums vai kopīpašums (dzīvoklis, dzīvojamā māja). Īpaši ierīkota ieroču glabātava paredzēta juridiskajām personām, un «jebkura» adrese bez ieraksta atļaujā neder."
+  "explanation": "Fiziskā persona ieroci glabā atļaujā norādītajā adresē, kas var būt deklarētā dzīvesvieta, deklarācijā norādītā papildu adrese vai nekustamais īpašums vai kopīpašums (dzīvoklis, dzīvojamā māja). Īpaši ierīkota ieroču glabātava paredzēta juridiskajām personām, un «jebkura» adrese bez ieraksta atļaujā neder.",
+  "reviewed": true
  },
  {
   "id": 77,
   "law_reference": "Ieroču aprites likums, 18. panta 1. daļas 3., 4. un 5. punkts",
-  "explanation": "Neatkarīgi no lietojuma veida glabāšanas atļauja dod tiesības iegādāties atļaujā norādītajam ierocim paredzēto munīciju un to glabāt. Šaujampulveri drīkst iegādāties tikai medībām vai sportam klasificētam šaujamierocim, bet trokšņa slāpētāju — tikai medībām vai sportam klasificētam garstobra—vītņstobra šaujamierocim."
+  "explanation": "Neatkarīgi no lietojuma veida glabāšanas atļauja dod tiesības iegādāties atļaujā norādītajam ierocim paredzēto munīciju un to glabāt. Šaujampulveri drīkst iegādāties tikai medībām vai sportam klasificētam šaujamierocim, bet trokšņa slāpētāju — tikai medībām vai sportam klasificētam garstobra—vītņstobra šaujamierocim.",
+  "reviewed": true
  },
  {
   "id": 78,
   "law_reference": "Ieroču aprites likums, 18. panta 1. daļas 1.–3. punkts; 19. pants",
-  "explanation": "Glabāšanas atļauja dod tiesības glabāt un pārvadāt atļaujā norādīto šaujamieroci (arī tā maināmās būtiskās sastāvdaļas) un lielas enerģijas pneimatisko ieroci, kā arī iegādāties un glabāt tā munīciju. Nēsāt ieroci var tikai ar nēsāšanas atļauju, bet šaujampulveris un trokšņa slāpētājs nav pieejami visām kategorijām un lietojuma veidiem."
+  "explanation": "Glabāšanas atļauja dod tiesības glabāt un pārvadāt atļaujā norādīto šaujamieroci (arī tā maināmās būtiskās sastāvdaļas) un lielas enerģijas pneimatisko ieroci, kā arī iegādāties un glabāt tā munīciju. Nēsāt ieroci var tikai ar nēsāšanas atļauju, bet šaujampulveris un trokšņa slāpētājs nav pieejami visām kategorijām un lietojuma veidiem.",
+  "reviewed": true
  },
  {
   "id": 79,
   "law_reference": "Ieroču aprites likums, 18. panta 1. daļas 4. punkts",
-  "explanation": "Šaujampulveri ar glabāšanas atļauju var iegādāties un glabāt medībām vai sportam klasificētam šaujamierocim. Pašaizsardzības šaujamieročiem šīs tiesības nav."
+  "explanation": "Šaujampulveri ar glabāšanas atļauju var iegādāties un glabāt medībām vai sportam klasificētam šaujamierocim. Pašaizsardzības šaujamieročiem šīs tiesības nav.",
+  "reviewed": true
  },
  {
   "id": 80,
   "law_reference": "Ieroču aprites likums, 18. panta 1. daļas 4.–6. punkts; 12. panta 4. punkts; 8. panta 5. punkts; 9. panta 10. punkts",
-  "explanation": "Medību un sporta ieroča īpašnieks var iegādāties un glabāt šaujampulveri un komplektēt patronas no rūpnieciski ražotām sastāvdaļām vai pašizgatavotām skrotīm, renkuļiem un lodēm. Viņš var arī iegādāties, glabāt, pārvadāt un izmantot trokšņa slāpētāju atļaujā norādītajam medību vai sporta garstobra—vītņstobra šaujamierocim. Visi varianti ir pareizi."
+  "explanation": "Medību un sporta ieroča īpašnieks var iegādāties un glabāt šaujampulveri un komplektēt patronas no rūpnieciski ražotām sastāvdaļām vai pašizgatavotām skrotīm, renkuļiem un lodēm. Viņš var arī iegādāties, glabāt, pārvadāt un izmantot trokšņa slāpētāju atļaujā norādītajam medību vai sporta garstobra—vītņstobra šaujamierocim. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 81,
   "law_reference": "Ieroču aprites likums, 18. panta 1. daļas 2. un 3. punkts; 20. pants",
-  "explanation": "Glabāšanas atļauja dod tiesības iegādāties reģistrētajam šaujamierocim paredzēto munīciju un pārvadāt atļaujā norādīto šaujamieroci. Realizēšanai (pārdošanai) vajadzīga atsevišķa ieroča realizēšanas atļauja."
+  "explanation": "Glabāšanas atļauja dod tiesības iegādāties reģistrētajam šaujamierocim paredzēto munīciju un pārvadāt atļaujā norādīto šaujamieroci. Realizēšanai (pārdošanai) vajadzīga atsevišķa ieroča realizēšanas atļauja.",
+  "reviewed": true
  },
  {
   "id": 82,
   "law_reference": "Ieroču aprites likums, 14. panta 6. daļas 1. punkts; 18. panta 1. daļas 3. punkts",
-  "explanation": "Medībām klasificētus šaujamieročus atļauts izmantot medībās, treniņšaušanā un šaušanas sacensībās, tāpēc «tikai medībās» ir nepareizi. Glabāšanas atļauja dod arī tiesības iegādāties reģistrētajam šaujamierocim paredzēto munīciju."
+  "explanation": "Medībām klasificētus šaujamieročus atļauts izmantot medībās, treniņšaušanā un šaušanas sacensībās, tāpēc «tikai medībās» ir nepareizi. Glabāšanas atļauja dod arī tiesības iegādāties reģistrētajam šaujamierocim paredzēto munīciju.",
+  "reviewed": true
  },
  {
   "id": 83,
   "law_reference": "Ieroču aprites likums, 14. panta 7. daļa; 18. panta 1. daļas 6. punkts",
-  "explanation": "Sportam klasificētu šaujamieroci izmanto treniņšaušanā un šaušanas sacensībās. Ar sporta ieroci nedrīkst medīt vai to pielietot pašaizsardzībai, jo ieroci izmanto atbilstoši atļaujā norādītajam lietojuma veidam. Treniņšaušana ir atļauta, tāpēc «tikai sacensībās» arī ir nepareizi."
+  "explanation": "Sportam klasificētu šaujamieroci izmanto treniņšaušanā un šaušanas sacensībās. Ar sporta ieroci nedrīkst medīt vai to pielietot pašaizsardzībai, jo ieroci izmanto atbilstoši atļaujā norādītajam lietojuma veidam. Treniņšaušana ir atļauta, tāpēc «tikai sacensībās» arī ir nepareizi.",
+  "reviewed": true
  },
  {
   "id": 84,
   "law_reference": "Ieroču aprites likums, 14. panta 8. un 10. daļa; 18. panta 1. daļas 6. punkts",
-  "explanation": "Pašaizsardzībai klasificētu šaujamieroci var pielietot pašaizsardzībai, kā arī izmantot treniņšaušanā un šaušanas sacensībās. Medībās to izmantot nedrīkst — arī tad, ja ir mednieka apliecība."
+  "explanation": "Pašaizsardzībai klasificētu šaujamieroci var pielietot pašaizsardzībai, kā arī izmantot treniņšaušanā un šaušanas sacensībās. Medībās to izmantot nedrīkst — arī tad, ja ir mednieka apliecība.",
+  "reviewed": true
  },
  {
   "id": 85,
   "law_reference": "Ieroču aprites likums, 19. panta 1. un 2. daļa",
-  "explanation": "Nēsāšanas atļauju izsniedz tikai B kategorijas īsstobra pašaizsardzības šaujamieročiem (pistolēm un revolveriem), un tā dod tiesības tos arī glabāt atļaujā norādītajā adresē. Atsevišķa glabāšanas atļauja nav vajadzīga, un «visu kategoriju» pašaizsardzības šaujamieročiem nēsāšanas atļauju neizsniedz."
+  "explanation": "Nēsāšanas atļauju izsniedz tikai B kategorijas īsstobra pašaizsardzības šaujamieročiem (pistolēm un revolveriem), un tā dod tiesības tos arī glabāt atļaujā norādītajā adresē. Atsevišķa glabāšanas atļauja nav vajadzīga, un «visu kategoriju» pašaizsardzības šaujamieročiem nēsāšanas atļauju neizsniedz.",
+  "reviewed": true
  },
  {
   "id": 86,
   "law_reference": "Ieroču aprites likums, 19. panta 1. un 2. daļa",
-  "explanation": "Nēsāšanas atļauju izsniedz B kategorijas īsstobra pašaizsardzības šaujamieroču (pistoļu un revolveru) glabāšanai un nēsāšanai. Garstobra—gludstobra pašaizsardzības šaujamieročiem nēsāšanas atļauju neizsniedz, un nēsāšanas atļauja nav iegādes atļauja."
+  "explanation": "Nēsāšanas atļauju izsniedz B kategorijas īsstobra pašaizsardzības šaujamieroču (pistoļu un revolveru) glabāšanai un nēsāšanai. Garstobra—gludstobra pašaizsardzības šaujamieročiem nēsāšanas atļauju neizsniedz, un nēsāšanas atļauja nav iegādes atļauja.",
+  "reviewed": true
  },
  {
   "id": 87,
   "law_reference": "Ieroču aprites likums, 19. panta 1. un 2. daļa; 14. panta 3. daļas 1. punkts",
-  "explanation": "Nēsāšanas atļauju izsniedz tikai B kategorijas īsstobra pašaizsardzības šaujamieročiem. Garstobra—gludstobra šaujamieročiem tā nav paredzēta, bet E kategorijas gāzes ieročus pieaugušais var nēsāt bez jebkādas atļaujas."
+  "explanation": "Nēsāšanas atļauju izsniedz tikai B kategorijas īsstobra pašaizsardzības šaujamieročiem. Garstobra—gludstobra šaujamieročiem tā nav paredzēta, bet E kategorijas gāzes ieročus pieaugušais var nēsāt bez jebkādas atļaujas.",
+  "reviewed": true
  },
  {
   "id": 88,
   "law_reference": "Ieroču aprites likums, 19. panta 2. daļa",
-  "explanation": "Nēsāšanas atļauja dod tiesības glabāt šaujamieroci atļaujā norādītajā adresē, to pārvadāt, iegādāties un glabāt tam paredzēto rūpnieciski ražoto munīciju, kā arī izmantot un pielietot ieroci. Tātad ne «tikai nēsāt», bet arī glabāt, pārvadāt un iegādāties munīciju."
+  "explanation": "Nēsāšanas atļauja dod tiesības glabāt šaujamieroci atļaujā norādītajā adresē, to pārvadāt, iegādāties un glabāt tam paredzēto rūpnieciski ražoto munīciju, kā arī izmantot un pielietot ieroci. Tātad ne «tikai nēsāt», bet arī glabāt, pārvadāt un iegādāties munīciju.",
+  "reviewed": true
  },
  {
   "id": 89,
   "law_reference": "Ieroču aprites likums, 20. panta 1. daļas 1. un 2. punkts",
-  "explanation": "Realizēšanas atļauja dod tiesības realizēt atļaujā norādīto šaujamieroci, tā munīciju, maināmās būtiskās sastāvdaļas un lielas enerģijas pneimatisko ieroci ieroču komersantam vai citām personām (kurām ir atbilstoša atļauja), kā arī nodot tos ieroču komersantam dezaktivēšanai. Visi varianti ir pareizi."
+  "explanation": "Realizēšanas atļauja dod tiesības realizēt atļaujā norādīto šaujamieroci, tā munīciju, maināmās būtiskās sastāvdaļas un lielas enerģijas pneimatisko ieroci ieroču komersantam vai citām personām (kurām ir atbilstoša atļauja), kā arī nodot tos ieroču komersantam dezaktivēšanai. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 90,
   "law_reference": "Ieroču aprites likums, 20. panta 1. daļas 1. un 3. punkts",
-  "explanation": "Realizēšanas atļauja dod tiesības realizēt atļaujā norādīto ieroci, kā arī to glabāt un pārvadāt līdz realizācijai. Izmantot ieroci atbilstoši lietojuma veidam realizēšanas atļauja neļauj."
+  "explanation": "Realizēšanas atļauja dod tiesības realizēt atļaujā norādīto ieroci, kā arī to glabāt un pārvadāt līdz realizācijai. Izmantot ieroci atbilstoši lietojuma veidam realizēšanas atļauja neļauj.",
+  "reviewed": true
  },
  {
   "id": 91,
   "law_reference": "Ieroču aprites likums, 20. panta 1. daļa",
-  "explanation": "Ieroča realizēšanas atļauja ir derīga trīs mēnešus no dienas, kad Valsts policija pieņēmusi lēmumu par tās izsniegšanu — tāpat kā iegādāšanās atļauja. Uzmanību: saskaņā ar pārejas noteikumu 22. punktu no 01.01.2030. 20. pants (realizēšanas atļauja) tiks izslēgts."
+  "explanation": "Ieroča realizēšanas atļauja ir derīga trīs mēnešus no dienas, kad Valsts policija pieņēmusi lēmumu par tās izsniegšanu — tāpat kā iegādāšanās atļauja. Uzmanību: saskaņā ar pārejas noteikumu 22. punktu no 01.01.2030. 20. pants (realizēšanas atļauja) tiks izslēgts.",
+  "reviewed": true
  },
  {
   "id": 92,
   "law_reference": "Ieroču aprites likums, 21. pants",
-  "explanation": "Ieroču kolekcijas atļauja dod tiesības glabāt tajā norādītos šaujamieročus, to būtiskās sastāvdaļas un lielas enerģijas pneimatiskos ieročus atļaujā norādītajā adresē, kā arī tos pārvadāt un eksponēt izstādēs. Izmantot kolekcijas ieročus medībās, sportā, pašaizsardzībai vai šaut ar tiem šautuvē tā neļauj."
+  "explanation": "Ieroču kolekcijas atļauja dod tiesības glabāt tajā norādītos šaujamieročus, to būtiskās sastāvdaļas un lielas enerģijas pneimatiskos ieročus atļaujā norādītajā adresē, kā arī tos pārvadāt un eksponēt izstādēs. Izmantot kolekcijas ieročus medībās, sportā, pašaizsardzībai vai šaut ar tiem šautuvē tā neļauj.",
+  "reviewed": true
  },
  {
   "id": 93,
   "law_reference": "Ieroču aprites likums, 22. pants",
-  "explanation": "Eiropas šaujamieroču apliecība dod tiesības ievest Latvijā un izvest no tās A, B un C kategorijas šaujamieročus un to maināmās būtiskās sastāvdaļas, lai ceļotu ar tiem ES un EEZ valstīs un izmantotu tos atbilstoši lietojuma veidam medībās, treniņšaušanā un šaušanas sacensībās. Tā nav iegādes atļauja un neattiecas uz «jebkuru valsti»."
+  "explanation": "Eiropas šaujamieroču apliecība dod tiesības ievest Latvijā un izvest no tās A, B un C kategorijas šaujamieročus un to maināmās būtiskās sastāvdaļas, lai ceļotu ar tiem ES un EEZ valstīs un izmantotu tos atbilstoši lietojuma veidam medībās, treniņšaušanā un šaušanas sacensībās. Tā nav iegādes atļauja un neattiecas uz «jebkuru valsti».",
+  "reviewed": true
  },
  {
   "id": 94,
   "law_reference": "MK noteikumi Nr. 211, 208. punkts; 98. punkts",
-  "explanation": "Eiropas šaujamieroču apliecību iesniedz Valsts policijā ierakstu izdarīšanai, ja mainījušies apliecībā norādītie personas dati, ja apliecībā norādītais šaujamierocis ir realizēts vai ja mainījušās ziņas par ieroča glabāšanas atļauju. Pirms ceļojuma ar apliecībā jau ierakstītu ieroci tā nav jāiesniedz."
+  "explanation": "Eiropas šaujamieroču apliecību iesniedz Valsts policijā ierakstu izdarīšanai, ja mainījušies apliecībā norādītie personas dati, ja apliecībā norādītais šaujamierocis ir realizēts vai ja mainījušās ziņas par ieroča glabāšanas atļauju. Pirms ceļojuma ar apliecībā jau ierakstītu ieroci tā nav jāiesniedz.",
+  "reviewed": true
  },
  {
   "id": 95,
   "law_reference": "Ieroču aprites likums, 23. panta 11., 16. punkts; 14. pants; 27. panta 1. un 2. daļa",
-  "explanation": "Atļauju aizliegts izsniegt, ja uz personu attiecas kāds no 23. panta aizliegumiem, tostarp ja persona neatbilst 14. panta nosacījumiem (piemēram, vecumam) vai tai ir medicīniskās pretindikācijas. Veselības pārbaude ir obligāta pirms atļaujas saņemšanas. Visi varianti ir pareizi."
+  "explanation": "Atļauju aizliegts izsniegt, ja uz personu attiecas kāds no 23. panta aizliegumiem, tostarp ja persona neatbilst 14. panta nosacījumiem (piemēram, vecumam) vai tai ir medicīniskās pretindikācijas. Veselības pārbaude ir obligāta pirms atļaujas saņemšanas. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 96,
   "law_reference": "Ieroču aprites likums, 23. panta 9. un 10. punkts",
-  "explanation": "Atļauju aizliegts izsniegt, ja Valsts policijai vai valsts drošības iestādēm ir ziņas par personas piederību aizliegtam militarizētam vai bruņotam grupējumam vai organizācijai, par tās nelojalitāti Latvijas Republikai un Satversmei, vai pamatotas ziņas, ka persona var pielietot ieroci ļaunprātīgi vai apdraudēt sevi, sabiedrisko kārtību vai drošību. Visi varianti ir pareizi."
+  "explanation": "Atļauju aizliegts izsniegt, ja Valsts policijai vai valsts drošības iestādēm ir ziņas par personas piederību aizliegtam militarizētam vai bruņotam grupējumam vai organizācijai, par tās nelojalitāti Latvijas Republikai un Satversmei, vai pamatotas ziņas, ka persona var pielietot ieroci ļaunprātīgi vai apdraudēt sevi, sabiedrisko kārtību vai drošību. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 97,
   "law_reference": "Ieroču aprites likums, 23. panta 1. un 7. punkts; 14. pants",
-  "explanation": "Aizliegts izsniegt atļauju personai, kura sodīta par noziedzīga nodarījuma izdarīšanu, līdz sodāmības dzēšanai vai noņemšanai. Administratīvais sods kavē atļaujas saņemšanu tikai par 23. panta 7. punktā uzskaitītajiem pārkāpumiem un tikai gadu pēc soda izpildes, nevis par jebkuriem «vairākiem» pārkāpumiem. Atļauju var saņemt arī citu valstu pilsoņi 14. pantā noteiktajos gadījumos."
+  "explanation": "Aizliegts izsniegt atļauju personai, kura sodīta par noziedzīga nodarījuma izdarīšanu, līdz sodāmības dzēšanai vai noņemšanai. Administratīvais sods kavē atļaujas saņemšanu tikai par 23. panta 7. punktā uzskaitītajiem pārkāpumiem un tikai gadu pēc soda izpildes, nevis par jebkuriem «vairākiem» pārkāpumiem. Atļauju var saņemt arī citu valstu pilsoņi 14. pantā noteiktajos gadījumos.",
+  "reviewed": true
  },
  {
   "id": 98,
   "law_reference": "Ieroču aprites likums, 23. panta 1., 2. un 6. punkts",
-  "explanation": "Atļauju aizliegts izsniegt personai, kura sodīta par noziedzīgu nodarījumu (līdz sodāmības dzēšanai vai noņemšanai), kura kriminālprocesā ir apsūdzētais vai atzīta par aizdomās turēto nozieguma izdarīšanā. Visi varianti ir pareizi."
+  "explanation": "Atļauju aizliegts izsniegt personai, kura sodīta par noziedzīgu nodarījumu (līdz sodāmības dzēšanai vai noņemšanai), kura kriminālprocesā ir apsūdzētais vai atzīta par aizdomās turēto nozieguma izdarīšanā. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 99,
   "law_reference": "Ieroču aprites likums, 23. panta 7. punkts",
-  "explanation": "Gadu pēc administratīvā soda izpildes atļauju aizliegts izsniegt, ja persona sodīta par pārkāpumiem apreibinošo vielu ietekmē, par atteikšanos no alkohola vai citu vielu pārbaudes, par sabiedriskās kārtības traucēšanu, agresīvu uzvedību, maznozīmīgu miesas bojājumu vai amatpersonas prasību nepildīšanu vai darbības traucēšanu. Visi varianti ir šajā punktā."
+  "explanation": "Gadu pēc administratīvā soda izpildes atļauju aizliegts izsniegt, ja persona sodīta par pārkāpumiem apreibinošo vielu ietekmē, par atteikšanos no alkohola vai citu vielu pārbaudes, par sabiedriskās kārtības traucēšanu, agresīvu uzvedību, maznozīmīgu miesas bojājumu vai amatpersonas prasību nepildīšanu vai darbības traucēšanu. Visi varianti ir šajā punktā.",
+  "reviewed": true
  },
  {
   "id": 100,
   "law_reference": "Ieroču aprites likums, 23. panta 7. un 8. punkts",
-  "explanation": "Ja par pārkāpumiem ieroču aprites jomā personai uz laiku atņemtas ieroču iegādāšanās, glabāšanas vai nēsāšanas tiesības (vai tiesības nodarboties ar komercdarbību ieroču jomā), atļauju neizsniedz līdz šā ierobežojuma termiņa beigām. Pats agrākais administratīvais sods par ieroču vai citiem pārkāpumiem nav aizliegums, ja vien tas nav 7. punktā minētais pārkāpums un nav pagājis gads."
+  "explanation": "Ja par pārkāpumiem ieroču aprites jomā personai uz laiku atņemtas ieroču iegādāšanās, glabāšanas vai nēsāšanas tiesības (vai tiesības nodarboties ar komercdarbību ieroču jomā), atļauju neizsniedz līdz šā ierobežojuma termiņa beigām. Pats agrākais administratīvais sods par ieroču vai citiem pārkāpumiem nav aizliegums, ja vien tas nav 7. punktā minētais pārkāpums un nav pagājis gads.",
+  "reviewed": true
  },
  {
   "id": 101,
   "law_reference": "Ieroču aprites likums, 23. panta 14. punkts; 18. panta 1. daļas 1. punkts",
-  "explanation": "Atļauju aizliegts izsniegt, ja norādītajā glabāšanas adresē nav nodrošināti normatīvajos aktos noteiktie glabāšanas apstākļi. Glabāšanas adrese var būt arī nekustamais īpašums vai papildu adrese, ne tikai deklarētā dzīvesvieta, tāpēc pārējie iemesli nav aizliegumi."
+  "explanation": "Atļauju aizliegts izsniegt, ja norādītajā glabāšanas adresē nav nodrošināti normatīvajos aktos noteiktie glabāšanas apstākļi. Glabāšanas adrese var būt arī nekustamais īpašums vai papildu adrese, ne tikai deklarētā dzīvesvieta, tāpēc pārējie iemesli nav aizliegumi.",
+  "reviewed": true
  },
  {
   "id": 102,
   "law_reference": "Ieroču aprites likums, 23. panta 12., 13. un 15. punkts",
-  "explanation": "Atļauju aizliegts izsniegt personai, kura fizisku trūkumu dēļ nespēj lietot šaujamieroci, kurai nav deklarētas dzīvesvietas Latvijā vai kura minējusi nepamatotus ieroča iegādāšanās iemeslus. Visi varianti ir pareizi."
+  "explanation": "Atļauju aizliegts izsniegt personai, kura fizisku trūkumu dēļ nespēj lietot šaujamieroci, kurai nav deklarētas dzīvesvietas Latvijā vai kura minējusi nepamatotus ieroča iegādāšanās iemeslus. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 103,
   "law_reference": "Ieroču aprites likums, 23. panta 11. punkts",
-  "explanation": "Atļauju aizliegts izsniegt personai, kurai diagnosticēti psihiski traucējumi, alkohola, narkotisko, psihotropo vai toksisko vielu atkarība vai uzvedības traucējumi, kas dod pamatu apšaubīt tās spēju ievērot ieroču aprites nosacījumus. Visi varianti ir pareizi."
+  "explanation": "Atļauju aizliegts izsniegt personai, kurai diagnosticēti psihiski traucējumi, alkohola, narkotisko, psihotropo vai toksisko vielu atkarība vai uzvedības traucējumi, kas dod pamatu apšaubīt tās spēju ievērot ieroču aprites nosacījumus. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 104,
   "law_reference": "Ieroču aprites likums, 24. panta 1. un 2. daļa",
-  "explanation": "Valsts policija aptur atļaujas darbību, ja persona kriminālprocesā atzīta par aizdomās turēto nozieguma izdarīšanā vai ir apsūdzētā. Liecinieka statuss vai administratīvā atbildība nav apturēšanas pamats. Ja konstatēts kāds no izsniegšanas aizliegumiem, atļauju nevis aptur, bet anulē."
+  "explanation": "Valsts policija aptur atļaujas darbību, ja persona kriminālprocesā atzīta par aizdomās turēto nozieguma izdarīšanā vai ir apsūdzētā. Liecinieka statuss vai administratīvā atbildība nav apturēšanas pamats. Ja konstatēts kāds no izsniegšanas aizliegumiem, atļauju nevis aptur, bet anulē.",
+  "reviewed": true
  },
  {
   "id": 105,
   "law_reference": "Ieroču aprites likums, 24. panta 1. daļas 4. un 7. punkts un 2. daļa",
-  "explanation": "Atļaujas darbību aptur personai, kura kriminālprocesā ir apsūdzētā (vai aizdomās turētā). Ja īpašnieks traucē pārbaudīt glabāšanas apstākļus vai atļaujas saņemšanai sniegtas nepatiesas ziņas, atļauju anulē, nevis aptur. Dzīvesvietas maiņa nav ne apturēšanas, ne anulēšanas pamats."
+  "explanation": "Atļaujas darbību aptur personai, kura kriminālprocesā ir apsūdzētā (vai aizdomās turētā). Ja īpašnieks traucē pārbaudīt glabāšanas apstākļus vai atļaujas saņemšanai sniegtas nepatiesas ziņas, atļauju anulē, nevis aptur. Dzīvesvietas maiņa nav ne apturēšanas, ne anulēšanas pamats.",
+  "reviewed": true
  },
  {
   "id": 106,
   "law_reference": "Ieroču aprites likums, 24. panta 1. daļas 2. punkts un 4. daļa; 26. panta 2. daļa",
-  "explanation": "Ja Uzturlīdzekļu garantiju fonda administrācija pieņem lēmumu par medību, sporta, kolekcijas un pašaizsardzības šaujamieroču atļauju darbības apturēšanu, Valsts policija izdara attiecīgu ierakstu Ieroču reģistrā, un ieroči jānodod Valsts policijai. Medicīniskās pretindikācijas ir anulēšanas, nevis apturēšanas pamats, bet administratīvā atbildība pati par sevi atļauju neaptur."
+  "explanation": "Ja Uzturlīdzekļu garantiju fonda administrācija pieņem lēmumu par medību, sporta, kolekcijas un pašaizsardzības šaujamieroču atļauju darbības apturēšanu, Valsts policija izdara attiecīgu ierakstu Ieroču reģistrā, un ieroči jānodod Valsts policijai. Medicīniskās pretindikācijas ir anulēšanas, nevis apturēšanas pamats, bet administratīvā atbildība pati par sevi atļauju neaptur.",
+  "reviewed": true
  },
  {
   "id": 107,
   "law_reference": "Ieroču aprites likums, 24. panta 1. daļas 4. un 7. punkts",
-  "explanation": "Atļauju anulē, ja īpašnieks izvairās vai traucē pārbaudīt glabāšanas apstākļus, atsakās uzrādīt amatpersonai ieročus, munīciju un ieroča atļauju, vai ja atļaujas saņemšanai sniegtas nepatiesas ziņas vai iesniegti nederīgi dokumenti. Visi varianti ir pareizi."
+  "explanation": "Atļauju anulē, ja īpašnieks izvairās vai traucē pārbaudīt glabāšanas apstākļus, atsakās uzrādīt amatpersonai ieročus, munīciju un ieroča atļauju, vai ja atļaujas saņemšanai sniegtas nepatiesas ziņas vai iesniegti nederīgi dokumenti. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 108,
   "law_reference": "Ieroču aprites likums, 24. panta 1. daļas 1., 2. un 8. punkts",
-  "explanation": "Atļauju anulē, ja to nosaka tiesas nolēmums, ja īpašniekam konstatētas medicīniskās pretindikācijas, kā arī ja uz personu attiecas 23. panta izsniegšanas aizliegumi. Izņēmums — aizdomās turētajiem un apsūdzētajiem atļauju aptur, nevis anulē. Visi varianti ir pareizi."
+  "explanation": "Atļauju anulē, ja to nosaka tiesas nolēmums, ja īpašniekam konstatētas medicīniskās pretindikācijas, kā arī ja uz personu attiecas 23. panta izsniegšanas aizliegumi. Izņēmums — aizdomās turētajiem un apsūdzētajiem atļauju aptur, nevis anulē. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 109,
   "law_reference": "Ieroču aprites likums, 24. panta 1. daļas 7. punkts un 2. daļa",
-  "explanation": "Ja īpašnieks izvairās vai traucē Valsts policijai pārbaudīt glabāšanas apstākļus, atļauju anulē. Aizdomās turētajam vai apsūdzētajam atļaujas darbību aptur (nevis anulē), un administratīvā atbildība pati par sevi anulēšanas pamats nav."
+  "explanation": "Ja īpašnieks izvairās vai traucē Valsts policijai pārbaudīt glabāšanas apstākļus, atļauju anulē. Aizdomās turētajam vai apsūdzētajam atļaujas darbību aptur (nevis anulē), un administratīvā atbildība pati par sevi anulēšanas pamats nav.",
+  "reviewed": true
  },
  {
   "id": 110,
   "law_reference": "Ieroču aprites likums, 26. panta 1. un 3. daļa; 25. panta 2. daļa",
-  "explanation": "Ja atļauju anulē vai aptur, ieroci, munīciju, šaujampulveri un maināmās būtiskās sastāvdaļas piecu darbdienu laikā pēc paziņojuma saņemšanas nodod Valsts policijai kopā ar atļauju. Komersantam tie nav jānodod, un lēmuma pārsūdzēšana šo pienākumu neaptur."
+  "explanation": "Ja atļauju anulē vai aptur, ieroci, munīciju, šaujampulveri un maināmās būtiskās sastāvdaļas piecu darbdienu laikā pēc paziņojuma saņemšanas nodod Valsts policijai kopā ar atļauju. Komersantam tie nav jānodod, un lēmuma pārsūdzēšana šo pienākumu neaptur.",
+  "reviewed": true
  },
  {
   "id": 111,
   "law_reference": "Ieroču aprites likums, 25. panta 1. daļa",
-  "explanation": "Lēmumu par atteikumu izsniegt atļauju, par tās darbības apturēšanu vai anulēšanu var apstrīdēt un pārsūdzēt Administratīvā procesa likumā noteiktajā kārtībā. Tas nozīmē, ka vispirms lēmumu apstrīd (Valsts policijā) un tikai pēc tam var pārsūdzēt tiesā. Prokuratūra lēmumus neizskata."
+  "explanation": "Lēmumu par atteikumu izsniegt atļauju, par tās darbības apturēšanu vai anulēšanu var apstrīdēt un pārsūdzēt Administratīvā procesa likumā noteiktajā kārtībā. Tas nozīmē, ka vispirms lēmumu apstrīd (Valsts policijā) un tikai pēc tam var pārsūdzēt tiesā. Prokuratūra lēmumus neizskata.",
+  "reviewed": true
  },
  {
   "id": 112,
   "law_reference": "Ieroču aprites likums, 25. panta 2. daļa",
-  "explanation": "Lēmuma par atļaujas darbības apturēšanu vai anulēšanu apstrīdēšana un pārsūdzēšana neaptur tā darbību. Ieroči jānodod arī tad, ja lēmums tiek apstrīdēts."
+  "explanation": "Lēmuma par atļaujas darbības apturēšanu vai anulēšanu apstrīdēšana un pārsūdzēšana neaptur tā darbību. Ieroči jānodod arī tad, ja lēmums tiek apstrīdēts.",
+  "reviewed": true
  }
 ]

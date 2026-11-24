@@ -1,12 +1,12 @@
-# Skaidrojumu melnraksti
+# Skaidrojumi
 
 > Ģenerēts ar `python3 -I scripts/explanations-report.py` — nerediģēt ar roku.
 
-Visi skaidrojumi ir **melnraksti** (`draft`). Tie rakstīti **tikai** pēc `content/law/` tekstiem:
+Pārbaudīti pret likuma tekstu (`"reviewed": true`): **405** no 515; pārējie ir **melnraksti** (`draft`). Skaidrojumi rakstīti **tikai** pēc `content/law/` tekstiem:
 Ieroču aprites likums, Krimināllikuma izvilkums un MK noteikumi Nr. 191, 202, 210, 211, 494 (redakciju datumi — failu sākumā).
 Katra atsauce tiek automātiski pārbaudīta — pantam vai punktam jābūt tekstā (`tests/explanations.test.ts`).
 
-Sēklošana (`npm run db:seed`) ieraksta skaidrojumus datubāzē tikai jautājumiem ar statusu `draft`; pārbaudītos (`reviewed`) nepārraksta.
+Sēklošana (`npm run db:seed`) ieraksta skaidrojumus datubāzē tikai jautājumiem ar statusu `draft` (ar `"reviewed": true` — iestata `reviewed`); administrācijā pārbaudītos nepārraksta.
 
 ## Kopsavilkums
 

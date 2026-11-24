@@ -2,86 +2,103 @@
  {
   "id": 250,
   "law_reference": "Ieroču aprites likums, 46. panta 1. daļas 4. punkts",
-  "explanation": "Medībām klasificētus B kategorijas šaujamieročus uz citu ES vai EEZ valsti var pārvadāt, ja saņemts attiecīgās valsts iepriekšējās piekrišanas dokuments un Valsts policijas pārvadāšanas vai pārsūtīšanas atļauja (un ja galamērķa valstī nav noteikta cita kārtība). Vajadzīgi abi dokumenti. Ar Eiropas šaujamieroču apliecību vien nepietiek — tā der sporta B kategorijas ieročiem, nevis medību."
+  "explanation": "Medībām klasificētus B kategorijas šaujamieročus uz citu ES vai EEZ valsti var pārvadāt, ja saņemts attiecīgās valsts iepriekšējās piekrišanas dokuments un Valsts policijas pārvadāšanas vai pārsūtīšanas atļauja (un ja galamērķa valstī nav noteikta cita kārtība). Vajadzīgi abi dokumenti. Ar Eiropas šaujamieroču apliecību vien nepietiek — tā der sporta B kategorijas ieročiem, nevis medību.",
+  "reviewed": true
  },
  {
   "id": 251,
   "law_reference": "Ieroču aprites likums, 46. panta 1. daļas 4. punkts",
-  "explanation": "Medību B kategorijas šaujamierocim vajadzīgs gan galamērķa valsts kompetentās iestādes iepriekšējās piekrišanas dokuments, gan Valsts policijas pārvadāšanas vai pārsūtīšanas atļauja. Eiropas šaujamieroču apliecība šim gadījumam nav paredzēta."
+  "explanation": "Medību B kategorijas šaujamierocim vajadzīgs gan galamērķa valsts kompetentās iestādes iepriekšējās piekrišanas dokuments, gan Valsts policijas pārvadāšanas vai pārsūtīšanas atļauja. Eiropas šaujamieroču apliecība šim gadījumam nav paredzēta.",
+  "reviewed": true
  },
  {
   "id": 252,
   "law_reference": "Ieroču aprites likums, 46. panta 1. daļas 1., 3. un 6. punkts",
-  "explanation": "Sporta A, B vai C kategorijas šaujamieročiem pietiek ar Eiropas šaujamieroču apliecību, kurā ierocis ierakstīts, un pamatojumu ieroču ievešanai galamērķa valstī treniņšaušanai vai sacensībām. Atsevišķa Valsts policijas pārvadāšanas atļauja šajā gadījumā nav prasīta."
+  "explanation": "Sporta A, B vai C kategorijas šaujamieročiem pietiek ar Eiropas šaujamieroču apliecību, kurā ierocis ierakstīts, un pamatojumu ieroču ievešanai galamērķa valstī treniņšaušanai vai sacensībām. Atsevišķa Valsts policijas pārvadāšanas atļauja šajā gadījumā nav prasīta.",
+  "reviewed": true
  },
  {
   "id": 253,
   "law_reference": "Ieroču aprites likums, 46. panta 1. daļas 1., 3. un 6. punkts",
-  "explanation": "Sporta šaujamieročus uz citu ES vai EEZ valsti var pārvadāt, ja tie ierakstīti Eiropas šaujamieroču apliecībā, ir pamatojums ievešanai galamērķa valstī treniņšaušanai vai sacensībām un attiecīgajā valstī nav noteikta cita kārtība. Jāizpilda visas trīs prasības."
+  "explanation": "Sporta šaujamieročus uz citu ES vai EEZ valsti var pārvadāt, ja tie ierakstīti Eiropas šaujamieroču apliecībā, ir pamatojums ievešanai galamērķa valstī treniņšaušanai vai sacensībām un attiecīgajā valstī nav noteikta cita kārtība. Jāizpilda visas trīs prasības.",
+  "reviewed": true
  },
  {
   "id": 254,
   "law_reference": "Ieroču aprites likums, 46. panta 1. daļas 6. punkts",
-  "explanation": "Medību un sporta C kategorijas šaujamieročiem vajadzīga Eiropas šaujamieroču apliecība, kurā ierocis ierakstīts, un pamatojums ievešanai galamērķa valstī atbilstoši lietojumam, ja tajā valstī nav noteikta cita kārtība. Jāizpilda visas trīs prasības."
+  "explanation": "Medību un sporta C kategorijas šaujamieročiem vajadzīga Eiropas šaujamieroču apliecība, kurā ierocis ierakstīts, un pamatojums ievešanai galamērķa valstī atbilstoši lietojumam, ja tajā valstī nav noteikta cita kārtība. Jāizpilda visas trīs prasības.",
+  "reviewed": true
  },
  {
   "id": 255,
   "law_reference": "Ieroču aprites likums, 46. panta 1. daļas 8. punkts",
-  "explanation": "D kategorijas lielas enerģijas pneimatiskos ieročus uz citu ES vai EEZ valsti var pārvadāt, ja saņemts tās valsts iepriekšējās piekrišanas dokuments un Valsts policijas pārvadāšanas vai pārsūtīšanas atļauja, un attiecīgajā valstī nav noteikta cita kārtība. Jāizpilda visas trīs prasības."
+  "explanation": "D kategorijas lielas enerģijas pneimatiskos ieročus uz citu ES vai EEZ valsti var pārvadāt, ja saņemts tās valsts iepriekšējās piekrišanas dokuments un Valsts policijas pārvadāšanas vai pārsūtīšanas atļauja, un attiecīgajā valstī nav noteikta cita kārtība. Jāizpilda visas trīs prasības.",
+  "reviewed": true
  },
  {
   "id": 256,
   "law_reference": "Ieroču aprites likums, 47. pants",
-  "explanation": "Uz trešo valsti medību un sporta ieročus uz laiku var izvest, ja ir trešās valsts kompetentās iestādes atļauja ievešanai un Valsts policijas pārvadāšanas vai pārsūtīšanas atļauja. Eiropas šaujamieroču apliecība der tikai ES un EEZ valstīm."
+  "explanation": "Uz trešo valsti medību un sporta ieročus uz laiku var izvest, ja ir trešās valsts kompetentās iestādes atļauja ievešanai un Valsts policijas pārvadāšanas vai pārsūtīšanas atļauja. Eiropas šaujamieroču apliecība der tikai ES un EEZ valstīm.",
+  "reviewed": true
  },
  {
   "id": 257,
   "law_reference": "Ieroču aprites likums, 46. panta 1. daļa; 47. pants",
-  "explanation": "Uz citām ES un EEZ valstīm un trešām valstīm likums paredz pārvadāt sportam un medībām klasificētus šaujamieročus un D kategorijas lielas enerģijas pneimatiskos ieročus. Pašaizsardzības šaujamieroči šajos pantos nav minēti, tāpēc pareizais variants ir sporta un medību ieroči."
+  "explanation": "Uz citām ES un EEZ valstīm un trešām valstīm likums paredz pārvadāt sportam un medībām klasificētus šaujamieročus un D kategorijas lielas enerģijas pneimatiskos ieročus. Pašaizsardzības šaujamieroči šajos pantos nav minēti, tāpēc pareizais variants ir sporta un medību ieroči.",
+  "reviewed": true
  },
  {
   "id": 258,
   "law_reference": "Ieroču aprites likums, 52. panta 1. daļa",
-  "explanation": "Lai ES dalībvalstī iegādātos un ievestu Latvijā A, B un C kategorijas šaujamieročus, vajag Valsts policijas iegādāšanās atļauju un iepriekšējās piekrišanas dokumentu, kā arī attiecīgās valsts kompetentās iestādes pārvadāšanas vai pārsūtīšanas atļauju. Eiropas šaujamieroču apliecība iegādei neder."
+  "explanation": "Lai ES dalībvalstī iegādātos un ievestu Latvijā A, B un C kategorijas šaujamieročus, vajag Valsts policijas iegādāšanās atļauju un iepriekšējās piekrišanas dokumentu, kā arī attiecīgās valsts kompetentās iestādes pārvadāšanas vai pārsūtīšanas atļauju. Eiropas šaujamieroču apliecība iegādei neder.",
+  "reviewed": true
  },
  {
   "id": 259,
   "law_reference": "Ieroču aprites likums, 46. panta 1. daļas 1. punkts",
-  "explanation": "A kategorijas šaujamieročus uz citu ES vai EEZ valsti var pārvadāt tikai tad, ja tie ir sportam klasificēti, ierakstīti Eiropas šaujamieroču apliecībā un ir pamatojums ievešanai galamērķa valstī treniņšaušanai vai sacensībām. Ar sporta klasifikāciju vien vai ierakstu glabāšanas atļaujā nepietiek."
+  "explanation": "A kategorijas šaujamieročus uz citu ES vai EEZ valsti var pārvadāt tikai tad, ja tie ir sportam klasificēti, ierakstīti Eiropas šaujamieroču apliecībā un ir pamatojums ievešanai galamērķa valstī treniņšaušanai vai sacensībām. Ar sporta klasifikāciju vien vai ierakstu glabāšanas atļaujā nepietiek.",
+  "reviewed": true
  },
  {
   "id": 260,
   "law_reference": "Ieroču aprites likums, 46. panta 1. daļas 3. punkts",
-  "explanation": "Sporta B kategorijas šaujamieročus var pārvadāt, ja tie ierakstīti Eiropas šaujamieroču apliecībā un ir pamatojums ievešanai galamērķa valstī treniņšaušanai vai sacensībām. Bez apliecības tas nav iespējams, un pašaizsardzības pistoles 46. pantā nav minētas."
+  "explanation": "Sporta B kategorijas šaujamieročus var pārvadāt, ja tie ierakstīti Eiropas šaujamieroču apliecībā un ir pamatojums ievešanai galamērķa valstī treniņšaušanai vai sacensībām. Bez apliecības tas nav iespējams, un pašaizsardzības pistoles 46. pantā nav minētas.",
+  "reviewed": true
  },
  {
   "id": 261,
   "law_reference": "Ieroču aprites likums, 46. panta 1. daļas 8. punkts",
-  "explanation": "D kategorijas lielas enerģijas pneimatiskajiem ieročiem vajadzīgs galamērķa valsts iepriekšējās piekrišanas dokuments un Valsts policijas pārvadāšanas vai pārsūtīšanas atļauja. Ar vienu no tiem, glabāšanas atļauju vai Eiropas šaujamieroču apliecību nepietiek."
+  "explanation": "D kategorijas lielas enerģijas pneimatiskajiem ieročiem vajadzīgs galamērķa valsts iepriekšējās piekrišanas dokuments un Valsts policijas pārvadāšanas vai pārsūtīšanas atļauja. Ar vienu no tiem, glabāšanas atļauju vai Eiropas šaujamieroču apliecību nepietiek.",
+  "reviewed": true
  },
  {
   "id": 262,
   "law_reference": "Ieroču aprites likums, 52. panta 1. daļa",
-  "explanation": "Iegādei ES vai EEZ valstī un ievešanai Latvijā vajag Valsts policijas iegādāšanās atļauju un iepriekšējās piekrišanas dokumentu, kā arī attiecīgās valsts pārvadāšanas vai pārsūtīšanas atļauju. Ar iegādāšanās atļauju vien vai Valsts policijas informēšanu nepietiek."
+  "explanation": "Iegādei ES vai EEZ valstī un ievešanai Latvijā vajag Valsts policijas iegādāšanās atļauju un iepriekšējās piekrišanas dokumentu, kā arī attiecīgās valsts pārvadāšanas vai pārsūtīšanas atļauju. Ar iegādāšanās atļauju vien vai Valsts policijas informēšanu nepietiek.",
+  "reviewed": true
  },
  {
   "id": 263,
   "law_reference": "Ieroču aprites likums, 53. panta 1. daļa",
-  "explanation": "Lai iegādātos un ievestu Latvijā šaujamieročus no trešām valstīm, Valsts policijā jāsaņem ieroču iegādāšanās atļauja un pārvadāšanas vai pārsūtīšanas atļauja. Iepriekšējās piekrišanas dokuments un Eiropas šaujamieroču apliecība attiecas uz ES un EEZ."
+  "explanation": "Lai iegādātos un ievestu Latvijā šaujamieročus no trešām valstīm, Valsts policijā jāsaņem ieroču iegādāšanās atļauja un pārvadāšanas vai pārsūtīšanas atļauja. Iepriekšējās piekrišanas dokuments un Eiropas šaujamieroču apliecība attiecas uz ES un EEZ.",
+  "reviewed": true
  },
  {
   "id": 264,
   "law_reference": "Ieroču aprites likums, 56. panta 1. daļa",
-  "explanation": "Lai realizētu savu Latvijā reģistrēto šaujamieroci ES dalībvalstī, jāsaņem tās valsts iepriekšējās piekrišanas dokuments un pēc tam Valsts policijā — gan realizēšanas atļauja, gan pārvadāšanas vai pārsūtīšanas atļauja. Ar diviem dokumentiem no trim nepietiek."
+  "explanation": "Lai realizētu savu Latvijā reģistrēto šaujamieroci ES dalībvalstī, jāsaņem tās valsts iepriekšējās piekrišanas dokuments un pēc tam Valsts policijā — gan realizēšanas atļauja, gan pārvadāšanas vai pārsūtīšanas atļauja. Ar diviem dokumentiem no trim nepietiek.",
+  "reviewed": true
  },
  {
   "id": 265,
   "law_reference": "Ieroču aprites likums, 56. panta 2. daļa",
-  "explanation": "Realizēšanai trešajā valstī vajag trešās valsts ievešanas atļauju un pēc tam Valsts policijas realizēšanas atļauju un pārvadāšanas vai pārsūtīšanas atļauju. Vajadzīgi visi trīs dokumenti."
+  "explanation": "Realizēšanai trešajā valstī vajag trešās valsts ievešanas atļauju un pēc tam Valsts policijas realizēšanas atļauju un pārvadāšanas vai pārsūtīšanas atļauju. Vajadzīgi visi trīs dokumenti.",
+  "reviewed": true
  },
  {
   "id": 266,
   "law_reference": "Ieroču aprites likums, 57. pants",
-  "explanation": "Pāri valsts robežai šaujamieročus un lielas enerģijas pneimatiskos ieročus drīkst pārvadāt vai pārsūtīt tikai nepielādētus, speciālā futrālī vai citādā iesaiņojumā un atsevišķi no munīcijas. No iesaiņojuma tos izņem tikai pēc muitas vai robežsardzes darbinieka pieprasījuma."
+  "explanation": "Pāri valsts robežai šaujamieročus un lielas enerģijas pneimatiskos ieročus drīkst pārvadāt vai pārsūtīt tikai nepielādētus, speciālā futrālī vai citādā iesaiņojumā un atsevišķi no munīcijas. No iesaiņojuma tos izņem tikai pēc muitas vai robežsardzes darbinieka pieprasījuma.",
+  "reviewed": true
  }
 ]

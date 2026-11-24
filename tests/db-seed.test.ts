@@ -92,6 +92,11 @@ describe.skipIf(!process.env.TEST_DATABASE_URL)("skaidrojumu sēklošana", () =>
     const q63 = await db.query.questions.findFirst({ where: eq(schema.questions.id, 63) });
     expect(q63?.possiblyOutdated).toBe(true);
     expect(q63?.lawReference).toMatch(/16\. panta 2\. daļa/);
+    // pārbaudītie pret likumu (content: "reviewed": true) — statuss "reviewed"; tehniskie paliek melnraksti
+    const q2 = await db.query.questions.findFirst({ where: eq(schema.questions.id, 2) });
+    expect(q2?.explanationStatus).toBe("reviewed");
+    const q488 = await db.query.questions.findFirst({ where: eq(schema.questions.id, 488) });
+    expect(q488?.explanationStatus).toBe("draft");
     await client.end();
   });
 });

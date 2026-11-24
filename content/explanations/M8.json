@@ -2,182 +2,218 @@
  {
   "id": 267,
   "law_reference": "MK noteikumi Nr. 210, 32. punkts",
-  "explanation": "Glabāšanas atļaujas turētājs drīkst izņemt, pielādēt un nēsāt pašaizsardzības ieroci savā īpašumā vai valdījumā esošajā teritorijā tikai tad, ja konkrētajā situācijā var rasties pamats to pielietot vai izmantot. Pati atļauja vai vēlēšanās to darīt nav pietiekams pamats."
+  "explanation": "Glabāšanas atļaujas turētājs drīkst izņemt, pielādēt un nēsāt pašaizsardzības ieroci savā īpašumā vai valdījumā esošajā teritorijā tikai tad, ja konkrētajā situācijā var rasties pamats to pielietot vai izmantot. Pati atļauja vai vēlēšanās to darīt nav pietiekams pamats.",
+  "reviewed": true
  },
  {
   "id": 268,
   "law_reference": "Ieroču aprites likums, 36. panta 4. daļa",
-  "explanation": "Ieroci atļauts izvilkt no maksts un sagatavot šaušanai, ja ir pamats uzskatīt, ka konkrētajā situācijā izmantošanas vai pielietošanas nosacījumi iestāsies vai jau ir iestājušies. Abi gadījumi ir likumā. Pati atļauja nedod tiesības izvilkt ieroci bez šāda pamata."
+  "explanation": "Ieroci atļauts izvilkt no maksts un sagatavot šaušanai, ja ir pamats uzskatīt, ka konkrētajā situācijā izmantošanas vai pielietošanas nosacījumi iestāsies vai jau ir iestājušies. Abi gadījumi ir likumā. Pati atļauja nedod tiesības izvilkt ieroci bez šāda pamata.",
+  "reviewed": true
  },
  {
   "id": 269,
   "law_reference": "Ieroču aprites likums, 36. panta 4. daļa",
-  "explanation": "Sagatavot ieroci šaušanai (izslēgt drošinātāju, ievadīt patronu patrontelpā vai uzvilkt gaili) drīkst, ja ir pamats uzskatīt, ka izmantošanas vai pielietošanas nosacījumi ir iestājušies vai var iestāties. Atļauja vien šādu tiesību nedod."
+  "explanation": "Sagatavot ieroci šaušanai (izslēgt drošinātāju, ievadīt patronu patrontelpā vai uzvilkt gaili) drīkst, ja ir pamats uzskatīt, ka izmantošanas vai pielietošanas nosacījumi ir iestājušies vai var iestāties. Atļauja vien šādu tiesību nedod.",
+  "reviewed": true
  },
  {
   "id": 270,
   "law_reference": "Ieroču aprites likums, 36. panta 4. daļa",
-  "explanation": "Likums ļauj izvilkt un sagatavot ieroci šaušanai, ja ir pamats uzskatīt, ka pielietošanas nosacījumi «iestāsies vai ir iestājušies». Tas aptver nākotni, tagadni («iestājas») un jau notikušu situāciju, tāpēc pareizi ir visi varianti."
+  "explanation": "Likums ļauj izvilkt un sagatavot ieroci šaušanai, ja ir pamats uzskatīt, ka pielietošanas nosacījumi «iestāsies vai ir iestājušies». Tas aptver nākotni, tagadni («iestājas») un jau notikušu situāciju, tāpēc pareizi ir visi varianti.",
+  "reviewed": true
  },
  {
   "id": 271,
   "law_reference": "Ieroču aprites likums, 36. panta 4. daļa",
-  "explanation": "Sagatavošana šaušanai atļauta, ja nosacījumi var iestāties, iestājas vai jau ir iestājušies — likums aptver gan gaidāmo, gan esošo situāciju. Visi varianti ir pareizi."
+  "explanation": "Sagatavošana šaušanai atļauta, ja nosacījumi var iestāties, iestājas vai jau ir iestājušies — likums aptver gan gaidāmo, gan esošo situāciju. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 272,
   "law_reference": "Ieroču aprites likums, 65. panta 1. daļa; 36. panta 4. daļa",
-  "explanation": "Pielietošana ir tēmēts šāviens (izņemot medības, sacensības un treniņšaušanu), kā arī šāviens, kas izraisa nāvi, kaitējumu veselībai, mantai vai padara nekaitīgu dzīvnieku. Izvilkšana no maksts un sagatavošana šaušanai vēl nav pielietošana, un ne katrs šāviens ir pielietošana."
+  "explanation": "Pielietošana ir tēmēts šāviens (izņemot medības, sacensības un treniņšaušanu), kā arī šāviens, kas izraisa nāvi, kaitējumu veselībai, mantai vai padara nekaitīgu dzīvnieku. Izvilkšana no maksts un sagatavošana šaušanai vēl nav pielietošana, un ne katrs šāviens ir pielietošana.",
+  "reviewed": true
  },
  {
   "id": 273,
   "law_reference": "Ieroču aprites likums, 65. panta 1. daļa",
-  "explanation": "Pielietošanas definīcijai ir divas daļas: tēmēts šāviens (izņemot medības, sacensības un treniņšaušanu) un šāviens, kas izraisa cilvēka nāvi, nodara kaitējumu veselībai vai mantai vai padara nekaitīgu dzīvnieku. Pareizi ir abi, bet «jebkāda šaušana» nav pielietošana."
+  "explanation": "Pielietošanas definīcijai ir divas daļas: tēmēts šāviens (izņemot medības, sacensības un treniņšaušanu) un šāviens, kas izraisa cilvēka nāvi, nodara kaitējumu veselībai vai mantai vai padara nekaitīgu dzīvnieku. Pareizi ir abi, bet «jebkāda šaušana» nav pielietošana.",
+  "reviewed": true
  },
  {
   "id": 274,
   "law_reference": "Ieroču aprites likums, 65. panta 1. daļa",
-  "explanation": "Pilnā definīcija: tēmēts šāviens (izņemot medības, sacensības un treniņšaušanu), kā arī šāviens, kas izraisa nāvi, kaitējumu veselībai vai mantai vai padara nekaitīgu dzīvnieku. Pielietošana nav «tikai» seku izraisošs šāviens, un trāpījums mērķī nav kritērijs."
+  "explanation": "Pilnā definīcija: tēmēts šāviens (izņemot medības, sacensības un treniņšaušanu), kā arī šāviens, kas izraisa nāvi, kaitējumu veselībai vai mantai vai padara nekaitīgu dzīvnieku. Pielietošana nav «tikai» seku izraisošs šāviens, un trāpījums mērķī nav kritērijs.",
+  "reviewed": true
  },
  {
   "id": 275,
   "law_reference": "Ieroču aprites likums, 65. panta 1. daļa",
-  "explanation": "Šis ir likuma 65. panta pirmajā daļā dotais šaujamieroča pielietošanas jēdziens. Izmantošana ir cits jēdziens (65. panta 5. daļa), un «pašaizsardzības šāviena» termina likumā nav."
+  "explanation": "Šis ir likuma 65. panta pirmajā daļā dotais šaujamieroča pielietošanas jēdziens. Izmantošana ir cits jēdziens (65. panta 5. daļa), un «pašaizsardzības šāviena» termina likumā nav.",
+  "reviewed": true
  },
  {
   "id": 276,
   "law_reference": "Ieroču aprites likums, 65. panta 1. un 4. daļa",
-  "explanation": "Pielietošana ir tēmēts šāviens likumā noteiktajos gadījumos, kad pastāv pielietošanas nosacījumi (65. panta 4. daļa). Šaušana, lai izsauktu palīdzību, brīdinātu vai aizbaidītu dzīvnieku, ir izmantošana, nevis pielietošana."
+  "explanation": "Pielietošana ir tēmēts šāviens likumā noteiktajos gadījumos, kad pastāv pielietošanas nosacījumi (65. panta 4. daļa). Šaušana, lai izsauktu palīdzību, brīdinātu vai aizbaidītu dzīvnieku, ir izmantošana, nevis pielietošana.",
+  "reviewed": true
  },
  {
   "id": 277,
   "law_reference": "Ieroču aprites likums, 65. panta 1. un 4. daļa",
-  "explanation": "Pielietošana ir tēmēts šāviens pret personu vai bīstamu dzīvnieku situācijā, kas atbilst kādam no 65. panta 4. daļā uzskaitītajiem pielietošanas gadījumiem. Netēmēts šāviens drošības labad vai citu līdzekļu trūkums vien nav pielietošanas definīcija."
+  "explanation": "Pielietošana ir tēmēts šāviens pret personu vai bīstamu dzīvnieku situācijā, kas atbilst kādam no 65. panta 4. daļā uzskaitītajiem pielietošanas gadījumiem. Netēmēts šāviens drošības labad vai citu līdzekļu trūkums vien nav pielietošanas definīcija.",
+  "reviewed": true
  },
  {
   "id": 294,
   "law_reference": "Ieroču aprites likums, 65. panta 1. un 4. daļa",
-  "explanation": "Pielietošana ir šāviens 65. panta 4. daļā minētajos gadījumos: lai aizsargātu dzīvību vai veselību no uzbrukuma, novērstu ieroča vardarbīgu atņemšanu, aizturētu pretoties sākušu noziedznieku vai padarītu nekaitīgu bīstamu dzīvnieku. Brīdinājuma šāviens nosacīti drošā virzienā ir izmantošana, nevis pielietošana."
+  "explanation": "Pielietošana ir šāviens 65. panta 4. daļā minētajos gadījumos: lai aizsargātu dzīvību vai veselību no uzbrukuma, novērstu ieroča vardarbīgu atņemšanu, aizturētu pretoties sākušu noziedznieku vai padarītu nekaitīgu bīstamu dzīvnieku. Brīdinājuma šāviens nosacīti drošā virzienā ir izmantošana, nevis pielietošana.",
+  "reviewed": true
  },
  {
   "id": 295,
   "law_reference": "Ieroču aprites likums, 65. panta 5. daļa",
-  "explanation": "Šaujamieroci drīkst izmantot, lai izsauktu palīdzību, brīdinātu par ieroča pielietošanu vai aizbaidītu dzīvniekus. Visi varianti atbilst likumam."
+  "explanation": "Šaujamieroci drīkst izmantot, lai izsauktu palīdzību, brīdinātu par ieroča pielietošanu vai aizbaidītu dzīvniekus. Visi varianti atbilst likumam.",
+  "reviewed": true
  },
  {
   "id": 296,
   "law_reference": "Ieroču aprites likums, 65. panta 5. daļa",
-  "explanation": "No variantiem likumā minēta tikai palīdzības izsaukšana. Uzmanības pievēršana citos nolūkos, salutēšana vai signalizēšana nav likumā paredzēti izmantošanas gadījumi."
+  "explanation": "No variantiem likumā minēta tikai palīdzības izsaukšana. Uzmanības pievēršana citos nolūkos, salutēšana vai signalizēšana nav likumā paredzēti izmantošanas gadījumi.",
+  "reviewed": true
  },
  {
   "id": 297,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 4. punkts un 5. daļa",
-  "explanation": "Likums ļauj izmantot ieroci, lai aizbaidītu dzīvniekus, un to interpretē kopsakarā ar pielietošanas nosacījumiem: runa ir par dzīvnieku, kas apdraud cilvēka dzīvību, veselību vai mantu. Dzīvnieka atrašanās īpašumā vai vēlēšanās to aizbaidīt vien nav pamats šaut."
+  "explanation": "Likums ļauj izmantot ieroci, lai aizbaidītu dzīvniekus, un to interpretē kopsakarā ar pielietošanas nosacījumiem: runa ir par dzīvnieku, kas apdraud cilvēka dzīvību, veselību vai mantu. Dzīvnieka atrašanās īpašumā vai vēlēšanās to aizbaidīt vien nav pamats šaut.",
+  "reviewed": true
  },
  {
   "id": 298,
   "law_reference": "Ieroču aprites likums, 65. panta 5. daļa",
-  "explanation": "Izmantošana ir šāviens bez mērķtiecīga vēršanas pret cilvēku: lai izsauktu palīdzību, aizbaidītu bīstamu dzīvnieku vai brīdinātu par ieroča pielietošanu, pārtraucot prettiesisku rīcību, kad pielietošana nav izslēgta. Visi varianti apraksta likumā paredzētos izmantošanas gadījumus."
+  "explanation": "Izmantošana ir šāviens bez mērķtiecīga vēršanas pret cilvēku: lai izsauktu palīdzību, aizbaidītu bīstamu dzīvnieku vai brīdinātu par ieroča pielietošanu, pārtraucot prettiesisku rīcību, kad pielietošana nav izslēgta. Visi varianti apraksta likumā paredzētos izmantošanas gadījumus.",
+  "reviewed": true
  },
  {
   "id": 299,
   "law_reference": "Ieroču aprites likums, 65. panta 5. daļa; 66. panta 1. daļa",
-  "explanation": "Brīdinājuma šāviens nosacīti drošā virzienā, ar kuru demonstrē gatavību pielietot ieroci un mēģina pārtraukt prettiesisku rīcību, ir šaujamieroča izmantošana. Visi trīs varianti to apraksta dažādiem vārdiem."
+  "explanation": "Brīdinājuma šāviens nosacīti drošā virzienā, ar kuru demonstrē gatavību pielietot ieroci un mēģina pārtraukt prettiesisku rīcību, ir šaujamieroča izmantošana. Visi trīs varianti to apraksta dažādiem vārdiem.",
+  "reviewed": true
  },
  {
   "id": 300,
   "law_reference": "Ieroču aprites likums, 65. panta 4. un 5. daļa; 66. panta 1. daļa",
-  "explanation": "Izmantošanas gadījumi nav patstāvīgi — tos skata kopsakarā ar pielietošanas nosacījumiem. Palīdzības izsaukšana vai dzīvnieka aizbaidīšana attiecas uz situācijām, kad pielietošana nav izslēgta, un brīdinājums tieši izriet no pielietošanas situācijas. Plašāka interpretācija nav pareiza."
+  "explanation": "Izmantošanas gadījumi nav patstāvīgi — tos skata kopsakarā ar pielietošanas nosacījumiem. Palīdzības izsaukšana vai dzīvnieka aizbaidīšana attiecas uz situācijām, kad pielietošana nav izslēgta, un brīdinājums tieši izriet no pielietošanas situācijas. Plašāka interpretācija nav pareiza.",
+  "reviewed": true
  },
  {
   "id": 301,
   "law_reference": "Ieroču aprites likums, 65. panta 1. un 5. daļa",
-  "explanation": "Izmantošana ir šāviens, kas nav mērķtiecīgi vērsts pret personu vai dzīvnieku, un tam ir brīdinošs vai preventīvs raksturs. Tēmēts šāviens pret cilvēku vai dzīvnieku jau ir pielietošana."
+  "explanation": "Izmantošana ir šāviens, kas nav mērķtiecīgi vērsts pret personu vai dzīvnieku, un tam ir brīdinošs vai preventīvs raksturs. Tēmēts šāviens pret cilvēku vai dzīvnieku jau ir pielietošana.",
+  "reviewed": true
  },
  {
   "id": 278,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 1. punkts",
-  "explanation": "Likuma formulējums: pielietot šaujamieroci kā galējo līdzekli drīkst, lai aizsargātu sevi vai citas personas no uzbrukuma, kas reāli apdraud dzīvību vai veselību. Svarīgs ir vārds «reāli», un aizsardzība attiecas gan uz dzīvību, gan uz veselību. «Jebkāds uzbrukums» neder."
+  "explanation": "Likuma formulējums: pielietot šaujamieroci kā galējo līdzekli drīkst, lai aizsargātu sevi vai citas personas no uzbrukuma, kas reāli apdraud dzīvību vai veselību. Svarīgs ir vārds «reāli», un aizsardzība attiecas gan uz dzīvību, gan uz veselību. «Jebkāds uzbrukums» neder.",
+  "reviewed": true
  },
  {
   "id": 279,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 1. punkts",
-  "explanation": "Pareizi ir tikai precīzais likuma formulējums: uzbrukums, kas reāli apdraud dzīvību vai veselību. Mantas apdraudējums šajā punktā nav minēts (manta minēta tikai pie dzīvniekiem), un aizsardzība nav tikai no dzīvības apdraudējuma."
+  "explanation": "Pareizi ir tikai precīzais likuma formulējums: uzbrukums, kas reāli apdraud dzīvību vai veselību. Mantas apdraudējums šajā punktā nav minēts (manta minēta tikai pie dzīvniekiem), un aizsardzība nav tikai no dzīvības apdraudējuma.",
+  "reviewed": true
  },
  {
   "id": 280,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 2. punkts",
-  "explanation": "Likumā: lai novērstu nelikumīgu mēģinājumu vardarbīgi atņemt šaujamieroci. Jābūt abām pazīmēm — mēģinājums ir nelikumīgs un vardarbīgs. Mēģinājums atņemt ieroci bez vardarbības šo nosacījumu neizpilda."
+  "explanation": "Likumā: lai novērstu nelikumīgu mēģinājumu vardarbīgi atņemt šaujamieroci. Jābūt abām pazīmēm — mēģinājums ir nelikumīgs un vardarbīgs. Mēģinājums atņemt ieroci bez vardarbības šo nosacījumu neizpilda.",
+  "reviewed": true
  },
  {
   "id": 281,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 2. punkts",
-  "explanation": "Pareizs ir precīzais formulējums: nelikumīgs mēģinājums vardarbīgi atņemt šaujamieroci. Citas mantas aizsardzība šajā punktā nav paredzēta."
+  "explanation": "Pareizs ir precīzais formulējums: nelikumīgs mēģinājums vardarbīgi atņemt šaujamieroci. Citas mantas aizsardzība šajā punktā nav paredzēta.",
+  "reviewed": true
  },
  {
   "id": 282,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 3. punkts",
-  "explanation": "Aizturēt drīkst personu, kura pārsteigta nozieguma izdarīšanas brīdī un izrāda pretošanos. Vajadzīgas abas pazīmes — tikai pārsteigšana nozieguma brīdī vai tikai pretošanās nav pietiekama."
+  "explanation": "Aizturēt drīkst personu, kura pārsteigta nozieguma izdarīšanas brīdī un izrāda pretošanos. Vajadzīgas abas pazīmes — tikai pārsteigšana nozieguma brīdī vai tikai pretošanās nav pietiekama.",
+  "reviewed": true
  },
  {
   "id": 283,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 3. punkts",
-  "explanation": "Likumā minēts noziegums, nevis jebkurš likumpārkāpums, un persona jāpārsteidz tā izdarīšanas brīdī, un tai jāizrāda pretošanās. Tas, vai persona ir bruņota, šajā punktā nav noteicošais."
+  "explanation": "Likumā minēts noziegums, nevis jebkurš likumpārkāpums, un persona jāpārsteidz tā izdarīšanas brīdī, un tai jāizrāda pretošanās. Tas, vai persona ir bruņota, šajā punktā nav noteicošais.",
+  "reviewed": true
  },
  {
   "id": 284,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 3. punkts",
-  "explanation": "Pareizi: persona pārsteigta nozieguma (nevis jebkura likumpārkāpuma) izdarīšanas brīdī un izrāda pretošanos. Bruņotība nav obligāta pazīme, bet pretošanās — ir."
+  "explanation": "Pareizi: persona pārsteigta nozieguma (nevis jebkura likumpārkāpuma) izdarīšanas brīdī un izrāda pretošanos. Bruņotība nav obligāta pazīme, bet pretošanās — ir.",
+  "reviewed": true
  },
  {
   "id": 285,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 4. punkts",
-  "explanation": "Likumā: padarīt nekaitīgu dzīvnieku, kas apdraud cilvēka dzīvību, veselību vai mantu. «Bīstams» vai «agresīvs» dzīvnieks bez šī apdraudējuma neatbilst formulējumam."
+  "explanation": "Likumā: padarīt nekaitīgu dzīvnieku, kas apdraud cilvēka dzīvību, veselību vai mantu. «Bīstams» vai «agresīvs» dzīvnieks bez šī apdraudējuma neatbilst formulējumam.",
+  "reviewed": true
  },
  {
   "id": 286,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 4. punkts",
-  "explanation": "Pareizs ir pilnais formulējums: dzīvnieks apdraud cilvēka dzīvību, veselību vai mantu. Manta ir iekļauta, tāpēc «tikai dzīvību vai veselību» ir nepareizi."
+  "explanation": "Pareizs ir pilnais formulējums: dzīvnieks apdraud cilvēka dzīvību, veselību vai mantu. Manta ir iekļauta, tāpēc «tikai dzīvību vai veselību» ir nepareizi.",
+  "reviewed": true
  },
  {
   "id": 287,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 4. punkts",
-  "explanation": "Pielietot drīkst pret dzīvnieku, kas apdraud cilvēka dzīvību, veselību vai mantu. Likums nenosaka papildu prasību, ka nav iespējams dzīvnieku aizbaidīt, un neierobežo apdraudējumu tikai ar dzīvību vai veselību."
+  "explanation": "Pielietot drīkst pret dzīvnieku, kas apdraud cilvēka dzīvību, veselību vai mantu. Likums nenosaka papildu prasību, ka nav iespējams dzīvnieku aizbaidīt, un neierobežo apdraudējumu tikai ar dzīvību vai veselību.",
+  "reviewed": true
  },
  {
   "id": 288,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 4. punkts",
-  "explanation": "Pietiek ar vienu no apdraudējumiem — dzīvībai, veselībai vai mantai. Tāpēc pareizi ir visi varianti."
+  "explanation": "Pietiek ar vienu no apdraudējumiem — dzīvībai, veselībai vai mantai. Tāpēc pareizi ir visi varianti.",
+  "reviewed": true
  },
  {
   "id": 289,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 1., 3. un 4. punkts",
-  "explanation": "Visi trīs varianti ir 65. panta 4. daļā uzskaitītie pielietošanas gadījumi: aizsardzība no uzbrukuma, kas reāli apdraud dzīvību vai veselību, pārsteigta un pretoties sākuša noziedznieka aizturēšana un bīstama dzīvnieka padarīšana nekaitīgu."
+  "explanation": "Visi trīs varianti ir 65. panta 4. daļā uzskaitītie pielietošanas gadījumi: aizsardzība no uzbrukuma, kas reāli apdraud dzīvību vai veselību, pārsteigta un pretoties sākuša noziedznieka aizturēšana un bīstama dzīvnieka padarīšana nekaitīgu.",
+  "reviewed": true
  },
  {
   "id": 290,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 1., 2. un 4. punkts",
-  "explanation": "Aizsardzība no reāla uzbrukuma, nelikumīga vardarbīga ieroča atņemšanas novēršana un bīstama dzīvnieka padarīšana nekaitīgu ir likumā paredzēti pielietošanas gadījumi. Visi varianti ir pareizi."
+  "explanation": "Aizsardzība no reāla uzbrukuma, nelikumīga vardarbīga ieroča atņemšanas novēršana un bīstama dzīvnieka padarīšana nekaitīgu ir likumā paredzēti pielietošanas gadījumi. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 291,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 1.–3. punkts",
-  "explanation": "Visi trīs varianti ir likumā uzskaitītie pielietošanas gadījumi."
+  "explanation": "Visi trīs varianti ir likumā uzskaitītie pielietošanas gadījumi.",
+  "reviewed": true
  },
  {
   "id": 292,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 2.–4. punkts",
-  "explanation": "Visi trīs varianti ir likumā uzskaitītie pielietošanas gadījumi."
+  "explanation": "Visi trīs varianti ir likumā uzskaitītie pielietošanas gadījumi.",
+  "reviewed": true
  },
  {
   "id": 293,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 1., 2. un 4. punkts",
-  "explanation": "Pareizi ir ieroča vardarbīgas atņemšanas novēršana un aizsardzība no reāla uzbrukuma. Variants «padarītu nekaitīgu dzīvnieku» ir nepilnīgs: likums atļauj to tikai tad, ja dzīvnieks apdraud cilvēka dzīvību, veselību vai mantu."
+  "explanation": "Pareizi ir ieroča vardarbīgas atņemšanas novēršana un aizsardzība no reāla uzbrukuma. Variants «padarītu nekaitīgu dzīvnieku» ir nepilnīgs: likums atļauj to tikai tad, ja dzīvnieks apdraud cilvēka dzīvību, veselību vai mantu.",
+  "reviewed": true
  },
  {
   "id": 306,
   "law_reference": "Ieroču aprites likums, 65. panta 4. un 6. daļa; Krimināllikums, 28.–32. pants",
-  "explanation": "Šaujamieroci pielieto tikai kā galējo līdzekli, un tā pielietošanai ir izņēmuma raksturs. Pielietošanas nosacījumus skata kopā ar pārējo regulējumu: aizliegumiem (66. panta 4. daļa), nepieciešamās aizstāvēšanās robežām (65. panta 6. daļa) un kriminālatbildību izslēdzošajiem apstākļiem (Krimināllikuma III nodaļa). Visi varianti ir pareizi."
+  "explanation": "Šaujamieroci pielieto tikai kā galējo līdzekli, un tā pielietošanai ir izņēmuma raksturs. Pielietošanas nosacījumus skata kopā ar pārējo regulējumu: aizliegumiem (66. panta 4. daļa), nepieciešamās aizstāvēšanās robežām (65. panta 6. daļa) un kriminālatbildību izslēdzošajiem apstākļiem (Krimināllikuma III nodaļa). Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 307,
@@ -278,7 +314,8 @@
  {
   "id": 323,
   "law_reference": "Ieroču aprites likums, 65. panta 4. daļas 3. punkts",
-  "explanation": "Likumā minēta persona, kura pārsteigta nozieguma izdarīšanas brīdī. Administratīvie pārkāpumi vai jebkurš likumpārkāpums šo nosacījumu neizpilda."
+  "explanation": "Likumā minēta persona, kura pārsteigta nozieguma izdarīšanas brīdī. Administratīvie pārkāpumi vai jebkurš likumpārkāpums šo nosacījumu neizpilda.",
+  "reviewed": true
  },
  {
   "id": 324,
@@ -295,7 +332,8 @@
  {
   "id": 302,
   "law_reference": "Krimināllikums, 29. panta 2. un 4. daļa; Ieroču aprites likums, 65. panta 6. daļa",
-  "explanation": "Krimināllikums robežu pārkāpšanu definē kā acīmredzamu aizsardzības nesamērību ar uzbrukuma raksturu un bīstamību, kuras rezultātā uzbrucējam nodarīts nevajadzīgs kaitējums. Pats kaitējums uzbrucējam nav pārkāpums. Iespēja izvairīties no uzbrukuma vai lūgt palīdzību neatņem tiesības aizstāvēties (29. panta 4. daļa)."
+  "explanation": "Krimināllikums robežu pārkāpšanu definē kā acīmredzamu aizsardzības nesamērību ar uzbrukuma raksturu un bīstamību, kuras rezultātā uzbrucējam nodarīts nevajadzīgs kaitējums. Pats kaitējums uzbrucējam nav pārkāpums. Iespēja izvairīties no uzbrukuma vai lūgt palīdzību neatņem tiesības aizstāvēties (29. panta 4. daļa).",
+  "reviewed": true
  },
  {
   "id": 303,
@@ -318,37 +356,44 @@
  {
   "id": 326,
   "law_reference": "Ieroču aprites likums, 66. panta 3. daļa; 65. panta 6. daļa",
-  "explanation": "Pat ja pastāv pielietošanas nosacījums, jādara viss iespējamais, lai mazinātu kaitējumu un garantētu citu personu drošību, un nedrīkst pārkāpt nepieciešamās aizstāvēšanās robežas. Ar formālām pazīmēm nepietiek, un nosacījums neuzliek pienākumu ieroci pielietot."
+  "explanation": "Pat ja pastāv pielietošanas nosacījums, jādara viss iespējamais, lai mazinātu kaitējumu un garantētu citu personu drošību, un nedrīkst pārkāpt nepieciešamās aizstāvēšanās robežas. Ar formālām pazīmēm nepietiek, un nosacījums neuzliek pienākumu ieroci pielietot.",
+  "reviewed": true
  },
  {
   "id": 327,
   "law_reference": "Ieroču aprites likums, 66. panta 3. un 4. daļa; 65. panta 6. daļa",
-  "explanation": "Jāievēro aizliegums izmantot vai pielietot ieroci, ja var ciest citas personas, pret kurām tas nav vērsts, jādara viss iespējamais kaitējuma mazināšanai un nedrīkst pārkāpt nepieciešamās aizstāvēšanās robežas. Visi varianti ir pareizi."
+  "explanation": "Jāievēro aizliegums izmantot vai pielietot ieroci, ja var ciest citas personas, pret kurām tas nav vērsts, jādara viss iespējamais kaitējuma mazināšanai un nedrīkst pārkāpt nepieciešamās aizstāvēšanās robežas. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 328,
   "law_reference": "Ieroču aprites likums, 66. panta 2. un 4. daļa",
-  "explanation": "Likumā noteikts aizliegums izmantot un pielietot šaujamieroci, ja var ciest citas personas, pret kurām tas nav vērsts. Bez brīdinājuma pielietot drīkst 66. panta 2. daļā minētajos gadījumos, un likums nenosaka, ka brīdinājuma šāviens jāizdara tikai gaisā."
+  "explanation": "Likumā noteikts aizliegums izmantot un pielietot šaujamieroci, ja var ciest citas personas, pret kurām tas nav vērsts. Bez brīdinājuma pielietot drīkst 66. panta 2. daļā minētajos gadījumos, un likums nenosaka, ka brīdinājuma šāviens jāizdara tikai gaisā.",
+  "reviewed": true
  },
  {
   "id": 329,
   "law_reference": "Ieroču aprites likums, 66. panta 2. un 4. daļa",
-  "explanation": "Aizliegts izmantot un pielietot ieroci, ja var ciest citas personas, pret kurām tas nav vērsts. Likumā nav aizlieguma pielietot ieroci bez brīdinājuma visos gadījumos (66. panta 2. daļa) un nav īpaša aizlieguma attiecībā uz sievietēm vai personām ar invaliditāti."
+  "explanation": "Aizliegts izmantot un pielietot ieroci, ja var ciest citas personas, pret kurām tas nav vērsts. Likumā nav aizlieguma pielietot ieroci bez brīdinājuma visos gadījumos (66. panta 2. daļa) un nav īpaša aizlieguma attiecībā uz sievietēm vai personām ar invaliditāti.",
+  "reviewed": true
  },
  {
   "id": 330,
   "law_reference": "Ieroču aprites likums, 66. panta 3. un 4. daļa; 65. panta 6. daļa",
-  "explanation": "Izmantojot un pielietojot ieroci, jādara viss iespējamais kaitējuma mazināšanai, nedrīkst izmantot vai pielietot ieroci, ja var ciest citas personas, un nedrīkst pārkāpt nepieciešamās aizstāvēšanās robežas. Visi varianti ir pareizi."
+  "explanation": "Izmantojot un pielietojot ieroci, jādara viss iespējamais kaitējuma mazināšanai, nedrīkst izmantot vai pielietot ieroci, ja var ciest citas personas, un nedrīkst pārkāpt nepieciešamās aizstāvēšanās robežas. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 331,
   "law_reference": "Ieroču aprites likums, 66. panta 1. un 2. daļa",
-  "explanation": "Pirms pielietošanas brīdina par nodomu to pielietot vai izdara brīdinājuma šāvienu — abi veidi ir likumā. Bez brīdinājuma ieroci pielieto tikai 66. panta 2. daļā uzskaitītajos gadījumos, nevis pēc brīvas izvēles."
+  "explanation": "Pirms pielietošanas brīdina par nodomu to pielietot vai izdara brīdinājuma šāvienu — abi veidi ir likumā. Bez brīdinājuma ieroci pielieto tikai 66. panta 2. daļā uzskaitītajos gadījumos, nevis pēc brīvas izvēles.",
+  "reviewed": true
  },
  {
   "id": 332,
   "law_reference": "Ieroču aprites likums, 66. panta 1. daļa",
-  "explanation": "Likumā: brīdina par nodomu to pielietot vai izdara brīdinājuma šāvienu. Tas ir «vai», nevis «un» — pietiek ar vienu no brīdinājuma veidiem."
+  "explanation": "Likumā: brīdina par nodomu to pielietot vai izdara brīdinājuma šāvienu. Tas ir «vai», nevis «un» — pietiek ar vienu no brīdinājuma veidiem.",
+  "reviewed": true
  },
  {
   "id": 333,
@@ -377,27 +422,32 @@
  {
   "id": 337,
   "law_reference": "Ieroču aprites likums, 66. panta 4. daļa",
-  "explanation": "Aizliegums attiecas gan uz pielietošanu, gan uz izmantošanu: brīdinājuma šāvienu aizliegts izdarīt, ja tā dēļ var ciest citas personas. Likums neaizliedz papildus mutiskajam brīdinājumam izdarīt arī brīdinājuma šāvienu."
+  "explanation": "Aizliegums attiecas gan uz pielietošanu, gan uz izmantošanu: brīdinājuma šāvienu aizliegts izdarīt, ja tā dēļ var ciest citas personas. Likums neaizliedz papildus mutiskajam brīdinājumam izdarīt arī brīdinājuma šāvienu.",
+  "reviewed": true
  },
  {
   "id": 338,
   "law_reference": "Ieroču aprites likums, 66. panta 1. daļa",
-  "explanation": "Likums dod izvēli: brīdina par nodomu pielietot vai izdara brīdinājuma šāvienu. Mutisks brīdinājums nav obligāts pirms šāviena, brīdinājuma šāviens nav obligāts, un abus apvienot nav aizliegts."
+  "explanation": "Likums dod izvēli: brīdina par nodomu pielietot vai izdara brīdinājuma šāvienu. Mutisks brīdinājums nav obligāts pirms šāviena, brīdinājuma šāviens nav obligāts, un abus apvienot nav aizliegts.",
+  "reviewed": true
  },
  {
   "id": 339,
   "law_reference": "Ieroču aprites likums, 66. panta 1. daļa",
-  "explanation": "Pirms pielietošanas var izvēlēties vienu no brīdināšanas veidiem — mutisku brīdinājumu vai brīdinājuma šāvienu. Pēc brīdinājuma šāviena pielietošana nav obligāta."
+  "explanation": "Pirms pielietošanas var izvēlēties vienu no brīdināšanas veidiem — mutisku brīdinājumu vai brīdinājuma šāvienu. Pēc brīdinājuma šāviena pielietošana nav obligāta.",
+  "reviewed": true
  },
  {
   "id": 340,
   "law_reference": "Ieroču aprites likums, 66. panta 1. daļa",
-  "explanation": "Brīdināšanas veidu var izvēlēties: mutisku brīdinājumu vai brīdinājuma šāvienu. Mutisks brīdinājums nav obligāti pirmais, un brīdinājuma šāviens pēc mutiskā nav aizliegts."
+  "explanation": "Brīdināšanas veidu var izvēlēties: mutisku brīdinājumu vai brīdinājuma šāvienu. Mutisks brīdinājums nav obligāti pirmais, un brīdinājuma šāviens pēc mutiskā nav aizliegts.",
+  "reviewed": true
  },
  {
   "id": 341,
   "law_reference": "Ieroču aprites likums, 66. panta 1. un 2. daļa",
-  "explanation": "Pirms pielietošanas var izdarīt brīdinājuma šāvienu (vai brīdināt mutiski). Tas nav obligāts, nav jābūt pēc mutiska brīdinājuma, un pielietot bez brīdinājuma drīkst tikai 66. panta 2. daļas gadījumos, nevis «visos gadījumos»."
+  "explanation": "Pirms pielietošanas var izdarīt brīdinājuma šāvienu (vai brīdināt mutiski). Tas nav obligāts, nav jābūt pēc mutiska brīdinājuma, un pielietot bez brīdinājuma drīkst tikai 66. panta 2. daļas gadījumos, nevis «visos gadījumos».",
+  "reviewed": true
  },
  {
   "id": 342,
@@ -408,12 +458,14 @@
  {
   "id": 343,
   "law_reference": "Ieroču aprites likums, 66. panta 1. un 2. daļa",
-  "explanation": "Vispārējā kārtība ir brīdināt (66. panta 1. daļa), bet likumā ir izņēmumi, kad ieroci pielieto bez brīdinājuma (66. panta 2. daļa). Tas nav ieroča īpašnieka brīvā izvēlē, un pienākums brīdināt attiecas uz visiem, ne tikai uz amatpersonām."
+  "explanation": "Vispārējā kārtība ir brīdināt (66. panta 1. daļa), bet likumā ir izņēmumi, kad ieroci pielieto bez brīdinājuma (66. panta 2. daļa). Tas nav ieroča īpašnieka brīvā izvēlē, un pienākums brīdināt attiecas uz visiem, ne tikai uz amatpersonām.",
+  "reviewed": true
  },
  {
   "id": 344,
   "law_reference": "Ieroču aprites likums, 66. panta 2. daļa",
-  "explanation": "Bez brīdinājuma ieroci pielieto, ja uzbrukums, kas apdraud dzīvību vai veselību, ir pēkšņs, ja uzbrukumā lieto ieročus vai bīstamus priekšmetus vai mehāniskos transportlīdzekļus, vai ja aizturamā persona pretojas, lietojot ieročus vai bīstamus priekšmetus. Visi varianti ir likumā."
+  "explanation": "Bez brīdinājuma ieroci pielieto, ja uzbrukums, kas apdraud dzīvību vai veselību, ir pēkšņs, ja uzbrukumā lieto ieročus vai bīstamus priekšmetus vai mehāniskos transportlīdzekļus, vai ja aizturamā persona pretojas, lietojot ieročus vai bīstamus priekšmetus. Visi varianti ir likumā.",
+  "reviewed": true
  },
  {
   "id": 345,
@@ -424,91 +476,109 @@
  {
   "id": 346,
   "law_reference": "Ieroču aprites likums, 66. panta 2. daļa 1. punkts",
-  "explanation": "Bez brīdinājuma pielieto, ja uzbrukums, kas apdraud cilvēka dzīvību vai veselību, ir pēkšņs. Reāls apdraudējums pats par sevi brīdinājumu neatceļ, un mantas vai dzīvnieka apdraudējums šajā punktā nav minēts."
+  "explanation": "Bez brīdinājuma pielieto, ja uzbrukums, kas apdraud cilvēka dzīvību vai veselību, ir pēkšņs. Reāls apdraudējums pats par sevi brīdinājumu neatceļ, un mantas vai dzīvnieka apdraudējums šajā punktā nav minēts.",
+  "reviewed": true
  },
  {
   "id": 347,
   "law_reference": "Ieroču aprites likums, 66. panta 2. daļa 1. un 2. punkts",
-  "explanation": "Visi trīs gadījumi ir 66. panta 2. daļā: uzbrukumā lieto ieročus vai bīstamus priekšmetus, uzbrukumā izmanto mehānisko transportlīdzekli un uzbrukums, kas apdraud dzīvību vai veselību, ir pēkšņs."
+  "explanation": "Visi trīs gadījumi ir 66. panta 2. daļā: uzbrukumā lieto ieročus vai bīstamus priekšmetus, uzbrukumā izmanto mehānisko transportlīdzekli un uzbrukums, kas apdraud dzīvību vai veselību, ir pēkšņs.",
+  "reviewed": true
  },
  {
   "id": 348,
   "law_reference": "Ieroču aprites likums, 66. panta 2. daļa 2. punkts",
-  "explanation": "No variantiem precīzi likumam atbilst uzbrukums, kurā lieto ieročus vai bīstamus priekšmetus vai mehāniskos transportlīdzekļus. Reāls apdraudējums vien brīdinājumu neatceļ, bet pēkšņuma gadījumā likums runā par cilvēka, nevis dzīvnieka dzīvību vai veselību."
+  "explanation": "No variantiem precīzi likumam atbilst uzbrukums, kurā lieto ieročus vai bīstamus priekšmetus vai mehāniskos transportlīdzekļus. Reāls apdraudējums vien brīdinājumu neatceļ, bet pēkšņuma gadījumā likums runā par cilvēka, nevis dzīvnieka dzīvību vai veselību.",
+  "reviewed": true
  },
  {
   "id": 349,
   "law_reference": "Ieroču aprites likums, 66. panta 2. daļa 2. punkts",
-  "explanation": "Bez brīdinājuma pielieto, ja uzbrukumā lieto ieročus vai bīstamus priekšmetus vai mehāniskos transportlīdzekļus. Aizsardzība no reāla uzbrukuma vai ieroča atņemšanas novēršana ir pielietošanas nosacījumi, bet tie paši par sevi brīdinājumu neatceļ."
+  "explanation": "Bez brīdinājuma pielieto, ja uzbrukumā lieto ieročus vai bīstamus priekšmetus vai mehāniskos transportlīdzekļus. Aizsardzība no reāla uzbrukuma vai ieroča atņemšanas novēršana ir pielietošanas nosacījumi, bet tie paši par sevi brīdinājumu neatceļ.",
+  "reviewed": true
  },
  {
   "id": 350,
   "law_reference": "Ieroču aprites likums, 66. panta 2. daļa 1. un 3. punkts",
-  "explanation": "Pareizi: uzbrukums, kas apdraud dzīvību vai veselību, ir pēkšņs. Aizturēšanas gadījumā bez brīdinājuma pielieto tikai tad, ja aizturamais pretojas, lietojot ieročus vai bīstamus priekšmetus — «pēkšņa» pārsteigšana vai pretošanās vien to neattaisno."
+  "explanation": "Pareizi: uzbrukums, kas apdraud dzīvību vai veselību, ir pēkšņs. Aizturēšanas gadījumā bez brīdinājuma pielieto tikai tad, ja aizturamais pretojas, lietojot ieročus vai bīstamus priekšmetus — «pēkšņa» pārsteigšana vai pretošanās vien to neattaisno.",
+  "reviewed": true
  },
  {
   "id": 351,
   "law_reference": "Ieroču aprites likums, 66. panta 2. daļa 3. punkts",
-  "explanation": "Bez brīdinājuma pielieto, ja aizturamā persona pretojas, lietojot ieročus vai priekšmetus, ar kuriem apdraud cita cilvēka dzīvību vai veselību. «Pēkšņa pretošanās» vai «pēkšņs ieroča atņemšanas mēģinājums» likumā kā izņēmumi nav minēti."
+  "explanation": "Bez brīdinājuma pielieto, ja aizturamā persona pretojas, lietojot ieročus vai priekšmetus, ar kuriem apdraud cita cilvēka dzīvību vai veselību. «Pēkšņa pretošanās» vai «pēkšņs ieroča atņemšanas mēģinājums» likumā kā izņēmumi nav minēti.",
+  "reviewed": true
  },
  {
   "id": 352,
   "law_reference": "Ieroču aprites likums, 66. panta 2. daļa",
-  "explanation": "Izņēmumi ir 66. panta 2. daļā: pēkšņs uzbrukums, uzbrukums ar ieročiem, bīstamiem priekšmetiem vai transportlīdzekļiem un aizturamā pretošanās ar ieročiem vai bīstamiem priekšmetiem. Tas, ka jebkurš pielietošanas nosacījums ir negaidīts, nav vispārējs izņēmums."
+  "explanation": "Izņēmumi ir 66. panta 2. daļā: pēkšņs uzbrukums, uzbrukums ar ieročiem, bīstamiem priekšmetiem vai transportlīdzekļiem un aizturamā pretošanās ar ieročiem vai bīstamiem priekšmetiem. Tas, ka jebkurš pielietošanas nosacījums ir negaidīts, nav vispārējs izņēmums.",
+  "reviewed": true
  },
  {
   "id": 353,
   "law_reference": "Ieroču aprites likums, 66. panta 2. daļa",
-  "explanation": "Pareizais variants apvieno likuma 66. panta 2. daļas gadījumus: aizturamā pretošanās vai uzbrukums ar ieročiem vai bīstamiem priekšmetiem, mehāniskā transportlīdzekļa izmantošana un pēkšņs uzbrukums. Tikai aizturēšanas mērķis vai jebkura negaidītība brīdinājumu neatceļ."
+  "explanation": "Pareizais variants apvieno likuma 66. panta 2. daļas gadījumus: aizturamā pretošanās vai uzbrukums ar ieročiem vai bīstamiem priekšmetiem, mehāniskā transportlīdzekļa izmantošana un pēkšņs uzbrukums. Tikai aizturēšanas mērķis vai jebkura negaidītība brīdinājumu neatceļ.",
+  "reviewed": true
  },
  {
   "id": 354,
   "law_reference": "Ieroču aprites likums, 66. panta 2. daļa",
-  "explanation": "Visi trīs gadījumi ir 66. panta 2. daļā: aizturamā pretošanās ar ieročiem vai bīstamiem priekšmetiem, pēkšņs uzbrukums un uzbrukums ar ieročiem, bīstamiem priekšmetiem vai transportlīdzekļiem."
+  "explanation": "Visi trīs gadījumi ir 66. panta 2. daļā: aizturamā pretošanās ar ieročiem vai bīstamiem priekšmetiem, pēkšņs uzbrukums un uzbrukums ar ieročiem, bīstamiem priekšmetiem vai transportlīdzekļiem.",
+  "reviewed": true
  },
  {
   "id": 355,
   "law_reference": "Ieroču aprites likums, 66. panta 3., 4. un 5. daļa",
-  "explanation": "Izmantojot un pielietojot ieroci, jāievēro aizliegums, ja var ciest citas personas, jādara viss iespējamais kaitējuma mazināšanai, un pēc pielietošanas jāsaglabā notikuma vieta, jāpaliek tajā un jāsniedz palīdzība cietušajiem. Visi varianti ir pareizi."
+  "explanation": "Izmantojot un pielietojot ieroci, jāievēro aizliegums, ja var ciest citas personas, jādara viss iespējamais kaitējuma mazināšanai, un pēc pielietošanas jāsaglabā notikuma vieta, jāpaliek tajā un jāsniedz palīdzība cietušajiem. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 356,
   "law_reference": "Ieroču aprites likums, 66. panta 3. daļa",
-  "explanation": "Likumā: persona dara visu iespējamo, lai mazinātu kaitējumu un garantētu citu personu drošību. Likums neprasa garantēt citu mantas saglabāšanu, un uzsvars nav uz kaitējuma novēršanu sev."
+  "explanation": "Likumā: persona dara visu iespējamo, lai mazinātu kaitējumu un garantētu citu personu drošību. Likums neprasa garantēt citu mantas saglabāšanu, un uzsvars nav uz kaitējuma novēršanu sev.",
+  "reviewed": true
  },
  {
   "id": 357,
   "law_reference": "Ieroču aprites likums, 66. panta 4. daļa",
-  "explanation": "Aizliegts izmantot un pielietot ieroci, ja var ciest citas personas, pret kurām ierocis nav vērsts. Kaitējums personai, pret kuru ieroci pielieto, pats par sevi nav aizliegums, un vārdi «pret kurām ierocis nav vērsts» ir būtiski."
+  "explanation": "Aizliegts izmantot un pielietot ieroci, ja var ciest citas personas, pret kurām ierocis nav vērsts. Kaitējums personai, pret kuru ieroci pielieto, pats par sevi nav aizliegums, un vārdi «pret kurām ierocis nav vērsts» ir būtiski.",
+  "reviewed": true
  },
  {
   "id": 358,
   "law_reference": "Ieroču aprites likums, 66. panta 5. daļa",
-  "explanation": "Par katru pielietošanas gadījumu persona nekavējoties ziņo Valsts policijai — neatkarīgi no tā, vai ir cietušie. Darba devējs vai prokuratūra likumā nav minēti."
+  "explanation": "Par katru pielietošanas gadījumu persona nekavējoties ziņo Valsts policijai — neatkarīgi no tā, vai ir cietušie. Darba devējs vai prokuratūra likumā nav minēti.",
+  "reviewed": true
  },
  {
   "id": 359,
   "law_reference": "Ieroču aprites likums, 66. panta 5. daļa",
-  "explanation": "Pienākums ir nekavējoties ziņot Valsts policijai par katru pielietošanas gadījumu. Likums nenosaka konkrētu tālruni un neattiecina pienākumu tikai uz gadījumiem ar cietušajiem."
+  "explanation": "Pienākums ir nekavējoties ziņot Valsts policijai par katru pielietošanas gadījumu. Likums nenosaka konkrētu tālruni un neattiecina pienākumu tikai uz gadījumiem ar cietušajiem.",
+  "reviewed": true
  },
  {
   "id": 360,
   "law_reference": "Ieroču aprites likums, 66. panta 5. daļa",
-  "explanation": "Pēc pielietošanas jāziņo Valsts policijai, jāsaglabā notikuma vietas apstākļi un jāpaliek tajā, bet, ja ir cietušie, jāsniedz pirmā palīdzība un jāizsauc neatliekamā medicīniskā palīdzība. Visi varianti ir pareizi."
+  "explanation": "Pēc pielietošanas jāziņo Valsts policijai, jāsaglabā notikuma vietas apstākļi un jāpaliek tajā, bet, ja ir cietušie, jāsniedz pirmā palīdzība un jāizsauc neatliekamā medicīniskā palīdzība. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 361,
   "law_reference": "Ieroču aprites likums, 66. panta 5. daļa",
-  "explanation": "Persona saglabā notikuma vietas apstākļus un paliek notikuma vietā. Ieroci aiznest uz glabāšanas vietu vai pašai «apskatīt» notikuma vietu likums neparedz."
+  "explanation": "Persona saglabā notikuma vietas apstākļus un paliek notikuma vietā. Ieroci aiznest uz glabāšanas vietu vai pašai «apskatīt» notikuma vietu likums neparedz.",
+  "reviewed": true
  },
  {
   "id": 362,
   "law_reference": "Ieroču aprites likums, 66. panta 5. daļa",
-  "explanation": "Ja ir cietušie, jāsniedz pirmā palīdzība, nekavējoties jāizsauc neatliekamā medicīniskā palīdzība, jāziņo Valsts policijai, jāsaglabā notikuma vieta un jāpaliek tajā. Visi varianti ir pareizi."
+  "explanation": "Ja ir cietušie, jāsniedz pirmā palīdzība, nekavējoties jāizsauc neatliekamā medicīniskā palīdzība, jāziņo Valsts policijai, jāsaglabā notikuma vieta un jāpaliek tajā. Visi varianti ir pareizi.",
+  "reviewed": true
  },
  {
   "id": 363,
   "law_reference": "Ieroču aprites likums, 66. panta 5. daļa",
-  "explanation": "Ja ir cietušie, jādara abas lietas — jāsniedz pirmā palīdzība un nekavējoties jānodrošina neatliekamās medicīniskās palīdzības izsaukšana. Viena no tām vien nav pietiekama."
+  "explanation": "Ja ir cietušie, jādara abas lietas — jāsniedz pirmā palīdzība un nekavējoties jānodrošina neatliekamās medicīniskās palīdzības izsaukšana. Viena no tām vien nav pietiekama.",
+  "reviewed": true
  }
 ]

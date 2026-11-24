@@ -17,6 +17,8 @@ const EntrySchema = z.object({
   todo: z.string().optional(),
   possibly_outdated: z.boolean().optional(),
   outdated_note: z.string().nullable().optional(),
+  /** Pārbaudīts pret content/law tekstu — sēklošana iestata statusu "reviewed" */
+  reviewed: z.boolean().optional(),
 });
 
 export type ExplanationEntry = z.infer<typeof EntrySchema>;

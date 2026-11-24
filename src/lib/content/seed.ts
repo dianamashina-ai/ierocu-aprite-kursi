@@ -19,7 +19,7 @@ export async function seedDatabase(
   }: {
     reset?: boolean;
     /** Skaidrojumu melnraksti; tiek ierakstīti tikai jautājumiem ar statusu "draft" */
-    explanations?: Map<number, { explanation: string | null; law_reference: string | null; possibly_outdated?: boolean; outdated_note?: string | null }>;
+    explanations?: Map<number, { explanation: string | null; law_reference: string | null; possibly_outdated?: boolean; outdated_note?: string | null; reviewed?: boolean }>;
   } = {},
 ) {
   const { officialSections, modules, topics, questions, questionOptions, appSettings } = schema;
@@ -120,6 +120,7 @@ export async function seedDatabase(
             lawReference: e.law_reference,
             possiblyOutdated: Boolean(e.possibly_outdated),
             outdatedNote: e.outdated_note ?? null,
+            ...(e.reviewed ? { explanationStatus: "reviewed" as const } : {}),
           })
           .where(and(eq(questions.id, id), eq(questions.explanationStatus, "draft")))
           .returning({ id: questions.id });
