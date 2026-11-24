@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Check } from "lucide-react";
 import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/auth/session";
 import { applyPaymentEvent, getOrderForUser } from "@/lib/billing/service";
@@ -42,18 +43,17 @@ export default async function PaymentResultPage({ searchParams }: { searchParams
     <div className="mx-auto max-w-xl px-4 py-10 sm:py-16">
       {order.status === "paid" ? (
         <section className="rounded-2xl border border-line bg-white p-6 sm:p-8">
-          <p className="text-4xl" aria-hidden="true">🎯</p>
-          <h1 className="mt-2 text-2xl font-semibold">
+          <span aria-hidden="true" className="flex size-12 items-center justify-center rounded-full bg-ok-soft text-ok">
+            <Check className="size-6" strokeWidth={2.5} />
+          </span>
+          <h1 className="mt-4 text-2xl font-semibold">
             {product.includesCourse ? "Paldies! Pilna piekļuve atvērta" : "Paldies! Praktiskā nodarbība iegādāta"}
           </h1>
-          <p className="mt-2 text-muted">
-            Maksājums {formatEuro(order.amountCents)} saņemts. Rēķins {order.invoiceNumber} nosūtīts uz {order.buyer.email}.
+          <p className="mt-2 text-muted">Maksājums {formatEuro(order.amountCents)} saņemts.</p>
+          <p className="mt-1 text-muted">
+            Rēķins {order.invoiceNumber} nosūtīts uz {order.buyer.email}.
           </p>
-          {product.includesLesson && (
-            <p className="mt-3 rounded-lg bg-accent-soft px-3 py-2">
-              {LESSON_SCHEDULING} {order.buyer.phone && <>Tālrunis: <strong>{order.buyer.phone}</strong>.</>}
-            </p>
-          )}
+          {product.includesLesson && <p className="mt-4 rounded-xl bg-surface px-4 py-3">{LESSON_SCHEDULING}</p>}
           <div className="mt-6 flex flex-wrap gap-3">
             <Link href="/" className="btn-primary">{product.includesCourse ? "Sākt mācīties" : "Uz sākumu"}</Link>
             <Link href={`/rekins/${order.id}`} className="btn-secondary">Skatīt rēķinu</Link>

@@ -144,7 +144,7 @@ async function sendReceipt(order: typeof schema.orders.$inferSelect) {
     "",
     `Maksājums ${formatEuro(order.amountCents)} saņemts: ${product.title}.`,
     product.includesCourse ? "Tagad tev ir pieejami visi kursa moduļi, nodarbības un izmēģinājuma eksāmens." : "",
-    product.includesLesson ? `${LESSON_SCHEDULING} Tālrunis: ${order.buyer.phone ?? "—"}.` : "",
+    product.includesLesson ? LESSON_SCHEDULING : "",
     "",
     `Rēķins ${order.invoiceNumber}: ${link}`,
     product.includesCourse ? `Sākt mācīties: ${siteUrl()}/` : "",
