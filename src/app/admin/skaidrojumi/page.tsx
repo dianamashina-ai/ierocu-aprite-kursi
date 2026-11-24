@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Check } from "lucide-react";
 import { listModules, listQuestionsForReview, type ExplanationStatus } from "@/lib/backoffice/service";
 import { ExplanationBadge } from "@/components/admin/status-badge";
 
@@ -10,16 +11,20 @@ const TABS: { status?: ExplanationStatus; label: string }[] = [
   { status: "reviewed", label: "Pārbaudīti" },
 ];
 
-export default async function ExplanationsPage({ searchParams }: { searchParams: Promise<{ status?: string; modulis?: string }> }) {
+export default async function ExplanationsPage({ searchParams }: { searchParams: Promise<{ status?: string; modulis?: string; izmainas?: string }> }) {
   const sp = await searchParams;
   const status = TABS.find((t) => t.status === sp.status)?.status;
   const modules = await listModules();
   const moduleId = modules.find((m) => m.id === sp.modulis)?.id;
-  const rows = await listQuestionsForReview({ status, moduleId });
-  const href = (s?: ExplanationStatus, m?: string) => {
+  const onlyChanged = sp.izmainas === "1";
+  const all = await listQuestionsForReview({ status, moduleId });
+  const rows = onlyChanged ? all.filter((r) => r.possiblyOutdated) : all;
+  const changedCount = all.filter((r) => r.possiblyOutdated).length;
+  const href = (s?: ExplanationStatus, m?: string, changed = onlyChanged) => {
     const p = new URLSearchParams();
     if (s) p.set("status", s);
     if (m) p.set("modulis", m);
+    if (changed) p.set("izmainas", "1");
     return `/admin/skaidrojumi${p.size ? `?${p}` : ""}`;
   };
   const qs = (() => {
@@ -68,7 +73,23 @@ export default async function ExplanationsPage({ searchParams }: { searchParams:
         </div>
       </div>
 
-      <p className="mt-4 text-sm text-muted">{rows.length} jautājumi</p>
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm text-muted">{rows.length} jautājumi</p>
+        <Link
+          href={href(status, moduleId, !onlyChanged)}
+          role="checkbox"
+          aria-checked={onlyChanged}
+          className="inline-flex items-center gap-2 text-sm hover:text-ink"
+        >
+          <span
+            aria-hidden="true"
+            className={`flex size-5 items-center justify-center rounded border ${onlyChanged ? "border-accent bg-accent text-white" : "border-line bg-white"}`}
+          >
+            {onlyChanged && <Check className="size-3.5" strokeWidth={3} />}
+          </span>
+          Tikai likuma izmaiņas <span className="text-muted">({changedCount})</span>
+        </Link>
+      </div>
       <ul className="mt-2 divide-y divide-line rounded-2xl border border-line bg-white">
         {rows.map((r) => (
           <li key={r.id}>
