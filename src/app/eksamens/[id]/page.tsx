@@ -106,7 +106,7 @@ export default async function ExamPage({
               </div>
               {q.possiblyOutdated && q.outdatedNote && (
                 <p className="mt-3 rounded-xl bg-warn-soft p-3 text-sm text-ink">
-                  <span className="font-semibold text-warn">Likuma izmaiņas. </span>
+                  <span className="font-semibold text-warn">Uzmanīgi! </span>
                   {q.outdatedNote}
                 </p>
               )}

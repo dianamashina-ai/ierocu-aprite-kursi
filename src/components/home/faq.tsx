@@ -56,7 +56,7 @@ function items(exam: { questions: number; minutes: number; maxWrong: number }, t
     },
     {
       q: "Kas notiek, ja likums mainās?",
-      a: "Skaidrojumi un tēmas ir rakstīti pēc spēkā esošās likuma redakcijas. Ja oficiālā atbilde var neatbilst jaunākajiem grozījumiem, pie jautājuma ir atzīme «Likuma izmaiņas» ar paskaidrojumu un oficiālo atbildi no Valsts policijas saraksta.",
+      a: "Skaidrojumi un tēmas ir rakstīti pēc spēkā esošās likuma redakcijas. Ja oficiālā atbilde var neatbilst jaunākajiem grozījumiem, pie jautājuma ir atzīme «Uzmanīgi!» ar paskaidrojumu, kas mainījies un kad izmaiņas parādīsies eksāmenā.",
     },
   ];
 }

@@ -176,9 +176,10 @@
  {
   "id": 142,
   "law_reference": "MK noteikumi Nr. 211, 49. punkts",
-  "explanation": "Pašaizsardzības ieroča glabāšanas vai nēsāšanas atļaujas derīguma termiņa pagarināšanai iesniegumu iesniedz vismaz mēnesi pirms atļaujas termiņa beigām tajā Valsts policijas struktūrvienībā, kurā ierocis reģistrēts. Uzmanību: no 01.12.2026. šīs atļaujas izsniegs uz nenoteiktu laiku (likuma 16. panta 2. daļas jaunā redakcija), bet MK noteikumi vēl nav grozīti.",
+  "explanation": "Lai pagarinātu pašaizsardzības ierocim izsniegtās glabāšanas vai nēsāšanas atļaujas derīguma termiņu, iesniegumu iesniedz vismaz mēnesi pirms termiņa beigām tajā Valsts policijas struktūrvienībā, kurā ierocis reģistrēts.",
   "possibly_outdated": true,
-  "outdated_note": "No 2026. gada 1. decembra glabāšanas un nēsāšanas atļaujas izsniegs uz nenoteiktu laiku, tāpēc derīguma termiņa pagarināšana vairs nebūs vajadzīga. MK noteikumu Nr. 211 49. punkts pagaidām nav grozīts."
+  "outdated_note": "01.12.2026. stāsies spēkā Ieroču aprites likuma grozījumi (16. panta otrā daļa). Ieroča glabāšanas un nēsāšanas atļaujas izsniegs uz nenoteiktu laiku, tāpēc to derīguma termiņš vairs nebūs jāpagarina. Jautājumos, atbildēs un Valsts policijas eksāmenā šīs izmaiņas tiks ieviestas no 2027. gada.",
+  "reviewed": true
  },
  {
   "id": 143,
@@ -272,17 +273,19 @@
  },
  {
   "id": 167,
-  "law_reference": "MK noteikumi Nr. 210, 22. punkts (MK 27.10.2026. noteikumu Nr. 641 redakcijā)",
-  "explanation": "Spēkā esošā redakcija: visus šaujamieročus un lielas enerģijas pneimatiskos ieročus glabā izlādētus — gan medību un sporta, gan pašaizsardzības. Pielādētu magazīnu glabā kā munīciju. Agrākā redakcija atļāva pašaizsardzības ieroci glabāt ar pievienotu pielādētu magazīnu, uz ko balstās oficiālā atbilde.",
+  "law_reference": "MK noteikumi Nr. 210, 22. punkts (redakcijā līdz 29.10.2026.)",
+  "explanation": "Medību vai sporta šaujamieroci un lielas enerģijas pneimatisko ieroci glabā izlādētu: magazīnā (cilindrā) un patrontelpā nav munīcijas. Pašaizsardzības šaujamieroci drīkst glabāt tāpat vai ar pielādētu magazīnu, ja patrontelpā nav patronas. Tāpēc pareizi ir abi apgalvojumi: gan par medību un sporta ieroci, gan par pašaizsardzības ieroci.",
   "possibly_outdated": true,
-  "outdated_note": "Kopš MK 27.10.2026. noteikumiem Nr. 641 visus šaujamieročus, arī pašaizsardzības, glabā izlādētus, pielādētu magazīnu glabā kā munīciju, un visu šaujamieroču munīciju glabā atsevišķi no ieroča (atsevišķā slēdzamā nodalījumā vai atsevišķā seifā). Oficiālā atbilde atbilst MK noteikumu Nr. 210 22. punkta iepriekšējai redakcijai."
+  "outdated_note": "30.10.2026. stājās spēkā MK noteikumu Nr. 210 grozījumi (MK 27.10.2026. noteikumi Nr. 641). Tagad visus šaujamieročus, arī pašaizsardzības, glabā izlādētus, un pielādētu magazīnu glabā kā munīciju. Jebkura šaujamieroča munīciju glabā atsevišķi no ieroča: atsevišķā slēdzamā nodalījumā vai atsevišķā seifā. Jautājumos, atbildēs un Valsts policijas eksāmenā šīs izmaiņas tiks ieviestas no 2027. gada.",
+  "reviewed": true
  },
  {
   "id": 168,
-  "law_reference": "MK noteikumi Nr. 210, 22. punkts (MK 27.10.2026. noteikumu Nr. 641 redakcijā)",
-  "explanation": "Spēkā esošā redakcija: jebkura lietojuma veida šaujamieroci glabā izlādētu — magazīnā (cilindrā), kas pievienots ierocim, un patrontelpā nav munīcijas. Agrāk šī prasība bija tikai medību un sporta ieročiem, uz ko balstās oficiālā atbilde.",
+  "law_reference": "MK noteikumi Nr. 210, 22. punkts (redakcijā līdz 29.10.2026.)",
+  "explanation": "Izlādētu, kad magazīnā (cilindrā) un patrontelpā nav munīcijas, obligāti jāglabā medību un sporta šaujamierocis. Pašaizsardzības šaujamieroci drīkst glabāt arī ar pielādētu magazīnu, ja patrontelpā nav patronas. Tāpēc šī prasība neattiecas uz jebkura lietojuma ieroci.",
   "possibly_outdated": true,
-  "outdated_note": "Kopš MK 27.10.2026. noteikumiem Nr. 641 visus šaujamieročus, arī pašaizsardzības, glabā izlādētus, pielādētu magazīnu glabā kā munīciju, un visu šaujamieroču munīciju glabā atsevišķi no ieroča (atsevišķā slēdzamā nodalījumā vai atsevišķā seifā). Oficiālā atbilde atbilst MK noteikumu Nr. 210 22. punkta iepriekšējai redakcijai."
+  "outdated_note": "30.10.2026. stājās spēkā MK noteikumu Nr. 210 grozījumi (MK 27.10.2026. noteikumi Nr. 641). Tagad visus šaujamieročus, arī pašaizsardzības, glabā izlādētus, un pielādētu magazīnu glabā kā munīciju. Jebkura šaujamieroča munīciju glabā atsevišķi no ieroča: atsevišķā slēdzamā nodalījumā vai atsevišķā seifā. Jautājumos, atbildēs un Valsts policijas eksāmenā šīs izmaiņas tiks ieviestas no 2027. gada.",
+  "reviewed": true
  },
  {
   "id": 169,
@@ -292,10 +295,11 @@
  },
  {
   "id": 170,
-  "law_reference": "MK noteikumi Nr. 210, 22. punkts (MK 27.10.2026. noteikumu Nr. 641 redakcijā)",
-  "explanation": "Spēkā esošā redakcija: arī pašaizsardzības šaujamieroci glabā tikai izlādētu, bet pielādētu magazīnu glabā kā munīciju atsevišķi. Iespēja glabāt ar pievienotu pielādētu magazīnu bija agrākajā redakcijā, uz ko balstās oficiālā atbilde.",
+  "law_reference": "MK noteikumi Nr. 210, 22. punkts (redakcijā līdz 29.10.2026.)",
+  "explanation": "Pašaizsardzības šaujamieroci drīkst glabāt izlādētu vai ar pielādētu magazīnu (cilindru), bet patrontelpā patronas nedrīkst būt. Ierocis ar patronu patrontelpā glabāšanai nav pieļaujams.",
   "possibly_outdated": true,
-  "outdated_note": "Kopš MK 27.10.2026. noteikumiem Nr. 641 visus šaujamieročus, arī pašaizsardzības, glabā izlādētus, pielādētu magazīnu glabā kā munīciju, un visu šaujamieroču munīciju glabā atsevišķi no ieroča (atsevišķā slēdzamā nodalījumā vai atsevišķā seifā). Oficiālā atbilde atbilst MK noteikumu Nr. 210 22. punkta iepriekšējai redakcijai."
+  "outdated_note": "30.10.2026. stājās spēkā MK noteikumu Nr. 210 grozījumi (MK 27.10.2026. noteikumi Nr. 641). Tagad visus šaujamieročus, arī pašaizsardzības, glabā izlādētus, un pielādētu magazīnu glabā kā munīciju. Jebkura šaujamieroča munīciju glabā atsevišķi no ieroča: atsevišķā slēdzamā nodalījumā vai atsevišķā seifā. Jautājumos, atbildēs un Valsts policijas eksāmenā šīs izmaiņas tiks ieviestas no 2027. gada.",
+  "reviewed": true
  },
  {
   "id": 176,
@@ -359,17 +363,19 @@
  },
  {
   "id": 171,
-  "law_reference": "MK noteikumi Nr. 210, 22. punkts (MK 27.10.2026. noteikumu Nr. 641 redakcijā)",
-  "explanation": "Spēkā esošā redakcija: jebkura šaujamieroča munīciju glabā atsevišķi no ieroča — seifa atsevišķā slēdzamā nodalījumā vai atsevišķā seifā. Agrāk tas bija prasīts tikai medību un sporta garstobra–vītņstobra šaujamieroču munīcijai, uz ko balstās oficiālā atbilde.",
+  "law_reference": "MK noteikumi Nr. 210, 22. punkts (redakcijā līdz 29.10.2026.)",
+  "explanation": "Atsevišķi no ieroča jāglabā medību un sporta garstobra–vītņstobra šaujamieroča munīcija: seifā vai metāla skapī (kastē), atsevišķā slēdzamā nodalījumā vai atsevišķā seifā (metāla skapī). Šī prasība attiecas tieši uz šo ieroču grupu, nevis uz visiem šaujamieročiem.",
   "possibly_outdated": true,
-  "outdated_note": "Kopš MK 27.10.2026. noteikumiem Nr. 641 visus šaujamieročus, arī pašaizsardzības, glabā izlādētus, pielādētu magazīnu glabā kā munīciju, un visu šaujamieroču munīciju glabā atsevišķi no ieroča (atsevišķā slēdzamā nodalījumā vai atsevišķā seifā). Oficiālā atbilde atbilst MK noteikumu Nr. 210 22. punkta iepriekšējai redakcijai."
+  "outdated_note": "30.10.2026. stājās spēkā MK noteikumu Nr. 210 grozījumi (MK 27.10.2026. noteikumi Nr. 641). Tagad visus šaujamieročus, arī pašaizsardzības, glabā izlādētus, un pielādētu magazīnu glabā kā munīciju. Jebkura šaujamieroča munīciju glabā atsevišķi no ieroča: atsevišķā slēdzamā nodalījumā vai atsevišķā seifā. Jautājumos, atbildēs un Valsts policijas eksāmenā šīs izmaiņas tiks ieviestas no 2027. gada.",
+  "reviewed": true
  },
  {
   "id": 172,
-  "law_reference": "MK noteikumi Nr. 210, 22. punkts (MK 27.10.2026. noteikumu Nr. 641 redakcijā)",
-  "explanation": "Spēkā esošā redakcija: visu šaujamieroču (medību, sporta un pašaizsardzības) munīciju glabā atsevišķi no ieroča. Ierobežojums «tikai medību un sporta vītņstobra» bija agrākajā redakcijā, uz ko balstās oficiālā atbilde.",
+  "law_reference": "MK noteikumi Nr. 210, 22. punkts (redakcijā līdz 29.10.2026.)",
+  "explanation": "Atsevišķi no ieroča jāglabā medību un sporta garstobra–vītņstobra šaujamieroča munīcija: seifā vai metāla skapī (kastē), atsevišķā slēdzamā nodalījumā vai atsevišķā seifā (metāla skapī). Šī prasība attiecas tieši uz šo ieroču grupu, nevis uz visiem šaujamieročiem.",
   "possibly_outdated": true,
-  "outdated_note": "Kopš MK 27.10.2026. noteikumiem Nr. 641 visus šaujamieročus, arī pašaizsardzības, glabā izlādētus, pielādētu magazīnu glabā kā munīciju, un visu šaujamieroču munīciju glabā atsevišķi no ieroča (atsevišķā slēdzamā nodalījumā vai atsevišķā seifā). Oficiālā atbilde atbilst MK noteikumu Nr. 210 22. punkta iepriekšējai redakcijai."
+  "outdated_note": "30.10.2026. stājās spēkā MK noteikumu Nr. 210 grozījumi (MK 27.10.2026. noteikumi Nr. 641). Tagad visus šaujamieročus, arī pašaizsardzības, glabā izlādētus, un pielādētu magazīnu glabā kā munīciju. Jebkura šaujamieroča munīciju glabā atsevišķi no ieroča: atsevišķā slēdzamā nodalījumā vai atsevišķā seifā. Jautājumos, atbildēs un Valsts policijas eksāmenā šīs izmaiņas tiks ieviestas no 2027. gada.",
+  "reviewed": true
  },
  {
   "id": 173,

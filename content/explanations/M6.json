@@ -55,17 +55,19 @@
  },
  {
   "id": 191,
-  "law_reference": "MK noteikumi Nr. 210, 34. punkts (MK 27.10.2026. noteikumu Nr. 641 redakcijā)",
-  "explanation": "Ieroci pārvadā iesaiņotu (futrālī, somā vai speciālā iesaiņojumā), izlādētu un tā, lai tas nenonāktu nepiederošu personu rokās. Spēkā esošajā redakcijā izlādēts nozīmē «ar nepielādētu magazīnu un bez munīcijas patrontelpā», un munīcija ir iesaiņota atsevišķi.",
+  "law_reference": "MK noteikumi Nr. 210, 34. punkts (redakcijā līdz 29.10.2026.)",
+  "explanation": "Pārvadājot ieroci, jāizpilda visas prasības kopā. Ierocis ir iesaiņots: futrālī, ieroču somā vai citā speciālā iesaiņojumā. Ierocis ir izlādēts: patrontelpā nav munīcijas, un magazīna ir nepielādēta vai izņemta no ieroča. Pārvadāšanas apstākļi nepieļauj, ka ierocis vai munīcija nejauši nonāk nepiederošas personas rokās.",
   "possibly_outdated": true,
-  "outdated_note": "Kopš MK 27.10.2026. noteikumiem Nr. 641 ieroci pārvadā ar nepielādētu magazīnu un bez munīcijas patrontelpā, munīciju iesaiņo atsevišķi. Iespēja pārvadāt ar no ieroča izņemtu pielādētu magazīnu, kas minēta oficiālajā atbildē, bija MK noteikumu Nr. 210 34. punkta iepriekšējā redakcijā."
+  "outdated_note": "30.10.2026. stājās spēkā MK noteikumu Nr. 210 grozījumi (MK 27.10.2026. noteikumi Nr. 641). Tagad ieroci pārvadā tikai ar nepielādētu magazīnu un bez munīcijas patrontelpā, un munīciju iesaiņo atsevišķi no ieroča. Pārvadāt ar no ieroča izņemtu pielādētu magazīnu vairs nedrīkst. Jautājumos, atbildēs un Valsts policijas eksāmenā šīs izmaiņas tiks ieviestas no 2027. gada.",
+  "reviewed": true
  },
  {
   "id": 192,
-  "law_reference": "MK noteikumi Nr. 210, 34. punkts (MK 27.10.2026. noteikumu Nr. 641 redakcijā)",
-  "explanation": "Spēkā esošā redakcija: ieroci pārvadā izlādētu — bez munīcijas patrontelpā un ar nepielādētu magazīnu, munīcija ir iesaiņota atsevišķi. Agrākā redakcija ļāva pārvadāt arī ar no ieroča izņemtu pielādētu magazīnu, uz ko balstās oficiālā atbilde.",
+  "law_reference": "MK noteikumi Nr. 210, 34. punkts (redakcijā līdz 29.10.2026.)",
+  "explanation": "Pārvadājot ieroci, patrontelpā nedrīkst būt munīcijas. Magazīna drīkst būt nepielādēta vai pielādēta, ja tā izņemta no ieroča, un abi veidi ir pieļaujami. Pielādētu ieroci pārvadāt nedrīkst arī tad, ja tas ir futrālī vai somā.",
   "possibly_outdated": true,
-  "outdated_note": "Kopš MK 27.10.2026. noteikumiem Nr. 641 ieroci pārvadā ar nepielādētu magazīnu un bez munīcijas patrontelpā, munīciju iesaiņo atsevišķi. Iespēja pārvadāt ar no ieroča izņemtu pielādētu magazīnu, kas minēta oficiālajā atbildē, bija MK noteikumu Nr. 210 34. punkta iepriekšējā redakcijā."
+  "outdated_note": "30.10.2026. stājās spēkā MK noteikumu Nr. 210 grozījumi (MK 27.10.2026. noteikumi Nr. 641). Tagad ieroci pārvadā tikai ar nepielādētu magazīnu un bez munīcijas patrontelpā, un munīciju iesaiņo atsevišķi no ieroča. Pārvadāt ar no ieroča izņemtu pielādētu magazīnu vairs nedrīkst. Jautājumos, atbildēs un Valsts policijas eksāmenā šīs izmaiņas tiks ieviestas no 2027. gada.",
+  "reviewed": true
  },
  {
   "id": 193,

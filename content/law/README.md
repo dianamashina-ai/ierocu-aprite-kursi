@@ -16,6 +16,7 @@ un grozījumu piezīmes ir oriģinālie. Mūsu pievienotās rindas sākas ar «�
 | Fails | Noteikumi | Redakcija |
 |---|---|---|
 | [mk-210-ierocu-un-municijas-aprite.md](./mk-210-ierocu-un-municijas-aprite.md) | Nr. 210 «Noteikumi par ieroču un munīcijas apriti» (glabāšana, nēsāšana, pārvadāšana, nodošana, realizēšana) | 30.10.2026.–31.12.2026.; atsevišķi atzīmēti punkti, kas mainās no 01.01.2027. |
+| [mk-210.redakcija-lidz-2026-10-29.md](./mk-210.redakcija-lidz-2026-10-29.md) | Nr. 210, 22. un 34. punkts iepriekšējā redakcijā (uz tiem balstās oficiālās atbildes jautājumiem Nr. 167, 168, 170–172, 191, 192; eksāmenā izmanto 2026. gadā) | līdz 29.10.2026. (vairs nav spēkā) |
 | [mk-211-ierocu-atlaujas.md](./mk-211-ierocu-atlaujas.md) | Nr. 211 «Noteikumi par ieroču atļaujām un par ieroču izņemšanu un iznīcināšanu» | 13.04.2024.– (vēl nav pielāgoti likuma grozījumiem, kas stājās spēkā 21.10.2026.) |
 | [mk-202-veselibas-parbaudes.md](./mk-202-veselibas-parbaudes.md) | Nr. 202 par veselības pārbaudēm un medicīniskajām pretindikācijām | sākotnējā redakcija |
 | [mk-494-sautuves.md](./mk-494-sautuves.md) | Nr. 494 par šautuvēm, treniņšaušanu un drošību | 14.08.2025.– |

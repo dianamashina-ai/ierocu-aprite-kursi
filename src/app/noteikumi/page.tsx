@@ -117,7 +117,7 @@ export default function TermsPage() {
         </li>
         <li>
           Oficiālo jautājumu atbildes tiek rādītas tādas, kādas tās ir Valsts policijas jautājumu sarakstā. Ja likums ir mainījies,
-          pie jautājuma ir atzīme «Likuma izmaiņas».
+          pie jautājuma ir atzīme «Uzmanīgi!».
         </li>
         <li>Platforma palīdz sagatavoties, bet negarantē pārbaudījuma nokārtošanu.</li>
         <li>
