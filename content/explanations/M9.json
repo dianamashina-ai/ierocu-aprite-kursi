@@ -93,13 +93,15 @@
   "id": 379,
   "law_reference": "Ieroču aprites likums, 90. panta 3. daļa",
   "explanation": "Likums ļauj uz laiku izņemt ieroci, lai novērstu tā pazaudēšanu, nolaupīšanu vai ļaunprātīgu izmantošanu, un šis pamats aptver arī situāciju, kad pieņemts policijas lēmums par nošķiršanu. Policijas darbinieka subjektīvs lietderības apsvērums nav pamats.",
-  "todo": "policijas lēmums par nošķiršanu regulēts citā likumā («Par policiju»), kura teksta platformā nav."
+  "todo": "policijas lēmums par nošķiršanu regulēts citā likumā («Par policiju»), kura teksta platformā nav.",
+  "reviewed": true
  },
  {
   "id": 380,
   "law_reference": "Ieroču aprites likums, 90. panta 1. daļas 1. un 2. punkts un 3. daļa",
   "explanation": "Ieroci var izņemt, ja pārkāpta aprites kārtība, ja tas vajadzīgs administratīvo pārkāpumu procesā vai kriminālprocesā, kā arī lai novērstu ļaunprātīgu izmantošanu (piemēram, pēc lēmuma par nošķiršanu). Visi varianti ir pareizi.",
-  "todo": "nošķiršanas regulējums ir likumā «Par policiju», kura teksta platformā nav."
+  "todo": "nošķiršanas regulējums ir likumā «Par policiju», kura teksta platformā nav.",
+  "reviewed": true
  },
  {
   "id": 381,
@@ -309,7 +311,8 @@
   "id": 415,
   "law_reference": "Krimināllikums, 32. pants",
   "explanation": "Galējā nepieciešamība: reāls apdraudējums tiesiskām interesēm, ko konkrētajos apstākļos nevar novērst ar citiem līdzekļiem, un radītais kaitējums ir mazāks nekā novērstais. Visi varianti apraksta šīs pazīmes.",
-  "todo": "daļa formulējumu ir likuma interpretācija (Valsts policijas metodiskais skaidrojums), kura avota teksta platformā vēl nav."
+  "todo": "daļa formulējumu ir likuma interpretācija (Valsts policijas metodiskais skaidrojums), kura avota teksta platformā vēl nav.",
+  "reviewed": true
  },
  {
   "id": 416,
@@ -327,7 +330,8 @@
   "id": 418,
   "law_reference": "Krimināllikums, 32. pants; 29. pants; 31. pants",
   "explanation": "Galējās nepieciešamības situācijā kaitējums tiek nodarīts trešajai personai (piemēram, kāda mantai), lai novērstu lielāku kaitējumu. Uzbrucējam kaitējumu nodara nepieciešamajā aizstāvēšanās gadījumā, bet aizturamajai personai — aizturēšanas gadījumā.",
-  "todo": "daļa formulējumu ir likuma interpretācija (Valsts policijas metodiskais skaidrojums), kura avota teksta platformā vēl nav."
+  "todo": "daļa formulējumu ir likuma interpretācija (Valsts policijas metodiskais skaidrojums), kura avota teksta platformā vēl nav.",
+  "reviewed": true
  },
  {
   "id": 419,
@@ -339,12 +343,14 @@
   "id": 420,
   "law_reference": "Krimināllikums, 29. panta 2. daļa",
   "explanation": "Aizstāvoties jāievēro robežas (aizsardzība nedrīkst būt acīmredzami nesamērīga ar uzbrukuma raksturu un bīstamību) un jāvērtē uzbrucēja pazīmes un uzbrukuma bīstamība (spēku samērs, uzbrucēju skaits, ieroču lietošana u. c.). Aizturēšanas nosacījumi attiecas uz 31. pantu, nevis uz aizstāvēšanos.",
-  "todo": "daļa formulējumu ir likuma interpretācija (Valsts policijas metodiskais skaidrojums), kura avota teksta platformā vēl nav."
+  "todo": "daļa formulējumu ir likuma interpretācija (Valsts policijas metodiskais skaidrojums), kura avota teksta platformā vēl nav.",
+  "reviewed": true
  },
  {
   "id": 421,
   "law_reference": "Krimināllikums, 31. panta 1.–3. daļa",
   "explanation": "Aizturot jāievēro aizturēšanas nosacījumi (kaitējums nedrīkst acīmredzami neatbilst nodarījuma, nepakļaušanās vai pretošanās raksturam) un jāvērtē aizturamā pazīmes un pretošanās bīstamība. Nepieciešamās aizstāvēšanās robežas attiecas uz aizsardzību pret uzbrukumu (29. pants), nevis uz aizturēšanu.",
-  "todo": "daļa formulējumu ir likuma interpretācija (Valsts policijas metodiskais skaidrojums), kura avota teksta platformā vēl nav."
+  "todo": "daļa formulējumu ir likuma interpretācija (Valsts policijas metodiskais skaidrojums), kura avota teksta platformā vēl nav.",
+  "reviewed": true
  }
 ]

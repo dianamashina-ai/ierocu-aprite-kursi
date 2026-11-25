@@ -121,7 +121,8 @@
   "id": 201,
   "law_reference": "Ieroču aprites likums, 36. panta 1. daļas 2. un 3. punkts",
   "explanation": "Aizliegts nēsāt pistoli ar patronu patrontelpā. Pielādētu pistoli (magazīna ievietota) ar vienu pielādētu rezerves magazīnu vai revolveri ar vienu rezerves cilindru nēsāt drīkst, tāpat kā nepielādētu ieroci.",
-  "todo": "likums nosaka aizliegumu pistolei; revolvera gadījums var būt precizēts MK noteikumos."
+  "todo": "likums nosaka aizliegumu pistolei; revolvera gadījums var būt precizēts MK noteikumos.",
+  "reviewed": true
  },
  {
   "id": 202,
@@ -397,7 +398,8 @@
   "id": 247,
   "law_reference": "MK noteikumi Nr. 210, 10. punkts; Ieroču aprites likums, 38. panta 1. daļa",
   "explanation": "Valsts policijai jāziņo, ja persona atsakās uzrādīt munīcijai atbilstošu atļauju vai realizē pašizgatavotu munīciju. Fiziskā persona drīkst realizēt munīciju tikai bez komerciāla rakstura (likuma 38. panta 1. daļa), tāpēc arī komerciāla realizēšana ir pārkāpums.",
-  "todo": "tieši par ziņošanu komerciāla rakstura gadījumā MK noteikumu Nr. 210 10. punkts nerunā."
+  "todo": "tieši par ziņošanu komerciāla rakstura gadījumā MK noteikumu Nr. 210 10. punkts nerunā.",
+  "reviewed": true
  },
  {
   "id": 248,

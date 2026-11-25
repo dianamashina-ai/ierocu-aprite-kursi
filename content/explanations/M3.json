@@ -15,7 +15,8 @@
   "id": 3,
   "law_reference": "Ieroču aprites likums, 4. panta 1. un 4. daļa",
   "explanation": "Likums nosaka, ka šaujamieročus un munīciju klasificē Valsts policija, bet klasificēšanas kārtību nosaka Ministru kabinets. Ražotāji, importētāji, komersanti vai ekspertu laboratorijas ieročus neklasificē.",
-  "todo": "konkrēto institūciju (klasificēšanas komisiju) nosaka Ministru kabineta noteikumi, kuru teksta platformā vēl nav."
+  "todo": "konkrēto institūciju (klasificēšanas komisiju) nosaka Ministru kabineta noteikumi, kuru teksta platformā vēl nav.",
+  "reviewed": true
  },
  {
   "id": 4,

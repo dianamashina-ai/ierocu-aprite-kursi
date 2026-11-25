@@ -2,7 +2,7 @@
 
 > Ģenerēts ar `python3 -I scripts/explanations-report.py` — nerediģēt ar roku.
 
-Pārbaudīti pret likuma tekstu (`"reviewed": true`): **417** no 515; pārējie ir **melnraksti** (`draft`). Skaidrojumi rakstīti **tikai** pēc `content/law/` tekstiem:
+Pārbaudīti pret likuma tekstu (`"reviewed": true`): **514** no 515; pārējie ir **melnraksti** (`draft`). Skaidrojumi rakstīti **tikai** pēc `content/law/` tekstiem:
 Ieroču aprites likums, Krimināllikuma izvilkums un MK noteikumi Nr. 191, 202, 210, 211, 494 (redakciju datumi — failu sākumā).
 Katra atsauce tiek automātiski pārbaudīta — pantam vai punktam jābūt tekstā (`tests/explanations.test.ts`).
 

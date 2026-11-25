@@ -38,22 +38,26 @@
  {
   "id": 428,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 428–431 (oficiālās atbildes)",
-  "explanation": "Šaujamieroča darbība ir vairāku soļu kopums: ieroci pārbauda, pielādē un sagatavo šaušanai; nospiežot sprūda mēlīti, gailis uzsit pa belzni, belznis pa kapseli, un pulvera gāzes izgrūž lodi pa stobru. Atkārtotas darbības ierocim nākamo patronu ievada, ar roku pārlādējot aizslēgu, bet viena šāviena ierocim patronu katru reizi ieliek ar roku. Katrs apgalvojums apraksta daļu no šī procesa, tāpēc pareizi ir visi."
+  "explanation": "Šaujamieroča darbība ir vairāku soļu kopums: ieroci pārbauda, pielādē un sagatavo šaušanai; nospiežot sprūda mēlīti, gailis uzsit pa belzni, belznis pa kapseli, un pulvera gāzes izgrūž lodi pa stobru. Atkārtotas darbības ierocim nākamo patronu ievada, ar roku pārlādējot aizslēgu, bet viena šāviena ierocim patronu katru reizi ieliek ar roku. Katrs apgalvojums apraksta daļu no šī procesa, tāpēc pareizi ir visi.",
+  "reviewed": true
  },
  {
   "id": 429,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 428–431 (oficiālās atbildes)",
-  "explanation": "Pistoles darbības princips sastāv no secīgiem posmiem: sagatavošana (magazīna rokturī, drošinātājs izslēgts, aizslēgs pārvilkts — patrona patrontelpā), šāviena mehānika (gailis → belznis → kapsele → šaujampulveris) un rezultāts (gāzu spiediens izgrūž lodi pa stobru). Neviens posms atsevišķi nav viss darbības princips — tas ir visu darbību kopums."
+  "explanation": "Pistoles darbības princips sastāv no secīgiem posmiem: sagatavošana (magazīna rokturī, drošinātājs izslēgts, aizslēgs pārvilkts — patrona patrontelpā), šāviena mehānika (gailis → belznis → kapsele → šaujampulveris) un rezultāts (gāzu spiediens izgrūž lodi pa stobru). Neviens posms atsevišķi nav viss darbības princips — tas ir visu darbību kopums.",
+  "reviewed": true
  },
  {
   "id": 430,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 428–431 (oficiālās atbildes)",
-  "explanation": "Pusautomātiskās pistoles cikls: šāviens; gāzu spiediens virza aizslēgu atpakaļ, saspiež atgriezējatsperi, izvilcējs notur čaulīti un tā caur aizslēga logu tiek izmesta, gailis tiek uzvilkts; atgriezējatspere atgriež aizslēgu, tas iebīda nākamo patronu patrontelpā un to noslēdz. Visi trīs apraksti kopā veido pilnu ciklu."
+  "explanation": "Pusautomātiskās pistoles cikls: šāviens; gāzu spiediens virza aizslēgu atpakaļ, saspiež atgriezējatsperi, izvilcējs notur čaulīti un tā caur aizslēga logu tiek izmesta, gailis tiek uzvilkts; atgriezējatspere atgriež aizslēgu, tas iebīda nākamo patronu patrontelpā un to noslēdz. Visi trīs apraksti kopā veido pilnu ciklu.",
+  "reviewed": true
  },
  {
   "id": 431,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 428–431 (oficiālās atbildes)",
-  "explanation": "Pusautomātiskā pistole pēc katra šāviena pati sagatavojas nākamajam, bet katram šāvienam sprūda mēlīte jāatlaiž un jānospiež no jauna. Kad magazīna tukša, aizslēga aizture notur aizslēgu aizmugurē — var ielikt pielādētu magazīnu un, atbrīvojot aizturi, ievadīt patronu patrontelpā. Pareizi ir visi apraksti kopā."
+  "explanation": "Pusautomātiskā pistole pēc katra šāviena pati sagatavojas nākamajam, bet katram šāvienam sprūda mēlīte jāatlaiž un jānospiež no jauna. Kad magazīna tukša, aizslēga aizture notur aizslēgu aizmugurē — var ielikt pielādētu magazīnu un, atbrīvojot aizturi, ievadīt patronu patrontelpā. Pareizi ir visi apraksti kopā.",
+  "reviewed": true
  },
  {
   "id": 432,
@@ -220,147 +224,176 @@
  {
   "id": 459,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Pie galvenajiem šaujamieroča mehānismiem pieskaita pielādēšanas un čaulīšu ekstrakcijas mehānismu, patronu padeves mehānismu, patrontelpas noslēgšanas (aizslēga) mehānismu, kā arī šaušanas mehānismu un drošinātājus. Visi minētie ir galvenie mehānismi."
+  "explanation": "Pie galvenajiem šaujamieroča mehānismiem pieskaita pielādēšanas un čaulīšu ekstrakcijas mehānismu, patronu padeves mehānismu, patrontelpas noslēgšanas (aizslēga) mehānismu, kā arī šaušanas mehānismu un drošinātājus. Visi minētie ir galvenie mehānismi.",
+  "reviewed": true
  },
  {
   "id": 460,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Galvenie šaujamieroča mehānismi ir šaušanas mehānisms un drošinātāji, pielādēšanas un čaulīšu ekstrakcijas mehānisms, patronu padeves mehānisms un patrontelpas noslēgšanas mehānisms. Visi uzskaitītie pieder pie galvenajiem."
+  "explanation": "Galvenie šaujamieroča mehānismi ir šaušanas mehānisms un drošinātāji, pielādēšanas un čaulīšu ekstrakcijas mehānisms, patronu padeves mehānisms un patrontelpas noslēgšanas mehānisms. Visi uzskaitītie pieder pie galvenajiem.",
+  "reviewed": true
  },
  {
   "id": 461,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Oficiālajā atbildē visi trīs apraksti ir galvenie mehānismi: ekstrakcijas mehānisms (atsperīgs izvilcējs un izmetēja izcilnis), patronu padeves un patrontelpas noslēgšanas (aizslēga) mehānisms un šaušanas mehānisms (uzsitējmehānisms un nolaižamais mehānisms)."
+  "explanation": "Oficiālajā atbildē visi trīs apraksti ir galvenie mehānismi: ekstrakcijas mehānisms (atsperīgs izvilcējs un izmetēja izcilnis), patronu padeves un patrontelpas noslēgšanas (aizslēga) mehānisms un šaušanas mehānisms (uzsitējmehānisms un nolaižamais mehānisms).",
+  "reviewed": true
  },
  {
   "id": 462,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Drošinātāji un pielādēšanas un čaulīšu ekstrakcijas mehānisms ir galvenie šaujamieroča mehānismi. Skaņas klusinātājs vai liesmu slāpētājs nav ieroča darbībai nepieciešams mehānisms — tā ir papildierīce, tāpēc tā šajā sarakstā nav."
+  "explanation": "Drošinātāji un pielādēšanas un čaulīšu ekstrakcijas mehānisms ir galvenie šaujamieroča mehānismi. Skaņas klusinātājs vai liesmu slāpētājs nav ieroča darbībai nepieciešams mehānisms — tā ir papildierīce, tāpēc tā šajā sarakstā nav.",
+  "reviewed": true
  },
  {
   "id": 463,
   "law_reference": "Ieroču aprites likums, 1. panta 43. un 47. punkts",
   "explanation": "Šaujamieroča sastāvdaļa ir jebkurš speciāli konstruēts elements, kas derīgs ieroča darbināšanai, kā arī klusinātājs vai liesmu slāpētājs. Stobrs, rāmis, kārba, cilindrs, sprūds un aizslēgs ir šādi elementi. Visi varianti ir pareizi.",
-  "todo": "detaļu uzskaitījums (stobrs, rāmis, pastobrs u. c.) nav likuma teksts."
+  "todo": "detaļu uzskaitījums (stobrs, rāmis, pastobrs u. c.) nav likuma teksts.",
+  "reviewed": true
  },
  {
   "id": 464,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Šaujamieroča sastāvdaļas ir stobrs (ar graudu un tēmekli vai bez tā), rāmis ar rokturi vai mehānismu kārbu, laide vai pastobre, un aizslēgs ar belzni un čaulītes izvilcēju. Pareizi ir visi uzskaitītie."
+  "explanation": "Šaujamieroča sastāvdaļas ir stobrs (ar graudu un tēmekli vai bez tā), rāmis ar rokturi vai mehānismu kārbu, laide vai pastobre, un aizslēgs ar belzni un čaulītes izvilcēju. Pareizi ir visi uzskaitītie.",
+  "reviewed": true
  },
  {
   "id": 465,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Pie sastāvdaļām pieder arī nolaižamā belzējierīce ar drošinātāju, sprūda mēlītes aizsargskava, aizslēga aizture (pistolēm), magazīna vai revolvera patronu cilindrs un pusautomātisko un automātisko ieroču atgriezējatspere. Visas minētās ir šaujamieroča sastāvdaļas."
+  "explanation": "Pie sastāvdaļām pieder arī nolaižamā belzējierīce ar drošinātāju, sprūda mēlītes aizsargskava, aizslēga aizture (pistolēm), magazīna vai revolvera patronu cilindrs un pusautomātisko un automātisko ieroču atgriezējatspere. Visas minētās ir šaujamieroča sastāvdaļas.",
+  "reviewed": true
  },
  {
   "id": 466,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Šaujamieroča galvenās sastāvdaļas ir stobrs, rāmis un mehānismu kārba, kā arī aizslēgs ar belzni un čaulītes izvilcēju. Vārdi «ar graudu un tēmekli vai bez tā» nozīmē, ka galvenā sastāvdaļa ir pats stobrs, bet tēmēšanas ierīces pie galvenajām sastāvdaļām nepieder (sk. arī Nr. 467). Visi minētie ir galvenās sastāvdaļas."
+  "explanation": "Šaujamieroča galvenās sastāvdaļas ir stobrs, rāmis un mehānismu kārba, kā arī aizslēgs ar belzni un čaulītes izvilcēju. Vārdi «ar graudu un tēmekli vai bez tā» nozīmē, ka galvenā sastāvdaļa ir pats stobrs, bet tēmēšanas ierīces pie galvenajām sastāvdaļām nepieder (sk. arī Nr. 467). Visi minētie ir galvenās sastāvdaļas.",
+  "reviewed": true
  },
  {
   "id": 467,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Galvenās sastāvdaļas ir stobrs (arī ieliekamie stobri un adapteri kalibra maiņai) un stobra apvalks, kas pilda rāmja funkciju. Tēmekļi (mehāniskais, optiskais, kolimators) nav pieskaitīti galvenajām sastāvdaļām — tāpēc arī Nr. 464 un 466 stobrs minēts «ar graudu un tēmekli vai bez tā». Līdz ar to «visi varianti» nav pareizi."
+  "explanation": "Galvenās sastāvdaļas ir stobrs (arī ieliekamie stobri un adapteri kalibra maiņai) un stobra apvalks, kas pilda rāmja funkciju. Tēmekļi (mehāniskais, optiskais, kolimators) nav pieskaitīti galvenajām sastāvdaļām — tāpēc arī Nr. 464 un 466 stobrs minēts «ar graudu un tēmekli vai bez tā». Līdz ar to «visi varianti» nav pareizi.",
+  "reviewed": true
  },
  {
   "id": 468,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Visi trīs apgalvojumi ir pareizi: ieroča uzbūve ir atkarīga no tā veida un sistēmas; galvenās daļas var sastāvēt no vairākām sastāvdaļām un saturēt mehānismus; mehānismiem bieži ir kopīgas daļas, kas pilda vairākas funkcijas (piem., aizslēgs un stobra kārba). Tāpēc pareizā atbilde ir «visas atbildes ir pareizas»."
+  "explanation": "Visi trīs apgalvojumi ir pareizi: ieroča uzbūve ir atkarīga no tā veida un sistēmas; galvenās daļas var sastāvēt no vairākām sastāvdaļām un saturēt mehānismus; mehānismiem bieži ir kopīgas daļas, kas pilda vairākas funkcijas (piem., aizslēgs un stobra kārba). Tāpēc pareizā atbilde ir «visas atbildes ir pareizas».",
+  "reviewed": true
  },
  {
   "id": 469,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Pistoles rāmis ir pamatdaļa, pie kuras tiek piestiprinātas visas pārējās pistoles daļas, ne tikai stobrs, aizslēgs vai rokturis."
+  "explanation": "Pistoles rāmis ir pamatdaļa, pie kuras tiek piestiprinātas visas pārējās pistoles daļas, ne tikai stobrs, aizslēgs vai rokturis.",
+  "reviewed": true
  },
  {
   "id": 470,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Aizsargskava apņem sprūda mēlīti un pasargā to no nejaušas nospiešanas. Tā nav paredzēta satveršanai, stobra stiprināšanai, un tā nav drošinātājs."
+  "explanation": "Aizsargskava apņem sprūda mēlīti un pasargā to no nejaušas nospiešanas. Tā nav paredzēta satveršanai, stobra stiprināšanai, un tā nav drošinātājs.",
+  "reviewed": true
  },
  {
   "id": 471,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Aizslēgs pilda vairākas funkcijas: ievada patronu no magazīnas patrontelpā, šāviena laikā noslēdz stobra kanālu un ar izvilcēju notur čaulīti, kā arī uzvelk gaili. Tāpēc pareizi ir visi apgalvojumi."
+  "explanation": "Aizslēgs pilda vairākas funkcijas: ievada patronu no magazīnas patrontelpā, šāviena laikā noslēdz stobra kanālu un ar izvilcēju notur čaulīti, kā arī uzvelk gaili. Tāpēc pareizi ir visi apgalvojumi.",
+  "reviewed": true
  },
  {
   "id": 472,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Belznis ir stienītis, kura priekšējais gals (dzelksnis) pārsit patronas kapseli. Belzējierīci palaiž sprūda mēlīte, patronu patrontelpā ievada aizslēgs, bet čaulīti notur izvilcējs."
+  "explanation": "Belznis ir stienītis, kura priekšējais gals (dzelksnis) pārsit patronas kapseli. Belzējierīci palaiž sprūda mēlīte, patronu patrontelpā ievada aizslēgs, bet čaulīti notur izvilcējs.",
+  "reviewed": true
  },
  {
   "id": 473,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Oficiālajā atbildē ar «izmetēju» saprasta čaulītes izvilkšanas un izmešanas sistēma kopumā: izvilcējs notur čaulīti un izvelk to no patrontelpas, aizslēgam ejot atpakaļ, bet izmetējs (izsviedējs) to izmet caur aizslēga logu (sk. Nr. 430). Atbilde «tikai patronas čaulītes izmešanai» nav pareiza vārda «tikai» dēļ. Patronas patrontelpā ievada aizslēgs, bet aizslēgu priekšējā stāvoklī atbīda atgriezējatspere."
+  "explanation": "Oficiālajā atbildē ar «izmetēju» saprasta čaulītes izvilkšanas un izmešanas sistēma kopumā: izvilcējs notur čaulīti un izvelk to no patrontelpas, aizslēgam ejot atpakaļ, bet izmetējs (izsviedējs) to izmet caur aizslēga logu (sk. Nr. 430). Atbilde «tikai patronas čaulītes izmešanai» nav pareiza vārda «tikai» dēļ. Patronas patrontelpā ievada aizslēgs, bet aizslēgu priekšējā stāvoklī atbīda atgriezējatspere.",
+  "reviewed": true
  },
  {
   "id": 474,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Atgriezējatspere pēc šāviena atbīda (atgriež) aizslēgu priekšējā stāvoklī. Pēc šāviena aizslēgs ar gāzu spiedienu iet atpakaļ un saspiež atgriezējatsperi, kas to atkal atgriež sākotnējā stāvoklī."
+  "explanation": "Atgriezējatspere pēc šāviena atbīda (atgriež) aizslēgu priekšējā stāvoklī. Pēc šāviena aizslēgs ar gāzu spiedienu iet atpakaļ un saspiež atgriezējatsperi, kas to atkal atgriež sākotnējā stāvoklī.",
+  "reviewed": true
  },
  {
   "id": 475,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Pēc oficiālās atbildes belzējierīce (gailis) uzsit pa belzni, un belžņa dzelksnis jau pārsit kapseli. Tātad belzējierīce pa kapseli tieši nesit. Patronu patrontelpā ievada aizslēgs."
+  "explanation": "Pēc oficiālās atbildes belzējierīce (gailis) uzsit pa belzni, un belžņa dzelksnis jau pārsit kapseli. Tātad belzējierīce pa kapseli tieši nesit. Patronu patrontelpā ievada aizslēgs.",
+  "reviewed": true
  },
  {
   "id": 476,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Ar sprūda mēlīti nolaiž belzējierīci (izdara šāvienu), bet pašuzvilkšanās režīmā ar to arī uzvelk nolaižamo belzējierīci. Patronas no magazīnas patrontelpā padod aizslēgs, nevis sprūda mēlīte."
+  "explanation": "Ar sprūda mēlīti nolaiž belzējierīci (izdara šāvienu), bet pašuzvilkšanās režīmā ar to arī uzvelk nolaižamo belzējierīci. Patronas no magazīnas patrontelpā padod aizslēgs, nevis sprūda mēlīte.",
+  "reviewed": true
  },
  {
   "id": 477,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Visi trīs apraksti raksturo sprūda mēlīti: ar to uzvelk (pašuzvilkšanās režīmā) un nolaiž belzējierīci, tā ir svira, kuru pavelkot atbrīvo kaujas atsperi, un ar to iedarbina sprūda mehānismu, lai izdarītu šāvienu."
+  "explanation": "Visi trīs apraksti raksturo sprūda mēlīti: ar to uzvelk (pašuzvilkšanās režīmā) un nolaiž belzējierīci, tā ir svira, kuru pavelkot atbrīvo kaujas atsperi, un ar to iedarbina sprūda mehānismu, lai izdarītu šāvienu.",
+  "reviewed": true
  },
  {
   "id": 478,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Aizslēga aizture notur aizslēgu aizmugurējā stāvoklī, kad no magazīnas izšautas visas patronas. Tā signalizē, ka magazīna ir tukša, un ļauj ātri ielikt pielādētu magazīnu."
+  "explanation": "Aizslēga aizture notur aizslēgu aizmugurējā stāvoklī, kad no magazīnas izšautas visas patronas. Tā signalizē, ka magazīna ir tukša, un ļauj ātri ielikt pielādētu magazīnu.",
+  "reviewed": true
  },
  {
   "id": 479,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Stobrs nosaka lodes vai cita šāviņa lidojuma virzienu. Tēmēšanai paredzēti tēmeklis un grauds, daļas stiprina rāmis, bet patronu ievieto patrontelpā vai magazīnā."
+  "explanation": "Stobrs nosaka lodes vai cita šāviņa lidojuma virzienu. Tēmēšanai paredzēti tēmeklis un grauds, daļas stiprina rāmis, bet patronu ievieto patrontelpā vai magazīnā.",
+  "reviewed": true
  },
  {
   "id": 480,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 459–480 (oficiālās atbildes)",
-  "explanation": "Patronu padošanas mehānisms ir magazīna vai revolvera patronu cilindrs (ap savu asi pagriežama magazīna ar patrontelpām). Aptvere ir tikai palīglīdzeklis patronu ielādēšanai magazīnā — pati patronas patrontelpā nepadod, tāpēc tā nav patronu padošanas mehānisms."
+  "explanation": "Patronu padošanas mehānisms ir magazīna vai revolvera patronu cilindrs (ap savu asi pagriežama magazīna ar patrontelpām). Aptvere ir tikai palīglīdzeklis patronu ielādēšanai magazīnā — pati patronas patrontelpā nepadod, tāpēc tā nav patronu padošanas mehānisms.",
+  "reviewed": true
  },
  {
   "id": 481,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 481–487 (oficiālās atbildes)",
-  "explanation": "Šajā jautājumā oficiāli kā cēloņi norādīti tikai ieroča nolietojums un tas, ka ieroci netīra un neeļļo. Nelabvēlīgi laika apstākļi praksē var ietekmēt šaušanu, taču kā mehānismu kļūmju vai bojājumu cēlonis šajā atbildē tie nav minēti, tāpēc atbilde par aukstu laiku un lietu nav jāatzīmē."
+  "explanation": "Šajā jautājumā oficiāli kā cēloņi norādīti tikai ieroča nolietojums un tas, ka ieroci netīra un neeļļo. Nelabvēlīgi laika apstākļi praksē var ietekmēt šaušanu, taču kā mehānismu kļūmju vai bojājumu cēlonis šajā atbildē tie nav minēti, tāpēc atbilde par aukstu laiku un lietu nav jāatzīmē.",
+  "reviewed": true
  },
  {
   "id": 482,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 481–487 (oficiālās atbildes)",
-  "explanation": "Netīrs un neeļļots vai nolietots ierocis var radīt dažādas kļūmes: aizslēgs nenoslēdz patrontelpu, čaula iesprūst vai netiek izvilkta, belzējierīce uzsit par vāju un šāviens nenotiek. Visas minētās kļūmes ir iespējamas."
+  "explanation": "Netīrs un neeļļots vai nolietots ierocis var radīt dažādas kļūmes: aizslēgs nenoslēdz patrontelpu, čaula iesprūst vai netiek izvilkta, belzējierīce uzsit par vāju un šāviens nenotiek. Visas minētās kļūmes ir iespējamas.",
+  "reviewed": true
  },
  {
   "id": 483,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 481–487 (oficiālās atbildes)",
-  "explanation": "Netīrības un nolietojuma dēļ aizslēgu var nevarēt uzvilkt līdz galam vai aizture to nenotur, stobrā un detaļās var rasties mikroplaisas un bojājumi, kas traucē precīzi šaut, bet nodilis gaiļa robs vai sprūda zobs, atslābusi vai nolūzusi sprūda atspere var izraisīt automātiskus šāvienus. Pareizi ir visi apgalvojumi."
+  "explanation": "Netīrības un nolietojuma dēļ aizslēgu var nevarēt uzvilkt līdz galam vai aizture to nenotur, stobrā un detaļās var rasties mikroplaisas un bojājumi, kas traucē precīzi šaut, bet nodilis gaiļa robs vai sprūda zobs, atslābusi vai nolūzusi sprūda atspere var izraisīt automātiskus šāvienus. Pareizi ir visi apgalvojumi.",
+  "reviewed": true
  },
  {
   "id": 484,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 481–487 (oficiālās atbildes)",
-  "explanation": "Aizslēgs nenoslēdz patrontelpu, ja netīra ir patrontelpa, aizslēga čaulas aizmugures ligzda vai rāmja gropes. Netīra nolaižamā belzējierīce izraisa citu kļūmi — vāju uzsitienu, un šāviens nenotiek."
+  "explanation": "Aizslēgs nenoslēdz patrontelpu, ja netīra ir patrontelpa, aizslēga čaulas aizmugures ligzda vai rāmja gropes. Netīra nolaižamā belzējierīce izraisa citu kļūmi — vāju uzsitienu, un šāviens nenotiek.",
+  "reviewed": true
  },
  {
   "id": 485,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 481–487 (oficiālās atbildes)",
-  "explanation": "Visas minētās ir kļūmes šaujot: čaula iesprūst patrontelpā, aizslēgu nevar uzvilkt līdz galam, aizslēgs kārtīgi nenoslēdz patrontelpu."
+  "explanation": "Visas minētās ir kļūmes šaujot: čaula iesprūst patrontelpā, aizslēgu nevar uzvilkt līdz galam, aizslēgs kārtīgi nenoslēdz patrontelpu.",
+  "reviewed": true
  },
  {
   "id": 486,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 481–487 (oficiālās atbildes)",
-  "explanation": "Automātiskus šāvienus pistolei var izraisīt nodilis gaiļa robs vai sprūda zobs un atslābusi vai nolūzusi sprūda atspere — tad gailis netiek noturēts uzvilktā stāvoklī. Ja aizslēgu nevar uzvilkt līdz galam, tā ir cita kļūme, kas automātisku šaušanu neizraisa."
+  "explanation": "Automātiskus šāvienus pistolei var izraisīt nodilis gaiļa robs vai sprūda zobs un atslābusi vai nolūzusi sprūda atspere — tad gailis netiek noturēts uzvilktā stāvoklī. Ja aizslēgu nevar uzvilkt līdz galam, tā ir cita kļūme, kas automātisku šaušanu neizraisa.",
+  "reviewed": true
  },
  {
   "id": 487,
   "law_reference": "Kvalifikācijas pārbaudījuma jautājumi Nr. 481–487 (oficiālās atbildes)",
-  "explanation": "Šaujot iespējamas dažādas kļūmes: šāviens var nenotikt, magazīnas padevējatspere var nepadot patronu, patronu var sašķobīt. Visas minētās ir iespējamas."
+  "explanation": "Šaujot iespējamas dažādas kļūmes: šāviens var nenotikt, magazīnas padevējatspere var nepadot patronu, patronu var sašķobīt. Visas minētās ir iespējamas.",
+  "reviewed": true
  }
 ]
