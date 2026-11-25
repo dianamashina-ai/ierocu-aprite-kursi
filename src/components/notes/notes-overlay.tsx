@@ -234,6 +234,8 @@ export function NotesOverlay({ viewFull = false }: { viewFull?: boolean }) {
         >
           {active ? <X className="size-5" aria-hidden="true" /> : notes.length ? <MessageSquarePlus className="size-5" aria-hidden="true" /> : <Pencil className="size-5" aria-hidden="true" />}
         </button>
+      </div>
+      <div className="notes-fab fixed bottom-4 left-4 z-[80] print:hidden">
         <AccessViewToggle full={viewFull} />
       </div>
     </div>
