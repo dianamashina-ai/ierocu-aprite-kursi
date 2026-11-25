@@ -308,19 +308,7 @@ export function Practice({
           >
             {q.text}
           </h2>
-          {answered && q.possiblyOutdated && (
-            <aside
-              className="mt-5 rounded-xl border border-warn/30 bg-warn-soft px-4 py-3 text-sm leading-relaxed text-ink"
-              aria-label={t("outdated")}
-            >
-              <p className="flex items-center gap-1.5 font-semibold text-warn">
-                <TriangleAlert aria-hidden="true" className="size-4 shrink-0" />
-                {t("outdated")}
-              </p>
-              {q.outdatedNote && <p className="mt-1.5">{q.outdatedNote}</p>}
-              <p className="mt-1.5 text-muted">{t("outdatedDisclaimer")}</p>
-            </aside>
-          )}
+          {answered && q.possiblyOutdated && <OutdatedNote note={q.outdatedNote} className="mt-5 hidden lg:block" />}
         </div>
 
         <div>
@@ -420,6 +408,8 @@ export function Practice({
                   )}
                 </div>
 
+                {q.possiblyOutdated && <OutdatedNote note={q.outdatedNote} className="lg:hidden" />}
+
                 {q.familyId && q.familySize > 1 && (
                   <div>
                     <FamilyDrawer
@@ -467,5 +457,23 @@ export function Practice({
         </div>
       </article>
     </div>
+  );
+}
+
+/** Brīdinājums «Uzmanīgi!» par likuma izmaiņām — rāda tikai pēc atbildes izvēles. */
+function OutdatedNote({ note, className = "" }: { note: string | null; className?: string }) {
+  const t = useTranslations("practice");
+  return (
+    <aside
+      className={`rounded-xl border border-warn/30 bg-warn-soft px-4 py-3 text-sm leading-relaxed text-ink ${className}`}
+      aria-label={t("outdated")}
+    >
+      <p className="flex items-center gap-1.5 font-semibold text-warn">
+        <TriangleAlert aria-hidden="true" className="size-4 shrink-0" />
+        {t("outdated")}
+      </p>
+      {note && <p className="mt-1.5">{note}</p>}
+      <p className="mt-1.5 text-muted">{t("outdatedDisclaimer")}</p>
+    </aside>
   );
 }
