@@ -16,16 +16,9 @@ import { montonioPaymentMethods, montonioProvider } from "./providers/montonio";
 import { devProvider } from "./providers/dev";
 import { manualProvider } from "./providers/manual";
 
-export class BillingError extends Error {}
+import { siteUrl } from "@/lib/site/url";
 
-/** Vietnes adrese e-pastiem (izpildes laikā, ne būvēšanas laikā). */
-const siteUrl = () =>
-  (
-    process.env.BETTER_AUTH_URL ??
-    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : undefined) ??
-    process.env.NEXT_PUBLIC_SITE_URL ??
-    "http://localhost:3000"
-  ).replace(/\/$/, "");
+export class BillingError extends Error {}
 
 const providers: Record<ProviderName, PaymentProvider> = { stripe: stripeProvider, montonio: montonioProvider, dev: devProvider, manual: manualProvider };
 

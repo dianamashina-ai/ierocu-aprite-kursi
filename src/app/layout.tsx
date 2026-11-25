@@ -10,12 +10,17 @@ import { isAdmin } from "@/lib/admin";
 import "@fontsource-variable/figtree";
 import "./globals.css";
 import { indexingAllowed } from "@/lib/site/indexing";
+import { siteUrl } from "@/lib/site/url";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("meta");
   return {
     title: { default: t("title"), template: `%s · ${t("title")}` },
     description: t("description"),
+    metadataBase: new URL(siteUrl()),
+    applicationName: t("title"),
+    openGraph: { type: "website", locale: "lv_LV", siteName: "Ieroču atļauja", title: t("title"), description: t("description") },
+    twitter: { card: "summary_large_image", title: t("title"), description: t("description") },
     // līdz palaišanai vietne netiek indeksēta (SITE_INDEXING=1 to ieslēdz)
     ...(indexingAllowed() ? {} : { robots: { index: false, follow: false } }),
   };
