@@ -14,6 +14,7 @@ export async function SiteHeader() {
         { href: "/trenins", label: "Trenēties" },
         { href: "/eksamens", label: "Eksāmens" },
         { href: "/jautajumi", label: "Jautājumi", match: ["/meklet"] },
+        { href: "/praktiska-nodarbiba", label: "Praktiskā nodarbība" },
       ]
     : [
         { href: "/#ka-notiek", label: "Par mācībām" },
