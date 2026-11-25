@@ -300,7 +300,7 @@ export function Practice({
         aria-labelledby={`q-${q.id}`}
       >
         <div className="lg:sticky lg:top-32 lg:self-start">
-          {q.possiblyOutdated && (
+          {answered && q.possiblyOutdated && (
             <aside
               className="mb-5 rounded-xl border border-warn/30 bg-warn-soft px-4 py-3 text-sm leading-relaxed text-ink"
               aria-label={t("outdated")}
