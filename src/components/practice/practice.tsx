@@ -300,9 +300,17 @@ export function Practice({
         aria-labelledby={`q-${q.id}`}
       >
         <div className="lg:sticky lg:top-32 lg:self-start">
+          <p className="mb-1.5 text-sm tabular-nums text-muted">Nr. {q.id}</p>
+          <h2
+            id={`q-${q.id}`}
+            className="text-xl font-semibold leading-snug tracking-tight sm:text-2xl"
+            lang="lv"
+          >
+            {q.text}
+          </h2>
           {answered && q.possiblyOutdated && (
             <aside
-              className="mb-5 rounded-xl border border-warn/30 bg-warn-soft px-4 py-3 text-sm leading-relaxed text-ink"
+              className="mt-5 rounded-xl border border-warn/30 bg-warn-soft px-4 py-3 text-sm leading-relaxed text-ink"
               aria-label={t("outdated")}
             >
               <p className="flex items-center gap-1.5 font-semibold text-warn">
@@ -313,14 +321,6 @@ export function Practice({
               <p className="mt-1.5 text-muted">{t("outdatedDisclaimer")}</p>
             </aside>
           )}
-          <p className="mb-1.5 text-sm tabular-nums text-muted">Nr. {q.id}</p>
-          <h2
-            id={`q-${q.id}`}
-            className="text-xl font-semibold leading-snug tracking-tight sm:text-2xl"
-            lang="lv"
-          >
-            {q.text}
-          </h2>
         </div>
 
         <div>
