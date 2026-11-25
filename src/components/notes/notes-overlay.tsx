@@ -3,7 +3,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import Link from "next/link";
-import { Check, LayoutDashboard, MessageSquarePlus, Pencil, X } from "lucide-react";
+import { Check, Settings, MessageSquarePlus, Pencil, X } from "lucide-react";
 import { addNoteAction, notesForPathAction, setNoteStatusAction } from "@/app/actions/notes";
 import { setAdminViewAction } from "@/app/actions/admin";
 
@@ -218,7 +218,7 @@ export function NotesOverlay({ viewFull = false }: { viewFull?: boolean }) {
           title="Administrēšana"
           className="inline-flex size-12 items-center justify-center rounded-full border border-line bg-white text-ink shadow-xl hover:bg-surface"
         >
-          <LayoutDashboard className="size-5" aria-hidden="true" />
+          <Settings className="size-5" aria-hidden="true" />
         </Link>
         <button
           type="button"
