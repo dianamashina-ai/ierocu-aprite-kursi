@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { CalendarClock, CheckCircle2 } from "lucide-react";
 import { getCurrentUser } from "@/lib/auth/session";
 import { hasFullAccess } from "@/lib/billing/access";
@@ -27,7 +28,9 @@ export const metadata = {
 /** Praktiskā nodarbība: apraksts, iegādātās nodarbības statuss un iespēja iegādāties (arī tiem, kam jau ir kurss). */
 export default async function LessonPage() {
   const [user, course] = await Promise.all([getCurrentUser(), getCourseOverview()]);
-  const [hasCourse, orders] = await Promise.all([hasFullAccess(user?.id), user ? getOrdersForUser(user.id) : Promise.resolve([])]);
+  // Viesiem pietiek ar cenu sadaļu sākumlapā.
+  if (!user) redirect("/#cena");
+  const [hasCourse, orders] = await Promise.all([hasFullAccess(user.id), getOrdersForUser(user.id)]);
   const lessons = orders.filter((o) => o.status === "paid" && LESSON_CODES.includes(o.productCode as ProductCode));
   const hasLesson = lessons.some((o) => o.lessonStatus !== "refunded");
   const saving = COURSE_PRODUCT.amountCents + LESSON_PRODUCT.amountCents - BUNDLE_PRODUCT.amountCents;
