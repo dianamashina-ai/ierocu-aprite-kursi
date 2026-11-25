@@ -80,7 +80,7 @@ export default function TermsPage() {
       </p>
       <p>
         Pēc apmaksas pirkums tiek piesaistīts jūsu kontam uzreiz, un uz konta e-pastu tiek nosūtīts elektronisks PVN rēķins.
-        Rēķini pieejami arī sadaļā «Profils». Pakalpojums paredzēts fiziskām personām.
+        Rēķini pieejami arī sadaļā «Mans konts». Pakalpojums paredzēts fiziskām personām.
       </p>
 
       <H2>5. Piekļuves termiņš</H2>

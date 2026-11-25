@@ -10,7 +10,7 @@ import { SignOutButton } from "@/components/sign-out-button";
 import { EmailForm, NameForm, PasswordForm } from "@/components/account/account-forms";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Profils" };
+export const metadata = { title: "Mans konts" };
 
 function Section({ id, title, lead, children }: { id: string; title: string; lead?: string; children: React.ReactNode }) {
   return (
@@ -34,7 +34,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
   return (
     <div className="page-white">
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
-        <h1 className="text-4xl font-semibold tracking-tight">Profils</h1>
+        <h1 className="text-4xl font-semibold tracking-tight">Mans konts</h1>
         <p className="mt-3 text-muted">Profila dati, pieslēgšanās un pirkumi.</p>
 
         {epasts === "mainits" && (

@@ -106,7 +106,7 @@ export default function PrivacyPage() {
       <p>Jums ir tiesības:</p>
       <List>
         <li>saņemt informāciju par saviem datiem un to kopiju;</li>
-        <li>labot neprecīzus datus (vārdu, e-pastu un paroli varat mainīt sadaļā «Profils»);</li>
+        <li>labot neprecīzus datus (vārdu, e-pastu un paroli varat mainīt sadaļā «Mans konts»);</li>
         <li>pieprasīt datu dzēšanu (ciktāl tie nav jāglabā likumā noteiktā kārtā);</li>
         <li>ierobežot apstrādi vai iebilst pret to;</li>
         <li>saņemt savus datus pārnesamā formātā.</li>

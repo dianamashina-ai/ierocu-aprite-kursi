@@ -79,12 +79,6 @@ export function SiteNav({
     path === "/",
   );
 
-  const itemCls = (active: boolean) =>
-    `inline-flex min-h-11 items-center whitespace-nowrap rounded-lg px-3 text-[15px] transition-colors hover:bg-accent-soft ${
-      active
-        ? "font-semibold text-ink"
-        : "font-normal text-muted hover:text-ink"
-    }`;
   const mobileCls = (active: boolean) =>
     `-mx-2 flex min-h-12 w-[calc(100%+1rem)] items-center rounded-lg px-2 text-left text-base hover:bg-accent-soft ${active ? "font-semibold text-ink" : "font-normal text-muted"}`;
   const onAccount = path === "/konts" || path.startsWith("/konts/");
@@ -121,9 +115,9 @@ export function SiteNav({
               <Link
                 href="/konts"
                 aria-current={onAccount ? "page" : undefined}
-                className={itemCls(onAccount)}
+                className="btn-secondary ml-2 min-h-11 px-4 text-sm"
               >
-                Profils
+                Mans konts
               </Link>
               {showBuy && (
                 <Link href="/iegadaties" className="btn-primary ml-2 min-h-11 px-4 text-sm">
@@ -191,7 +185,7 @@ export function SiteNav({
                       aria-current={onAccount ? "page" : undefined}
                       className={mobileCls(onAccount)}
                     >
-                      Profils
+                      Mans konts
                     </Link>
                   </li>
                 </>

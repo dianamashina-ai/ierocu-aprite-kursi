@@ -46,7 +46,7 @@ export default function ContactsPage() {
         <li>
           Rēķini un piekļuves statuss ir sadaļā{" "}
           <Link href="/konts" className={a}>
-            «Profils»
+            «Mans konts»
           </Link>
           .
         </li>
