@@ -2,7 +2,8 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, useTransition } from "react";
-import { Check, MessageSquarePlus, Pencil, X } from "lucide-react";
+import Link from "next/link";
+import { Check, LayoutDashboard, MessageSquarePlus, Pencil, X } from "lucide-react";
 import { addNoteAction, notesForPathAction, setNoteStatusAction } from "@/app/actions/notes";
 import { setAdminViewAction } from "@/app/actions/admin";
 
@@ -204,7 +205,6 @@ export function NotesOverlay({ viewFull = false }: { viewFull?: boolean }) {
       ))}
 
       <div className="notes-fab fixed bottom-4 right-4 z-[80] flex flex-col items-end gap-2 print:hidden">
-        <AccessViewToggle full={viewFull} />
         {active && (
           <div className="rounded-xl bg-ink px-3 py-2 text-xs text-white shadow-lg">
             Noklikšķini uz elementa · Esc — iziet{missing > 0 ? ` · ${missing} piezīmes šeit nav redzamas` : ""}
@@ -212,6 +212,14 @@ export function NotesOverlay({ viewFull = false }: { viewFull?: boolean }) {
             <a href="/labojumi" className="underline">visi labojumi</a>
           </div>
         )}
+        <Link
+          href="/admin"
+          aria-label="Administrēšana"
+          title="Administrēšana"
+          className="inline-flex size-12 items-center justify-center rounded-full border border-line bg-white text-ink shadow-xl hover:bg-surface"
+        >
+          <LayoutDashboard className="size-5" aria-hidden="true" />
+        </Link>
         <button
           type="button"
           onClick={() => {
@@ -220,11 +228,13 @@ export function NotesOverlay({ viewFull = false }: { viewFull?: boolean }) {
             setHover(null);
           }}
           aria-pressed={active}
-          className={`inline-flex min-h-12 items-center gap-2 rounded-full px-5 text-sm font-semibold shadow-xl ${active ? "bg-ink text-white" : "bg-accent text-white"}`}
+          aria-label={active ? "Beigt labot" : "Labot"}
+          title={active ? "Beigt labot" : "Labot"}
+          className={`inline-flex size-12 items-center justify-center rounded-full text-white shadow-xl ${active ? "bg-ink" : "bg-accent"}`}
         >
-          {active ? <X className="size-4" aria-hidden="true" /> : notes.length ? <MessageSquarePlus className="size-4" aria-hidden="true" /> : <Pencil className="size-4" aria-hidden="true" />}
-          {active ? "Beigt labot" : "Labot"}
+          {active ? <X className="size-5" aria-hidden="true" /> : notes.length ? <MessageSquarePlus className="size-5" aria-hidden="true" /> : <Pencil className="size-5" aria-hidden="true" />}
         </button>
+        <AccessViewToggle full={viewFull} />
       </div>
     </div>
   );

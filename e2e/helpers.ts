@@ -32,10 +32,9 @@ export async function paidUser(page: Page, tag: string) {
   await buyAccess(page);
 }
 
-/** Iziet (telefonā poga ir izvēlnē). */
+/** Iziet — poga ir profila lapā. */
 export async function signOut(page: Page) {
-  const menu = page.getByRole("button", { name: "Atvērt izvēlni" });
-  if (await menu.isVisible()) await menu.click();
+  await page.goto("/konts");
   // sākumlapā jau varam būt — gaidām, līdz sesija tiešām beigusies
   await Promise.all([
     page.waitForResponse((r) => r.url().includes("/api/auth/sign-out") && r.ok()),

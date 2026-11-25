@@ -7,7 +7,7 @@ test("administrācija: parastam lietotājam nav pieejama", async ({ page }) => {
   await signUp(page, uniqueEmail("nav-admins"));
   const res = await page.goto("/admin");
   expect(res?.status()).toBe(404);
-  await expect(page.getByRole("link", { name: "Admin" })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "Administrēšana" })).toHaveCount(0);
 });
 
 test("administrācija: pasūtījums redzams, atmaksa slēdz piekļuvi", async ({ browser }) => {

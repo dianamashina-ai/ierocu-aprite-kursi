@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
-import { SignOutButton } from "./sign-out-button";
 
 export interface NavItem {
   href: string;
@@ -67,12 +66,10 @@ export function SiteNav({
   items,
   signedIn,
   showBuy,
-  admin = false,
 }: {
   items: NavItem[];
   signedIn: boolean;
   showBuy: boolean;
-  admin?: boolean;
 }) {
   const path = usePathname();
   const [open, setOpen] = useState(false);
@@ -90,7 +87,6 @@ export function SiteNav({
     }`;
   const mobileCls = (active: boolean) =>
     `-mx-2 flex min-h-12 w-[calc(100%+1rem)] items-center rounded-lg px-2 text-left text-base hover:bg-accent-soft ${active ? "font-semibold text-ink" : "font-normal text-muted"}`;
-  const onAdmin = path === "/admin" || path.startsWith("/admin/") || path.startsWith("/labojumi");
   const onAccount = path === "/konts" || path.startsWith("/konts/");
 
   return (
@@ -129,24 +125,9 @@ export function SiteNav({
               >
                 Profils
               </Link>
-              {showBuy ? (
-                <>
-                  {/* tikai 1. modulis: galvenā darbība — pilna piekļuve, iziet — sekundāra poga */}
-                  <Link href="/iegadaties" className="btn-primary ml-2 min-h-11 px-4 text-sm">
-                    Pilna piekļuve
-                  </Link>
-                  <SignOutButton className="btn-secondary ml-2 min-h-11 px-4 text-sm" />
-                </>
-              ) : (
-                <SignOutButton className={itemCls(false)} />
-              )}
-              {admin && (
-                <Link
-                  href="/admin"
-                  aria-current={onAdmin ? "page" : undefined}
-                  className="btn-secondary ml-2 min-h-11 px-4 text-sm"
-                >
-                  Admin
+              {showBuy && (
+                <Link href="/iegadaties" className="btn-primary ml-2 min-h-11 px-4 text-sm">
+                  Pilna piekļuve
                 </Link>
               )}
             </>
@@ -213,22 +194,14 @@ export function SiteNav({
                       Profils
                     </Link>
                   </li>
-                  <li>
-                    <SignOutButton className={mobileCls(false)} />
-                  </li>
                 </>
               )}
             </ul>
-            {(showBuy || !signedIn || admin) && (
+            {(showBuy || !signedIn) && (
               <div className="flex flex-wrap gap-2 py-3">
                 {showBuy && (
                   <Link href="/iegadaties" className="btn-primary">
                     Pilna piekļuve
-                  </Link>
-                )}
-                {admin && (
-                  <Link href="/admin" className="btn-secondary">
-                    Admin
                   </Link>
                 )}
                 {!signedIn && (
