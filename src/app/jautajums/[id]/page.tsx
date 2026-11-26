@@ -7,7 +7,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Practice } from "@/components/practice/practice";
 import { getCurrentUser } from "@/lib/auth/session";
 import { canAccessModule, moduleOfTopic, requireSignUpForFreeModule } from "@/lib/billing/access";
-import { Paywall } from "@/components/billing/paywall";
+import { LockedQuestion } from "@/components/billing/locked-question";
 
 export const dynamic = "force-dynamic";
 
@@ -15,7 +15,10 @@ const parseId = (s: string) => (/^\d{1,3}$/.test(s) ? Number(s) : null);
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const id = parseId((await params).id);
-  return { title: id ? `Jautājums Nr. ${id}` : undefined };
+  const q = id ? await getPracticeQuestion(id) : null;
+  if (!q) return {};
+  const text = q.text.length > 150 ? `${q.text.slice(0, 147).trimEnd()}…` : q.text;
+  return { title: `Jautājums Nr. ${q.id}`, description: `${text} — oficiālais eksāmena jautājums ar atbildi un skaidrojumu.` };
 }
 
 export default async function QuestionPage({ params }: { params: Promise<{ id: string }> }) {
@@ -44,11 +47,13 @@ export default async function QuestionPage({ params }: { params: Promise<{ id: s
         {allowed ? (
           <Practice signedIn={Boolean(user)} questions={[q]} seed={randomUUID()} topicHref={topicHref} shuffleQuestions={false} />
         ) : (
-          <div className="space-y-5">
-            <h1 className="sr-only">{tc("question", { id: q.id })}</h1>
-            <p className="rounded-2xl border border-line bg-white p-5 text-lg font-semibold leading-snug" lang="lv">{q.text}</p>
-            <Paywall title="Atbilde un skaidrojums pieejami ar pilnu piekļuvi" />
-          </div>
+          <LockedQuestion
+            text={q.text}
+            optionCount={q.options.length}
+            topicHref={topicHref}
+            topicLabel={meta ? `${meta.id} ${meta.titleLv}` : q.topicId}
+            signedIn={Boolean(user)}
+          />
         )}
       </div>
       <p className="mt-6 text-sm text-muted">{tp("officialText")}</p>
